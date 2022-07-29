@@ -11,8 +11,6 @@ parser.add_argument("--input", default="0", help="new input dataset(s), should b
                                                     "be mapped in the order of appearance. If not sure of the "
                                                     "ordering or naming, leave the field empty the system will "
                                                     "ask you for your input.")
-
-
 def main(args):
     with open(args.pipeline, "r") as source:
         tree = ast.parse(source.read())
@@ -39,7 +37,7 @@ def main(args):
         print("No new inputs provided. Please add the new inputs for: \n")
         for dataset in assigner.datasets:
             print("Current value for %s is: %s" % (dataset["variable"], dataset["data_source"]["data_file"]))
-            assigner.new_inputs[assigner.datasets.index(dataset)] = input("New value for %s: \n" % dataset["variable"])
+            assigner.new_inputs.append(input("New value for %s: \n" % dataset["variable"]))
         print(assigner.new_inputs)
 
 
