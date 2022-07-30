@@ -125,10 +125,10 @@ class AssignVisitor(ast.NodeVisitor):
 
     def visit_BinOp(self, node):
         left = direct_visit(self, node, node.left)
-        print(node.op)
+        # print(node.op)
         right = direct_visit(self, node, node.right)
-        print(node.left._fields[0] + "  ", type(node.op).__name__ +
-              " " + node.right._fields[1])
+        # print(node.left._fields[0] + "  ", type(node.op).__name__ +
+        #       " " + node.right._fields[1])
 
         if type(node.op).__name__ == "Add":
             if type(left) == str and type(right) == str:
@@ -168,27 +168,27 @@ class AssignVisitor(ast.NodeVisitor):
     def filter_Assignments(self):
         removed = []
         for assignment in self.assignments:
-            print(assignment)
-            print("Type of the above assignment: %s" % type(assignment["data_source"]))
+            # print(assignment)
+            # print("Type of the above assignment: %s" % type(assignment["data_source"]))
             if type(assignment["data_source"]) is not dict:
                 removed.append(assignment)
-                print("removed\n")
+                # print("removed\n")
             elif "data_file" not in assignment["data_source"].keys():
                 removed.append(assignment)
-                print("removed\n")
+                # print("removed\n")
             elif len(assignment["data_source"]["data_file"]) == 0:
                 removed.append(assignment)
-                print("removed\n")
+                # print("removed\n")
             elif type(assignment["data_source"]["data_file"][0]) is not str:
                 removed.append(assignment)
-                print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0]))
-                print("removed\n")
+                # print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0]))
+                # print("removed\n")
             elif type(assignment["data_source"]["data_file"][0][0]) is not str:
                 removed.append(assignment)
-                print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0][0]))
-                print("removed\n")
-            else:
-                print("didn't remove\n")
+                # print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0][0]))
+                # print("removed\n")
+            # else:
+            #     print("didn't remove\n")
 
         self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
 
@@ -200,14 +200,14 @@ class AssignVisitor(ast.NodeVisitor):
             for i in range(self.inputs.index(assignment) + 1, len(self.inputs)):
                 if assignment["variable"] in self.inputs[i]["data_source"]["data_file"]:
                     processing_steps.append(self.inputs[i])
-                    print("%s is a preprocessing step\n" % assignment)
+                    # print("%s is a preprocessing step\n" % assignment)
                 elif assignment["variable"] == self.inputs[i]["variable"]:
                     processing_steps.append(self.inputs[i])
-                    print("%s alters a previous data input\n" % assignment)
-                else:
-                    print("%s is a data input\n" % assignment)
+                    # print("%s alters a previous data input\n" % assignment)
+                # else:
+                #     print("%s is a data input\n" % assignment)
         self.datasets = [assignment for assignment in self.inputs if assignment not in processing_steps]
-        print(self.datasets)
+        # print(self.datasets)
 
     def parseNewInputs(self):
         for input in self.new_inputs:
@@ -257,7 +257,7 @@ def direct_visit(parent_object, node, towards):
     except AttributeError:
         print(
             "visit_" + type(towards).__name__ +
-            " accessed from node type " + type(node).__name__ + " is not defined.")
+            " accessed from node type " + type(node).__name__ + " is not defined.\n")
 
 
 if __name__ == "__main__":

@@ -10,8 +10,8 @@ from_csv = pd.read_csv("examples/random.csv")
 auto_generate = np.zeros_like(from_csv)
 # Add double output i.e., train/test split from a single file
 
-print(from_path)
-print(from_csv)
-print(auto_generate)
+# print(from_path)
+# print(from_csv)
+# print(auto_generate)
 
 
