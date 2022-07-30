@@ -5,13 +5,13 @@ Smart data ingestion in machine learning pipelines
 ## Setup
 To setup the virtual environment and install the required dependencies, run the setup.sh script with:
 
-bash ./setup.sh
+* bash ./setup.sh
 
 ## Using the system
 
 Run the pipeline transformer with:
 
-python ast-playground.py --pipeline=examples/PIPELINE_NAME
+* python ast-playground.py --pipeline=examples/PIPELINE_NAME
 
 There are two example pipelines:
 
