@@ -6,11 +6,13 @@ import argparse
 parser = argparse.ArgumentParser(description="AST Analyzer of Data Imports")
 parser.add_argument("--pipeline", required=True, help="Python script to be parsed")
 parser.add_argument("--input", default="0", help="new input dataset(s), should be the same number as existing "
-                                                    "pipeline inputs. If more than 1, provide it in a list format."
-                                                    " When providing a list, the inputs will "
-                                                    "be mapped in the order of appearance. If not sure of the "
-                                                    "ordering or naming, leave the field empty the system will "
-                                                    "ask you for your input.")
+                                                 "pipeline inputs. If more than 1, provide it in a list format."
+                                                 " When providing a list, the inputs will "
+                                                 "be mapped in the order of appearance. If not sure of the "
+                                                 "ordering or naming, leave the field empty the system will "
+                                                 "ask you for your input.")
+
+
 def main(args):
     with open(args.pipeline, "r") as source:
         tree = ast.parse(source.read())
@@ -28,18 +30,24 @@ def main(args):
         print("New input size larger than the number of the datasets in the original pipeline. Please map your "
               "inputs.\n")
         for dataset in assigner.datasets:
-            print("Current value for %s is: %s" % (dataset["variable"], dataset["data_source"]["data_file"]))
-            assigner.new_inputs[assigner.datasets.index(dataset)] = input("New value for %s: \n" % dataset["variable"])
-        print(assigner.new_inputs)
+            print("Current value for %s is: %s. If no change to the input is required or the input variable is not "
+                  "suitable, press ENTER." % (dataset["variable"], dataset["data_source"]["data_file"]))
+            assigner.new_inputs.append({"old_input": dataset["data_source"]["data_file"],
+                                        "new_input": [input("New value for %s: \n" % dataset["variable"])]})
     elif int(args.input) == len(assigner.datasets):
         assigner.new_inputs = args.input.split(",")
     else:
         print("No new inputs provided. Please add the new inputs for: \n")
         for dataset in assigner.datasets:
-            print("Current value for %s is: %s" % (dataset["variable"], dataset["data_source"]["data_file"]))
-            assigner.new_inputs.append(input("New value for %s: \n" % dataset["variable"]))
-        print(assigner.new_inputs)
+            print("Current value for %s is: %s. If no change to the input is required or the input variable is not "
+                  "suitable, press ENTER." % (dataset["variable"], dataset["data_source"]["data_file"]))
+            assigner.new_inputs.append({"old_input": dataset["data_source"]["data_file"],
+                                        "new_input": [input("New value for %s: \n" % dataset["variable"])]})
+    assigner.parseNewInputs()
 
+
+    pipeline_name = args.pipeline.split(".")
+    assigner.transformScript(args.pipeline, pipeline_name[0] + "-new." + pipeline_name[1])
 
     # print(assigner.datasets)
     # print(trimmed)
@@ -79,7 +87,6 @@ def reportAssign(assignments, full):
         for assignment in assignments:
             output.write(str(assignment) + "\n")
         output.close()
-    # pprint(assignments)
 
 
 class AssignVisitor(ast.NodeVisitor):
@@ -88,7 +95,8 @@ class AssignVisitor(ast.NodeVisitor):
         self.assignments = []
         self.datasets = []
         self.imports = []
-        self.new_inputs=[]
+        self.new_inputs = []
+        self.new_datasets = []
 
     def visit_Assign(self, node):
         assignment = {"variable": str, "data_source": str}
@@ -96,7 +104,6 @@ class AssignVisitor(ast.NodeVisitor):
             assignment["variable"] = direct_visit(self, node, target)
             assignment["data_source"] = direct_visit(self, node, node.value)
         self.assignments.append(assignment)
-        # self.generic_visit(node)
 
     #
     def visit_Call(self, node):
@@ -105,7 +112,6 @@ class AssignVisitor(ast.NodeVisitor):
         params = []
         for arg in node.args:
             args_names.append(direct_visit(self, node, arg))
-        # self.generic_visit(node)
         for keyword in node.keywords:
             params.append(direct_visit(self, node, keyword))
 
@@ -114,7 +120,6 @@ class AssignVisitor(ast.NodeVisitor):
     def visit_Attribute(self, node):
         package = direct_visit(self, node, node.value)
         method = node.attr
-        # self.generic_visit(node)
 
         return {"from": package, "method": method}
 
@@ -127,9 +132,7 @@ class AssignVisitor(ast.NodeVisitor):
 
         if type(node.op).__name__ == "Add":
             if type(left) == str and type(right) == str:
-                return str(left + right)
-        # self.generic_visit(node)
-        # else:
+                return str(left + "+" + right)
         return [left, right]
 
     def visit_Subscript(self, node):
@@ -206,21 +209,41 @@ class AssignVisitor(ast.NodeVisitor):
         self.datasets = [assignment for assignment in self.inputs if assignment not in processing_steps]
         print(self.datasets)
 
+    def parseNewInputs(self):
+        for input in self.new_inputs:
+            if input["new_input"][0] == "":
+                input["new_input"] = input["old_input"]
+            else:
+                continue
 
-# class RewriteName(ast.NodeTransformer):
-#     def __init__(self):
-#         self.changed = {"changed-nodes": []}
-#
-#     def visit_Name(self, node):
-#         return ast.copy_location(ast.Subscript(
-#             value=Name(id='data', ctx=Load()),
-#             slice=Index(value=ast.Str(s=node.id)),
-#             ctx=node.ctx
-#         ), node)
+    # def addInputsToDatasets(self):
+    #     self.new_datasets = self.datasets
+    #     for input in self.new_inputs:
+    #         if input["new_input"] != "":
+    #             self.new_datasets[self.new_inputs.index(input)]["data_source"]["data_file"][0] = input["new_input"]
+    #         else:
+    #             continue
 
-class TransformPipeline(ast.NodeTransformer):
-    def __init__(self):
-        self.changedNodes = []
+    def transformScript(self, script, new_script):
+        temp = self.new_inputs
+        # print("From transformScript\n")
+        # print(temp)
+        # print("From transformScript\n")
+        # print(self.new_inputs)
+
+        with open(new_script, "w") as new:
+            with open(script, "r") as old:
+                row_old = iter(old)
+                for row in row_old:
+                    for dataset in temp:
+                        if dataset["old_input"][0] in row:
+                            for i in range(0, len(dataset["new_input"])):
+                                row = row.replace(dataset["old_input"][i], dataset["new_input"][i])
+                            temp.remove(dataset)
+
+                    new.write(row)
+                old.close()
+            new.close()
 
 
 def direct_visit(parent_object, node, towards):

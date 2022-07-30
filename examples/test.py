@@ -5,8 +5,8 @@ import sklearn
 
 path = "data"
 
-from_path = open(path + "/random.txt").read()
-from_csv = pd.read_csv(path + "/random.csv")
+from_path = open("examples/random.txt").read()
+from_csv = pd.read_csv("examples/random.csv")
 auto_generate = np.zeros_like(from_csv)
 # Add double output i.e., train/test split from a single file
 
