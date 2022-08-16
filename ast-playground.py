@@ -16,12 +16,17 @@ parser.add_argument("--input", default="0", help="new input dataset(s), should b
 def main(args):
     with open(args.pipeline, "r") as source:
         tree = ast.parse(source.read())
+        # print(tree.body)
+
+    # printAst(args.pipeline)
 
     # imports = ImportVisitor()
     # imports.visit(tree)
     # imports.report()
+
     assigner = AssignVisitor()
     assigner.visit(tree)
+
     reportAssign(assigner.assignments, "full")
     assigner.filter_Assignments()
     assigner.filter_datasets()
@@ -45,18 +50,23 @@ def main(args):
                                         "new_input": [input("New value for %s: \n" % dataset["variable"])]})
     assigner.parseNewInputs()
 
-
     pipeline_name = args.pipeline.split(".")
     assigner.transformScript(args.pipeline, pipeline_name[0] + "-new." + pipeline_name[1])
+    #
+    # # print(assigner.datasets)
+    # # print(trimmed)
+    # # reportAssign(trimmed, "clean")
+    # # report(assignments.assignments)
+    #
+    # # transformer = RewriteName()
+    # # transformer.visit(tree)
+    # # # transformer.report()
 
-    # print(assigner.datasets)
-    # print(trimmed)
-    # reportAssign(trimmed, "clean")
-    # report(assignments.assignments)
 
-    # transformer = RewriteName()
-    # transformer.visit(tree)
-    # # transformer.report()
+def printAst(source):
+    with open(source, "r") as source:
+        tree = ast.parse(source.read() + "\n")
+        print(ast.dump(tree) + "\n")
 
 
 class ImportVisitor(ast.NodeVisitor):
@@ -157,14 +167,29 @@ class AssignVisitor(ast.NodeVisitor):
     # The methods below are necessary for parsing the filter operators and preprocessing operations
 
     #  TODO
-    # def visit_Compare(self, node: Compare) -> Any:
+    # def visit_Compare(self, node):
 
     # TODO
-    # def visit_List(self, node: List) -> Any:
+    # def visit_Lambda(self, node):
+
 
     # TODO
-    # def visit_Tuple(self, node: Tuple) -> Any:
+    def visit_List(self, node):
+        list_el = []
+        for element in node.elts:
+            list_el.append(direct_visit(self, node, element))
 
+        print(list_el)
+        # return list_el
+
+    # TODO
+    def visit_Tuple(self, node):
+        tuple_el = []
+        for element in node.elts:
+            tuple_el.append(direct_visit(self, node, element))
+
+        print(tuple(tuple_el))
+        # return tuple(tuple_el)
     def filter_Assignments(self):
         removed = []
         for assignment in self.assignments:
