@@ -15,7 +15,7 @@ df, y, _, _ = dataset.get_data(dataset_format="dataframe")
 
 print(df.head(5))
 print(df.dtypes)
-
+print(list(df))
 target = 'class'
 training_features = list(df)
 training_features.remove(target)
@@ -39,7 +39,7 @@ preprocessor = ColumnTransformer(
                                 transformers=[
                                                 ('num', numerical_transformer, numerical_features),
                                                 ('cat', categorical_transformer, categorical_features)
-                                            ], 
+                                            ],
                                 remainder='passthrough'
                                 )
 
@@ -47,9 +47,9 @@ neural_network_pipeline = Pipeline(
                                     steps =[
                                                 ('preprocessor', preprocessor),
                                                 ('clf', MLPClassifier(
-                                                                        activation= 'tanh', 
-                                                                        alpha= 0.5, 
-                                                                        hidden_layer_sizes= (50,), 
+                                                                        activation= 'tanh',
+                                                                        alpha= 0.5,
+                                                                        hidden_layer_sizes= (50,),
                                                                         max_iter=10000
                                                                     )
                                                 )

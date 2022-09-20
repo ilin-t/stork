@@ -166,14 +166,32 @@ class AssignVisitor(ast.NodeVisitor):
 
     # The methods below are necessary for parsing the filter operators and preprocessing operations
 
-    #  TODO
-    # def visit_Compare(self, node):
+    def visit_Compare(self, node):
+        left = direct_visit(self, node, node.left)
+        operation = node.ops
+        right = direct_visit(self, node, node.comparators[0])
 
-    # TODO
-    # def visit_Lambda(self, node):
+        print("Left op: %s, \n operator: %s, \n right: %s" % (left, operation, right))
 
+        return {"left_op": left, "operator": operation, "right": right}
 
-    # TODO
+    def visit_Lambda(self, node):
+        args = direct_visit(self, node, node.args)
+        func = direct_visit(self, node, node.body)
+
+        print("Args: %s, func: %s" % (args, func))
+
+    def visit_arguments(self, node):
+        args = []
+        for arg in node.args:
+            args.append(direct_visit(self, node, arg))
+        print(args)
+        return args
+
+    def visit_arg(self, node):
+        print("arg: %s" % node.arg)
+        return node.arg
+
     def visit_List(self, node):
         list_el = []
         for element in node.elts:
@@ -182,38 +200,38 @@ class AssignVisitor(ast.NodeVisitor):
         print(list_el)
         # return list_el
 
-    # TODO
     def visit_Tuple(self, node):
         tuple_el = []
         for element in node.elts:
             tuple_el.append(direct_visit(self, node, element))
 
-        print(tuple(tuple_el))
-        # return tuple(tuple_el)
+        # print(tuple(tuple_el))
+        return tuple(tuple_el)
+
     def filter_Assignments(self):
         removed = []
         for assignment in self.assignments:
-            # print(assignment)
-            # print("Type of the above assignment: %s" % type(assignment["data_source"]))
+            print(assignment)
+            print("Type of the above assignment: %s" % type(assignment["data_source"]))
             if type(assignment["data_source"]) is not dict:
                 removed.append(assignment)
-                # print("removed\n")
+                print("removed\n")
             elif "data_file" not in assignment["data_source"].keys():
                 removed.append(assignment)
-                # print("removed\n")
+                print("removed\n")
             elif len(assignment["data_source"]["data_file"]) == 0:
                 removed.append(assignment)
-                # print("removed\n")
-            elif type(assignment["data_source"]["data_file"][0]) is not str:
-                removed.append(assignment)
-                # print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0]))
-                # print("removed\n")
-            elif type(assignment["data_source"]["data_file"][0][0]) is not str:
-                removed.append(assignment)
-                # print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0][0]))
-                # print("removed\n")
-            # else:
-            #     print("didn't remove\n")
+                print("removed\n")
+            # elif type(assignment["data_source"]["data_file"][0]) is not str:
+            #     removed.append(assignment)
+            #     print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0]))
+            #     print("removed\n")
+            # elif type(assignment["data_source"]["data_file"][0][0]) is not str:
+            #     removed.append(assignment)
+            #     print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0][0]))
+            #     print("removed\n")
+            else:
+                print("didn't remove\n")
 
         self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
 
