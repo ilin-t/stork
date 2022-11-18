@@ -1,102 +1,5 @@
 import ast
-from ast import Index, Name, Load, Subscript
-from pprint import pprint
-import argparse
-
-parser = argparse.ArgumentParser(description="AST Analyzer of Data Imports")
-parser.add_argument("--pipeline", required=True, help="Python script to be parsed")
-parser.add_argument("--input", default="0", help="new input dataset(s), should be the same number as existing "
-                                                 "pipeline inputs. If more than 1, provide it in a list format."
-                                                 " When providing a list, the inputs will "
-                                                 "be mapped in the order of appearance. If not sure of the "
-                                                 "ordering or naming, leave the field empty the system will "
-                                                 "ask you for your input.")
-
-
-def main(args):
-    with open(args.pipeline, "r") as source:
-        tree = ast.parse(source.read())
-        # print(tree.body)
-
-    # printAst(args.pipeline)
-
-    # imports = ImportVisitor()
-    # imports.visit(tree)
-    # imports.report()
-
-    assigner = AssignVisitor()
-    assigner.visit(tree)
-
-    reportAssign(assigner.assignments, "full")
-    assigner.filter_Assignments()
-    assigner.filter_datasets()
-    reportAssign(assigner.datasets, "datasets")
-    if len(args.input.split(",")) > len(assigner.datasets):
-        print("New input size larger than the number of the datasets in the original pipeline. Please map your "
-              "inputs.\n")
-        for dataset in assigner.datasets:
-            print("Current value for %s is: %s. If no change to the input is required or the input variable is not "
-                  "suitable, press ENTER." % (dataset["variable"], dataset["data_source"]["data_file"]))
-            assigner.new_inputs.append({"old_input": dataset["data_source"]["data_file"],
-                                        "new_input": [input("New value for %s: \n" % dataset["variable"])]})
-    elif int(args.input) == len(assigner.datasets):
-        assigner.new_inputs = args.input.split(",")
-    else:
-        print("No new inputs provided. Please add the new inputs for: \n")
-        for dataset in assigner.datasets:
-            print("Current value for %s is: %s. If no change to the input is required or the input variable is not "
-                  "suitable, press ENTER." % (dataset["variable"], dataset["data_source"]["data_file"]))
-            assigner.new_inputs.append({"old_input": dataset["data_source"]["data_file"],
-                                        "new_input": [input("New value for %s: \n" % dataset["variable"])]})
-    assigner.parseNewInputs()
-
-    pipeline_name = args.pipeline.split(".")
-    assigner.transformScript(args.pipeline, pipeline_name[0] + "-new." + pipeline_name[1])
-    #
-    # # print(assigner.datasets)
-    # # print(trimmed)
-    # # reportAssign(trimmed, "clean")
-    # # report(assignments.assignments)
-    #
-    # # transformer = RewriteName()
-    # # transformer.visit(tree)
-    # # # transformer.report()
-
-
-def printAst(source):
-    with open(source, "r") as source:
-        tree = ast.parse(source.read() + "\n")
-        print(ast.dump(tree) + "\n")
-
-
-class ImportVisitor(ast.NodeVisitor):
-    def __init__(self):
-        self.stats = {"import": [], "from": []}
-
-    def visit_Import(self, node):
-        for alias in node.names:
-            self.stats["import"].append(alias.name)
-        self.generic_visit(node)
-
-    def visit_ImportFrom(self, node):
-        temp = {"from": node.module, "import": []}
-        for alias in node.names:
-            temp["import"].append(alias.name)
-        self.stats["from"].append(temp)
-        self.generic_visit(node)
-
-    def report(self):
-        pprint(self.stats)
-
-
-def reportAssign(assignments, full):
-    path = str.split(args.input, "/")
-    filename = str.split(path[len(path) - 1], ".")
-
-    with open("assignments-" + filename[0] + "-" + full + ".txt", "w") as output:
-        for assignment in assignments:
-            output.write(str(assignment) + "\n")
-        output.close()
+from util import direct_visit
 
 
 class AssignVisitor(ast.NodeVisitor):
@@ -279,7 +182,7 @@ class AssignVisitor(ast.NodeVisitor):
                 row_old = iter(old)
                 for row in row_old:
                     for dataset in temp:
-                        if dataset["old_input"][0] in row:
+                        if dataset["old_input"] in row:
                             for i in range(0, len(dataset["new_input"])):
                                 row = row.replace(dataset["old_input"][i], dataset["new_input"][i])
                             temp.remove(dataset)
@@ -287,22 +190,3 @@ class AssignVisitor(ast.NodeVisitor):
                     new.write(row)
                 old.close()
             new.close()
-
-
-def direct_visit(parent_object, node, towards):
-    try:
-        func_name = "visit_" + type(towards).__name__
-        func = getattr(parent_object, func_name)
-        # print("Method %s will be called from node "
-        #       "type %s from object %s.\n" % (func_name, type(node), type(parent_object)))
-        output = func(towards)
-        return output
-    except AttributeError:
-        print(
-            "visit_" + type(towards).__name__ +
-            " accessed from node type " + type(node).__name__ + " is not defined.\n")
-
-
-if __name__ == "__main__":
-    args = parser.parse_args()
-    main(args)
