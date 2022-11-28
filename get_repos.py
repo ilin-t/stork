@@ -1,59 +1,34 @@
-import logging
+import json
 import os
-import pygit
+
 import requests
-import shutil
-from pygit import repos
-# from configuration.repository import supported_languages, supported_sort_by
-# from helpers.language import extension_mappings
-from pathlib import Path
-from langdetect import detect
 
-logger = logging.getLogger("logsight." + __name__)
-logging.basicConfig(level=logging.INFO)
-MIN_LINES_PER_FILE = 50
-MAX_LINES_PER_FILE = 1000
+query = "read_csv+language:python"
+# query = "read_csv+extension%3Apy+extension%3Aipynb+language%3APython"
+languages = ["python", "Jupyter Notebook"]
+pages = range(1,101)
+per_page = 30
+token = "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"
 
+for page in pages:
+    url = f"https://api.github.com/search/code?q={query}&page={page}"
 
-class RepositoryCloner:
-    def __init__(self, language="python", sort_by="stars", n_results=100):
-        if language not in ["python", "Jupyter notebook"]:
-            logger.info(f"{language} is still not supported language by the logsight.ai autologger")
-        if sort_by not in supported_sort_by:
-            logger.info(f"{language} is still not supported sorting method by the logsight.ai autologger")
-        self.language = language
-        self.sort_by = sort_by
-        self.n_results = n_results
-        self.request_link = f"https://api.github.com/search/repositories?q=" \
-                            f"language:{self.language}" \
-                            f"&sort={self.sort_by}" \
-                            f"&order=desc" \
-                            f"&per_page={n_results}"
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json"
+    }
 
-    def clone_repositories(self, output_dir="../data/repositories/"):
-        if not os.path.isdir(output_dir):
-            os.makedirs(output_dir)
-            logger.info(f'Created folder: {output_dir} successfully')
-        repositories = requests.get(self.request_link).json()["items"]
-        for repository in repositories:
-            if detect(repository["description"]) == "en":
-                logger.info(f'Cloning repository : {repository["html_url"]}')
-                try:
-                    Repo.clone_from(repository["html_url"], output_dir + f"{self.language}/" + repository["name"])
-                except git.exc.GitCommandError as e:
-                    logger.error(e)
-        return repositories
+    response = requests.request("GET", url, headers=headers)
+    json_response = response.json()
+    with open(f"repos_{page}_{per_page}.json", mode="w") as file:
+        json.dump(json_response, file)
 
-    def filter_repository_files(self, repository_dir='../data/repositories/', output_dir='../data/filter/'):
-        if not os.path.isdir(output_dir):
-            os.makedirs(output_dir)
-            logger.info(f'Created folder: {output_dir} successfully')
-        logger.info(f"Filtering files that contain the {self.language} language extension")
-        files = list(Path(f"{repository_dir}{self.language}").rglob(f"*.{extension_mappings[self.language]}"))
-        logger.info(f"Copying the files into the output directory")
-        for index, file in enumerate(files):
-            with open(file, 'r') as f:
-                f_s = f.readlines()
-            if MIN_LINES_PER_FILE <= len(f_s) < MAX_LINES_PER_FILE:
-                shutil.copy2(file, output_dir + str(index) + f".{extension_mappings[self.language]}")
-        logger.info(f"Filtering finished successfully")
+    repositories = {}
+
+    for item in json_response["items"]:
+        repositories[item["repository"]["name"]] = item["repository"]["html_url"]
+
+    for repository in repositories:
+        print(f"Repository: {repository}, url: {repositories[repository]}")
+        # response = requests.request("GET", repositories[repository], headers=headers)
+        os.system(f"git clone {repositories[repository]} github_repos_3000/{repository}")

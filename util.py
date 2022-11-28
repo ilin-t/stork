@@ -18,3 +18,25 @@ def direct_visit(parent_object, node, towards):
 def getAst(pipeline):
     with open(pipeline, "r") as source:
         return ast.parse(source.read() + "\n")
+
+
+def checkDataFile(data_file):
+    for item in data_file:
+        if type(item) is not str:
+            return False
+        file = item.split(".")
+        if len(file) < 2:
+            return False
+        # Data files and compression support for pandas from_csv method
+        elif file[-1] in ["csv", "zip", "parquet", "gz", "tar", "bz2", "zstd"]:
+            return True
+
+
+def reportAssign(pipeline, assignments, full):
+    path = str.split(pipeline, "/")
+    filename = str.split(path[len(path) - 1], ".")
+
+    with open("assignments-" + filename[0] + "-" + full + ".txt", "w") as output:
+        for assignment in assignments:
+            output.write(str(assignment) + "\n")
+        output.close()

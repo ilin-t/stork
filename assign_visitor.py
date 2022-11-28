@@ -1,9 +1,12 @@
 import ast
+
+import util
 from util import direct_visit
 
 
 class AssignVisitor(ast.NodeVisitor):
     def __init__(self):
+        self.assignment = None
         self.inputs = []
         self.assignments = []
         self.datasets = []
@@ -12,15 +15,17 @@ class AssignVisitor(ast.NodeVisitor):
         self.new_datasets = []
 
     def visit_Assign(self, node):
-        assignment = {"variable": str, "data_source": str}
+        self.assignment = {"variable": str, "data_source": []}
         for target in node.targets:
-            assignment["variable"] = direct_visit(self, node, target)
-            assignment["data_source"] = direct_visit(self, node, node.value)
-        self.assignments.append(assignment)
+            self.assignment["variable"] = direct_visit(self, node, target)
+            self.assignment["data_source"].append(direct_visit(parent_object=self, node=node, towards=node.value))
+
+        print(len(self.assignment["data_source"]))
+        self.assignments.append(self.assignment)
 
     #
     def visit_Call(self, node):
-        func_call = direct_visit(self, node, node.func)
+        func_call = direct_visit(parent_object=self, node=node, towards=node.func)
         args_names = []
         params = []
         for arg in node.args:
@@ -28,18 +33,25 @@ class AssignVisitor(ast.NodeVisitor):
         for keyword in node.keywords:
             params.append(direct_visit(self, node, keyword))
 
-        return {"func_call": func_call, "data_file": args_names, "params": params}
+        print(type(node.func).__name__)
+        if type(node.func).__name__ == "Attribute":
+            self.assignment["data_source"].append({"func_call": func_call, "data_file": args_names, "params": params})
+
+        else:
+            return {"func_call": func_call, "data_file": args_names, "params": params}
 
     def visit_Attribute(self, node):
-        package = direct_visit(self, node, node.value)
+        package = direct_visit(parent_object=self, node=node, towards=node.value)
         method = node.attr
-
-        return {"from": package, "method": method}
+        if type(node).__name__ == "Call":
+            self.assignment["data_source"].append(package)
+        else:
+            return {"from": package, "method": method}
 
     def visit_BinOp(self, node):
-        left = direct_visit(self, node, node.left)
+        left = direct_visit(parent_object=self, node=node, towards=node.left)
         # print(node.op)
-        right = direct_visit(self, node, node.right)
+        right = direct_visit(parent_object=self, node=node, towards=node.right)
         # print(node.left._fields[0] + "  ", type(node.op).__name__ +
         #       " " + node.right._fields[1])
 
@@ -49,8 +61,8 @@ class AssignVisitor(ast.NodeVisitor):
         return [left, right]
 
     def visit_Subscript(self, node):
-        load_var = direct_visit(self, node, node.value)
-        filter_criteria = direct_visit(self, node, node.slice)
+        load_var = direct_visit(parent_object=self, node=node, towards=node.value)
+        filter_criteria = direct_visit(parent_object=self, node=node, towards=node.slice)
 
         return [load_var, filter_criteria]
 
@@ -65,22 +77,22 @@ class AssignVisitor(ast.NodeVisitor):
         return node.value
 
     def visit_keyword(self, node):
-        return {node.arg: direct_visit(self, node, node.value)}
+        return {node.arg: direct_visit(parent_object=self, node=node, towards=node.value)}
 
     # The methods below are necessary for parsing the filter operators and preprocessing operations
 
     def visit_Compare(self, node):
-        left = direct_visit(self, node, node.left)
+        left = direct_visit(parent_object=self, node=node, towards=node.left)
         operation = node.ops
-        right = direct_visit(self, node, node.comparators[0])
+        right = direct_visit(parent_object=self, node=node, towards=node.comparators[0])
 
         print("Left op: %s, \n operator: %s, \n right: %s" % (left, operation, right))
 
         return {"left_op": left, "operator": operation, "right": right}
 
     def visit_Lambda(self, node):
-        args = direct_visit(self, node, node.args)
-        func = direct_visit(self, node, node.body)
+        args = direct_visit(parent_object=self, node=node, towards=node.args)
+        func = direct_visit(parent_object=self, node=node, towards=node.body)
 
         print("Args: %s, func: %s" % (args, func))
 
@@ -111,21 +123,52 @@ class AssignVisitor(ast.NodeVisitor):
         # print(tuple(tuple_el))
         return tuple(tuple_el)
 
+    def visit_Dict(self, node):
+        return 0
+
+    # TODO Define visit Dict method
+
     def filter_Assignments(self):
         removed = []
         for assignment in self.assignments:
             print(assignment)
             print("Type of the above assignment: %s" % type(assignment["data_source"]))
-            if type(assignment["data_source"]) is not dict:
-                removed.append(assignment)
-                print("removed\n")
-            elif "data_file" not in assignment["data_source"].keys():
-                removed.append(assignment)
-                print("removed\n")
-            elif len(assignment["data_source"]["data_file"]) == 0:
-                removed.append(assignment)
-                print("removed\n")
+            for source in assignment["data_source"]:
+                print(source)
+                if type(source) is not dict:
+                    removed.append(source)
+                    print("removed\n")
+                elif "data_file" not in source.keys():
+                    removed.append(source)
+                    print("removed\n")
+                elif len(source["data_file"]) == 0:
+                    removed.append(source)
+                    print("removed\n")
+                elif type(source["data_file"][0]) is not str:
+                    removed.append(source)
+                    print("removed\n")
+                elif not util.checkDataFile(source["data_file"]):
+                    removed.append(source)
+                    print("Type of the above data_file: %s" % type(source["data_file"][0]))
+                    print("removed\n")
+                else:
+                    self.inputs.append(assignment)
+                    print("didn't remove\n")
+            # if type(assignment["data_source"]) is not (dict or list):
+            #     removed.append(assignment)
+            #     print("removed\n")
+            # elif "data_file" not in assignment["data_source"].keys():
+            #     removed.append(assignment)
+            #     print("removed\n")
+            # elif len(assignment["data_source"]["data_file"]) == 0:
+            #     removed.append(assignment)
+            #     print("removed\n")
             # elif type(assignment["data_source"]["data_file"][0]) is not str:
+            #     removed.append(assignment)
+            #     print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0]))
+            #     print(f"data_file = {assignment['data_source']['data_file'][0]}")
+            #     print("removed\n")
+            # elif not self.checkDataFile(assignment["data_source"]["data_file"]):
             #     removed.append(assignment)
             #     print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0]))
             #     print("removed\n")
@@ -133,11 +176,10 @@ class AssignVisitor(ast.NodeVisitor):
             #     removed.append(assignment)
             #     print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0][0]))
             #     print("removed\n")
-            else:
-                print("didn't remove\n")
 
-        self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
+        # self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
 
+        print(self.inputs)
         return self.inputs
 
     def filter_datasets(self):
@@ -153,7 +195,7 @@ class AssignVisitor(ast.NodeVisitor):
                 # else:
                 #     print("%s is a data input\n" % assignment)
         self.datasets = [assignment for assignment in self.inputs if assignment not in processing_steps]
-        # print(self.datasets)
+        print(f"Datasets: {self.datasets}")
 
     def parseNewInputs(self):
         for input in self.new_inputs:

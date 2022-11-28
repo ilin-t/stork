@@ -45,19 +45,24 @@ class Switcheroo:
 
         tree = util.getAst(pipeline=pipeline)
         self.assignVisitor.visit(tree)
-        print(self.assignVisitor.assignments)
+        # print(self.assignVisitor.assignments)
         self.assignVisitor.filter_Assignments()
-        print(self.assignVisitor.assignments)
+        # print(self.assignVisitor.assignments)
         self.assignVisitor.filter_datasets()
-        print(self.assignVisitor.datasets)
+        # print(self.assignVisitor.datasets)
 
         for member in self.assignVisitor.datasets:
             print(member["variable"])
-            for dataset in member["data_source"]["data_file"]:
-                print(os.getcwd())
-                abs_path_dataset = self.parsePath(dataset)
-                self.connector.uploadFile(path=abs_path_dataset, bucket="switcheroo-test-bucket")
-
+            for source in member["data_source"]:
+                try:
+                    if util.checkDataFile(source["data_file"]):
+                    # print(os.getcwd())
+                        abs_path_dataset = self.parsePath(source["data_file"][0])
+                        print(f"Source data file:{source['data_file']}")
+                        # print(f"Absolute path: {abs_path_dataset}")
+                        self.connector.uploadFile(path=abs_path_dataset, bucket="switcheroo-test-bucket")
+                except TypeError as e:
+                    print(e)
 
         # TODO Check which buckets exist for this user. Whether a new bucket should be created for this
         # for dataset in self.assignVisitor.datasets:
@@ -91,22 +96,29 @@ class Switcheroo:
 
         print(pipeline_directory)
 
-        if data_path[0]== "/":
+        if data_path[0] == "/":
             return data_path
         elif data_path[0].isalnum():
             return pipeline_directory[0] + "/" + data_path
-        elif data_path[0] ==".":
+        elif data_path[0] == ".":
             if data_path[1] == "/":
                 return pipeline_directory[0] + "/" + data_path[2:]
             else:
                 parent_dir = Path(pipeline_directory[0]).parent.absolute()
-                return parent_dir + "/" + data_path[3:]
+                return str(parent_dir) + "/" + data_path[3:]
 
 
 if __name__ == '__main__':
-    switcheroo = Switcheroo("examples/config.ini")
+    print(os.getcwd())
+    switcheroo = Switcheroo(r"examples/config.ini")
     # ak, sak = switcheroo.parseConfig()
 
-    switcheroo.setup("examples/test.py")
+    # switcheroo.setup("examples/test.py")
+    print(os.getcwd())
+    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/F1-stats-digoc/app.py")
+    # switcheroo.setup(pipeline="examples/argus_eyes.py")
+    switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/log-monitoring/test.py")
+    util.reportAssign(switcheroo.pipeline, switcheroo.assignVisitor.assignments, "full")
     print(switcheroo.connector.getClient())
+
     # print("Access key: %s, secret access key: %s" % (ak, sak))

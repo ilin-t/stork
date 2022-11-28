@@ -1,0 +1,470 @@
+Module(
+   body=[
+      Import(
+         names=[
+            alias(name='numpy', asname='np')]),
+      ImportFrom(
+         module='sklearn.preprocessing',
+         names=[
+            alias(name='MinMaxScaler'),
+            alias(name='OneHotEncoder'),
+            alias(name='LabelBinarizer')],
+         level=0),
+      ImportFrom(
+         module='sklearn.compose',
+         names=[
+            alias(name='ColumnTransformer')],
+         level=0),
+      ImportFrom(
+         module='sklearn.neural_network',
+         names=[
+            alias(name='MLPClassifier')],
+         level=0),
+      ImportFrom(
+         module='sklearn.pipeline',
+         names=[
+            alias(name='Pipeline')],
+         level=0),
+      ImportFrom(
+         module='sklearn.model_selection',
+         names=[
+            alias(name='train_test_split')],
+         level=0),
+      ImportFrom(
+         module='sklearn.metrics',
+         names=[
+            alias(name='f1_score'),
+            alias(name='recall_score')],
+         level=0),
+      Import(
+         names=[
+            alias(name='time')]),
+      Import(
+         names=[
+            alias(name='openml')]),
+      ImportFrom(
+         module='pandas.api.types',
+         names=[
+            alias(name='is_numeric_dtype')],
+         level=0),
+      Assign(
+         targets=[
+            Name(id='dataset', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Attribute(
+                  value=Name(id='openml', ctx=Load()),
+                  attr='datasets',
+                  ctx=Load()),
+               attr='get_dataset',
+               ctx=Load()),
+            args=[
+               Constant(value=31)],
+            keywords=[])),
+      Assign(
+         targets=[
+            Tuple(
+               elts=[
+                  Name(id='df', ctx=Store()),
+                  Name(id='y', ctx=Store()),
+                  Name(id='_', ctx=Store()),
+                  Name(id='_', ctx=Store())],
+               ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Name(id='dataset', ctx=Load()),
+               attr='get_data',
+               ctx=Load()),
+            args=[],
+            keywords=[
+               keyword(
+                  arg='dataset_format',
+                  value=Constant(value='dataframe'))])),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               Call(
+                  func=Attribute(
+                     value=Name(id='df', ctx=Load()),
+                     attr='head',
+                     ctx=Load()),
+                  args=[
+                     Constant(value=5)],
+                  keywords=[])],
+            keywords=[])),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               Attribute(
+                  value=Name(id='df', ctx=Load()),
+                  attr='dtypes',
+                  ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='target', ctx=Store())],
+         value=Constant(value='class')),
+      Assign(
+         targets=[
+            Name(id='training_features', ctx=Store())],
+         value=Call(
+            func=Name(id='list', ctx=Load()),
+            args=[
+               Name(id='df', ctx=Load())],
+            keywords=[])),
+      Expr(
+         value=Call(
+            func=Attribute(
+               value=Name(id='training_features', ctx=Load()),
+               attr='remove',
+               ctx=Load()),
+            args=[
+               Name(id='target', ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='categorical_features', ctx=Store())],
+         value=List(elts=[], ctx=Load())),
+      Assign(
+         targets=[
+            Name(id='numerical_features', ctx=Store())],
+         value=List(elts=[], ctx=Load())),
+      For(
+         target=Name(id='x', ctx=Store()),
+         iter=Name(id='training_features', ctx=Load()),
+         body=[
+            If(
+               test=Call(
+                  func=Name(id='is_numeric_dtype', ctx=Load()),
+                  args=[
+                     Attribute(
+                        value=Subscript(
+                           value=Name(id='df', ctx=Load()),
+                           slice=Name(id='x', ctx=Load()),
+                           ctx=Load()),
+                        attr='dtype',
+                        ctx=Load())],
+                  keywords=[]),
+               body=[
+                  Expr(
+                     value=Call(
+                        func=Attribute(
+                           value=Name(id='numerical_features', ctx=Load()),
+                           attr='append',
+                           ctx=Load()),
+                        args=[
+                           Name(id='x', ctx=Load())],
+                        keywords=[]))],
+               orelse=[
+                  Expr(
+                     value=Call(
+                        func=Attribute(
+                           value=Name(id='categorical_features', ctx=Load()),
+                           attr='append',
+                           ctx=Load()),
+                        args=[
+                           Name(id='x', ctx=Load())],
+                        keywords=[]))])],
+         orelse=[]),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               BinOp(
+                  left=Constant(value='found numerical features: '),
+                  op=Add(),
+                  right=Call(
+                     func=Name(id='str', ctx=Load()),
+                     args=[
+                        Name(id='numerical_features', ctx=Load())],
+                     keywords=[]))],
+            keywords=[])),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               BinOp(
+                  left=Constant(value='found categorical features: '),
+                  op=Add(),
+                  right=Call(
+                     func=Name(id='str', ctx=Load()),
+                     args=[
+                        Name(id='categorical_features', ctx=Load())],
+                     keywords=[]))],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='numerical_transformer', ctx=Store())],
+         value=Call(
+            func=Name(id='Pipeline', ctx=Load()),
+            args=[],
+            keywords=[
+               keyword(
+                  arg='steps',
+                  value=List(
+                     elts=[
+                        Tuple(
+                           elts=[
+                              Constant(value='scaler'),
+                              Call(
+                                 func=Name(id='MinMaxScaler', ctx=Load()),
+                                 args=[],
+                                 keywords=[])],
+                           ctx=Load())],
+                     ctx=Load()))])),
+      Assign(
+         targets=[
+            Name(id='categorical_transformer', ctx=Store())],
+         value=Call(
+            func=Name(id='Pipeline', ctx=Load()),
+            args=[],
+            keywords=[
+               keyword(
+                  arg='steps',
+                  value=List(
+                     elts=[
+                        Tuple(
+                           elts=[
+                              Constant(value='encoder'),
+                              Call(
+                                 func=Name(id='OneHotEncoder', ctx=Load()),
+                                 args=[],
+                                 keywords=[])],
+                           ctx=Load())],
+                     ctx=Load()))])),
+      Assign(
+         targets=[
+            Name(id='preprocessor', ctx=Store())],
+         value=Call(
+            func=Name(id='ColumnTransformer', ctx=Load()),
+            args=[],
+            keywords=[
+               keyword(
+                  arg='transformers',
+                  value=List(
+                     elts=[
+                        Tuple(
+                           elts=[
+                              Constant(value='num'),
+                              Name(id='numerical_transformer', ctx=Load()),
+                              Name(id='numerical_features', ctx=Load())],
+                           ctx=Load()),
+                        Tuple(
+                           elts=[
+                              Constant(value='cat'),
+                              Name(id='categorical_transformer', ctx=Load()),
+                              Name(id='categorical_features', ctx=Load())],
+                           ctx=Load())],
+                     ctx=Load())),
+               keyword(
+                  arg='remainder',
+                  value=Constant(value='passthrough'))])),
+      Assign(
+         targets=[
+            Name(id='neural_network_pipeline', ctx=Store())],
+         value=Call(
+            func=Name(id='Pipeline', ctx=Load()),
+            args=[],
+            keywords=[
+               keyword(
+                  arg='steps',
+                  value=List(
+                     elts=[
+                        Tuple(
+                           elts=[
+                              Constant(value='preprocessor'),
+                              Name(id='preprocessor', ctx=Load())],
+                           ctx=Load()),
+                        Tuple(
+                           elts=[
+                              Constant(value='clf'),
+                              Call(
+                                 func=Name(id='MLPClassifier', ctx=Load()),
+                                 args=[],
+                                 keywords=[
+                                    keyword(
+                                       arg='activation',
+                                       value=Constant(value='tanh')),
+                                    keyword(
+                                       arg='alpha',
+                                       value=Constant(value=0.5)),
+                                    keyword(
+                                       arg='hidden_layer_sizes',
+                                       value=Tuple(
+                                          elts=[
+                                             Constant(value=50)],
+                                          ctx=Load())),
+                                    keyword(
+                                       arg='max_iter',
+                                       value=Constant(value=10000))])],
+                           ctx=Load())],
+                     ctx=Load()))])),
+      Assign(
+         targets=[
+            Name(id='X', ctx=Store())],
+         value=Subscript(
+            value=Name(id='df', ctx=Load()),
+            slice=Name(id='training_features', ctx=Load()),
+            ctx=Load())),
+      Assign(
+         targets=[
+            Name(id='y', ctx=Store())],
+         value=Subscript(
+            value=Name(id='df', ctx=Load()),
+            slice=Name(id='target', ctx=Load()),
+            ctx=Load())),
+      Assign(
+         targets=[
+            Name(id='lb', ctx=Store())],
+         value=Call(
+            func=Name(id='LabelBinarizer', ctx=Load()),
+            args=[],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='y', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Name(id='np', ctx=Load()),
+               attr='ravel',
+               ctx=Load()),
+            args=[
+               Call(
+                  func=Attribute(
+                     value=Name(id='lb', ctx=Load()),
+                     attr='fit_transform',
+                     ctx=Load()),
+                  args=[
+                     Name(id='y', ctx=Load())],
+                  keywords=[])],
+            keywords=[])),
+      Assign(
+         targets=[
+            Tuple(
+               elts=[
+                  Name(id='X_train', ctx=Store()),
+                  Name(id='X_test', ctx=Store()),
+                  Name(id='y_train', ctx=Store()),
+                  Name(id='y_test', ctx=Store())],
+               ctx=Store())],
+         value=Call(
+            func=Name(id='train_test_split', ctx=Load()),
+            args=[
+               Name(id='X', ctx=Load()),
+               Name(id='y', ctx=Load())],
+            keywords=[
+               keyword(
+                  arg='test_size',
+                  value=Constant(value=0.3)),
+               keyword(
+                  arg='random_state',
+                  value=Constant(value=42))])),
+      Assign(
+         targets=[
+            Name(id='tr_1nn', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Name(id='time', ctx=Load()),
+               attr='time',
+               ctx=Load()),
+            args=[],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='trained_nn', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Name(id='neural_network_pipeline', ctx=Load()),
+               attr='fit',
+               ctx=Load()),
+            args=[
+               Name(id='X_train', ctx=Load()),
+               Name(id='y_train', ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='tr_2nn', ctx=Store())],
+         value=BinOp(
+            left=Call(
+               func=Attribute(
+                  value=Name(id='time', ctx=Load()),
+                  attr='time',
+                  ctx=Load()),
+               args=[],
+               keywords=[]),
+            op=Sub(),
+            right=Name(id='tr_1nn', ctx=Load()))),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               BinOp(
+                  left=Constant(value='Time to train nn: %0.3f'),
+                  op=Mod(),
+                  right=Name(id='tr_2nn', ctx=Load()))],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='t1nn', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Name(id='time', ctx=Load()),
+               attr='time',
+               ctx=Load()),
+            args=[],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='y_pred', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Name(id='trained_nn', ctx=Load()),
+               attr='predict',
+               ctx=Load()),
+            args=[
+               Name(id='X_test', ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='t2nn', ctx=Store())],
+         value=BinOp(
+            left=Call(
+               func=Attribute(
+                  value=Name(id='time', ctx=Load()),
+                  attr='time',
+                  ctx=Load()),
+               args=[],
+               keywords=[]),
+            op=Sub(),
+            right=Name(id='t1nn', ctx=Load()))),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               BinOp(
+                  left=Constant(value='Recall score on test set: %0.3f'),
+                  op=Mod(),
+                  right=Call(
+                     func=Name(id='recall_score', ctx=Load()),
+                     args=[
+                        Name(id='y_test', ctx=Load()),
+                        Name(id='y_pred', ctx=Load())],
+                     keywords=[]))],
+            keywords=[])),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               BinOp(
+                  left=Constant(value='F1 score on test set: %0.3f'),
+                  op=Mod(),
+                  right=Call(
+                     func=Name(id='f1_score', ctx=Load()),
+                     args=[
+                        Name(id='y_test', ctx=Load()),
+                        Name(id='y_pred', ctx=Load())],
+                     keywords=[]))],
+            keywords=[]))],
+   type_ignores=[])
