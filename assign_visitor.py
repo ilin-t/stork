@@ -128,6 +128,9 @@ class AssignVisitor(ast.NodeVisitor):
 
     # TODO Define visit Dict method
 
+    def visit_ListComp(self, node):
+        return 0
+
     def filter_Assignments(self):
         removed = []
         for assignment in self.assignments:
