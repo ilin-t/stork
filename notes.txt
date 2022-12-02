@@ -1,0 +1,64 @@
+Use cases currently not covered:
+
+________________________________________________________________________________________________________
+The data ingestion (read_csv) is located in a method. The dataset name is dynamically constructed.
+
+E.g. from Air_Quality_Analysis/Data-Scripts/Data_extract.py:
+
+"
+    def data_combine(year, cs):
+        for a in pd.read_csv('../Data/Original-Data/met_' + str(year) + '.csv', chunksize=cs):
+            df = pd.DataFrame(data=a)
+            mylist = df.values.tolist()
+        return mylist
+"
+______________________________________________________________________________________________________
+
+File names in different files (e.g. yaml or string files)
+
+E.g. from deploy-impact21-kona-b/backend/model/utils/strings.py
+
+"
+    # key-value files
+    AGE_KEYS = KEYS_PATH + "age_key_value.csv"
+    DOTS_CATEGORIES_KEYS = KEYS_PATH + "dots_categories_key_value.csv"
+    DOTS_SUBCATEGORIES_KEYS = KEYS_PATH + "dots_subcategories_key_value.csv"
+    GENDER_KEYS = KEYS_PATH + "gender_key_value.csv"
+    REGION_KEYS = KEYS_PATH + "region_key_value.csv"
+    SUBCATEGORIES_MAPPING = KEYS_PATH+"subcategory_mapping.csv"
+"
+_______________________________________________________________________________________________________
+
+File names in different variables (initialized before read_csv calls)
+
+E.g. from Diabetes-Prediction-Project/algorithmEvaluationTechnique.py
+
+"
+    filename = 'diabete-data.csv' #this will ismport the data file
+    names = ['pregnant','plasma','bpdia','skin','test','bmass','diapedi','age','class']
+    dataframe = read_csv(filename, names=names)
+""
+            __________________________________________________________
+
+E.g. from LOONE/Data.py
+
+"
+
+    from Pre_defined_Variables import Pre_defined_Variables
+    SFWMM_Daily_Outputs = pd.read_csv('./Data/SFWMM_Daily_Outputs_%s.csv'%Pre_defined_Variables.Schedule)
+"
+______________________________________________________________________________________________________
+
+Data ingested in a method, but not assigned to a variable. The method call is executed in the return statement
+
+E.g. from forest-pypi/forest/forestdata.py
+
+"
+    def opsd():
+        return pd.read_csv('https://raw.githubusercontent.com/jenfly/opsd/master/opsd_germany_daily.csv', sep=",")
+
+    def presidents():
+        return pd.read_csv('https://sololearn.com/uploads/files/president_heights_party.csv', index_col='name')
+
+"
+______________________________________________________________________________________________________

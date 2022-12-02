@@ -3,10 +3,11 @@ import os
 
 import requests
 
-query = "read_csv+language:python"
+# query = "read_csv+language:python"
+query = "read_sql+language:python"
 # query = "read_csv+extension%3Apy+extension%3Aipynb+language%3APython"
 languages = ["python", "Jupyter Notebook"]
-pages = range(1,101)
+pages = range(1,3)
 per_page = 30
 token = "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"
 
@@ -31,4 +32,5 @@ for page in pages:
     for repository in repositories:
         print(f"Repository: {repository}, url: {repositories[repository]}")
         # response = requests.request("GET", repositories[repository], headers=headers)
-        os.system(f"git clone {repositories[repository]} github_repos_3000/{repository}")
+        # os.system(f"git clone {repositories[repository]} github_repos_3000/{repository}")
+        os.system(f"git clone {repositories[repository]} read_sql_repos_60/{repository}")

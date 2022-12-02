@@ -13,6 +13,7 @@ class AssignVisitor(ast.NodeVisitor):
         self.imports = []
         self.new_inputs = []
         self.new_datasets = []
+        self.datasets_urls = []
 
     def visit_Assign(self, node):
         self.assignment = {"variable": str, "data_source": []}
@@ -20,7 +21,7 @@ class AssignVisitor(ast.NodeVisitor):
             self.assignment["variable"] = direct_visit(self, node, target)
             self.assignment["data_source"].append(direct_visit(parent_object=self, node=node, towards=node.value))
 
-        print(len(self.assignment["data_source"]))
+        print(f"Length of data_source: {len(self.assignment['data_source'])}")
         self.assignments.append(self.assignment)
 
     #
@@ -36,7 +37,6 @@ class AssignVisitor(ast.NodeVisitor):
         print(type(node.func).__name__)
         if type(node.func).__name__ == "Attribute":
             self.assignment["data_source"].append({"func_call": func_call, "data_file": args_names, "params": params})
-
         else:
             return {"func_call": func_call, "data_file": args_names, "params": params}
 
@@ -86,7 +86,7 @@ class AssignVisitor(ast.NodeVisitor):
         operation = node.ops
         right = direct_visit(parent_object=self, node=node, towards=node.comparators[0])
 
-        print("Left op: %s, \n operator: %s, \n right: %s" % (left, operation, right))
+        # print("Left op: %s, \n operator: %s, \n right: %s" % (left, operation, right))
 
         return {"left_op": left, "operator": operation, "right": right}
 
@@ -94,17 +94,17 @@ class AssignVisitor(ast.NodeVisitor):
         args = direct_visit(parent_object=self, node=node, towards=node.args)
         func = direct_visit(parent_object=self, node=node, towards=node.body)
 
-        print("Args: %s, func: %s" % (args, func))
+        # print("Args: %s, func: %s" % (args, func))
 
     def visit_arguments(self, node):
         args = []
         for arg in node.args:
             args.append(direct_visit(self, node, arg))
-        print(args)
+        # print(args)
         return args
 
     def visit_arg(self, node):
-        print("arg: %s" % node.arg)
+        # print("arg: %s" % node.arg)
         return node.arg
 
     def visit_List(self, node):
@@ -112,9 +112,10 @@ class AssignVisitor(ast.NodeVisitor):
         for element in node.elts:
             list_el.append(direct_visit(self, node, element))
 
-        print(list_el)
-        # return list_el
+        # print(list_el)
+        return list_el
 
+    #
     def visit_Tuple(self, node):
         tuple_el = []
         for element in node.elts:
@@ -124,7 +125,15 @@ class AssignVisitor(ast.NodeVisitor):
         return tuple(tuple_el)
 
     def visit_Dict(self, node):
-        return 0
+        content = {}
+        for element in node.keys:
+            key = direct_visit(self, node, element)
+            key_index = node.keys.index(element)
+            value = direct_visit(self, node, node.values[key_index])
+            content[key] = value
+            print(f"Key: {key}, Index: {key_index}, Value: {value}")
+        # print(f"Content: {content}")
+        # return content
 
     # TODO Define visit Dict method
 
@@ -134,29 +143,36 @@ class AssignVisitor(ast.NodeVisitor):
     def filter_Assignments(self):
         removed = []
         for assignment in self.assignments:
-            print(assignment)
             print("Type of the above assignment: %s" % type(assignment["data_source"]))
+            to_keep = False
+            assignment["data_source"] = [i for i in assignment["data_source"] if i is not None]
+            print(assignment["data_source"])
             for source in assignment["data_source"]:
-                print(source)
+                to_keep = False
+                # print(source)
                 if type(source) is not dict:
                     removed.append(source)
-                    print("removed\n")
+                    # print("removed\n")
                 elif "data_file" not in source.keys():
                     removed.append(source)
-                    print("removed\n")
+                    # print("removed\n")
                 elif len(source["data_file"]) == 0:
                     removed.append(source)
-                    print("removed\n")
+                    # print("removed\n")
                 elif type(source["data_file"][0]) is not str:
                     removed.append(source)
-                    print("removed\n")
+                    # print("removed\n")
                 elif not util.checkDataFile(source["data_file"]):
                     removed.append(source)
-                    print("Type of the above data_file: %s" % type(source["data_file"][0]))
-                    print("removed\n")
+                    # print("Type of the above data_file: %s" % type(source["data_file"][0]))
+                    # print("removed\n")
                 else:
-                    self.inputs.append(assignment)
+                    # self.inputs.append(assignment)
+                    # print(f"Assignment: {assignment}")
+                    to_keep = True
                     print("didn't remove\n")
+                if to_keep and assignment not in self.inputs:
+                    self.inputs.append(assignment)
             # if type(assignment["data_source"]) is not (dict or list):
             #     removed.append(assignment)
             #     print("removed\n")
@@ -182,23 +198,23 @@ class AssignVisitor(ast.NodeVisitor):
 
         # self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
 
-        print(self.inputs)
+        print(f"Inputs length: {len(self.inputs)}")
         return self.inputs
 
-    def filter_datasets(self):
-        processing_steps = []
-        for assignment in self.inputs:
-            for i in range(self.inputs.index(assignment) + 1, len(self.inputs)):
-                if assignment["variable"] in self.inputs[i]["data_source"]["data_file"]:
-                    processing_steps.append(self.inputs[i])
-                    # print("%s is a preprocessing step\n" % assignment)
-                elif assignment["variable"] == self.inputs[i]["variable"]:
-                    processing_steps.append(self.inputs[i])
-                    # print("%s alters a previous data input\n" % assignment)
-                # else:
-                #     print("%s is a data input\n" % assignment)
-        self.datasets = [assignment for assignment in self.inputs if assignment not in processing_steps]
-        print(f"Datasets: {self.datasets}")
+    # def filter_datasets(self):
+    #     processing_steps = []
+    #     for assignment in self.inputs:
+    #         for i in range(self.inputs.index(assignment) + 1, len(self.inputs)):
+    #             if assignment["variable"] in self.inputs[i]["data_source"]["data_file"]:
+    #                 processing_steps.append(self.inputs[i])
+    #                 # print("%s is a preprocessing step\n" % assignment)
+    #             elif assignment["variable"] == self.inputs[i]["variable"]:
+    #                 processing_steps.append(self.inputs[i])
+    #                 # print("%s alters a previous data input\n" % assignment)
+    #             # else:
+    #             #     print("%s is a data input\n" % assignment)
+    #     self.datasets = [assignment for assignment in self.inputs if assignment not in processing_steps]
+    #     print(f"Datasets: {self.datasets}")
 
     def parseNewInputs(self):
         for input in self.new_inputs:
@@ -216,7 +232,7 @@ class AssignVisitor(ast.NodeVisitor):
     #             continue
 
     def transformScript(self, script, new_script):
-        temp = self.new_inputs
+        temp = self.datasets_urls
         # print("From transformScript\n")
         # print(temp)
         # print("From transformScript\n")
@@ -226,11 +242,11 @@ class AssignVisitor(ast.NodeVisitor):
             with open(script, "r") as old:
                 row_old = iter(old)
                 for row in row_old:
-                    for dataset in temp:
-                        if dataset["old_input"] in row:
-                            for i in range(0, len(dataset["new_input"])):
-                                row = row.replace(dataset["old_input"][i], dataset["new_input"][i])
-                            temp.remove(dataset)
+                    for source in temp:
+                        if source["dataset_name"] in row:
+                            # for i in range(0, len(source["dataset"])):
+                            row = row.replace(source["dataset_name"], source["url"])
+                            temp.remove(source)
 
                     new.write(row)
                 old.close()
