@@ -15,6 +15,28 @@ class AssignVisitor(ast.NodeVisitor):
         self.new_datasets = []
         self.datasets_urls = []
 
+    def visit_FunctionDef(self, node):
+        args = direct_visit(self, node, node.args)
+        function_body = []
+        decorator_list = []
+        for item in node.body:
+            function_body.append(direct_visit(self, node, item))
+
+        for element in decorator_list:
+            function_body.append(element)
+
+        return {"function": node.name, "data_source": function_body}
+
+
+
+
+    def visit_Return(self, node):
+        value = direct_visit(self, node, node.value)
+        return value
+
+    def visit_list(self, node):
+        return node
+
     def visit_Assign(self, node):
         self.assignment = {"variable": str, "data_source": []}
         for target in node.targets:
