@@ -72,14 +72,17 @@ class Switcheroo:
                     for dataset in source["data_file"]:
                         if util.checkFileExtension(dataset):
                             print(f"dataset:{dataset}")
-                            # if util.checkDataFile(dataset):
-                            # abs_path_dataset = self.parsePath(dataset)
-                            # # print(f"Source data file:{abs_path_dataset}")
-                            # self.connector.uploadFile(path=abs_path_dataset, bucket=bucket_name)
-                            # dataset_name = self.getDatasetName(abs_path_dataset)
-                            # self.assignVisitor.datasets_urls.append({"dataset_name": dataset,
-                            #                                          "url": self.connector.getObjectUrl(
-                            #                                              key=dataset_name, bucket=bucket_name)})
+                            if util.checkDataFile(dataset):
+
+                                abs_path_dataset = self.parsePath(dataset)
+                                print(f"Source data file:{abs_path_dataset}")
+                                self.connector.uploadFile(path=abs_path_dataset, bucket=bucket_name)
+                                dataset_name = self.getDatasetName(abs_path_dataset)
+
+                                print(f"Url: {self.connector.getObjectUrl(key=dataset_name, bucket=bucket_name)}")
+                                # self.assignVisitor.datasets_urls.append({"dataset_name": dataset,
+                                #                                          "url": self.connector.getObjectUrl(
+                                #                                              key=dataset_name, bucket=bucket_name)})
 
                 except TypeError as e:
                     print(e)
@@ -161,13 +164,18 @@ class Switcheroo:
 
 
 if __name__ == '__main__':
-    switcheroo = Switcheroo(r"examples/config.ini")
+    switcheroo = Switcheroo(r"../config.ini")
+
+    project_path = os.getcwd()
+
+
+    print(project_path.split())
     # ak, sak = switcheroo.parseConfig()
 
     # switcheroo.setup("examples/test.py")
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/F1-stats-digoc/app.py") - working
     # switcheroo.setup(pipeline="examples/argus_eyes.py", new_pipeline="new_argus_eyes.py") - working
-    # switcheroo.setup(pipeline="examples/argus_eyes.py", new_pipeline="new_argus_eyes.py")
+    switcheroo.setup(pipeline="../examples/argus_eyes.py", new_pipeline="new_argus_eyes.py")
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/log-monitoring/test.py") - working
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/log-monitoring/test.py", new_pipeline="new_test.py")
     # #switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/Air_Quality_Analysis/Data-Scripts/Data_extract.py") - not working #
@@ -178,7 +186,7 @@ if __name__ == '__main__':
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/craiglist_crawler/__init__.py") - working - adapted
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/craiglist_crawler/__init__.py")
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/Faculdade-Inteligencia_Artificial/aula2.py") - working (contains other pipelines that are not covered)
-    switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/forest-pypi/forest/forestdata.py", new_pipeline="new_forest_data.py")
+    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/forest-pypi/forest/forestdata.py", new_pipeline="new_forest_data.py")
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/IJCAI-18/上下文特征提取.py") - not working - no data
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/LIContractValue/ir_nss.py", new_pipeline="new_ir_nss.py") - works
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/LIContractValue/ir_nss.py", new_pipeline="new_ir_nss.py")

@@ -1,6 +1,6 @@
 import ast
 
-from src import util
+from src.util import util
 from src.util.util import direct_visit
 
 
