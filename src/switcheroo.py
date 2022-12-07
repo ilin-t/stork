@@ -4,9 +4,9 @@ import re
 from pathlib import Path
 from configparser import ConfigParser
 
-import util
-from s3_connector import S3Connector
-from assign_visitor import AssignVisitor
+from src.util import util
+from src.db_conn.s3_connector import S3Connector
+from src.ast.assign_visitor import AssignVisitor
 
 
 class Switcheroo:

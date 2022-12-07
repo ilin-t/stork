@@ -1,5 +1,0 @@
-{'variable': 'path', 'data_source': ['data']}
-{'variable': 'from_path', 'data_source': [{'func_call': {'from': {'func_call': 'open', 'data_file': ['data/random.txt'], 'params': []}, 'method': 'read'}, 'data_file': [], 'params': []}, None]}
-{'variable': 'from_csv', 'data_source': [{'func_call': {'from': 'pd', 'method': 'read_csv'}, 'data_file': ['data/random.csv'], 'params': []}, None]}
-{'variable': 'auto_generate', 'data_source': [{'func_call': {'from': 'np', 'method': 'zeros_like'}, 'data_file': ['from_csv'], 'params': []}, None]}
-{'variable': 'postgres', 'data_source': [{'func_call': {'from': 'pp', 'method': 'PostgresqlPlayground'}, 'data_file': [], 'params': []}, None, {'func_call': {'from': 'postgres', 'method': 'connect'}, 'data_file': [], 'params': []}]}

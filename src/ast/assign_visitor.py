@@ -1,7 +1,7 @@
 import ast
 
-import util
-from util import direct_visit
+from src import util
+from src.util.util import direct_visit
 
 
 class AssignVisitor(ast.NodeVisitor):

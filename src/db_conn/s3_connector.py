@@ -1,8 +1,7 @@
 import os
 import boto3
 
-from ast_playground import AssignVisitor
-from util import getAst
+from src.util.util import getAst
 
 
 class S3Connector:

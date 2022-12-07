@@ -1,9 +1,9 @@
 import ast
 import argparse
 
-from assign_visitor import AssignVisitor
-from import_visitor import ImportVisitor
-from util import getAst
+from src.ast.assign_visitor import AssignVisitor
+from src.ast.import_visitor import ImportVisitor
+from src.util.util import getAst
 
 parser = argparse.ArgumentParser(description="AST Analyzer of Data Imports")
 parser.add_argument("--pipeline", required=True, help="Python script to be parsed")
