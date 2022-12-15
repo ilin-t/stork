@@ -15,6 +15,7 @@ class AssignVisitor(ast.NodeVisitor):
         self.new_datasets = []
         self.datasets_urls = []
 
+    # WIP, not tested
     def visit_FunctionDef(self, node):
         args = direct_visit(self, node, node.args)
         function_body = []
@@ -26,9 +27,6 @@ class AssignVisitor(ast.NodeVisitor):
             function_body.append(element)
 
         return {"function": node.name, "data_source": function_body}
-
-
-
 
     def visit_Return(self, node):
         value = direct_visit(self, node, node.value)
@@ -72,10 +70,7 @@ class AssignVisitor(ast.NodeVisitor):
 
     def visit_BinOp(self, node):
         left = direct_visit(parent_object=self, node=node, towards=node.left)
-        # print(node.op)
         right = direct_visit(parent_object=self, node=node, towards=node.right)
-        # print(node.left._fields[0] + "  ", type(node.op).__name__ +
-        #       " " + node.right._fields[1])
 
         if type(node.op).__name__ == "Add":
             if type(left) == str and type(right) == str:
@@ -108,8 +103,6 @@ class AssignVisitor(ast.NodeVisitor):
         operation = node.ops
         right = direct_visit(parent_object=self, node=node, towards=node.comparators[0])
 
-        # print("Left op: %s, \n operator: %s, \n right: %s" % (left, operation, right))
-
         return {"left_op": left, "operator": operation, "right": right}
 
     def visit_Lambda(self, node):
@@ -126,7 +119,6 @@ class AssignVisitor(ast.NodeVisitor):
         return args
 
     def visit_arg(self, node):
-        # print("arg: %s" % node.arg)
         return node.arg
 
     def visit_List(self, node):
@@ -134,7 +126,6 @@ class AssignVisitor(ast.NodeVisitor):
         for element in node.elts:
             list_el.append(direct_visit(self, node, element))
 
-        # print(list_el)
         return list_el
 
     #
@@ -143,7 +134,6 @@ class AssignVisitor(ast.NodeVisitor):
         for element in node.elts:
             tuple_el.append(direct_visit(self, node, element))
 
-        # print(tuple(tuple_el))
         return tuple(tuple_el)
 
     def visit_Dict(self, node):
@@ -154,10 +144,7 @@ class AssignVisitor(ast.NodeVisitor):
             value = direct_visit(self, node, node.values[key_index])
             content[key] = value
             print(f"Key: {key}, Index: {key_index}, Value: {value}")
-        # print(f"Content: {content}")
         # return content
-
-    # TODO Define visit Dict method
 
     def visit_ListComp(self, node):
         return 0
@@ -166,7 +153,6 @@ class AssignVisitor(ast.NodeVisitor):
         removed = []
         for assignment in self.assignments:
             print("Type of the above assignment: %s" % type(assignment["data_source"]))
-            to_keep = False
             assignment["data_source"] = [i for i in assignment["data_source"] if i is not None]
             print(assignment["data_source"])
             for source in assignment["data_source"]:
@@ -174,49 +160,20 @@ class AssignVisitor(ast.NodeVisitor):
                 # print(source)
                 if type(source) is not dict:
                     removed.append(source)
-                    # print("removed\n")
                 elif "data_file" not in source.keys():
                     removed.append(source)
-                    # print("removed\n")
                 elif len(source["data_file"]) == 0:
                     removed.append(source)
-                    # print("removed\n")
                 elif type(source["data_file"][0]) is not str:
                     removed.append(source)
-                    # print("removed\n")
                 elif not util.checkDataFile(source["data_file"]):
                     removed.append(source)
-                    # print("Type of the above data_file: %s" % type(source["data_file"][0]))
-                    # print("removed\n")
                 else:
                     # self.inputs.append(assignment)
-                    # print(f"Assignment: {assignment}")
                     to_keep = True
                     print("didn't remove\n")
                 if to_keep and assignment not in self.inputs:
                     self.inputs.append(assignment)
-            # if type(assignment["data_source"]) is not (dict or list):
-            #     removed.append(assignment)
-            #     print("removed\n")
-            # elif "data_file" not in assignment["data_source"].keys():
-            #     removed.append(assignment)
-            #     print("removed\n")
-            # elif len(assignment["data_source"]["data_file"]) == 0:
-            #     removed.append(assignment)
-            #     print("removed\n")
-            # elif type(assignment["data_source"]["data_file"][0]) is not str:
-            #     removed.append(assignment)
-            #     print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0]))
-            #     print(f"data_file = {assignment['data_source']['data_file'][0]}")
-            #     print("removed\n")
-            # elif not self.checkDataFile(assignment["data_source"]["data_file"]):
-            #     removed.append(assignment)
-            #     print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0]))
-            #     print("removed\n")
-            # elif type(assignment["data_source"]["data_file"][0][0]) is not str:
-            #     removed.append(assignment)
-            #     print("Type of the above data_file: %s" % type(assignment["data_source"]["data_file"][0][0]))
-            #     print("removed\n")
 
         # self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
 
@@ -255,10 +212,6 @@ class AssignVisitor(ast.NodeVisitor):
 
     def transformScript(self, script, new_script):
         temp = self.datasets_urls
-        # print("From transformScript\n")
-        # print(temp)
-        # print("From transformScript\n")
-        # print(self.new_inputs)
 
         with open(new_script, "w") as new:
             with open(script, "r") as old:

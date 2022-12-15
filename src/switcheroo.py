@@ -48,16 +48,11 @@ class Switcheroo:
 
         tree = util.getAst(pipeline=pipeline)
         self.assignVisitor.visit(tree)
-        # print(self.assignVisitor.assignments)
         self.assignVisitor.filter_Assignments()
-        # print(self.assignVisitor.assignments)
         # self.assignVisitor.filter_datasets()
-        # print(self.assignVisitor.datasets)
 
         repo_name = self.parseRepoName(self.getRepositoryName())
         buckets = [bucket['Name'] for bucket in self.connector.getBuckets()['Buckets']]
-        print(buckets)
-        # print(self.connector.getBuckets())
         bucket_name = repo_name
         print(f"Adapted repository and bucket name: {repo_name}")
         if repo_name not in buckets:
@@ -80,9 +75,9 @@ class Switcheroo:
                                 dataset_name = self.getDatasetName(abs_path_dataset)
 
                                 print(f"Url: {self.connector.getObjectUrl(key=dataset_name, bucket=bucket_name)}")
-                                # self.assignVisitor.datasets_urls.append({"dataset_name": dataset,
-                                #                                          "url": self.connector.getObjectUrl(
-                                #                                              key=dataset_name, bucket=bucket_name)})
+                                self.assignVisitor.datasets_urls.append({"dataset_name": dataset,
+                                                                         "url": self.connector.getObjectUrl(
+                                                                             key=dataset_name, bucket=bucket_name)})
 
                 except TypeError as e:
                     print(e)
@@ -90,18 +85,13 @@ class Switcheroo:
                 except KeyError as e:
                     print(e)
 
-                print(f"Datasets_urls: {self.assignVisitor.datasets_urls}")
-        # self.assignVisitor.transformScript(script=pipeline, new_script=new_pipeline)
+                # print(f"Datasets_urls: {self.assignVisitor.datasets_urls}")
+        self.assignVisitor.transformScript(script=pipeline, new_script=new_pipeline)
         # TODO Check which buckets exist for this user. Whether a new bucket should be created for this
-        # for dataset in self.assignVisitor.datasets:
-        #     self.connector.uploadFile(path=dataset)
-        #     filename = os.path.split(dataset)[1]
-        #     self.assignVisitor.inputs.append(self.connector.getObjectUrl(filename))
-
-    #       TODO get the URI for this file, add it as a new input in the assignVisitor.inputs
-
-    # def getAst(self):
-    #
+        for dataset in self.assignVisitor.datasets:
+            self.connector.uploadFile(path=dataset)
+            filename = os.path.split(dataset)[1]
+            self.assignVisitor.inputs.append(self.connector.getObjectUrl(filename))
 
     def setClient(self, access_key, secret_access_key, client="s3"):
         print("Access key id: %s, secret access key: %s, service_name: %s" % (access_key, secret_access_key, client))
@@ -164,12 +154,8 @@ class Switcheroo:
 
 
 if __name__ == '__main__':
-    switcheroo = Switcheroo(r"../config.ini")
+    switcheroo = Switcheroo(r"../examples/config.ini")
 
-    project_path = os.getcwd()
-
-
-    print(project_path.split())
     # ak, sak = switcheroo.parseConfig()
 
     # switcheroo.setup("examples/test.py")
@@ -195,11 +181,6 @@ if __name__ == '__main__':
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/pizzaprediction/classification_nn.py", new_pipeline="new_classification.py")
     # util.reportAssign(switcheroo.pipeline, switcheroo.assignVisitor.assignments, "full")
     # print("Access key: %s, secret access key: %s" % (ak, sak))
-
-
-
-
-
 
     # switcheroo.setup(pipeline="examples/argus_eyes.py", new_pipeline="new_argus_eyes.py")
     # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/F1-stats-digoc/app.py", new_pipeline="new_app.py")
