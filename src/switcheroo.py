@@ -149,42 +149,10 @@ class Switcheroo:
             print(len(repo_name))
 
         bucket_name = re.sub(r'[\W_]+', '-', repo_name) + "-" + str(hashlib.md5(repo_name.encode()).hexdigest())
-        print(len(bucket_name))
         return bucket_name.lower()
 
 
 if __name__ == '__main__':
     switcheroo = Switcheroo(r"../examples/config.ini")
-
-    # ak, sak = switcheroo.parseConfig()
-
-    # switcheroo.setup("examples/test.py")
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/F1-stats-digoc/app.py") - working
-    # switcheroo.setup(pipeline="examples/argus_eyes.py", new_pipeline="new_argus_eyes.py") - working
     switcheroo.setup(pipeline="../examples/argus_eyes.py", new_pipeline="new_argus_eyes.py")
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/log-monitoring/test.py") - working
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/log-monitoring/test.py", new_pipeline="new_test.py")
-    # #switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/Air_Quality_Analysis/Data-Scripts/Data_extract.py") - not working #
-    # #switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/Covid19Tracker/CV19P Code/Python CorrData/CorrData.py") - adapted
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/affects_in_twitter/DataPreprocessing.py") - working
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/281Hamilton/main.py") - not working - no data
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/Archive_Project/ERHFDA_Cleaning.py") - not working - no data
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/craiglist_crawler/__init__.py") - working - adapted
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/craiglist_crawler/__init__.py")
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/Faculdade-Inteligencia_Artificial/aula2.py") - working (contains other pipelines that are not covered)
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/forest-pypi/forest/forestdata.py", new_pipeline="new_forest_data.py")
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/IJCAI-18/上下文特征提取.py") - not working - no data
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/LIContractValue/ir_nss.py", new_pipeline="new_ir_nss.py") - works
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/LIContractValue/ir_nss.py", new_pipeline="new_ir_nss.py")
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/LOONE/Data.py") - not working - not covered
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/pizzaprediction/classification_nn.py") - working
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/pizzaprediction/classification_nn.py", new_pipeline="new_classification.py")
-    # util.reportAssign(switcheroo.pipeline, switcheroo.assignVisitor.assignments, "full")
-    # print("Access key: %s, secret access key: %s" % (ak, sak))
-
-    # switcheroo.setup(pipeline="examples/argus_eyes.py", new_pipeline="new_argus_eyes.py")
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/F1-stats-digoc/app.py", new_pipeline="new_app.py")
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/affects_in_twitter/DataPreprocessing.py", new_pipeline="new_dp.py")
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/craiglist_crawler/__init__.py", new_pipeline="new_crawler.py")
-    # switcheroo.setup(pipeline="/home/ilint/HPI/repos/github-pipelines/github-repos-3000/pizzaprediction/classification_nn.py", new_pipeline="new_classification.py")
 

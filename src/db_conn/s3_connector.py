@@ -16,13 +16,6 @@ class S3Connector:
         self.client = boto3.client(service_name=client, aws_access_key_id=aws_access_key,
                                    aws_secret_access_key=aws_secret_access_key)
 
-    # def setConnection(self):
-    #     self.connection = []
-
-    # def setResource(self, aws_access_key, aws_secret_access_key, resource):
-    #     self.resource = boto3.resource(service_name=resource, aws_access_key_id=aws_access_key,
-    #                                    aws_secret_access_key=aws_secret_access_key)
-
     def setPipeline(self, pipeline):
         self.pipeline = pipeline
 

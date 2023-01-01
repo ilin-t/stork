@@ -19,19 +19,6 @@ def getAst(pipeline):
     with open(pipeline, "r") as source:
         return ast.parse(source.read() + "\n")
 
-
-# def checkDataFile(data_file):
-#     for item in data_file:
-#         print(f"Item: {item}")
-#         if type(item) is not str:
-#             return False
-#         file = item.split(".")
-#         if len(file) < 2:
-#             return False
-#         # Data files and compression support for pandas from_csv method
-#         elif file[-1] in ["csv", "txt", "zip", "parquet", "gz", "tar", "bz2", "zstd"]:
-#             return True
-
 def checkDataFile(data_file):
     for item in data_file:
         return checkFileExtension(item)

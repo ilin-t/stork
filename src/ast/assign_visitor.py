@@ -180,35 +180,12 @@ class AssignVisitor(ast.NodeVisitor):
         print(f"Inputs length: {len(self.inputs)}")
         return self.inputs
 
-    # def filter_datasets(self):
-    #     processing_steps = []
-    #     for assignment in self.inputs:
-    #         for i in range(self.inputs.index(assignment) + 1, len(self.inputs)):
-    #             if assignment["variable"] in self.inputs[i]["data_source"]["data_file"]:
-    #                 processing_steps.append(self.inputs[i])
-    #                 # print("%s is a preprocessing step\n" % assignment)
-    #             elif assignment["variable"] == self.inputs[i]["variable"]:
-    #                 processing_steps.append(self.inputs[i])
-    #                 # print("%s alters a previous data input\n" % assignment)
-    #             # else:
-    #             #     print("%s is a data input\n" % assignment)
-    #     self.datasets = [assignment for assignment in self.inputs if assignment not in processing_steps]
-    #     print(f"Datasets: {self.datasets}")
-
     def parseNewInputs(self):
         for input in self.new_inputs:
             if input["new_input"][0] == "":
                 input["new_input"] = input["old_input"]
             else:
                 continue
-
-    # def addInputsToDatasets(self):
-    #     self.new_datasets = self.datasets
-    #     for input in self.new_inputs:
-    #         if input["new_input"] != "":
-    #             self.new_datasets[self.new_inputs.index(input)]["data_source"]["data_file"][0] = input["new_input"]
-    #         else:
-    #             continue
 
     def transformScript(self, script, new_script):
         temp = self.datasets_urls
