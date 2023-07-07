@@ -1,0 +1,1 @@
+sudo mount -t cifs -o username=ilin.tolovski,domain=hpi //store-01.hpi.uni-potsdam.de/fg/rabl/ilin.tolovski /mnt/fs00/rabl/ilin.tolovski

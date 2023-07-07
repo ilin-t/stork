@@ -1,0 +1,836 @@
+Module(
+   body=[
+      Import(
+         names=[
+            alias(name='sys')]),
+      Import(
+         names=[
+            alias(name='pandas', asname='pd')]),
+      Import(
+         names=[
+            alias(name='numpy', asname='np')]),
+      ImportFrom(
+         module='sklearn.preprocessing',
+         names=[
+            alias(name='OneHotEncoder'),
+            alias(name='label_binarize'),
+            alias(name='StandardScaler'),
+            alias(name='FunctionTransformer')],
+         level=0),
+      ImportFrom(
+         module='sklearn.compose',
+         names=[
+            alias(name='ColumnTransformer')],
+         level=0),
+      ImportFrom(
+         module='sklearn.impute',
+         names=[
+            alias(name='SimpleImputer')],
+         level=0),
+      ImportFrom(
+         module='sklearn.feature_extraction.text',
+         names=[
+            alias(name='HashingVectorizer')],
+         level=0),
+      ImportFrom(
+         module='sklearn.pipeline',
+         names=[
+            alias(name='Pipeline')],
+         level=0),
+      ImportFrom(
+         module='tensorflow.python.keras.wrappers.scikit_learn',
+         names=[
+            alias(name='KerasClassifier')],
+         level=0),
+      ImportFrom(
+         module='tensorflow.keras.layers',
+         names=[
+            alias(name='Dense'),
+            alias(name='Dropout')],
+         level=0),
+      ImportFrom(
+         module='tensorflow.keras.models',
+         names=[
+            alias(name='Sequential')],
+         level=0),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               Constant(value='ARGS'),
+               Attribute(
+                  value=Name(id='sys', ctx=Load()),
+                  attr='argv',
+                  ctx=Load())],
+            keywords=[])),
+      FunctionDef(
+         name='load_data',
+         args=arguments(
+            posonlyargs=[],
+            args=[
+               arg(arg='target_categories'),
+               arg(arg='start_date'),
+               arg(arg='verified_only')],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='reviews', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='datasets/amazon-reviews/reviews.csv.gz')],
+                  keywords=[
+                     keyword(
+                        arg='compression',
+                        value=Constant(value='gzip')),
+                     keyword(
+                        arg='index_col',
+                        value=Constant(value=0))])),
+            Assign(
+               targets=[
+                  Name(id='products', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='datasets/amazon-reviews/products.csv')],
+                  keywords=[
+                     keyword(
+                        arg='index_col',
+                        value=Constant(value=0))])),
+            Assign(
+               targets=[
+                  Name(id='categories', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='datasets/amazon-reviews/categories.csv')],
+                  keywords=[
+                     keyword(
+                        arg='index_col',
+                        value=Constant(value=0))])),
+            Assign(
+               targets=[
+                  Name(id='ratings', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='datasets/amazon-reviews/ratings.csv')],
+                  keywords=[
+                     keyword(
+                        arg='index_col',
+                        value=Constant(value=0))])),
+            Assign(
+               targets=[
+                  Name(id='reviews', ctx=Store())],
+               value=Subscript(
+                  value=Name(id='reviews', ctx=Load()),
+                  slice=Compare(
+                     left=Subscript(
+                        value=Name(id='reviews', ctx=Load()),
+                        slice=Constant(value='review_date'),
+                        ctx=Load()),
+                     ops=[
+                        GtE()],
+                     comparators=[
+                        Name(id='start_date', ctx=Load())]),
+                  ctx=Load())),
+            Assign(
+               targets=[
+                  Name(id='categories', ctx=Store())],
+               value=Subscript(
+                  value=Name(id='categories', ctx=Load()),
+                  slice=Call(
+                     func=Attribute(
+                        value=Subscript(
+                           value=Name(id='categories', ctx=Load()),
+                           slice=Constant(value='category'),
+                           ctx=Load()),
+                        attr='isin',
+                        ctx=Load()),
+                     args=[
+                        Name(id='target_categories', ctx=Load())],
+                     keywords=[]),
+                  ctx=Load())),
+            If(
+               test=Name(id='verified_only', ctx=Load()),
+               body=[
+                  Assign(
+                     targets=[
+                        Name(id='reviews', ctx=Store())],
+                     value=Subscript(
+                        value=Name(id='reviews', ctx=Load()),
+                        slice=Compare(
+                           left=Subscript(
+                              value=Name(id='reviews', ctx=Load()),
+                              slice=Constant(value='verified_purchase'),
+                              ctx=Load()),
+                           ops=[
+                              Eq()],
+                           comparators=[
+                              Constant(value='Y')]),
+                        ctx=Load()))],
+               orelse=[]),
+            Assign(
+               targets=[
+                  Name(id='reviews_with_ratings', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='reviews', ctx=Load()),
+                     attr='merge',
+                     ctx=Load()),
+                  args=[
+                     Name(id='ratings', ctx=Load())],
+                  keywords=[
+                     keyword(
+                        arg='on',
+                        value=Constant(value='review_id'))])),
+            Assign(
+               targets=[
+                  Name(id='products', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='products', ctx=Load()),
+                     attr='merge',
+                     ctx=Load()),
+                  args=[
+                     Name(id='categories', ctx=Load())],
+                  keywords=[
+                     keyword(
+                        arg='left_on',
+                        value=Constant(value='category_id')),
+                     keyword(
+                        arg='right_on',
+                        value=Constant(value='id'))])),
+            Assign(
+               targets=[
+                  Name(id='full_reviews', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='reviews_with_ratings', ctx=Load()),
+                     attr='merge',
+                     ctx=Load()),
+                  args=[
+                     Name(id='products', ctx=Load())],
+                  keywords=[
+                     keyword(
+                        arg='on',
+                        value=Constant(value='product_id'))])),
+            Assign(
+               targets=[
+                  Subscript(
+                     value=Name(id='full_reviews', ctx=Load()),
+                     slice=Constant(value='product_title'),
+                     ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Subscript(
+                        value=Name(id='full_reviews', ctx=Load()),
+                        slice=Constant(value='product_title'),
+                        ctx=Load()),
+                     attr='fillna',
+                     ctx=Load()),
+                  args=[],
+                  keywords=[
+                     keyword(
+                        arg='value',
+                        value=Constant(value=''))])),
+            Assign(
+               targets=[
+                  Subscript(
+                     value=Name(id='full_reviews', ctx=Load()),
+                     slice=Constant(value='review_body'),
+                     ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Subscript(
+                        value=Name(id='full_reviews', ctx=Load()),
+                        slice=Constant(value='review_body'),
+                        ctx=Load()),
+                     attr='fillna',
+                     ctx=Load()),
+                  args=[],
+                  keywords=[
+                     keyword(
+                        arg='value',
+                        value=Constant(value=''))])),
+            Assign(
+               targets=[
+                  Subscript(
+                     value=Name(id='full_reviews', ctx=Load()),
+                     slice=Constant(value='title_and_review'),
+                     ctx=Store())],
+               value=BinOp(
+                  left=BinOp(
+                     left=Call(
+                        func=Attribute(
+                           value=Subscript(
+                              value=Name(id='full_reviews', ctx=Load()),
+                              slice=Constant(value='product_title'),
+                              ctx=Load()),
+                           attr='fillna',
+                           ctx=Load()),
+                        args=[],
+                        keywords=[
+                           keyword(
+                              arg='value',
+                              value=Constant(value=''))]),
+                     op=Add(),
+                     right=Constant(value=' ')),
+                  op=Add(),
+                  right=Call(
+                     func=Attribute(
+                        value=Subscript(
+                           value=Name(id='full_reviews', ctx=Load()),
+                           slice=Constant(value='review_body'),
+                           ctx=Load()),
+                        attr='fillna',
+                        ctx=Load()),
+                     args=[],
+                     keywords=[
+                        keyword(
+                           arg='value',
+                           value=Constant(value=''))]))),
+            Return(
+               value=Name(id='full_reviews', ctx=Load()))],
+         decorator_list=[]),
+      FunctionDef(
+         name='temporal_split',
+         args=arguments(
+            posonlyargs=[],
+            args=[
+               arg(arg='full_reviews'),
+               arg(arg='split_date')],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='train_data', ctx=Store())],
+               value=Subscript(
+                  value=Name(id='full_reviews', ctx=Load()),
+                  slice=Compare(
+                     left=Subscript(
+                        value=Name(id='full_reviews', ctx=Load()),
+                        slice=Constant(value='review_date'),
+                        ctx=Load()),
+                     ops=[
+                        LtE()],
+                     comparators=[
+                        Name(id='split_date', ctx=Load())]),
+                  ctx=Load())),
+            Assign(
+               targets=[
+                  Name(id='test_data', ctx=Store())],
+               value=Subscript(
+                  value=Name(id='full_reviews', ctx=Load()),
+                  slice=Compare(
+                     left=Subscript(
+                        value=Name(id='full_reviews', ctx=Load()),
+                        slice=Constant(value='review_date'),
+                        ctx=Load()),
+                     ops=[
+                        Gt()],
+                     comparators=[
+                        Name(id='split_date', ctx=Load())]),
+                  ctx=Load())),
+            Assign(
+               targets=[
+                  Subscript(
+                     value=Name(id='train_data', ctx=Load()),
+                     slice=Constant(value='is_helpful'),
+                     ctx=Store())],
+               value=Compare(
+                  left=Subscript(
+                     value=Name(id='train_data', ctx=Load()),
+                     slice=Constant(value='helpful_votes'),
+                     ctx=Load()),
+                  ops=[
+                     Gt()],
+                  comparators=[
+                     Constant(value=0)])),
+            Assign(
+               targets=[
+                  Subscript(
+                     value=Name(id='test_data', ctx=Load()),
+                     slice=Constant(value='is_helpful'),
+                     ctx=Store())],
+               value=Compare(
+                  left=Subscript(
+                     value=Name(id='test_data', ctx=Load()),
+                     slice=Constant(value='helpful_votes'),
+                     ctx=Load()),
+                  ops=[
+                     Gt()],
+                  comparators=[
+                     Constant(value=0)])),
+            Assign(
+               targets=[
+                  Name(id='train_labels', ctx=Store())],
+               value=Call(
+                  func=Name(id='label_binarize', ctx=Load()),
+                  args=[
+                     Subscript(
+                        value=Name(id='train_data', ctx=Load()),
+                        slice=Constant(value='is_helpful'),
+                        ctx=Load())],
+                  keywords=[
+                     keyword(
+                        arg='classes',
+                        value=List(
+                           elts=[
+                              Constant(value=True),
+                              Constant(value=False)],
+                           ctx=Load()))])),
+            Assign(
+               targets=[
+                  Name(id='test_labels', ctx=Store())],
+               value=Call(
+                  func=Name(id='label_binarize', ctx=Load()),
+                  args=[
+                     Subscript(
+                        value=Name(id='test_data', ctx=Load()),
+                        slice=Constant(value='is_helpful'),
+                        ctx=Load())],
+                  keywords=[
+                     keyword(
+                        arg='classes',
+                        value=List(
+                           elts=[
+                              Constant(value=True),
+                              Constant(value=False)],
+                           ctx=Load()))])),
+            Return(
+               value=Tuple(
+                  elts=[
+                     Name(id='train_data', ctx=Load()),
+                     Name(id='test_data', ctx=Load()),
+                     Name(id='train_labels', ctx=Load()),
+                     Name(id='test_labels', ctx=Load())],
+                  ctx=Load()))],
+         decorator_list=[]),
+      FunctionDef(
+         name='safe_log',
+         args=arguments(
+            posonlyargs=[],
+            args=[
+               arg(arg='x')],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Return(
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='np', ctx=Load()),
+                     attr='log',
+                     ctx=Load()),
+                  args=[
+                     Name(id='x', ctx=Load())],
+                  keywords=[
+                     keyword(
+                        arg='out',
+                        value=Call(
+                           func=Attribute(
+                              value=Name(id='np', ctx=Load()),
+                              attr='zeros_like',
+                              ctx=Load()),
+                           args=[
+                              Name(id='x', ctx=Load())],
+                           keywords=[])),
+                     keyword(
+                        arg='where',
+                        value=Compare(
+                           left=Name(id='x', ctx=Load()),
+                           ops=[
+                              NotEq()],
+                           comparators=[
+                              Constant(value=0)]))]))],
+         decorator_list=[]),
+      FunctionDef(
+         name='feature_encoding',
+         args=arguments(
+            posonlyargs=[],
+            args=[
+               arg(arg='numerical'),
+               arg(arg='categorical'),
+               arg(arg='text')],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='one_hot', ctx=Store())],
+               value=Call(
+                  func=Name(id='Pipeline', ctx=Load()),
+                  args=[
+                     List(
+                        elts=[
+                           Tuple(
+                              elts=[
+                                 Constant(value='impute'),
+                                 Call(
+                                    func=Name(id='SimpleImputer', ctx=Load()),
+                                    args=[],
+                                    keywords=[
+                                       keyword(
+                                          arg='strategy',
+                                          value=Constant(value='most_frequent'))])],
+                              ctx=Load()),
+                           Tuple(
+                              elts=[
+                                 Constant(value='encode'),
+                                 Call(
+                                    func=Name(id='OneHotEncoder', ctx=Load()),
+                                    args=[],
+                                    keywords=[
+                                       keyword(
+                                          arg='handle_unknown',
+                                          value=Constant(value='ignore'))])],
+                              ctx=Load())],
+                        ctx=Load())],
+                  keywords=[])),
+            Assign(
+               targets=[
+                  Name(id='scale', ctx=Store())],
+               value=Call(
+                  func=Name(id='Pipeline', ctx=Load()),
+                  args=[
+                     List(
+                        elts=[
+                           Tuple(
+                              elts=[
+                                 Constant(value='impute'),
+                                 Call(
+                                    func=Name(id='SimpleImputer', ctx=Load()),
+                                    args=[],
+                                    keywords=[
+                                       keyword(
+                                          arg='strategy',
+                                          value=Constant(value='mean'))])],
+                              ctx=Load()),
+                           Tuple(
+                              elts=[
+                                 Constant(value='log_transform'),
+                                 Call(
+                                    func=Name(id='FunctionTransformer', ctx=Load()),
+                                    args=[
+                                       Lambda(
+                                          args=arguments(
+                                             posonlyargs=[],
+                                             args=[
+                                                arg(arg='x')],
+                                             kwonlyargs=[],
+                                             kw_defaults=[],
+                                             defaults=[]),
+                                          body=Call(
+                                             func=Name(id='safe_log', ctx=Load()),
+                                             args=[
+                                                Name(id='x', ctx=Load())],
+                                             keywords=[]))],
+                                    keywords=[])],
+                              ctx=Load()),
+                           Tuple(
+                              elts=[
+                                 Constant(value='scale'),
+                                 Call(
+                                    func=Name(id='StandardScaler', ctx=Load()),
+                                    args=[],
+                                    keywords=[])],
+                              ctx=Load())],
+                        ctx=Load())],
+                  keywords=[])),
+            Assign(
+               targets=[
+                  Name(id='hashing', ctx=Store())],
+               value=Call(
+                  func=Name(id='HashingVectorizer', ctx=Load()),
+                  args=[],
+                  keywords=[
+                     keyword(
+                        arg='ngram_range',
+                        value=Tuple(
+                           elts=[
+                              Constant(value=1),
+                              Constant(value=3)],
+                           ctx=Load())),
+                     keyword(
+                        arg='n_features',
+                        value=Constant(value=100))])),
+            Return(
+               value=Call(
+                  func=Name(id='ColumnTransformer', ctx=Load()),
+                  args=[],
+                  keywords=[
+                     keyword(
+                        arg='transformers',
+                        value=List(
+                           elts=[
+                              Tuple(
+                                 elts=[
+                                    Constant(value='numerical_features'),
+                                    Name(id='scale', ctx=Load()),
+                                    Name(id='numerical', ctx=Load())],
+                                 ctx=Load()),
+                              Tuple(
+                                 elts=[
+                                    Constant(value='categorical_features'),
+                                    Name(id='one_hot', ctx=Load()),
+                                    Name(id='categorical', ctx=Load())],
+                                 ctx=Load()),
+                              Tuple(
+                                 elts=[
+                                    Constant(value='textual_features'),
+                                    Name(id='hashing', ctx=Load()),
+                                    Name(id='text', ctx=Load())],
+                                 ctx=Load())],
+                           ctx=Load()))]))],
+         decorator_list=[]),
+      FunctionDef(
+         name='create_mlp',
+         args=arguments(
+            posonlyargs=[],
+            args=[],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='nn', ctx=Store())],
+               value=Call(
+                  func=Name(id='Sequential', ctx=Load()),
+                  args=[
+                     List(
+                        elts=[
+                           Call(
+                              func=Name(id='Dense', ctx=Load()),
+                              args=[
+                                 Constant(value=256)],
+                              keywords=[
+                                 keyword(
+                                    arg='activation',
+                                    value=Constant(value='relu'))]),
+                           Call(
+                              func=Name(id='Dropout', ctx=Load()),
+                              args=[
+                                 Constant(value=0.3)],
+                              keywords=[]),
+                           Call(
+                              func=Name(id='Dense', ctx=Load()),
+                              args=[
+                                 Constant(value=64)],
+                              keywords=[
+                                 keyword(
+                                    arg='activation',
+                                    value=Constant(value='relu'))]),
+                           Call(
+                              func=Name(id='Dense', ctx=Load()),
+                              args=[
+                                 Constant(value=2)],
+                              keywords=[
+                                 keyword(
+                                    arg='activation',
+                                    value=Constant(value='softmax'))])],
+                        ctx=Load())],
+                  keywords=[])),
+            Expr(
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='nn', ctx=Load()),
+                     attr='compile',
+                     ctx=Load()),
+                  args=[],
+                  keywords=[
+                     keyword(
+                        arg='loss',
+                        value=Constant(value='sparse_categorical_crossentropy')),
+                     keyword(
+                        arg='optimizer',
+                        value=Constant(value='adam')),
+                     keyword(
+                        arg='metrics',
+                        value=Constant(value='accuracy'))])),
+            Return(
+               value=Name(id='nn', ctx=Load()))],
+         decorator_list=[]),
+      Assign(
+         targets=[
+            Name(id='target_categories', ctx=Store())],
+         value=List(
+            elts=[
+               Constant(value='Digital_Video_Games')],
+            ctx=Load())),
+      Assign(
+         targets=[
+            Name(id='split_date', ctx=Store())],
+         value=Constant(value='2015-07-31')),
+      If(
+         test=Compare(
+            left=Call(
+               func=Name(id='len', ctx=Load()),
+               args=[
+                  Attribute(
+                     value=Name(id='sys', ctx=Load()),
+                     attr='argv',
+                     ctx=Load())],
+               keywords=[]),
+            ops=[
+               Gt()],
+            comparators=[
+               Constant(value=1)]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='target_categories', ctx=Store())],
+               value=List(
+                  elts=[
+                     Subscript(
+                        value=Attribute(
+                           value=Name(id='sys', ctx=Load()),
+                           attr='argv',
+                           ctx=Load()),
+                        slice=Constant(value=1),
+                        ctx=Load())],
+                  ctx=Load()))],
+         orelse=[]),
+      If(
+         test=Compare(
+            left=Call(
+               func=Name(id='len', ctx=Load()),
+               args=[
+                  Attribute(
+                     value=Name(id='sys', ctx=Load()),
+                     attr='argv',
+                     ctx=Load())],
+               keywords=[]),
+            ops=[
+               Gt()],
+            comparators=[
+               Constant(value=2)]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='split_date', ctx=Store())],
+               value=Subscript(
+                  value=Attribute(
+                     value=Name(id='sys', ctx=Load()),
+                     attr='argv',
+                     ctx=Load()),
+                  slice=Constant(value=2),
+                  ctx=Load()))],
+         orelse=[]),
+      Assign(
+         targets=[
+            Name(id='reviews', ctx=Store())],
+         value=Call(
+            func=Name(id='load_data', ctx=Load()),
+            args=[
+               Name(id='target_categories', ctx=Load()),
+               Constant(value='2015-01-01')],
+            keywords=[
+               keyword(
+                  arg='verified_only',
+                  value=Constant(value=True))])),
+      Assign(
+         targets=[
+            Tuple(
+               elts=[
+                  Name(id='train_data', ctx=Store()),
+                  Name(id='test_data', ctx=Store()),
+                  Name(id='train_labels', ctx=Store()),
+                  Name(id='test_labels', ctx=Store())],
+               ctx=Store())],
+         value=Call(
+            func=Name(id='temporal_split', ctx=Load()),
+            args=[
+               Name(id='reviews', ctx=Load()),
+               Name(id='split_date', ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='feature_transformation', ctx=Store())],
+         value=Call(
+            func=Name(id='feature_encoding', ctx=Load()),
+            args=[],
+            keywords=[
+               keyword(
+                  arg='numerical',
+                  value=List(
+                     elts=[
+                        Constant(value='star_rating')],
+                     ctx=Load())),
+               keyword(
+                  arg='categorical',
+                  value=List(
+                     elts=[
+                        Constant(value='vine'),
+                        Constant(value='verified_purchase'),
+                        Constant(value='category_id')],
+                     ctx=Load())),
+               keyword(
+                  arg='text',
+                  value=Constant(value='title_and_review'))])),
+      Assign(
+         targets=[
+            Name(id='pipeline', ctx=Store())],
+         value=Call(
+            func=Name(id='Pipeline', ctx=Load()),
+            args=[
+               List(
+                  elts=[
+                     Tuple(
+                        elts=[
+                           Constant(value='features'),
+                           Name(id='feature_transformation', ctx=Load())],
+                        ctx=Load()),
+                     Tuple(
+                        elts=[
+                           Constant(value='learner'),
+                           Call(
+                              func=Name(id='KerasClassifier', ctx=Load()),
+                              args=[
+                                 Name(id='create_mlp', ctx=Load())],
+                              keywords=[])],
+                        ctx=Load())],
+                  ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='model', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Name(id='pipeline', ctx=Load()),
+               attr='fit',
+               ctx=Load()),
+            args=[
+               Name(id='train_data', ctx=Load()),
+               Name(id='train_labels', ctx=Load())],
+            keywords=[])),
+      Expr(
+         value=Call(
+            func=Attribute(
+               value=Name(id='model', ctx=Load()),
+               attr='score',
+               ctx=Load()),
+            args=[
+               Name(id='test_data', ctx=Load()),
+               Name(id='test_labels', ctx=Load())],
+            keywords=[]))],
+   type_ignores=[])

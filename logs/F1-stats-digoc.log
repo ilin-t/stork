@@ -1,0 +1,297 @@
+[2023-04-27 20:44:19,874] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 20:44:19,874] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:44:19,874] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:44:19,874] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:44:19,881] INFO ________________________________________________
+[2023-04-27 20:44:19,881] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py generated the following datasets: 
+[2023-04-27 20:44:19,881] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:44:19,881] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:44:19,881] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:44:19,881] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:44:19,881] INFO ________________________________________________
+[2023-04-27 20:44:19,881] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:44:19,887] INFO ________________________________________________
+[2023-04-27 20:44:19,887] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py generated the following datasets: 
+[2023-04-27 20:44:19,887] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:44:19,887] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:44:19,887] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:44:19,888] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:44:19,888] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:44:19,888] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:44:19,888] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:44:19,888] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:44:19,888] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:44:19,888] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:44:19,888] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:44:19,888] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:44:19,888] INFO ________________________________________________
+[2023-04-27 20:44:34,469] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 20:44:34,469] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:44:34,469] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:44:34,469] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:44:34,476] INFO ________________________________________________
+[2023-04-27 20:44:34,476] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py generated the following datasets: 
+[2023-04-27 20:44:34,476] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:44:34,476] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:44:34,476] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:44:34,476] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:44:34,476] INFO ________________________________________________
+[2023-04-27 20:44:34,476] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:44:34,482] INFO ________________________________________________
+[2023-04-27 20:44:34,482] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py generated the following datasets: 
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:44:34,482] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:44:34,482] INFO ________________________________________________
+[2023-04-27 20:49:25,131] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 20:49:25,131] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:49:25,131] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:49:25,131] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:49:25,138] INFO ________________________________________________
+[2023-04-27 20:49:25,138] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py generated the following datasets: 
+[2023-04-27 20:49:25,138] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:49:25,138] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:49:25,138] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:49:25,138] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:49:25,138] INFO ________________________________________________
+[2023-04-27 20:49:25,138] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:49:25,144] INFO ________________________________________________
+[2023-04-27 20:49:25,144] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py generated the following datasets: 
+[2023-04-27 20:49:25,144] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:49:25,144] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:49:25,144] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:49:25,144] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:49:25,145] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:49:25,145] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:49:25,145] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:49:25,145] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:49:25,145] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:49:25,145] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:49:25,145] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:49:25,145] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:49:25,145] INFO ________________________________________________
+[2023-04-27 20:53:22,377] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 20:53:22,377] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:53:22,377] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:53:22,377] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:53:22,384] INFO ________________________________________________
+[2023-04-27 20:53:22,384] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py generated the following datasets: 
+[2023-04-27 20:53:22,384] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:53:22,384] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:53:22,384] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:53:22,384] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:53:22,384] INFO ________________________________________________
+[2023-04-27 20:53:22,384] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:53:22,390] INFO ________________________________________________
+[2023-04-27 20:53:22,390] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py generated the following datasets: 
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:53:22,390] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:53:22,390] INFO ________________________________________________
+[2023-04-27 20:54:07,548] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 20:54:07,548] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:54:07,548] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:54:07,548] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:54:07,555] INFO ________________________________________________
+[2023-04-27 20:54:07,555] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py generated the following datasets: 
+[2023-04-27 20:54:07,555] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:54:07,555] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:54:07,555] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:54:07,555] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:54:07,555] INFO ________________________________________________
+[2023-04-27 20:54:07,555] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:54:07,561] INFO ________________________________________________
+[2023-04-27 20:54:07,561] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py generated the following datasets: 
+[2023-04-27 20:54:07,561] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:54:07,561] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:54:07,561] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:54:07,561] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:54:07,562] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:54:07,562] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:54:07,562] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:54:07,562] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:54:07,562] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:54:07,562] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:54:07,562] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:54:07,562] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:54:07,562] INFO ________________________________________________
+[2023-04-27 20:58:28,327] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 20:58:28,328] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:58:28,328] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:58:28,328] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:58:28,344] INFO ________________________________________________
+[2023-04-27 20:58:28,344] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py reads the following data files: 
+[2023-04-27 20:58:28,344] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:28,344] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:28,344] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:28,344] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:28,344] INFO ________________________________________________
+[2023-04-27 20:58:28,345] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:58:28,363] INFO ________________________________________________
+[2023-04-27 20:58:28,364] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py reads the following data files: 
+[2023-04-27 20:58:28,364] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:28,364] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:28,364] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:28,364] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:28,364] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:28,364] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:28,364] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:28,364] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:28,365] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:28,365] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:28,365] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:28,365] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:28,365] INFO ________________________________________________
+[2023-04-27 20:58:29,895] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 20:58:29,895] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:58:29,895] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:58:29,895] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:58:29,901] INFO ________________________________________________
+[2023-04-27 20:58:29,901] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py reads the following data files: 
+[2023-04-27 20:58:29,901] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:29,901] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:29,901] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:29,901] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:29,901] INFO ________________________________________________
+[2023-04-27 20:58:29,901] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:58:29,907] INFO ________________________________________________
+[2023-04-27 20:58:29,907] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py reads the following data files: 
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:29,907] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:29,907] INFO ________________________________________________
+[2023-04-27 20:58:32,508] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 20:58:32,508] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:58:32,508] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:58:32,508] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:58:32,515] INFO ________________________________________________
+[2023-04-27 20:58:32,515] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py reads the following data files: 
+[2023-04-27 20:58:32,515] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:32,515] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:32,515] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:32,515] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:32,515] INFO ________________________________________________
+[2023-04-27 20:58:32,515] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:58:32,521] INFO ________________________________________________
+[2023-04-27 20:58:32,521] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py reads the following data files: 
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:58:32,521] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:58:32,521] INFO ________________________________________________
+[2023-04-27 20:59:30,111] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 20:59:30,111] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:59:30,112] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:59:30,112] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:59:30,118] INFO ________________________________________________
+[2023-04-27 20:59:30,118] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py reads the following data files: 
+[2023-04-27 20:59:30,118] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:59:30,118] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:59:30,118] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:59:30,118] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:59:30,118] INFO ________________________________________________
+[2023-04-27 20:59:30,118] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:59:30,124] INFO ________________________________________________
+[2023-04-27 20:59:30,124] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py reads the following data files: 
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:59:30,124] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:59:30,124] INFO ________________________________________________
+[2023-04-27 20:59:44,780] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 20:59:44,780] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:59:44,780] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:59:44,780] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 20:59:44,787] INFO ________________________________________________
+[2023-04-27 20:59:44,787] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py reads the following data files: 
+[2023-04-27 20:59:44,787] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:59:44,787] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:59:44,787] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:59:44,787] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:59:44,787] INFO ________________________________________________
+[2023-04-27 20:59:44,787] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 20:59:44,793] INFO ________________________________________________
+[2023-04-27 20:59:44,793] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py reads the following data files: 
+[2023-04-27 20:59:44,793] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:59:44,793] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:59:44,793] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:59:44,793] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:59:44,794] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:59:44,794] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:59:44,794] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:59:44,794] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:59:44,794] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 20:59:44,794] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 20:59:44,794] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 20:59:44,794] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 20:59:44,794] INFO ________________________________________________
+[2023-04-27 21:00:13,010] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc, executing the following python files:
+[2023-04-27 21:00:13,010] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 21:00:13,010] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 21:00:13,011] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py
+[2023-04-27 21:00:13,017] INFO ________________________________________________
+[2023-04-27 21:00:13,017] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/app.py reads the following data files: 
+[2023-04-27 21:00:13,017] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 21:00:13,017] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 21:00:13,017] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 21:00:13,017] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 21:00:13,017] INFO ________________________________________________
+[2023-04-27 21:00:13,017] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py
+[2023-04-27 21:00:13,023] INFO ________________________________________________
+[2023-04-27 21:00:13,023] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data_cleaner.py reads the following data files: 
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/constructors.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/drivers.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/races.csv
+[2023-04-27 21:00:13,023] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/F1-stats-digoc/data/results.csv
+[2023-04-27 21:00:13,023] INFO ________________________________________________

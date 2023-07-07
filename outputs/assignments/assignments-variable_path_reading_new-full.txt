@@ -1,0 +1,3 @@
+{'variable': 'root_path', 'data_source': ['//'], 'lineno': 3}
+{'variable': 'path', 'data_source': ['root_path+examples/data/random.csv'], 'lineno': 4}
+{'variable': 'data', 'data_source': [{'func_call': {'from': 'pd', 'method': 'read_csv'}, 'data_file': ['root_path+examples/data/random.csv'], 'params': []}], 'lineno': 5}

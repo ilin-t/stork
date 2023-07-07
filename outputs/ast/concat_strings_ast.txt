@@ -1,0 +1,154 @@
+Module(
+   body=[
+      Assign(
+         targets=[
+            Name(id='s1', ctx=Store())],
+         value=Constant(value='Apple')),
+      Assign(
+         targets=[
+            Name(id='s2', ctx=Store())],
+         value=Constant(value='Pie')),
+      Assign(
+         targets=[
+            Name(id='s3', ctx=Store())],
+         value=Constant(value='Sauce')),
+      Assign(
+         targets=[
+            Name(id='s4', ctx=Store())],
+         value=BinOp(
+            left=BinOp(
+               left=Name(id='s1', ctx=Load()),
+               op=Add(),
+               right=Name(id='s2', ctx=Load())),
+            op=Add(),
+            right=Name(id='s3', ctx=Load()))),
+      Assign(
+         targets=[
+            Name(id='s1', ctx=Store())],
+         value=Constant(value='Hello')),
+      Assign(
+         targets=[
+            Name(id='s2', ctx=Store())],
+         value=Constant(value='World')),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               Constant(value='Concatenated String using join() ='),
+               Call(
+                  func=Attribute(
+                     value=Constant(value=''),
+                     attr='join',
+                     ctx=Load()),
+                  args=[
+                     List(
+                        elts=[
+                           Name(id='s1', ctx=Load()),
+                           Name(id='s2', ctx=Load())],
+                        ctx=Load())],
+                  keywords=[])],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='s1', ctx=Store())],
+         value=Constant(value='Hello')),
+      Assign(
+         targets=[
+            Name(id='s2', ctx=Store())],
+         value=Constant(value='World')),
+      Assign(
+         targets=[
+            Name(id='s3', ctx=Store())],
+         value=BinOp(
+            left=Constant(value='%s %s'),
+            op=Mod(),
+            right=Tuple(
+               elts=[
+                  Name(id='s1', ctx=Load()),
+                  Name(id='s2', ctx=Load())],
+               ctx=Load()))),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               Constant(value='String Concatenation using % Operator ='),
+               Name(id='s3', ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='s1', ctx=Store())],
+         value=Constant(value='Hello')),
+      Assign(
+         targets=[
+            Name(id='s2', ctx=Store())],
+         value=Constant(value='World')),
+      Assign(
+         targets=[
+            Name(id='s3', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Constant(value='{}-{}'),
+               attr='format',
+               ctx=Load()),
+            args=[
+               Name(id='s1', ctx=Load()),
+               Name(id='s2', ctx=Load())],
+            keywords=[])),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               Constant(value='String Concatenation using format() ='),
+               Name(id='s3', ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='s3', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Constant(value='{in1} {in2}'),
+               attr='format',
+               ctx=Load()),
+            args=[],
+            keywords=[
+               keyword(
+                  arg='in1',
+                  value=Name(id='s1', ctx=Load())),
+               keyword(
+                  arg='in2',
+                  value=Name(id='s2', ctx=Load()))])),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               Constant(value='String Concatenation using format() ='),
+               Name(id='s3', ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='s1', ctx=Store())],
+         value=Constant(value='Hello')),
+      Assign(
+         targets=[
+            Name(id='s2', ctx=Store())],
+         value=Constant(value='World')),
+      Assign(
+         targets=[
+            Name(id='s3', ctx=Store())],
+         value=JoinedStr(
+            values=[
+               FormattedValue(
+                  value=Name(id='s1', ctx=Load()),
+                  conversion=-1),
+               Constant(value=' '),
+               FormattedValue(
+                  value=Name(id='s2', ctx=Load()),
+                  conversion=-1)])),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               Constant(value='String Concatenation using f-string ='),
+               Name(id='s3', ctx=Load())],
+            keywords=[]))],
+   type_ignores=[])

@@ -1,0 +1,16 @@
+INFO:root:Joining customers and orders via SELECT * FROM customer INNER JOIN orders ON customer.c_custkey=orders."O_CUSTKEY": 18469.69099 ms.
+INFO:root:Joining lineitem and orders via SELECT * FROM lineitem INNER JOIN orders ON orders."O_ORDERKEY"=lineitem.l_orderkey: 192111.663336 ms.
+INFO:root:Joining customers and orders via SELECT * FROM (SELECT * FROM customer) INNER JOIN (SELECT * FROM orders)                     ON customer.c_custkey=orders."O_CUSTKEY";: 32911.962608 ms.
+INFO:root:Joining lineitem and orders via SELECT * FROM (SELECT * FROM lineitem) INNER JOIN (SELECT * FROM orders)                     ON orders."O_ORDERKEY"=lineitem.l_orderkey;: 315328.224218 ms.
+INFO:root:Size of joined lineitem and orders: 5473.1988 MB.
+INFO:root:Size of double joined lineitem and orders: 5473.1988 MB.
+INFO:root:Size of joined customer and orders: 1243.668017 MB.
+INFO:root:Size of double joined customer and orders: 1243.668017 MB.
+INFO:root:Joining customers and orders via SELECT * FROM (SELECT * FROM customer) INNER JOIN (SELECT * FROM orders)                     ON customer.c_custkey=orders."O_CUSTKEY";: 18273.420243 ms.
+INFO:root:Joining lineitem and orders via SELECT * FROM (SELECT * FROM lineitem) INNER JOIN (SELECT * FROM orders)                     ON orders."O_ORDERKEY"=lineitem.l_orderkey;: 190734.905955 ms.
+INFO:root:Size of double joined lineitem and orders: 5473.1988 MB.
+INFO:root:Size of double joined customer and orders: 1243.668017 MB.
+INFO:root:Joining customers and orders via SELECT * FROM customer INNER JOIN orders ON customer.c_custkey=orders."O_CUSTKEY": 18485.82294 ms.
+INFO:root:Joining lineitem and orders via SELECT * FROM lineitem INNER JOIN orders ON orders."O_ORDERKEY"=lineitem.l_orderkey: 194816.262583 ms.
+INFO:root:Size of joined lineitem and orders: 5473.1988 MB.
+INFO:root:Size of joined customer and orders: 1243.668017 MB.

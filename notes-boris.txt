@@ -1,0 +1,34 @@
+Thoughts and meeting notes (06.07.)
+
+- Execute the pipeline analysis also in forward fashion. For example, start with a variable that is defined as a string,
+trace its reassignments and invocations into methods etc. Finally, once it is read as an argument into a data reading
+method, perform the transfer to cloud or db.
+
+- Forward tracking of variables can be useful for lineage tracking for translating workloads to DBMS.
+
+- Conditional execution. When the value of the variables is the result of a conditional statement, one conservative
+approach is to execute all conditions and verify the new variable values against the file system contents. The adaptive
+approach would include a partial execution of the conditional statement to retrieve the resulting value of the variable.
+To this end, we would need to perform program slicing and partial code execution to retrieve the value.
+
+- Bi-directional control flow analysis of Python pipelines. Perform the current backward tracking of variables and
+combine it the forward variable tracking. Execute both in parallel and stop at a meeting point. It is useful to compare
+the values of the generated variables and analyze the differences. Addtionally, as a hybrid strategy, it might be more
+efficient compared to the unidirectional traversals. It's an idea for increasing the efficiency of the system.
+
+- Check the dataset from NYU and Juliana Freire.
+
+- Analysis on the data processing frameworks in python pipelines. Similar dataframe processing frameworks to pandas:
+    - Dask
+    - Modin
+    - Polars
+    - Vaex
+    - data.table
+    - cuDG
+    - (py)datatable
+    - Arrow
+    - dplyr
+    - spark
+    - DataFrames.jl
+    - ClickHouse
+    - DuckDb

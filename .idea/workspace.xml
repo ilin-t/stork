@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bdfe07ff-d0a8-4f2a-8d98-85f37d083523" name="Changes" comment="repository script set" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="fabian-paul" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/benchmarks/assignments-argus_eyes-full.txt" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2CRZ3pq90YV0IvlY6LCCi1OqIzt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "last_opened_file_path": "/home/ilint/HPI/repos/stork/venv",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
+      "PostgreSQL"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/db_conn" />
+      <recent name="$PROJECT_DIR$/src/log_modules" />
+      <recent name="$PROJECT_DIR$/measurement_scripts" />
+      <recent name="$PROJECT_DIR$/postgres_setup" />
+      <recent name="$PROJECT_DIR$/examples/data" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/.." />
+      <recent name="$PROJECT_DIR$/outputs/pipelines" />
+      <recent name="$PROJECT_DIR$/outputs/ast" />
+      <recent name="$PROJECT_DIR$/outputs/assignments" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.process_requirements">
+    <configuration name="DetectEmotionIntensity" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="stork" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../github-pipelines/github-repos-3000/affects_in_twitter" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../github-pipelines/github-repos-3000/affects_in_twitter/DetectEmotionIntensity.py" />
+      <option name="PARAMETERS" value="0,1,2,3" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="analyze_repos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stork" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/log_modules" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/log_modules/analyze_repos.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ast-playground-argus-eyes" type="PythonConfigurationType" factoryName="Python">
+      <module name="stork" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ast_playground.py" />
+      <option name="PARAMETERS" value="--pipeline=examples/argus-eyes.py" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ast-playground-sklearn-pipeline" type="PythonConfigurationType" factoryName="Python">
+      <module name="stork" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ast_playground.py" />
+      <option name="PARAMETERS" value="--pipeline=examples/sklearn-pipeline.py" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ast-playground-test" type="PythonConfigurationType" factoryName="Python">
+      <module name="stork" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ast_playground.py" />
+      <option name="PARAMETERS" value="--pipeline=examples/test.py" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="data_transfer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stork" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/log_modules" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/log_modules/data_transfer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="get_repos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stork" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/log_modules" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/log_modules/get_repos.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="join" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stork" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples/sample_pipelines/string_concat" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/sample_pipelines/string_concat/join.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="process_requirements" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stork" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/log_modules" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/log_modules/process_requirements.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.DetectEmotionIntensity" />
+      <item itemvalue="Python.ast-playground-argus-eyes" />
+      <item itemvalue="Python.ast-playground-sklearn-pipeline" />
+      <item itemvalue="Python.ast-playground-test" />
+      <item itemvalue="Python.analyze_repos" />
+      <item itemvalue="Python.process_requirements" />
+      <item itemvalue="Python.get_repos" />
+      <item itemvalue="Python.data_transfer" />
+      <item itemvalue="Python.join" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.process_requirements" />
+        <item itemvalue="Python.analyze_repos" />
+        <item itemvalue="Python.get_repos" />
+        <item itemvalue="Python.data_transfer" />
+        <item itemvalue="Python.join" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bdfe07ff-d0a8-4f2a-8d98-85f37d083523" name="Changes" comment="" />
+      <created>1658767160991</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1658767160991</updated>
+      <workItem from="1658767163391" duration="657000" />
+      <workItem from="1658835051984" duration="4255000" />
+      <workItem from="1658854879295" duration="1297000" />
+      <workItem from="1658909119600" duration="25027000" />
+      <workItem from="1658997297273" duration="9674000" />
+      <workItem from="1659022309270" duration="5848000" />
+      <workItem from="1659081519815" duration="19142000" />
+      <workItem from="1659188806003" duration="6463000" />
+      <workItem from="1659204000540" duration="9999000" />
+      <workItem from="1659218198918" duration="925000" />
+      <workItem from="1659343269746" duration="10344000" />
+      <workItem from="1659430613716" duration="4483000" />
+      <workItem from="1659518825492" duration="5355000" />
+      <workItem from="1659603741664" duration="610000" />
+      <workItem from="1659692755041" duration="3209000" />
+      <workItem from="1659957774693" duration="1198000" />
+      <workItem from="1660125191940" duration="2428000" />
+      <workItem from="1660208431010" duration="5476000" />
+      <workItem from="1660291564632" duration="11890000" />
+      <workItem from="1660564849898" duration="42000" />
+      <workItem from="1660576243794" duration="2525000" />
+      <workItem from="1660650002555" duration="4933000" />
+      <workItem from="1660736892708" duration="793000" />
+      <workItem from="1660904240822" duration="8754000" />
+      <workItem from="1661157661964" duration="4500000" />
+      <workItem from="1661166101598" duration="3157000" />
+      <workItem from="1661439712368" duration="622000" />
+      <workItem from="1661520268853" duration="5715000" />
+      <workItem from="1661859015094" duration="604000" />
+      <workItem from="1662031703169" duration="1156000" />
+      <workItem from="1662639640427" duration="2344000" />
+      <workItem from="1662717077115" duration="599000" />
+      <workItem from="1663665373404" duration="15419000" />
+      <workItem from="1663743574131" duration="5375000" />
+      <workItem from="1663762599446" duration="2357000" />
+      <workItem from="1663842003815" duration="4599000" />
+      <workItem from="1664039037385" duration="6470000" />
+      <workItem from="1664878547430" duration="599000" />
+      <workItem from="1664953926045" duration="9063000" />
+      <workItem from="1665045752040" duration="8924000" />
+      <workItem from="1665072634745" duration="1080000" />
+      <workItem from="1665129994821" duration="431000" />
+      <workItem from="1665735243318" duration="1253000" />
+      <workItem from="1666172636028" duration="6960000" />
+      <workItem from="1666264986498" duration="9423000" />
+      <workItem from="1666342741762" duration="51000" />
+      <workItem from="1666344785245" duration="1248000" />
+      <workItem from="1666704032222" duration="595000" />
+      <workItem from="1666788127103" duration="2137000" />
+      <workItem from="1667313592038" duration="1797000" />
+      <workItem from="1667386081753" duration="1563000" />
+      <workItem from="1667476266976" duration="1216000" />
+      <workItem from="1667556074499" duration="6469000" />
+      <workItem from="1668576461419" duration="2401000" />
+      <workItem from="1668578869966" duration="746000" />
+      <workItem from="1668690278907" duration="1594000" />
+      <workItem from="1668778159103" duration="10939000" />
+      <workItem from="1669206127044" duration="1073000" />
+      <workItem from="1669209717298" duration="3677000" />
+      <workItem from="1669213409781" duration="3464000" />
+      <workItem from="1669403232031" duration="1947000" />
+      <workItem from="1669626472531" duration="8658000" />
+      <workItem from="1669637887864" duration="16530000" />
+      <workItem from="1669715565625" duration="4650000" />
+      <workItem from="1669812261780" duration="3191000" />
+      <workItem from="1669818571831" duration="3884000" />
+      <workItem from="1669904114301" duration="100000" />
+      <workItem from="1669968075219" duration="22660000" />
+      <workItem from="1670593203118" duration="1955000" />
+      <workItem from="1671101643304" duration="6809000" />
+      <workItem from="1672593643871" duration="2233000" />
+      <workItem from="1672652679029" duration="13267000" />
+      <workItem from="1672735819376" duration="599000" />
+      <workItem from="1672823938013" duration="124000" />
+      <workItem from="1672824626188" duration="4169000" />
+      <workItem from="1672928305961" duration="2099000" />
+      <workItem from="1674121230224" duration="619000" />
+      <workItem from="1674138128720" duration="9666000" />
+      <workItem from="1674153011651" duration="328000" />
+      <workItem from="1674216359706" duration="11127000" />
+      <workItem from="1674468719417" duration="2417000" />
+      <workItem from="1674550417591" duration="609000" />
+      <workItem from="1674573587123" duration="3985000" />
+      <workItem from="1674637549695" duration="12955000" />
+      <workItem from="1674737593966" duration="13165000" />
+      <workItem from="1674816991583" duration="2877000" />
+      <workItem from="1675157404322" duration="652000" />
+      <workItem from="1675872655890" duration="394000" />
+      <workItem from="1675934960443" duration="7742000" />
+      <workItem from="1675980430370" duration="25133000" />
+      <workItem from="1676123030923" duration="5263000" />
+      <workItem from="1676284245220" duration="8396000" />
+      <workItem from="1676371132078" duration="7756000" />
+      <workItem from="1676455306840" duration="4287000" />
+      <workItem from="1676558463874" duration="8642000" />
+      <workItem from="1676640508783" duration="8916000" />
+      <workItem from="1677504633839" duration="3927000" />
+      <workItem from="1677574286444" duration="8157000" />
+      <workItem from="1677663584217" duration="1216000" />
+      <workItem from="1677857074899" duration="1826000" />
+      <workItem from="1678367235446" duration="599000" />
+      <workItem from="1679308025787" duration="599000" />
+      <workItem from="1679346890677" duration="1071000" />
+      <workItem from="1679473547606" duration="1417000" />
+      <workItem from="1681740875278" duration="1213000" />
+      <workItem from="1681806910461" duration="1610000" />
+      <workItem from="1681828882547" duration="1294000" />
+      <workItem from="1681893051660" duration="2007000" />
+      <workItem from="1681992245774" duration="2683000" />
+      <workItem from="1682000600179" duration="4187000" />
+      <workItem from="1682334300037" duration="3846000" />
+      <workItem from="1682408384743" duration="22937000" />
+      <workItem from="1682597288827" duration="15938000" />
+      <workItem from="1682620813525" duration="1878000" />
+      <workItem from="1682681237287" duration="1689000" />
+      <workItem from="1682689334685" duration="1400000" />
+      <workItem from="1682698571275" duration="1365000" />
+      <workItem from="1683193466576" duration="642000" />
+      <workItem from="1683549452624" duration="1216000" />
+      <workItem from="1683640556279" duration="2634000" />
+      <workItem from="1683706620443" duration="7989000" />
+      <workItem from="1683720058131" duration="5782000" />
+      <workItem from="1683813334755" duration="1203000" />
+      <workItem from="1684152250540" duration="9042000" />
+      <workItem from="1684310709912" duration="6641000" />
+      <workItem from="1684757703705" duration="1906000" />
+      <workItem from="1684845506609" duration="1897000" />
+      <workItem from="1684917664129" duration="5597000" />
+      <workItem from="1684927620429" duration="5881000" />
+      <workItem from="1685017521348" duration="8000" />
+      <workItem from="1685022115784" duration="4261000" />
+      <workItem from="1685095064268" duration="599000" />
+      <workItem from="1685449160784" duration="1082000" />
+      <workItem from="1685523443838" duration="4395000" />
+      <workItem from="1685537111941" duration="5255000" />
+      <workItem from="1685623372593" duration="9957000" />
+      <workItem from="1685694852980" duration="599000" />
+      <workItem from="1686139488371" duration="613000" />
+      <workItem from="1686755440179" duration="551000" />
+      <workItem from="1686843726496" duration="2452000" />
+      <workItem from="1686907146322" duration="609000" />
+      <workItem from="1686925077613" duration="599000" />
+      <workItem from="1687165012664" duration="9943000" />
+      <workItem from="1687187597850" duration="300000" />
+      <workItem from="1687252143693" duration="4734000" />
+      <workItem from="1687336719741" duration="7137000" />
+      <workItem from="1687425968938" duration="2465000" />
+      <workItem from="1687518480282" duration="9156000" />
+      <workItem from="1688122698734" duration="6051000" />
+      <workItem from="1688139299049" duration="857000" />
+      <workItem from="1688142507102" duration="1233000" />
+      <workItem from="1688215686414" duration="602000" />
+      <workItem from="1688375040626" duration="2810000" />
+      <workItem from="1688386795376" duration="599000" />
+      <workItem from="1688472772156" duration="599000" />
+      <workItem from="1688558001038" duration="6305000" />
+      <workItem from="1688636336985" duration="13997000" />
+      <workItem from="1688658175114" duration="329000" />
+      <workItem from="1688659070140" duration="149000" />
+      <workItem from="1688659353422" duration="357000" />
+      <workItem from="1688719752775" duration="1295000" />
+      <workItem from="1688721225331" duration="462000" />
+      <workItem from="1688722911625" duration="22315000" />
+    </task>
+    <task id="LOCAL-00001" summary="initial commit of import analyzer">
+      <created>1658767795657</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1658767795657</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Track data input">
+      <created>1658941696211</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1658941696211</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Track data input">
+      <created>1658941805588</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1658941805588</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Filter data inputs, receive new input. TODO: Replace it in the AST and generate new pipeline">
+      <created>1659110760996</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1659110760996</updated>
+    </task>
+    <task id="LOCAL-00005" summary="minor fix of the prompts">
+      <created>1659111011413</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1659111011413</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Working version.">
+      <created>1659214427897</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1659214427897</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Working version.">
+      <created>1659214445613</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659214445613</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Postgres connection established and sklearn pipeline added.">
+      <created>1659540798292</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1659540798292</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Update backlog">
+      <created>1660665239359</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1660665239359</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Update backlog">
+      <created>1660665270542</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1660665270542</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update backlog">
+      <created>1663687505444</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1663687505444</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update backlog">
+      <created>1668793217422</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668793217422</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Nested method calls (e.g. data access in spark covered). TODO: Clean the code.">
+      <created>1669663401532</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1669663401532</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Updated pipeline rewrite, fixed bugs in ast traversal. Updated not covered scenarios.">
+      <created>1669990335343</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1669990335343</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Start fixing visit_FucntionDef()">
+      <created>1669999656733</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1669999656733</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Minor refactor">
+      <created>1671144204881</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1671144204881</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Abdullatif, David, Tobias branch created.">
+      <created>1672596079861</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1672596079861</updated>
+    </task>
+    <task id="LOCAL-00018" summary="SQL connectivity established. Deployment of Postgres containers.">
+      <created>1674152803875</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1674152803875</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Adding data to SQL - buggy.">
+      <created>1674232126560</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1674232126560</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Insert data to remote table fixed.">
+      <created>1674640468476</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1674640468476</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Prepared statements - WIP">
+      <created>1674665838696</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1674665838696</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Prepared statements and postgres implementation MVP done, integration in Switcheroo WIP.">
+      <created>1674758149016</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1674758149016</updated>
+    </task>
+    <task id="LOCAL-00023" summary="License update">
+      <created>1682409058715</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1682409058715</updated>
+    </task>
+    <task id="LOCAL-00024" summary="License update">
+      <created>1682440857740</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1682440857740</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Refactor">
+      <created>1687187625822</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1687187625822</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Refactor">
+      <created>1687187757317</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1687187757317</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Variable extraction refactor WIP">
+      <option name="closed" value="true" />
+      <created>1687535907164</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1687535907164</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Variable extraction refactor WIP">
+      <option name="closed" value="true" />
+      <created>1687535941378</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1687535941378</updated>
+    </task>
+    <task id="LOCAL-00029" summary="repository script set">
+      <option name="closed" value="true" />
+      <created>1688659700383</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1688659700383</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="initial commit of import analyzer" />
+    <MESSAGE value="Track data input" />
+    <MESSAGE value="Filter data inputs, receive new input. TODO: Replace it in the AST and generate new pipeline" />
+    <MESSAGE value="minor fix of the prompts" />
+    <MESSAGE value="Working version." />
+    <MESSAGE value="Postgres connection established and sklearn pipeline added." />
+    <MESSAGE value="Update backlog" />
+    <MESSAGE value="Nested method calls (e.g. data access in spark covered). TODO: Clean the code." />
+    <MESSAGE value="Updated pipeline rewrite, fixed bugs in ast traversal. Updated not covered scenarios." />
+    <MESSAGE value="Start fixing visit_FucntionDef()" />
+    <MESSAGE value="Minor refactor" />
+    <MESSAGE value="Abdullatif, David, Tobias branch created." />
+    <MESSAGE value="SQL connectivity established. Deployment of Postgres containers." />
+    <MESSAGE value="Adding data to SQL - buggy." />
+    <MESSAGE value="Insert data to remote table fixed." />
+    <MESSAGE value="Prepared statements - WIP" />
+    <MESSAGE value="Prepared statements and postgres implementation MVP done, integration in Switcheroo WIP." />
+    <MESSAGE value="License update" />
+    <MESSAGE value="Refactor" />
+    <MESSAGE value="Variable extraction refactor WIP" />
+    <MESSAGE value="repository script set" />
+    <option name="LAST_COMMIT_MESSAGE" value="repository script set" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/db_conn/psqlConnector.py</url>
+          <line>185</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/db_conn/test_config_parser.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/switcheroo$s3_playground.coverage" NAME="s3-playground Coverage Results" MODIFIED="1664963929389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/switcheroo$simple_flows_and_runs_tutorial.coverage" NAME="simple_flows_and_runs_tutorial Coverage Results" MODIFIED="1661527349437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/openml" />
+    <SUITE FILE_PATH="coverage/switcheroo$switcheroo.coverage" NAME="switcheroo Coverage Results" MODIFIED="1687175741218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/stork$get_repos.coverage" NAME="get_repos Coverage Results" MODIFIED="1688735493286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
+    <SUITE FILE_PATH="coverage/switcheroo$random.coverage" NAME="random Coverage Results" MODIFIED="1682698585130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/util" />
+    <SUITE FILE_PATH="coverage/switcheroo$switcheroo__1_.coverage" NAME="switcheroo (1) Coverage Results" MODIFIED="1672594489054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/switcheroo$var_retrieval.coverage" NAME="var_retrieval Coverage Results" MODIFIED="1684768192805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
+    <SUITE FILE_PATH="coverage/switcheroo$variable_crawler.coverage" NAME="variable_crawler Coverage Results" MODIFIED="1687176636299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ast" />
+    <SUITE FILE_PATH="coverage/switcheroo$ast_playground_sklearn_pipeline.coverage" NAME="ast-playground-sklearn-pipeline Coverage Results" MODIFIED="1661166161408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/switcheroo$test.coverage" NAME="test Coverage Results" MODIFIED="1660230229247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/switcheroo$bytecode_test.coverage" NAME="bytecode_test Coverage Results" MODIFIED="1683644479425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/util" />
+    <SUITE FILE_PATH="coverage/switcheroo$pd_to_sql_pipe.coverage" NAME="pd_to_sql_pipe Coverage Results" MODIFIED="1676294177408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/measurement_scripts" />
+    <SUITE FILE_PATH="coverage/switcheroo$DetectEmotionIntensity.coverage" NAME="DetectEmotionIntensity Coverage Results" MODIFIED="1669829379762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-pipelines/github-repos-3000/affects_in_twitter" />
+    <SUITE FILE_PATH="coverage/switcheroo$dis_code.coverage" NAME="dis_code Coverage Results" MODIFIED="1683710228407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/util" />
+    <SUITE FILE_PATH="coverage/switcheroo$before_switcheroo.coverage" NAME="before-switcheroo Coverage Results" MODIFIED="1663683654829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/switcheroo$postgresql_playground.coverage" NAME="postgresql-playground Coverage Results" MODIFIED="1659692775467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/switcheroo$ast_playground.coverage" NAME="ast-playground Coverage Results" MODIFIED="1659458894930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/switcheroo$pd_to_sql.coverage" NAME="pd_to_sql Coverage Results" MODIFIED="1676458843965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/measurement_scripts" />
+    <SUITE FILE_PATH="coverage/switcheroo$sqlitePlayground.coverage" NAME="sqlitePlayground Coverage Results" MODIFIED="1660293942575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/switcheroo$run.coverage" NAME="run Coverage Results" MODIFIED="1684921445644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
+    <SUITE FILE_PATH="coverage/stork$format.coverage" NAME="format Coverage Results" MODIFIED="1687532567437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/sample_pipelines/string_concat" />
+    <SUITE FILE_PATH="coverage/switcheroo$create_upload_tutorial.coverage" NAME="create_upload_tutorial Coverage Results" MODIFIED="1661525962099" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/openml" />
+    <SUITE FILE_PATH="coverage/switcheroo$DataPreprocessing.coverage" NAME="DataPreprocessing Coverage Results" MODIFIED="1669828567564" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-pipelines/github-repos-3000/affects_in_twitter" />
+    <SUITE FILE_PATH="coverage/stork$variable_crawler__1_.coverage" NAME="variable_crawler (1) Coverage Results" MODIFIED="1687253978245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ast" />
+    <SUITE FILE_PATH="coverage/switcheroo$duckdb_python.coverage" NAME="duckdb-python Coverage Results" MODIFIED="1663765824036" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/stork$process_requirements.coverage" NAME="process_requirements Coverage Results" MODIFIED="1688751032930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
+    <SUITE FILE_PATH="coverage/switcheroo$postgresqlPlayground.coverage" NAME="postgresqlPlayground Coverage Results" MODIFIED="1672654180104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/switcheroo$psqlConnector.coverage" NAME="psqlConnector Coverage Results" MODIFIED="1674752725046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/db_conn" />
+    <SUITE FILE_PATH="coverage/switcheroo$get_repos.coverage" NAME="get_repos Coverage Results" MODIFIED="1682410881087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/util" />
+    <SUITE FILE_PATH="coverage/switcheroo$sklearn_pipeline.coverage" NAME="sklearn-pipeline Coverage Results" MODIFIED="1663683443661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/switcheroo$df_to_db.coverage" NAME="df_to_db Coverage Results" MODIFIED="1676458376322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/measurement_scripts" />
+    <SUITE FILE_PATH="coverage/switcheroo$CorrData.coverage" NAME="CorrData Coverage Results" MODIFIED="1669816109726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-pipelines/github-repos-3000/Covid19Tracker/CV19P Code/Python Corr Data" />
+    <SUITE FILE_PATH="coverage/stork$join.coverage" NAME="join Coverage Results" MODIFIED="1687532766011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/sample_pipelines/string_concat" />
+    <SUITE FILE_PATH="coverage/stork$data_transfer.coverage" NAME="data_transfer Coverage Results" MODIFIED="1688562831061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
+    <SUITE FILE_PATH="coverage/switcheroo$ast_playground_test.coverage" NAME="ast-playground-test Coverage Results" MODIFIED="1659209886520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/switcheroo$variable_path_reading.coverage" NAME="variable_path_reading Coverage Results" MODIFIED="1683718568057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/util" />
+    <SUITE FILE_PATH="coverage/switcheroo$var_retrieval_ast.coverage" NAME="var_retrieval_ast Coverage Results" MODIFIED="1686844761107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
+    <SUITE FILE_PATH="coverage/stork$stork.coverage" NAME="stork Coverage Results" MODIFIED="1687519443550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/switcheroo$test_config_parser.coverage" NAME="test_config_parser Coverage Results" MODIFIED="1687175714312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/db_conn" />
+    <SUITE FILE_PATH="coverage/switcheroo$ast_playground_paper_example.coverage" NAME="ast-playground-paper-example Coverage Results" MODIFIED="1660919769191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/stork$analyze_repos.coverage" NAME="analyze_repos Coverage Results" MODIFIED="1688745869591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
+  </component>
+</project>

@@ -1,0 +1,58 @@
+[2023-04-27 20:25:37,802] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-, executing the following python files:
+[2023-04-27 20:25:37,802] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/app.py
+[2023-04-27 20:25:37,802] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/Untitled.py
+[2023-04-27 20:25:37,803] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/app.py
+[2023-04-27 20:25:37,804] INFO ________________________________________________
+[2023-04-27 20:25:37,804] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/app.py generated the following datasets: 
+[2023-04-27 20:25:37,804] INFO ________________________________________________
+[2023-04-27 20:25:37,804] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/Untitled.py
+[2023-04-27 20:25:37,814] INFO ________________________________________________
+[2023-04-27 20:25:37,814] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/Untitled.py generated the following datasets: 
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending1\dataset1.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending1\dataset2.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending1\dataset3.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending1\dataset4.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending1\dataset5.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending1\dataset6.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending2\dataset1.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending2\dataset2.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending2\dataset3.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending2\dataset4.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending2\dataset5.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/bending2\dataset6.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/cycling\dataset1.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/cycling\dataset2.csv
+[2023-04-27 20:25:37,814] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/cycling\dataset3.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/cycling\dataset4.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/cycling\dataset5.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/cycling\dataset6.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/cycling\dataset7.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/lying\dataset1.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/lying\dataset11.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/lying\dataset8.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/lying\dataset4.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/lying\dataset13.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/lying\dataset6.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/sitting\dataset1.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/sitting\dataset2.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/sitting\dataset3.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/sitting\dataset4.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/sitting\dataset5.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/sitting\dataset6.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/sitting\dataset7.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/standing\dataset1.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/standing\dataset2.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/standing\dataset3.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/standing\dataset4.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/standing\dataset5.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/standing\dataset6.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/standing\dataset7.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/walking\dataset1.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/walking\dataset2.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/walking\dataset3.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/walking\dataset4.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/walking\dataset5.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/walking\dataset6.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/walking\dataset7.csv
+[2023-04-27 20:25:37,815] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/Activity-Recognition-system-based-on-Multisensor-data-fusion-AReM-/newdata_name.csv
+[2023-04-27 20:25:37,815] INFO ________________________________________________

@@ -1,0 +1,90 @@
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/lineitem in memory: 8539.974882 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/customers in memory: 388.677618 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/orders in memory: 1768.66017 ms.
+INFO:root:Merging time for lineitem and orders: 1839.961701 ms.
+INFO:root:Merging time for customers and orders: 2320.500735 ms.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/lineitem: 3569.390879 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/customers: 67.28348 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/orders: 599.870399 MB.
+INFO:root:Size of merged lineitem_orders: 5969.380156 MB.
+INFO:root:Size of merged customers_orders: 1272.755334 MB.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/lineitem in memory: 8492.62727 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/customers in memory: 343.62302 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/orders in memory: 1843.499527 ms.
+INFO:root:Merging time for lineitem and orders: 2222.236765 ms.
+INFO:root:Merging time for customers and orders: 2280.040385 ms.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/lineitem: 3569.390879 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/customers: 67.28348 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/orders: 599.870399 MB.
+INFO:root:Size of merged lineitem_orders: 5969.380156 MB.
+INFO:root:Size of merged customers_orders: 1272.755334 MB.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/lineitem in memory: 8625.000852 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/customers in memory: 337.307555 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/orders in memory: 1746.65259 ms.
+INFO:root:Merging time for lineitem and orders: 1920.332073 ms.
+INFO:root:Merging time for customers and orders: 2351.531495 ms.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/lineitem: 3569.390879 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/customers: 67.28348 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/orders: 599.870399 MB.
+INFO:root:Size of merged lineitem_orders: 5969.380156 MB.
+INFO:root:Size of merged customers_orders: 1272.755334 MB.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/lineitem in memory: 8312.816147 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/customers in memory: 346.674397 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/orders in memory: 1943.948393 ms.
+INFO:root:Merging time for lineitem and orders: 1903.499866 ms.
+INFO:root:Merging time for customers and orders: 2293.650686 ms.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/lineitem: 3569.390879 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/customers: 67.28348 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/orders: 599.870399 MB.
+INFO:root:Size of merged lineitem_orders: 5969.380156 MB.
+INFO:root:Size of merged customers_orders: 1272.755334 MB.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/lineitem in memory: 8187.306691 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/customers in memory: 328.236661 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/orders in memory: 1755.257359 ms.
+INFO:root:Merging time for lineitem and orders: 1807.8361 ms.
+INFO:root:Merging time for customers and orders: 2340.713934 ms.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/lineitem: 3569.390879 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/customers: 67.28348 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/orders: 599.870399 MB.
+INFO:root:Size of merged lineitem_orders: 5969.380156 MB.
+INFO:root:Size of merged customers_orders: 1272.755334 MB.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/lineitem in memory: 8178.941071 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/customers in memory: 320.449064 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/orders in memory: 1728.336328 ms.
+INFO:root:Merging time for lineitem and orders: 1864.590309 ms.
+INFO:root:Merging time for customers and orders: 2336.759322 ms.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/lineitem: 3569.390879 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/customers: 67.28348 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/orders: 599.870399 MB.
+INFO:root:Size of merged lineitem_orders: 5969.380156 MB.
+INFO:root:Size of merged customers_orders: 1272.755334 MB.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/lineitem in memory: 7961.64986 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/customers in memory: 312.295348 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/orders in memory: 1670.175326 ms.
+INFO:root:Merging time for lineitem and orders: 1795.667032 ms.
+INFO:root:Merging time for customers and orders: 2311.491888 ms.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/lineitem: 3569.390879 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/customers: 67.28348 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/orders: 599.870399 MB.
+INFO:root:Size of merged lineitem_orders: 5969.380156 MB.
+INFO:root:Size of merged customers_orders: 1272.755334 MB.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/lineitem in memory: 8071.397584 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/customers in memory: 314.447683 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/orders in memory: 1715.86899 ms.
+INFO:root:Merging time for lineitem and orders: 1874.353669 ms.
+INFO:root:Merging time for customers and orders: 2365.148979 ms.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/lineitem: 3569.390879 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/customers: 67.28348 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/orders: 599.870399 MB.
+INFO:root:Size of merged lineitem_orders: 5969.380156 MB.
+INFO:root:Size of merged customers_orders: 1272.755334 MB.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/lineitem in memory: 8945.116911 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/customers in memory: 335.072141 ms.
+INFO:root:Reading /home/ilint/HPI/repos/tpch-data/orders in memory: 1825.814718 ms.
+INFO:root:Merging time for lineitem and orders: 2314.960475 ms.
+INFO:root:Merging time for customers and orders: 2352.045772 ms.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/lineitem: 3569.390879 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/customers: 67.28348 MB.
+INFO:root:Size of /home/ilint/HPI/repos/tpch-data/orders: 599.870399 MB.
+INFO:root:Size of merged lineitem_orders: 5969.380156 MB.
+INFO:root:Size of merged customers_orders: 1272.755334 MB.

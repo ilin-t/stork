@@ -1,0 +1,25 @@
+Module(
+   body=[
+      Assign(
+         targets=[
+            Name(id='s1', ctx=Store())],
+         value=Constant(value='Apple')),
+      Assign(
+         targets=[
+            Name(id='s2', ctx=Store())],
+         value=Constant(value='Pie')),
+      Assign(
+         targets=[
+            Name(id='s3', ctx=Store())],
+         value=Constant(value='Sauce')),
+      Assign(
+         targets=[
+            Name(id='s4', ctx=Store())],
+         value=BinOp(
+            left=BinOp(
+               left=Name(id='s1', ctx=Load()),
+               op=Add(),
+               right=Name(id='s2', ctx=Load())),
+            op=Add(),
+            right=Name(id='s3', ctx=Load())))],
+   type_ignores=[])

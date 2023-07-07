@@ -1,0 +1,152 @@
+[2023-04-27 20:44:19,868] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 20:44:19,868] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:44:19,869] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:44:19,872] INFO ________________________________________________
+[2023-04-27 20:44:19,872] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py generated the following datasets: 
+[2023-04-27 20:44:19,872] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 20:44:19,873] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 20:44:19,873] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 20:44:19,873] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 20:44:19,873] INFO ________________________________________________
+[2023-04-27 20:44:34,465] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 20:44:34,465] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:44:34,465] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:44:34,468] INFO ________________________________________________
+[2023-04-27 20:44:34,468] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py generated the following datasets: 
+[2023-04-27 20:44:34,468] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 20:44:34,468] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 20:44:34,468] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 20:44:34,468] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 20:44:34,468] INFO ________________________________________________
+[2023-04-27 20:49:25,127] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 20:49:25,127] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:49:25,127] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:49:25,130] INFO ________________________________________________
+[2023-04-27 20:49:25,130] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py generated the following datasets: 
+[2023-04-27 20:49:25,131] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 20:49:25,131] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 20:49:25,131] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 20:49:25,131] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 20:49:25,131] INFO ________________________________________________
+[2023-04-27 20:53:22,373] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 20:53:22,373] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:53:22,373] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:53:22,376] INFO ________________________________________________
+[2023-04-27 20:53:22,376] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py generated the following datasets: 
+[2023-04-27 20:53:22,376] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 20:53:22,376] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 20:53:22,376] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 20:53:22,376] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 20:53:22,376] INFO ________________________________________________
+[2023-04-27 20:54:07,544] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 20:54:07,544] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:54:07,544] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:54:07,547] INFO ________________________________________________
+[2023-04-27 20:54:07,547] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py generated the following datasets: 
+[2023-04-27 20:54:07,548] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 20:54:07,548] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 20:54:07,548] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 20:54:07,548] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 20:54:07,548] INFO ________________________________________________
+[2023-04-27 20:58:28,317] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 20:58:28,318] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:58:28,318] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:58:28,326] INFO ________________________________________________
+[2023-04-27 20:58:28,326] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py reads the following data files: 
+[2023-04-27 20:58:28,326] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 20:58:28,326] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 20:58:28,326] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 20:58:28,327] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 20:58:28,327] INFO ________________________________________________
+[2023-04-27 20:58:29,891] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 20:58:29,891] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:58:29,891] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:58:29,894] INFO ________________________________________________
+[2023-04-27 20:58:29,894] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py reads the following data files: 
+[2023-04-27 20:58:29,894] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 20:58:29,894] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 20:58:29,894] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 20:58:29,894] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 20:58:29,894] INFO ________________________________________________
+[2023-04-27 20:58:32,504] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 20:58:32,504] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:58:32,504] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:58:32,507] INFO ________________________________________________
+[2023-04-27 20:58:32,507] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py reads the following data files: 
+[2023-04-27 20:58:32,507] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 20:58:32,507] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 20:58:32,507] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 20:58:32,507] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 20:58:32,507] INFO ________________________________________________
+[2023-04-27 20:59:30,108] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 20:59:30,108] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:59:30,108] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:59:30,111] INFO ________________________________________________
+[2023-04-27 20:59:30,111] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py reads the following data files: 
+[2023-04-27 20:59:30,111] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 20:59:30,111] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 20:59:30,111] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 20:59:30,111] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 20:59:30,111] INFO ________________________________________________
+[2023-04-27 20:59:44,776] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 20:59:44,776] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:59:44,776] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 20:59:44,779] INFO ________________________________________________
+[2023-04-27 20:59:44,779] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py reads the following data files: 
+[2023-04-27 20:59:44,779] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 20:59:44,779] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 20:59:44,779] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 20:59:44,779] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 20:59:44,779] INFO ________________________________________________
+[2023-04-27 21:00:13,006] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example, executing the following python files:
+[2023-04-27 21:00:13,006] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 21:00:13,007] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py
+[2023-04-27 21:00:13,010] INFO ________________________________________________
+[2023-04-27 21:00:13,010] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/paper-example.py reads the following data files: 
+[2023-04-27 21:00:13,010] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-04-27 21:00:13,010] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-04-27 21:00:13,010] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-04-27 21:00:13,010] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-04-27 21:00:13,010] INFO ________________________________________________
+[2023-05-10 14:50:15,046] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example, executing the following python files:
+[2023-05-10 14:50:15,046] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py
+[2023-05-10 14:50:15,046] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py
+[2023-05-10 14:50:15,049] INFO ________________________________________________
+[2023-05-10 14:50:15,049] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py reads the following data files: 
+[2023-05-10 14:50:15,049] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-05-10 14:50:15,049] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-05-10 14:50:15,049] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-05-10 14:50:15,049] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-05-10 14:50:15,049] INFO ________________________________________________
+[2023-05-10 14:50:31,181] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example, executing the following python files:
+[2023-05-10 14:50:31,181] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py
+[2023-05-10 14:50:31,181] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py
+[2023-05-10 14:50:31,184] INFO ________________________________________________
+[2023-05-10 14:50:31,184] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py reads the following data files: 
+[2023-05-10 14:50:31,184] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-05-10 14:50:31,184] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-05-10 14:50:31,184] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-05-10 14:50:31,184] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-05-10 14:50:31,184] INFO ________________________________________________
+[2023-05-24 11:39:26,106] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example, executing the following python files:
+[2023-05-24 11:39:26,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py
+[2023-05-24 11:39:26,107] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py
+[2023-05-24 11:39:26,111] INFO ________________________________________________
+[2023-05-24 11:39:26,112] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py reads the following data files: 
+[2023-05-24 11:39:26,112] INFO ________________________________________________
+[2023-05-24 11:40:38,650] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example, executing the following python files:
+[2023-05-24 11:40:38,650] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py
+[2023-05-24 11:40:38,650] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py
+[2023-05-24 11:40:38,652] INFO ________________________________________________
+[2023-05-24 11:40:38,652] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py reads the following data files: 
+[2023-05-24 11:40:38,652] INFO ________________________________________________
+[2023-05-24 11:44:06,353] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example, executing the following python files:
+[2023-05-24 11:44:06,353] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py
+[2023-05-24 11:44:06,353] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py
+[2023-05-24 11:44:06,356] INFO ________________________________________________
+[2023-05-24 11:44:06,356] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/paper-example.py reads the following data files: 
+[2023-05-24 11:44:06,356] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/reviews.csv.gz
+[2023-05-24 11:44:06,357] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/products.csv
+[2023-05-24 11:44:06,357] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/categories.csv
+[2023-05-24 11:44:06,357] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run-1/arguseyes-example/datasets/amazon-reviews/ratings.csv
+[2023-05-24 11:44:06,357] INFO ________________________________________________

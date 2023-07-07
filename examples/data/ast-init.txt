@@ -1,0 +1,336 @@
+Module(
+   body=[
+      Import(
+         names=[
+            alias(name='pandas', asname='pd')]),
+      Import(
+         names=[
+            alias(name='json')]),
+      Assign(
+         targets=[
+            Name(id='hoods', ctx=Store())],
+         value=Dict(
+            keys=[
+               Constant(value='Gastown'),
+               Constant(value='Yaletown'),
+               Constant(value='Arbutus Ridge'),
+               Constant(value='Downtown'),
+               Constant(value='Dunbar-Southlands'),
+               Constant(value='Fairview'),
+               Constant(value='Grandview-Woodland'),
+               Constant(value='Hastings-Sunrise'),
+               Constant(value='Kensington'),
+               Constant(value='Kerrisdale'),
+               Constant(value='Killarney'),
+               Constant(value='Kitsilano'),
+               Constant(value='Marpole'),
+               Constant(value='Mount Pleasant'),
+               Constant(value='Oakridge'),
+               Constant(value='Renfrew-Collingwood'),
+               Constant(value='Riley Park'),
+               Constant(value='Shaunessy'),
+               Constant(value='South Cambie'),
+               Constant(value='Strathcona'),
+               Constant(value='Sunset'),
+               Constant(value='Victoria-Fraserview'),
+               Constant(value='West End'),
+               Constant(value='West Point Grey')],
+            values=[
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/gastown.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/yaletown.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/arbutus_ridge.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/downtown.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/dunbar_southlands.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/fairview.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/grandview_woodlands.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/hastings_sunrise.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/kensington.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/kerrisdale.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/killarney.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/kitsilano.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/marpole.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/mount_pleasant.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/oakridge.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/renfrew_collingwood.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/riley_park.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/shawnessy.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/south_cambie.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/strathcona.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/sunset.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/victoria_fraserview.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/west_end.csv')],
+                  keywords=[]),
+               Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='scraper/vancouver_neighbourhoods/west_point_grey.csv')],
+                  keywords=[])])),
+      Assign(
+         targets=[
+            Name(id='file', ctx=Store())],
+         value=Call(
+            func=Name(id='open', ctx=Load()),
+            args=[
+               Constant(value='scraper/vancouver_neighbourhoods/AdminBoundary.geojson')],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='all_coords', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Name(id='json', ctx=Load()),
+               attr='loads',
+               ctx=Load()),
+            args=[
+               Call(
+                  func=Attribute(
+                     value=Name(id='file', ctx=Load()),
+                     attr='read',
+                     ctx=Load()),
+                  args=[],
+                  keywords=[])],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='cities', ctx=Store())],
+         value=Dict(keys=[], values=[])),
+      For(
+         target=Name(id='city_coords', ctx=Store()),
+         iter=Subscript(
+            value=Name(id='all_coords', ctx=Load()),
+            slice=Constant(value='features'),
+            ctx=Load()),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='municipality_name', ctx=Store())],
+               value=Subscript(
+                  value=Subscript(
+                     value=Name(id='city_coords', ctx=Load()),
+                     slice=Constant(value='properties'),
+                     ctx=Load()),
+                  slice=Constant(value='ShortName'),
+                  ctx=Load())),
+            If(
+               test=Compare(
+                  left=Subscript(
+                     value=Subscript(
+                        value=Name(id='city_coords', ctx=Load()),
+                        slice=Constant(value='geometry'),
+                        ctx=Load()),
+                     slice=Constant(value='type'),
+                     ctx=Load()),
+                  ops=[
+                     Eq()],
+                  comparators=[
+                     Constant(value='MultiPolygon')]),
+               body=[
+                  Assign(
+                     targets=[
+                        Name(id='geojson_coords', ctx=Store())],
+                     value=Subscript(
+                        value=Subscript(
+                           value=Subscript(
+                              value=Subscript(
+                                 value=Name(id='city_coords', ctx=Load()),
+                                 slice=Constant(value='geometry'),
+                                 ctx=Load()),
+                              slice=Constant(value='coordinates'),
+                              ctx=Load()),
+                           slice=Constant(value=0),
+                           ctx=Load()),
+                        slice=Constant(value=0),
+                        ctx=Load()))],
+               orelse=[
+                  Assign(
+                     targets=[
+                        Name(id='geojson_coords', ctx=Store())],
+                     value=Subscript(
+                        value=Subscript(
+                           value=Subscript(
+                              value=Name(id='city_coords', ctx=Load()),
+                              slice=Constant(value='geometry'),
+                              ctx=Load()),
+                           slice=Constant(value='coordinates'),
+                           ctx=Load()),
+                        slice=Constant(value=0),
+                        ctx=Load()))]),
+            Assign(
+               targets=[
+                  Subscript(
+                     value=Name(id='cities', ctx=Load()),
+                     slice=Name(id='municipality_name', ctx=Load()),
+                     ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='DataFrame',
+                     ctx=Load()),
+                  args=[
+                     Name(id='geojson_coords', ctx=Load())],
+                  keywords=[]))],
+         orelse=[])],
+   type_ignores=[])

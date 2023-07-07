@@ -1,0 +1,92 @@
+Module(
+   body=[
+      Assign(
+         targets=[
+            Name(id='s1', ctx=Store())],
+         value=Constant(value='Hello')),
+      Assign(
+         targets=[
+            Name(id='s2', ctx=Store())],
+         value=Constant(value='World')),
+      Assign(
+         targets=[
+            Name(id='s3', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Constant(value='{}-{}'),
+               attr='format',
+               ctx=Load()),
+            args=[
+               Name(id='s1', ctx=Load()),
+               Name(id='s2', ctx=Load())],
+            keywords=[])),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               Constant(value='String Concatenation using format() ='),
+               Name(id='s3', ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='s3', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Constant(value='{in1} {in2}'),
+               attr='format',
+               ctx=Load()),
+            args=[],
+            keywords=[
+               keyword(
+                  arg='in1',
+                  value=Name(id='s1', ctx=Load())),
+               keyword(
+                  arg='in2',
+                  value=Name(id='s2', ctx=Load()))])),
+      Expr(
+         value=Call(
+            func=Name(id='print', ctx=Load()),
+            args=[
+               Constant(value='String Concatenation using format() ='),
+               Name(id='s3', ctx=Load())],
+            keywords=[]))],
+   type_ignores=[])
+Module(
+   body=[
+      Assign(
+         targets=[
+            Name(id='s1', ctx=Store())],
+         value=Constant(value='Hello')),
+      Assign(
+         targets=[
+            Name(id='s2', ctx=Store())],
+         value=Constant(value='World')),
+      Assign(
+         targets=[
+            Name(id='s3', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Constant(value='{}-{}'),
+               attr='format',
+               ctx=Load()),
+            args=[
+               Name(id='s1', ctx=Load()),
+               Name(id='s2', ctx=Load())],
+            keywords=[])),
+      Assign(
+         targets=[
+            Name(id='s4', ctx=Store())],
+         value=Call(
+            func=Attribute(
+               value=Constant(value='{in1} {in2}'),
+               attr='format',
+               ctx=Load()),
+            args=[],
+            keywords=[
+               keyword(
+                  arg='in1',
+                  value=Name(id='s1', ctx=Load())),
+               keyword(
+                  arg='in2',
+                  value=Name(id='s2', ctx=Load()))]))],
+   type_ignores=[])

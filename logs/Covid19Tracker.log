@@ -1,0 +1,649 @@
+[2023-04-27 20:44:19,855] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 20:44:19,855] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:44:19,855] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:44:19,865] INFO ________________________________________________
+[2023-04-27 20:44:19,865] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py generated the following datasets: 
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 20:44:19,865] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 20:44:19,866] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 20:44:19,867] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 20:44:19,867] INFO ________________________________________________
+[2023-04-27 20:44:34,453] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 20:44:34,454] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:44:34,454] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:44:34,462] INFO ________________________________________________
+[2023-04-27 20:44:34,462] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py generated the following datasets: 
+[2023-04-27 20:44:34,462] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 20:44:34,463] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 20:44:34,464] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 20:44:34,464] INFO ________________________________________________
+[2023-04-27 20:49:25,116] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 20:49:25,116] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:49:25,116] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:49:25,125] INFO ________________________________________________
+[2023-04-27 20:49:25,125] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py generated the following datasets: 
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 20:49:25,125] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 20:49:25,126] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 20:49:25,127] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 20:49:25,127] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 20:49:25,127] INFO ________________________________________________
+[2023-04-27 20:53:22,361] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 20:53:22,361] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:53:22,361] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:53:22,370] INFO ________________________________________________
+[2023-04-27 20:53:22,370] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py generated the following datasets: 
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 20:53:22,370] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 20:53:22,371] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 20:53:22,372] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 20:53:22,372] INFO ________________________________________________
+[2023-04-27 20:54:07,533] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 20:54:07,533] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:54:07,533] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:54:07,542] INFO ________________________________________________
+[2023-04-27 20:54:07,542] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py generated the following datasets: 
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 20:54:07,542] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 20:54:07,543] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 20:54:07,544] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 20:54:07,544] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 20:54:07,544] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 20:54:07,544] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 20:54:07,544] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 20:54:07,544] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 20:54:07,544] INFO ________________________________________________
+[2023-04-27 20:58:28,285] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 20:58:28,285] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:58:28,285] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:58:28,311] INFO ________________________________________________
+[2023-04-27 20:58:28,311] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py reads the following data files: 
+[2023-04-27 20:58:28,311] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 20:58:28,312] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 20:58:28,312] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 20:58:28,312] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 20:58:28,312] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 20:58:28,312] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 20:58:28,312] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 20:58:28,312] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 20:58:28,312] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 20:58:28,312] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 20:58:28,312] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 20:58:28,313] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 20:58:28,313] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 20:58:28,313] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 20:58:28,313] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 20:58:28,313] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 20:58:28,313] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 20:58:28,313] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 20:58:28,313] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 20:58:28,313] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 20:58:28,313] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 20:58:28,314] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 20:58:28,314] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 20:58:28,314] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 20:58:28,314] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 20:58:28,314] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 20:58:28,314] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 20:58:28,314] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 20:58:28,314] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 20:58:28,314] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 20:58:28,314] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 20:58:28,315] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 20:58:28,315] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 20:58:28,315] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 20:58:28,315] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 20:58:28,315] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 20:58:28,315] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 20:58:28,315] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 20:58:28,315] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 20:58:28,315] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 20:58:28,315] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 20:58:28,316] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 20:58:28,316] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 20:58:28,316] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 20:58:28,316] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 20:58:28,316] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 20:58:28,316] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 20:58:28,316] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 20:58:28,316] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 20:58:28,316] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 20:58:28,316] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 20:58:28,317] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 20:58:28,317] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 20:58:28,317] INFO ________________________________________________
+[2023-04-27 20:58:29,880] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 20:58:29,880] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:58:29,880] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:58:29,888] INFO ________________________________________________
+[2023-04-27 20:58:29,889] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py reads the following data files: 
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 20:58:29,889] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 20:58:29,890] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 20:58:29,890] INFO ________________________________________________
+[2023-04-27 20:58:32,493] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 20:58:32,493] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:58:32,493] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:58:32,501] INFO ________________________________________________
+[2023-04-27 20:58:32,501] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py reads the following data files: 
+[2023-04-27 20:58:32,501] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 20:58:32,502] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 20:58:32,503] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 20:58:32,503] INFO ________________________________________________
+[2023-04-27 20:59:30,096] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 20:59:30,096] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:59:30,097] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:59:30,105] INFO ________________________________________________
+[2023-04-27 20:59:30,105] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py reads the following data files: 
+[2023-04-27 20:59:30,105] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 20:59:30,105] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 20:59:30,105] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 20:59:30,105] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 20:59:30,105] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 20:59:30,105] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 20:59:30,105] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 20:59:30,105] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 20:59:30,105] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 20:59:30,106] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 20:59:30,107] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 20:59:30,107] INFO ________________________________________________
+[2023-04-27 20:59:44,764] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 20:59:44,764] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:59:44,764] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 20:59:44,773] INFO ________________________________________________
+[2023-04-27 20:59:44,773] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py reads the following data files: 
+[2023-04-27 20:59:44,773] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 20:59:44,773] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 20:59:44,773] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 20:59:44,773] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 20:59:44,773] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 20:59:44,773] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 20:59:44,773] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 20:59:44,773] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 20:59:44,774] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 20:59:44,775] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 20:59:44,775] INFO ________________________________________________
+[2023-04-27 21:00:12,995] INFO Folder: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data, executing the following python files:
+[2023-04-27 21:00:12,995] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 21:00:12,995] INFO Pipeline: /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py
+[2023-04-27 21:00:13,004] INFO ________________________________________________
+[2023-04-27 21:00:13,004] INFO Pipeline /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Python Corr Data/CorrData.py reads the following data files: 
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data Workbooks/Cases.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alabama.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Alaska.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arizona.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Arkansas.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/California.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Colorado.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Connecticut.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Delaware.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Florida.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Georgia.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Hawaii.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Idaho.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Illinois.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Indiana.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Iowa.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kansas.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Kentucky.csv
+[2023-04-27 21:00:13,004] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Louisiana.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maine.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Maryland.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Massachusetts.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Michigan.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Minnesota.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Mississippi.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Missouri.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Montana.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nebraska.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Nevada.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Hampshire.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Jersey.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New Mexico.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/New York.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Carolina.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/North Dakota.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Ohio.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oklahoma.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Oregon.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Pennsylvania.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Rhode Island.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Carolina.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/South Dakota.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Tennessee.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Texas.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Utah.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Vermont.csv
+[2023-04-27 21:00:13,005] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Virginia.csv
+[2023-04-27 21:00:13,006] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Washington.csv
+[2023-04-27 21:00:13,006] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/West Virginia.csv
+[2023-04-27 21:00:13,006] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wisconsin.csv
+[2023-04-27 21:00:13,006] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Wyoming.csv
+[2023-04-27 21:00:13,006] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/Puerto Rico.csv
+[2023-04-27 21:00:13,006] INFO 	 /home/ilint/HPI/repos/read_csv_repos_300/test-run/Covid19Tracker/CV19P Code/Data/United States.csv
+[2023-04-27 21:00:13,006] INFO ________________________________________________

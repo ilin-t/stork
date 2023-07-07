@@ -1,0 +1,62 @@
+Problem formulation: local data access in Jupyter notebooks
+
+Local data access in Jupyter notebooks and other collaborative environments, presents a challenge for further
+workload sharing or reuse across different environments. Pipelines cannot be shared or executed without explicit access
+to the data that is stored on the client machine. To this end, the data must be stored in either a distributed file
+system, object storage, or a database management system. This is rarely the case when data is collected and stored on
+on-premise servers that host a shared file system or database. Sharing the data and the pipeline outside this
+environment would require moving both, the pipeline, and the data to the next user. Once transferred, the pipeline would
+need to be adjusted to access the data from the different location.
+
+When sharing a single pipeline, moving a single file and adjusting the data access does not pose a significant overhead.
+However, doing so for a set of pipelines that access multiple datasets becomes a repetitive and error-prone
+effort. Collaborative environments offered by major cloud vendors, such as Azure Notebooks, Google Collab and
+Amazon SageMaker, are integrated with their object storage services, such as Azure Blob Storage, Google Storage, and S3, respectively.
+Users can synchronize their file storage by using the paid services offered by the cloud vendors.
+These help mitigate the challenge of moving data and rewriting the pipelines. However, these setups are not plausible
+ in a setup where data is collected on a local server.
+
+In this paper, we look into the possibilities to share pipelines and data in a collaborative environment without
+migrating the complete development setup to a paid service offered by a cloud vendor. There are several settings where
+ migration to cloud is not feasible, such as on-premise legacy systems, university data centers,
+high performance computing infrastructure used by research centers, databases deployed by hospitals, and similar.
+
+In the following subsections, we present an example use case of a university data center where existing resources can
+be utilized to enhance pipeline and data sharing. We look into shared file systems and databases as suitable design
+choices.
+
+Worklflow description
+
+In this paper, we look into a collaborative data science workflow where two or more data science teams need to share
+their pipelines and reproduce the results. An example of such workflow is shown in Figure X. Such workflows find use cases
+in environments where data are collected remotely and a subset of it is processed locally by the data scientists. For example,
+during the past 3 years, we have seen a surge of analysis for the spread of the COVID-19 pandemic. Various medical institutions
+were reporting numbers and analysis results from their respective countries to centralized entities,
+such as the Centers for Disease Control and Prevention in the USA, National Health Service (NHS) in the UK,
+Robert Koch Institute in Germany, and similar.
+
+These institutions were responsible to consolidate the results from individual analysis on regional level,
+report it to the public and eventually the World Health Organization. In such a scenario, there is a data access and
+reproducibility challenge that arises two times in a hierarchical manner. First, national institutions consolidate
+the results from each region, after which international organizations such as WHO integrate the national results.
+
+To validate and integrate the results, each of these institutions needs to re-execute the original pipelines. However,
+such re-executions rarely work out of the box when moved to a different system environment. One of the main reasons
+for that is the unstructured data access across the pipelines. Each pipeline processes multiple files located on the
+clients. To execute the pipelines in a different environment for validation and further analysis, the data needs to be
+shipped together with the pipeline. Additionally, each pipeline needs to be rewritten, to include the files moved to the
+new environment. This is a multi-step manual process, that becomes cumbersome with the growing number of pipelines and
+data files. Additionally, it prevents any integration with automated systems for data or pipeline integration.
+
+In this paper, we automate the data access problem. To avoid sharing files across devices or cloud storage systems,
+we propose putting an intermediate storage solution from which the data can be accessed. We are focusing on structured data files that
+have table-like structure. In our current implementation we integrate PostgreSQL, a relational database
+management system (RDBMS), as the storage medium for such data. Once we move the data, we rewrite the pipeline to provide
+access to the new tables in the database. In Figure X, we show an example of the adjusted pipeline.
+
+In the following sections, we describe the internals of our system, and its feasibility when applied to a set of
+data processing pipelines.
+
+
+
+

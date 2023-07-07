@@ -1,0 +1,8 @@
+{'variable': 'path5', 'data_source': ['/home/ilint/HPI/repos/stork/examples/data/random5.csv'], 'lineno': 37}
+{'variable': 'path5', 'data_source': ['path5+/home/ilint/HPI/repos/stork/examples/data/random5.csv'], 'lineno': 39}
+{'variable': 'data1', 'data_source': [{'func_call': {'from': 'pd', 'method': 'read_csv'}, 'data_file': ['path5+/home/ilint/HPI/repos/stork/examples/data/random5.csv'], 'params': []}], 'lineno': 41}
+{'variable': 'data2', 'data_source': [{'func_call': {'from': 'pd', 'method': 'read_csv'}, 'data_file': ['path3'], 'params': []}], 'lineno': 43}
+{'variable': 'data3', 'data_source': [{'func_call': {'from': 'pd', 'method': 'read_csv'}, 'data_file': ['path2'], 'params': []}], 'lineno': 45}
+{'variable': 'data4', 'data_source': [{'func_call': {'from': 'pd', 'method': 'read_csv'}, 'data_file': ['path1'], 'params': []}], 'lineno': 47}
+{'variable': 'data5', 'data_source': [{'func_call': {'from': 'pd', 'method': 'read_csv'}, 'data_file': ['path4'], 'params': []}], 'lineno': 49}
+{'variable': 'path5', 'data_source': ['/home/ilint/HPI/repos/stork/examples/data/random5.csv'], 'lineno': 56}

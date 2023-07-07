@@ -1,0 +1,434 @@
+[2023-04-27 20:24:05,649] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/demo/singlepath/ins_sort, executing the following python files:
+[2023-04-27 20:24:05,649] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/demo/singlepath/ins_sort/genarr.py
+[2023-04-27 20:24:05,649] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/demo/singlepath/ins_sort/genarr.py
+[2023-04-27 20:24:05,650] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/demo/singlepath/ins_sort/genarr.py failed with the following error: invalid syntax (<unknown>, line 10). Check the error logs.
+[2023-04-27 20:24:05,650] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/demo/singlepath/ins_sort/genarr.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:05,650] INFO ________________________________________________
+[2023-04-27 20:24:05,650] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/demo/singlepath/ins_sort/genarr.py generated the following datasets: 
+[2023-04-27 20:24:05,650] INFO ________________________________________________
+[2023-04-27 20:24:05,652] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock, executing the following python files:
+[2023-04-27 20:24:05,652] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/extract_subtraces.py
+[2023-04-27 20:24:05,652] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/mktables.py
+[2023-04-27 20:24:05,652] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/sp_pflck.py
+[2023-04-27 20:24:05,652] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/traceana.py
+[2023-04-27 20:24:05,652] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/unused.py
+[2023-04-27 20:24:05,652] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/extract_subtraces.py
+[2023-04-27 20:24:05,653] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/extract_subtraces.py failed with the following error: invalid syntax (<unknown>, line 27). Check the error logs.
+[2023-04-27 20:24:05,653] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/extract_subtraces.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:05,653] INFO ________________________________________________
+[2023-04-27 20:24:05,653] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/extract_subtraces.py generated the following datasets: 
+[2023-04-27 20:24:05,653] INFO ________________________________________________
+[2023-04-27 20:24:05,653] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/mktables.py
+[2023-04-27 20:24:05,654] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/mktables.py failed with the following error: Missing parentheses in call to 'print'. Did you mean print(RPT_Entry.columns)? (<unknown>, line 191). Check the error logs.
+[2023-04-27 20:24:05,654] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/mktables.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:05,654] INFO ________________________________________________
+[2023-04-27 20:24:05,654] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/mktables.py generated the following datasets: 
+[2023-04-27 20:24:05,654] INFO ________________________________________________
+[2023-04-27 20:24:05,654] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/sp_pflck.py
+[2023-04-27 20:24:05,656] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/sp_pflck.py failed with the following error: Missing parentheses in call to 'print'. Did you mean print("prefetch request", tag, self.t)? (<unknown>, line 162). Check the error logs.
+[2023-04-27 20:24:05,656] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/sp_pflck.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:05,656] INFO ________________________________________________
+[2023-04-27 20:24:05,656] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/sp_pflck.py generated the following datasets: 
+[2023-04-27 20:24:05,656] INFO ________________________________________________
+[2023-04-27 20:24:05,656] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/traceana.py
+[2023-04-27 20:24:05,657] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/traceana.py failed with the following error: invalid syntax (<unknown>, line 171). Check the error logs.
+[2023-04-27 20:24:05,657] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/traceana.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:05,657] INFO ________________________________________________
+[2023-04-27 20:24:05,657] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/traceana.py generated the following datasets: 
+[2023-04-27 20:24:05,657] INFO ________________________________________________
+[2023-04-27 20:24:05,657] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/unused.py
+[2023-04-27 20:24:05,658] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/unused.py failed with the following error: Missing parentheses in call to 'print'. Did you mean print("Primary:")? (<unknown>, line 113). Check the error logs.
+[2023-04-27 20:24:05,658] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/unused.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:05,658] INFO ________________________________________________
+[2023-04-27 20:24:05,658] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/unused.py generated the following datasets: 
+[2023-04-27 20:24:05,658] INFO ________________________________________________
+[2023-04-27 20:24:05,659] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/locking, executing the following python files:
+[2023-04-27 20:24:05,659] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/locking/trp_locking.py
+[2023-04-27 20:24:05,659] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/locking/trp_locking.py
+[2023-04-27 20:24:05,662] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/locking/trp_locking.py failed with the following error: Missing parentheses in call to 'print'. Did you mean print("====")? (<unknown>, line 283). Check the error logs.
+[2023-04-27 20:24:05,662] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/locking/trp_locking.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:05,662] INFO ________________________________________________
+[2023-04-27 20:24:05,662] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/cache_prefetch_lock/locking/trp_locking.py generated the following datasets: 
+[2023-04-27 20:24:05,662] INFO ________________________________________________
+[2023-04-27 20:24:05,664] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/full_compiler, executing the following python files:
+[2023-04-27 20:24:05,664] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/full_compiler/build_tables.py
+[2023-04-27 20:24:05,664] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/full_compiler/build_tables.py
+[2023-04-27 20:24:05,665] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/full_compiler/build_tables.py failed with the following error: Missing parentheses in call to 'print'. Did you mean print([x/28.0 for x in sums])? (<unknown>, line 111). Check the error logs.
+[2023-04-27 20:24:05,665] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/full_compiler/build_tables.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:05,665] INFO ________________________________________________
+[2023-04-27 20:24:05,665] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/full_compiler/build_tables.py generated the following datasets: 
+[2023-04-27 20:24:05,665] INFO ________________________________________________
+[2023-04-27 20:24:05,666] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/function_splitter, executing the following python files:
+[2023-04-27 20:24:05,666] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/function_splitter/get_splitter_table.py
+[2023-04-27 20:24:05,666] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/function_splitter/get_splitter_table.py
+[2023-04-27 20:24:05,667] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/function_splitter/get_splitter_table.py failed with the following error: Missing parentheses in call to 'print'. Did you mean print(" -- Processing ", csvname)? (<unknown>, line 82). Check the error logs.
+[2023-04-27 20:24:05,667] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/function_splitter/get_splitter_table.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:05,667] INFO ________________________________________________
+[2023-04-27 20:24:05,667] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/experiments/function_splitter/get_splitter_table.py generated the following datasets: 
+[2023-04-27 20:24:05,667] INFO ________________________________________________
+[2023-04-27 20:24:05,708] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools, executing the following python files:
+[2023-04-27 20:24:05,709] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/setup.py
+[2023-04-27 20:24:05,709] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/z.py
+[2023-04-27 20:24:05,709] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/setup.py
+[2023-04-27 20:24:05,709] INFO ________________________________________________
+[2023-04-27 20:24:05,709] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/setup.py generated the following datasets: 
+[2023-04-27 20:24:05,709] INFO ________________________________________________
+[2023-04-27 20:24:05,709] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/z.py
+[2023-04-27 20:24:05,710] INFO ________________________________________________
+[2023-04-27 20:24:05,710] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/z.py generated the following datasets: 
+[2023-04-27 20:24:05,710] INFO ________________________________________________
+[2023-04-27 20:24:05,710] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools, executing the following python files:
+[2023-04-27 20:24:05,710] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/__init__.py
+[2023-04-27 20:24:05,710] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/__init__.py
+[2023-04-27 20:24:05,711] INFO ________________________________________________
+[2023-04-27 20:24:05,711] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/__init__.py generated the following datasets: 
+[2023-04-27 20:24:05,711] INFO ________________________________________________
+[2023-04-27 20:24:05,711] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common, executing the following python files:
+[2023-04-27 20:24:05,711] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/construct_utils.py
+[2023-04-27 20:24:05,711] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/exceptions.py
+[2023-04-27 20:24:05,711] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/ordereddict.py
+[2023-04-27 20:24:05,711] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/py3compat.py
+[2023-04-27 20:24:05,711] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/utils.py
+[2023-04-27 20:24:05,711] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/__init__.py
+[2023-04-27 20:24:05,711] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/construct_utils.py
+[2023-04-27 20:24:05,712] INFO ________________________________________________
+[2023-04-27 20:24:05,712] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/construct_utils.py generated the following datasets: 
+[2023-04-27 20:24:05,712] INFO ________________________________________________
+[2023-04-27 20:24:05,712] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/exceptions.py
+[2023-04-27 20:24:05,713] INFO ________________________________________________
+[2023-04-27 20:24:05,713] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/exceptions.py generated the following datasets: 
+[2023-04-27 20:24:05,713] INFO ________________________________________________
+[2023-04-27 20:24:05,713] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/ordereddict.py
+[2023-04-27 20:24:05,716] INFO ________________________________________________
+[2023-04-27 20:24:05,716] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/ordereddict.py generated the following datasets: 
+[2023-04-27 20:24:05,716] INFO ________________________________________________
+[2023-04-27 20:24:05,716] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/py3compat.py
+[2023-04-27 20:24:05,718] INFO ________________________________________________
+[2023-04-27 20:24:05,718] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/py3compat.py generated the following datasets: 
+[2023-04-27 20:24:05,718] INFO ________________________________________________
+[2023-04-27 20:24:05,718] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/utils.py
+[2023-04-27 20:24:05,719] INFO ________________________________________________
+[2023-04-27 20:24:05,719] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/utils.py generated the following datasets: 
+[2023-04-27 20:24:05,719] INFO ________________________________________________
+[2023-04-27 20:24:05,720] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/__init__.py
+[2023-04-27 20:24:05,720] INFO ________________________________________________
+[2023-04-27 20:24:05,720] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/common/__init__.py generated the following datasets: 
+[2023-04-27 20:24:05,720] INFO ________________________________________________
+[2023-04-27 20:24:05,721] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct, executing the following python files:
+[2023-04-27 20:24:05,721] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/adapters.py
+[2023-04-27 20:24:05,721] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/core.py
+[2023-04-27 20:24:05,721] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/debug.py
+[2023-04-27 20:24:05,721] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/macros.py
+[2023-04-27 20:24:05,721] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/__init__.py
+[2023-04-27 20:24:05,721] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/adapters.py
+[2023-04-27 20:24:05,726] INFO ________________________________________________
+[2023-04-27 20:24:05,726] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/adapters.py generated the following datasets: 
+[2023-04-27 20:24:05,726] INFO ________________________________________________
+[2023-04-27 20:24:05,726] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/core.py
+[2023-04-27 20:24:05,750] INFO ________________________________________________
+[2023-04-27 20:24:05,750] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/core.py generated the following datasets: 
+[2023-04-27 20:24:05,750] INFO ________________________________________________
+[2023-04-27 20:24:05,751] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/debug.py
+[2023-04-27 20:24:05,766] INFO ________________________________________________
+[2023-04-27 20:24:05,766] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/debug.py generated the following datasets: 
+[2023-04-27 20:24:05,766] INFO ________________________________________________
+[2023-04-27 20:24:05,766] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/macros.py
+[2023-04-27 20:24:05,785] INFO ________________________________________________
+[2023-04-27 20:24:05,785] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/macros.py generated the following datasets: 
+[2023-04-27 20:24:05,785] INFO ________________________________________________
+[2023-04-27 20:24:05,785] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/__init__.py
+[2023-04-27 20:24:05,802] INFO ________________________________________________
+[2023-04-27 20:24:05,802] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/construct/__init__.py generated the following datasets: 
+[2023-04-27 20:24:05,802] INFO ________________________________________________
+[2023-04-27 20:24:05,803] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf, executing the following python files:
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/abbrevtable.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/callframe.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/compileunit.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/constants.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/descriptions.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/die.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/dwarfinfo.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/dwarf_expr.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/enums.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/lineprogram.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/locationlists.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/ranges.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/structs.py
+[2023-04-27 20:24:05,803] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/__init__.py
+[2023-04-27 20:24:05,803] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/abbrevtable.py
+[2023-04-27 20:24:05,804] INFO ________________________________________________
+[2023-04-27 20:24:05,804] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/abbrevtable.py generated the following datasets: 
+[2023-04-27 20:24:05,804] INFO ________________________________________________
+[2023-04-27 20:24:05,804] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/callframe.py
+[2023-04-27 20:24:05,808] INFO ________________________________________________
+[2023-04-27 20:24:05,808] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/callframe.py generated the following datasets: 
+[2023-04-27 20:24:05,808] INFO ________________________________________________
+[2023-04-27 20:24:05,808] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/compileunit.py
+[2023-04-27 20:24:05,811] INFO ________________________________________________
+[2023-04-27 20:24:05,811] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/compileunit.py generated the following datasets: 
+[2023-04-27 20:24:05,811] INFO ________________________________________________
+[2023-04-27 20:24:05,811] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/constants.py
+[2023-04-27 20:24:05,817] INFO ________________________________________________
+[2023-04-27 20:24:05,817] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/constants.py generated the following datasets: 
+[2023-04-27 20:24:05,817] INFO ________________________________________________
+[2023-04-27 20:24:05,817] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/descriptions.py
+[2023-04-27 20:24:05,846] INFO ________________________________________________
+[2023-04-27 20:24:05,846] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/descriptions.py generated the following datasets: 
+[2023-04-27 20:24:05,846] INFO ________________________________________________
+[2023-04-27 20:24:05,846] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/die.py
+[2023-04-27 20:24:05,859] INFO ________________________________________________
+[2023-04-27 20:24:05,860] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/die.py generated the following datasets: 
+[2023-04-27 20:24:05,860] INFO ________________________________________________
+[2023-04-27 20:24:05,860] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/dwarfinfo.py
+[2023-04-27 20:24:05,876] INFO ________________________________________________
+[2023-04-27 20:24:05,876] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/dwarfinfo.py generated the following datasets: 
+[2023-04-27 20:24:05,876] INFO ________________________________________________
+[2023-04-27 20:24:05,876] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/dwarf_expr.py
+[2023-04-27 20:24:05,895] INFO ________________________________________________
+[2023-04-27 20:24:05,895] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/dwarf_expr.py generated the following datasets: 
+[2023-04-27 20:24:05,895] INFO ________________________________________________
+[2023-04-27 20:24:05,895] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/enums.py
+[2023-04-27 20:24:05,912] INFO ________________________________________________
+[2023-04-27 20:24:05,912] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/enums.py generated the following datasets: 
+[2023-04-27 20:24:05,912] INFO ________________________________________________
+[2023-04-27 20:24:05,912] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/lineprogram.py
+[2023-04-27 20:24:05,934] INFO ________________________________________________
+[2023-04-27 20:24:05,934] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/lineprogram.py generated the following datasets: 
+[2023-04-27 20:24:05,934] INFO ________________________________________________
+[2023-04-27 20:24:05,934] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/locationlists.py
+[2023-04-27 20:24:05,955] INFO ________________________________________________
+[2023-04-27 20:24:05,955] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/locationlists.py generated the following datasets: 
+[2023-04-27 20:24:05,955] INFO ________________________________________________
+[2023-04-27 20:24:05,955] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/ranges.py
+[2023-04-27 20:24:05,978] INFO ________________________________________________
+[2023-04-27 20:24:05,978] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/ranges.py generated the following datasets: 
+[2023-04-27 20:24:05,978] INFO ________________________________________________
+[2023-04-27 20:24:05,978] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/structs.py
+[2023-04-27 20:24:06,019] INFO ________________________________________________
+[2023-04-27 20:24:06,019] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/structs.py generated the following datasets: 
+[2023-04-27 20:24:06,019] INFO ________________________________________________
+[2023-04-27 20:24:06,019] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/__init__.py
+[2023-04-27 20:24:06,058] INFO ________________________________________________
+[2023-04-27 20:24:06,058] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/dwarf/__init__.py generated the following datasets: 
+[2023-04-27 20:24:06,058] INFO ________________________________________________
+[2023-04-27 20:24:06,058] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf, executing the following python files:
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/constants.py
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/descriptions.py
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/dynamic.py
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/elffile.py
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/enums.py
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/gnuversions.py
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/relocation.py
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/sections.py
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/segments.py
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/structs.py
+[2023-04-27 20:24:06,058] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/__init__.py
+[2023-04-27 20:24:06,059] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/constants.py
+[2023-04-27 20:24:06,060] INFO ________________________________________________
+[2023-04-27 20:24:06,060] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/constants.py generated the following datasets: 
+[2023-04-27 20:24:06,060] INFO ________________________________________________
+[2023-04-27 20:24:06,060] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/descriptions.py
+[2023-04-27 20:24:06,064] INFO ________________________________________________
+[2023-04-27 20:24:06,064] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/descriptions.py generated the following datasets: 
+[2023-04-27 20:24:06,064] INFO ________________________________________________
+[2023-04-27 20:24:06,064] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/dynamic.py
+[2023-04-27 20:24:06,068] INFO ________________________________________________
+[2023-04-27 20:24:06,068] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/dynamic.py generated the following datasets: 
+[2023-04-27 20:24:06,068] INFO ________________________________________________
+[2023-04-27 20:24:06,068] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/elffile.py
+[2023-04-27 20:24:06,077] INFO ________________________________________________
+[2023-04-27 20:24:06,077] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/elffile.py generated the following datasets: 
+[2023-04-27 20:24:06,077] INFO ________________________________________________
+[2023-04-27 20:24:06,077] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/enums.py
+[2023-04-27 20:24:06,087] INFO ________________________________________________
+[2023-04-27 20:24:06,087] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/enums.py generated the following datasets: 
+[2023-04-27 20:24:06,087] INFO ________________________________________________
+[2023-04-27 20:24:06,087] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/gnuversions.py
+[2023-04-27 20:24:06,099] INFO ________________________________________________
+[2023-04-27 20:24:06,099] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/gnuversions.py generated the following datasets: 
+[2023-04-27 20:24:06,099] INFO ________________________________________________
+[2023-04-27 20:24:06,099] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/relocation.py
+[2023-04-27 20:24:06,112] INFO ________________________________________________
+[2023-04-27 20:24:06,112] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/relocation.py generated the following datasets: 
+[2023-04-27 20:24:06,112] INFO ________________________________________________
+[2023-04-27 20:24:06,112] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/sections.py
+[2023-04-27 20:24:06,128] INFO ________________________________________________
+[2023-04-27 20:24:06,128] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/sections.py generated the following datasets: 
+[2023-04-27 20:24:06,128] INFO ________________________________________________
+[2023-04-27 20:24:06,128] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/segments.py
+[2023-04-27 20:24:06,143] INFO ________________________________________________
+[2023-04-27 20:24:06,143] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/segments.py generated the following datasets: 
+[2023-04-27 20:24:06,143] INFO ________________________________________________
+[2023-04-27 20:24:06,143] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/structs.py
+[2023-04-27 20:24:06,173] INFO ________________________________________________
+[2023-04-27 20:24:06,173] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/structs.py generated the following datasets: 
+[2023-04-27 20:24:06,173] INFO ________________________________________________
+[2023-04-27 20:24:06,173] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/__init__.py
+[2023-04-27 20:24:06,201] INFO ________________________________________________
+[2023-04-27 20:24:06,201] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/elftools/elf/__init__.py generated the following datasets: 
+[2023-04-27 20:24:06,201] INFO ________________________________________________
+[2023-04-27 20:24:06,202] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples, executing the following python files:
+[2023-04-27 20:24:06,202] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_decode_address.py
+[2023-04-27 20:24:06,202] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_die_tree.py
+[2023-04-27 20:24:06,202] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_location_lists.py
+[2023-04-27 20:24:06,202] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_range_lists.py
+[2023-04-27 20:24:06,202] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elfclass_address_size.py
+[2023-04-27 20:24:06,202] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elf_low_high_api.py
+[2023-04-27 20:24:06,202] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elf_relocations.py
+[2023-04-27 20:24:06,202] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elf_show_debug_sections.py
+[2023-04-27 20:24:06,202] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/examine_dwarf_info.py
+[2023-04-27 20:24:06,202] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_decode_address.py
+[2023-04-27 20:24:06,203] INFO ________________________________________________
+[2023-04-27 20:24:06,203] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_decode_address.py generated the following datasets: 
+[2023-04-27 20:24:06,203] INFO ________________________________________________
+[2023-04-27 20:24:06,203] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_die_tree.py
+[2023-04-27 20:24:06,204] INFO ________________________________________________
+[2023-04-27 20:24:06,204] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_die_tree.py generated the following datasets: 
+[2023-04-27 20:24:06,204] INFO ________________________________________________
+[2023-04-27 20:24:06,204] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_location_lists.py
+[2023-04-27 20:24:06,205] INFO ________________________________________________
+[2023-04-27 20:24:06,205] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_location_lists.py generated the following datasets: 
+[2023-04-27 20:24:06,205] INFO ________________________________________________
+[2023-04-27 20:24:06,205] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_range_lists.py
+[2023-04-27 20:24:06,206] INFO ________________________________________________
+[2023-04-27 20:24:06,206] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/dwarf_range_lists.py generated the following datasets: 
+[2023-04-27 20:24:06,206] INFO ________________________________________________
+[2023-04-27 20:24:06,206] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elfclass_address_size.py
+[2023-04-27 20:24:06,206] INFO ________________________________________________
+[2023-04-27 20:24:06,206] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elfclass_address_size.py generated the following datasets: 
+[2023-04-27 20:24:06,206] INFO ________________________________________________
+[2023-04-27 20:24:06,206] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elf_low_high_api.py
+[2023-04-27 20:24:06,207] INFO ________________________________________________
+[2023-04-27 20:24:06,208] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elf_low_high_api.py generated the following datasets: 
+[2023-04-27 20:24:06,208] INFO ________________________________________________
+[2023-04-27 20:24:06,208] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elf_relocations.py
+[2023-04-27 20:24:06,208] INFO ________________________________________________
+[2023-04-27 20:24:06,208] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elf_relocations.py generated the following datasets: 
+[2023-04-27 20:24:06,208] INFO ________________________________________________
+[2023-04-27 20:24:06,208] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elf_show_debug_sections.py
+[2023-04-27 20:24:06,209] INFO ________________________________________________
+[2023-04-27 20:24:06,209] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/elf_show_debug_sections.py generated the following datasets: 
+[2023-04-27 20:24:06,209] INFO ________________________________________________
+[2023-04-27 20:24:06,209] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/examine_dwarf_info.py
+[2023-04-27 20:24:06,210] INFO ________________________________________________
+[2023-04-27 20:24:06,210] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/examples/examine_dwarf_info.py generated the following datasets: 
+[2023-04-27 20:24:06,210] INFO ________________________________________________
+[2023-04-27 20:24:06,210] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/scripts, executing the following python files:
+[2023-04-27 20:24:06,210] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/scripts/readelf.py
+[2023-04-27 20:24:06,210] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/scripts/readelf.py
+[2023-04-27 20:24:06,221] INFO ________________________________________________
+[2023-04-27 20:24:06,222] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/scripts/readelf.py generated the following datasets: 
+[2023-04-27 20:24:06,222] INFO ________________________________________________
+[2023-04-27 20:24:06,222] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test, executing the following python files:
+[2023-04-27 20:24:06,222] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/all_tests.py
+[2023-04-27 20:24:06,222] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/run_all_unittests.py
+[2023-04-27 20:24:06,222] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/run_examples_test.py
+[2023-04-27 20:24:06,222] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/run_readelf_tests.py
+[2023-04-27 20:24:06,222] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_arm_support.py
+[2023-04-27 20:24:06,222] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_callframe.py
+[2023-04-27 20:24:06,222] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_double_dynstr_section.py
+[2023-04-27 20:24:06,222] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_expr.py
+[2023-04-27 20:24:06,222] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_lineprogram.py
+[2023-04-27 20:24:06,222] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_range_lists.py
+[2023-04-27 20:24:06,223] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_structs.py
+[2023-04-27 20:24:06,223] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_gnuversions.py
+[2023-04-27 20:24:06,223] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_solaris_support.py
+[2023-04-27 20:24:06,223] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_utils.py
+[2023-04-27 20:24:06,223] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/utils.py
+[2023-04-27 20:24:06,223] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/__init__.py
+[2023-04-27 20:24:06,223] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/all_tests.py
+[2023-04-27 20:24:06,223] INFO ________________________________________________
+[2023-04-27 20:24:06,223] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/all_tests.py generated the following datasets: 
+[2023-04-27 20:24:06,223] INFO ________________________________________________
+[2023-04-27 20:24:06,224] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/run_all_unittests.py
+[2023-04-27 20:24:06,224] INFO ________________________________________________
+[2023-04-27 20:24:06,224] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/run_all_unittests.py generated the following datasets: 
+[2023-04-27 20:24:06,224] INFO ________________________________________________
+[2023-04-27 20:24:06,224] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/run_examples_test.py
+[2023-04-27 20:24:06,226] INFO ________________________________________________
+[2023-04-27 20:24:06,226] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/run_examples_test.py generated the following datasets: 
+[2023-04-27 20:24:06,226] INFO ________________________________________________
+[2023-04-27 20:24:06,226] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/run_readelf_tests.py
+[2023-04-27 20:24:06,229] INFO ________________________________________________
+[2023-04-27 20:24:06,229] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/run_readelf_tests.py generated the following datasets: 
+[2023-04-27 20:24:06,229] INFO ________________________________________________
+[2023-04-27 20:24:06,229] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_arm_support.py
+[2023-04-27 20:24:06,230] INFO ________________________________________________
+[2023-04-27 20:24:06,230] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_arm_support.py generated the following datasets: 
+[2023-04-27 20:24:06,230] INFO ________________________________________________
+[2023-04-27 20:24:06,230] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_callframe.py
+[2023-04-27 20:24:06,233] INFO ________________________________________________
+[2023-04-27 20:24:06,233] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_callframe.py generated the following datasets: 
+[2023-04-27 20:24:06,233] INFO ________________________________________________
+[2023-04-27 20:24:06,233] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_double_dynstr_section.py
+[2023-04-27 20:24:06,235] INFO ________________________________________________
+[2023-04-27 20:24:06,235] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_double_dynstr_section.py generated the following datasets: 
+[2023-04-27 20:24:06,235] INFO ________________________________________________
+[2023-04-27 20:24:06,235] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_expr.py
+[2023-04-27 20:24:06,237] INFO ________________________________________________
+[2023-04-27 20:24:06,237] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_expr.py generated the following datasets: 
+[2023-04-27 20:24:06,237] INFO ________________________________________________
+[2023-04-27 20:24:06,237] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_lineprogram.py
+[2023-04-27 20:24:06,240] INFO ________________________________________________
+[2023-04-27 20:24:06,240] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_lineprogram.py generated the following datasets: 
+[2023-04-27 20:24:06,240] INFO ________________________________________________
+[2023-04-27 20:24:06,240] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_range_lists.py
+[2023-04-27 20:24:06,242] INFO ________________________________________________
+[2023-04-27 20:24:06,242] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_range_lists.py generated the following datasets: 
+[2023-04-27 20:24:06,242] INFO ________________________________________________
+[2023-04-27 20:24:06,242] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_structs.py
+[2023-04-27 20:24:06,244] INFO ________________________________________________
+[2023-04-27 20:24:06,244] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_dwarf_structs.py generated the following datasets: 
+[2023-04-27 20:24:06,244] INFO ________________________________________________
+[2023-04-27 20:24:06,244] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_gnuversions.py
+[2023-04-27 20:24:06,247] INFO ________________________________________________
+[2023-04-27 20:24:06,247] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_gnuversions.py generated the following datasets: 
+[2023-04-27 20:24:06,247] INFO ________________________________________________
+[2023-04-27 20:24:06,247] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_solaris_support.py
+[2023-04-27 20:24:06,250] INFO ________________________________________________
+[2023-04-27 20:24:06,250] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_solaris_support.py generated the following datasets: 
+[2023-04-27 20:24:06,250] INFO ________________________________________________
+[2023-04-27 20:24:06,250] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_utils.py
+[2023-04-27 20:24:06,254] INFO ________________________________________________
+[2023-04-27 20:24:06,254] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/test_utils.py generated the following datasets: 
+[2023-04-27 20:24:06,254] INFO ________________________________________________
+[2023-04-27 20:24:06,254] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/utils.py
+[2023-04-27 20:24:06,257] INFO ________________________________________________
+[2023-04-27 20:24:06,257] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/utils.py generated the following datasets: 
+[2023-04-27 20:24:06,257] INFO ________________________________________________
+[2023-04-27 20:24:06,257] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/__init__.py
+[2023-04-27 20:24:06,260] INFO ________________________________________________
+[2023-04-27 20:24:06,260] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/pyelftools/test/__init__.py generated the following datasets: 
+[2023-04-27 20:24:06,260] INFO ________________________________________________
+[2023-04-27 20:24:06,261] INFO Folder: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils, executing the following python files:
+[2023-04-27 20:24:06,261] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/bitprof.py
+[2023-04-27 20:24:06,261] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/coverage.py
+[2023-04-27 20:24:06,261] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/dasmutil.py
+[2023-04-27 20:24:06,261] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/edgeprof.py
+[2023-04-27 20:24:06,261] INFO 	 /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/simutil.py
+[2023-04-27 20:24:06,261] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/bitprof.py
+[2023-04-27 20:24:06,262] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/bitprof.py failed with the following error: Missing parentheses in call to 'print'. Did you mean print(brf)? (<unknown>, line 78). Check the error logs.
+[2023-04-27 20:24:06,262] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/bitprof.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:06,262] INFO ________________________________________________
+[2023-04-27 20:24:06,262] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/bitprof.py generated the following datasets: 
+[2023-04-27 20:24:06,262] INFO ________________________________________________
+[2023-04-27 20:24:06,262] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/coverage.py
+[2023-04-27 20:24:06,263] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/coverage.py failed with the following error: invalid syntax (<unknown>, line 79). Check the error logs.
+[2023-04-27 20:24:06,263] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/coverage.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:06,263] INFO ________________________________________________
+[2023-04-27 20:24:06,263] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/coverage.py generated the following datasets: 
+[2023-04-27 20:24:06,263] INFO ________________________________________________
+[2023-04-27 20:24:06,263] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/dasmutil.py
+[2023-04-27 20:24:06,265] INFO ________________________________________________
+[2023-04-27 20:24:06,265] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/dasmutil.py generated the following datasets: 
+[2023-04-27 20:24:06,265] INFO ________________________________________________
+[2023-04-27 20:24:06,265] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/edgeprof.py
+[2023-04-27 20:24:06,266] ERROR Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/edgeprof.py failed with the following error: Missing parentheses in call to 'print'. Did you mean print(funcs_a[faddr][1] if faddr else "<None>", ":")? (<unknown>, line 146). Check the error logs.
+[2023-04-27 20:24:06,266] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/edgeprof.py generated an empty AST. Check error logs.
+[2023-04-27 20:24:06,267] INFO ________________________________________________
+[2023-04-27 20:24:06,267] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/edgeprof.py generated the following datasets: 
+[2023-04-27 20:24:06,267] INFO ________________________________________________
+[2023-04-27 20:24:06,267] INFO Pipeline: /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/simutil.py
+[2023-04-27 20:24:06,268] INFO ________________________________________________
+[2023-04-27 20:24:06,268] INFO Pipeline /media/ilint/My Passport/HPI/switcheroo/repositories/02211AdvancedComputerArchitectureF18/simutils/simutil.py generated the following datasets: 
+[2023-04-27 20:24:06,268] INFO ________________________________________________
