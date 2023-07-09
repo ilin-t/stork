@@ -1,5 +1,4 @@
 import os
-import pyspark
 
 repos_path = "/home/ilint/HPI/fs00/rabl/ilin.tolovski/stork/repositories-test/"
 packages_path = "/home/ilint/HPI/fs00/rabl/ilin.tolovski/stork/packages/"
