@@ -12,8 +12,6 @@ OUTPUTS_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork/outputs/"
 REPOS_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork/repositories-test/"
 PACKAGES_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork/packages/"
 
-packages_root = "/mnt/fs00/rabl/ilin.tolovski/stork/packages/"
-
 
 # packages_path = "\\store-01.hpi.uni-potsdam.de\\fg\\rabl\\ilin.tolovski\\stork\\packages"
 # packages_path = r"//store-01.hpi.uni-potsdam.de/fg/rabl/ilin.tolovski/stork/packages/"
@@ -50,14 +48,12 @@ def traverse_requirements(packages_root):
 
 
 # extract packages
-def count_packages(total_packages):
+def count_packages(total_packages, packages_root):
     complete_list = []
 
     for single_list in total_packages.values():
         for value in single_list:
             complete_list.append(value)
-
-
 
     # count occurences:
     occurences = Counter(complete_list)
@@ -70,5 +66,5 @@ def count_packages(total_packages):
     file.close()
 
 
-total_packages = traverse_requirements(packages_root=packages_root)
-count_packages(total_packages=total_packages)
+packages_list = traverse_requirements(packages_root=PACKAGES_ROOT)
+count_packages(total_packages=packages_list, packages_root=PACKAGES_ROOT)
