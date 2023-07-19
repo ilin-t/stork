@@ -28,7 +28,7 @@ token = "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"
 
 years = [2021, 2022, 2023]
 months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-days = range(1, 32)
+days = [str(i).zfill(2) for i in range(1, 32)]
 
 # years = [2018, 2019]
 # days = range(30, 32)
