@@ -6,8 +6,6 @@ import time
 from pathlib import Path
 
 import requests
-# project_folder = Path(__file__).resolve().parents[]
-# sys.path.append(str(project_folder))
 from log_results import createLogger
 
 # query = "read_csv+language:python"
@@ -23,12 +21,10 @@ output_path_mnt = "/mnt/fs00/rabl/ilin.tolovski/stork/outputs/"
 token = "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"
 
 # years = [2018, 2019, 2020, 2021, 2022, 2023]
-# months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-# days = range(1, 32)
-
 years = [2021, 2022, 2023]
-months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+months = [str(i).zfill(2) for i in range(1, 13)]
 days = [str(i).zfill(2) for i in range(1, 32)]
+
 
 # years = [2018, 2019]
 # days = range(30, 32)
@@ -36,7 +32,7 @@ days = [str(i).zfill(2) for i in range(1, 32)]
 licenses = ['mit']
 
 # pages = range(1,101)
-pages = range(1,3)
+pages = range(1, 30)
 eom = False
 log=None
 for year in years:

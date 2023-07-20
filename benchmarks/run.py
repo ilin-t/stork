@@ -36,7 +36,7 @@ def filter_folders(project_path):
     return folders
 
 def run_switcheroo(python_files, pipeline_logger, error_logger):
-    switcheroo = Stork(r"../examples/db_playgrounds/config.ini")
+    stork = Stork(r"../examples/db_playgrounds/config.ini")
     for py_file in python_files:
         pipeline_logger.info(f"Pipeline: {py_file}")
         tree = []
@@ -54,18 +54,18 @@ def run_switcheroo(python_files, pipeline_logger, error_logger):
         if not tree:
             pipeline_logger.info(f"Pipeline {py_file} generated an empty AST. Check error logs.")
 
-        switcheroo.assignVisitor.setLogger(error_logger)
+        stork.assignVisitor.setLogger(error_logger)
         error_logger.error(f"Pipeline {py_file} generated the following errors:")
 
-        switcheroo.assignVisitor.setPipeline(pipeline=py_file)
-        switcheroo.assignVisitor.visit(tree)
-        switcheroo.assignVisitor.filter_Assignments()
-        switcheroo.assignVisitor.getDatasetsFromInputs()
+        stork.assignVisitor.setPipeline(pipeline=py_file)
+        stork.assignVisitor.visit(tree)
+        stork.assignVisitor.filter_Assignments()
+        stork.assignVisitor.getDatasetsFromInputs()
         error_log.error("________________________________________________")
         pipeline_logger.info("________________________________________________")
         pipeline_logger.info(f"Pipeline {py_file} reads the following data files: ")
-        print(f"Pipeline {py_file} accesses {len(switcheroo.assignVisitor.datasets)} datasets.")
-        for dataset in switcheroo.assignVisitor.datasets:
+        print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
+        for dataset in stork.assignVisitor.datasets:
             pipeline_logger.info(f"\t {dataset}")
         pipeline_logger.info("________________________________________________")
 
