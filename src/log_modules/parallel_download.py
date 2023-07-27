@@ -1,6 +1,7 @@
 import time, os
 from multiprocessing import Process, current_process
 from get_repos_mt import get_repos
+from analyze_repos_mt import generate_requirements, getTotalSize
 
 years = ['2018', '2019', '2020']
 months = [str(i).zfill(2) for i in range(1, 13)]
@@ -19,6 +20,7 @@ token9 = "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"
 token10 = "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"
 token11 = "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"
 token12 = "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"
+
 
 # p1 = Process(target=get_repos([2018], ['03'], ['01'], pages, token1))
 p1 = Process(target=get_repos, args=(years[0:1], months[0:3], days, pages, token1,))
@@ -57,3 +59,38 @@ p9.join()
 p10.join()
 p11.join()
 p12.join()
+
+# def generate_new_processes(num_processes, func, **kwargs):
+#     processes = []
+#     for i in range(1, num_processes + 1):
+#         processes.append(Process(target=func, args=(kwargs,)))
+#
+#     return processes
+#
+#
+# def start_processes(processes):
+#     for process in processes:
+#         process.start()
+#
+#
+# def join_processes(processes):
+#     for process in processes:
+#         process.join()
+
+#
+# if __name__ == '__main__':
+#     main()
+    # OUTPUTS_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork/outputs/"
+    # REPOS_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork/repositories-test/"
+    # PACKAGES_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork/packages/"
+
+    # years = ['2018', '2019', '2020']
+    # months = [str(i).zfill(2) for i in range(1, 13)]
+    # days = [str(i).zfill(2) for i in range(1, 32)]
+    # pages = range(1, 30)
+    # processes = []
+    # for i in range(1, 13):
+    #     processes.append(Process(target=generate_requirements, args=(REPOS_ROOT, PACKAGES_ROOT,
+    #                                                                  OUTPUTS_ROOT, getTotalSize(REPOS_ROOT), i, 12,)))
+    # start_processes(processes)
+    # join_processes(processes)

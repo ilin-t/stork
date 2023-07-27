@@ -36,9 +36,9 @@ from log_results import createLogger
 
 def get_repos(years, months, days, pages, token):
     per_page = 30
-    storage_path = "/mnt/fs00/rabl/ilin.tolovski/stork-test/repositories-test/"
-    output_path_local = "/home/ilint/HPI/repos/stork-test/outputs/"
-    output_path_mnt = "/mnt/fs00/rabl/ilin.tolovski/stork-test/outputs/"
+    storage_path = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-download/repositories-test/"
+    output_path_local = "/home/ilint/HPI/repos/stork-zip-download/outputs/"
+    output_path_mnt = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-download/outputs/"
     eom = False
     log = None
     licenses = ['mit']
@@ -66,12 +66,14 @@ def get_repos(years, months, days, pages, token):
                         json_response = response.json()
                         # print(json_response)
                         os.makedirs(f"{output_path_mnt}repo_lists/{day}-{month}-{year}", exist_ok=True)
+                        os.makedirs(f"{storage_path}/year-{year}/month-{month}/day-{day}/page-{page}", exist_ok=True)
                         with open(
                                 f"{output_path_mnt}repo_lists/{day}-{month}-{year}/repos-read-csv-{day}-{month}-{year}-page-{page}.json",
                                 mode="w") as file:
                             json.dump(json_response, file)
 
                         repositories = {}
+                        branches = {}
                         if "items" not in json_response.keys():
                             print(f"Number of pages: {page}.")
                             eom = True
@@ -83,15 +85,17 @@ def get_repos(years, months, days, pages, token):
 
                             for item in json_response["items"]:
                                 repositories[item["name"]] = item["html_url"]
+                                branches[item["name"]] = item["default_branch"]
 
                             for repository in repositories:
                                 print(f"Repository: {repository}, url: {repositories[repository]}")
                                 log.info(f"Repository: {repository}, url: {repositories[repository]}, "
                                          f"date (yyyy-mm-dd):{year}-{month}-{day}")
                                 response = requests.request("GET", repositories[repository], headers=headers)
-                                os.system(f"git clone --depth 1 --single-branch --shallow-submodules "
-                                          f"{repositories[repository]} "
-                                          f"{storage_path}year-{year}/month-{month}/day-{day}/page-{page}/{repository}")
+                                os.system(f"wget "
+                                          f"{repositories[repository]}/archive/refs/heads/{branches[repository]}.zip -O"
+                                          f"{storage_path}year-{year}/month-{month}/day-{day}/page-{page}/{repository}.zip"
+                                          f"")
 
                         file.close()
                 if eom:
