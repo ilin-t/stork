@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdfe07ff-d0a8-4f2a-8d98-85f37d083523" name="Changes" comment="parallel download">
-      <change afterPath="$PROJECT_DIR$/src/log_modules/parse_repos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/stork.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/stork.iml" afterDir="false" />
+    <list default="true" id="bdfe07ff-d0a8-4f2a-8d98-85f37d083523" name="Changes" comment="Multithred repository parsing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/setup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log_modules/analyze_repos_mt.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/analyze_repos_mt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log_modules/get_repos_mt.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/get_repos_mt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log_modules/parallel_download.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/parallel_download.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/log_modules/parse_repos.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/parse_repos.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,30 +44,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
-    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
-    "last_opened_file_path": "/home/ilint/HPI/repos/stork/src/log_modules",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/ilint/HPI/repos/stork/src/log_modules&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
-      "PostgreSQL"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
+      &quot;PostgreSQL&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/log_modules" />
@@ -486,7 +481,9 @@
       <workItem from="1690360856302" duration="11826000" />
       <workItem from="1690453734254" duration="10934000" />
       <workItem from="1690468462172" duration="79000" />
-      <workItem from="1690468551775" duration="7576000" />
+      <workItem from="1690468551775" duration="7692000" />
+      <workItem from="1690544416221" duration="6153000" />
+      <workItem from="1690553093412" duration="5429000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit of import analyzer">
       <created>1658767795657</created>
@@ -726,7 +723,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689874241591</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Multithred repository parsing">
+      <option name="closed" value="true" />
+      <created>1690476753026</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1690476753026</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -750,7 +755,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="initial commit of import analyzer" />
     <MESSAGE value="Track data input" />
     <MESSAGE value="Filter data inputs, receive new input. TODO: Replace it in the AST and generate new pipeline" />
     <MESSAGE value="minor fix of the prompts" />
@@ -775,7 +779,8 @@
     <MESSAGE value="Running the analysis for 2021-2023" />
     <MESSAGE value="bug fix" />
     <MESSAGE value="parallel download" />
-    <option name="LAST_COMMIT_MESSAGE" value="parallel download" />
+    <MESSAGE value="Multithred repository parsing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Multithred repository parsing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -808,7 +813,7 @@
     <SUITE FILE_PATH="coverage/switcheroo$var_retrieval.coverage" NAME="var_retrieval Coverage Results" MODIFIED="1684768192805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
     <SUITE FILE_PATH="coverage/switcheroo$DetectEmotionIntensity.coverage" NAME="DetectEmotionIntensity Coverage Results" MODIFIED="1669829379762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-pipelines/github-repos-3000/affects_in_twitter" />
     <SUITE FILE_PATH="coverage/switcheroo$s3_playground.coverage" NAME="s3-playground Coverage Results" MODIFIED="1664963929389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/stork$parse_repos.coverage" NAME="parse_repos Coverage Results" MODIFIED="1690476636215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
+    <SUITE FILE_PATH="coverage/stork$parse_repos.coverage" NAME="parse_repos Coverage Results" MODIFIED="1690560482555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
     <SUITE FILE_PATH="coverage/switcheroo$variable_crawler.coverage" NAME="variable_crawler Coverage Results" MODIFIED="1687176636299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/ast" />
     <SUITE FILE_PATH="coverage/switcheroo$sqlitePlayground.coverage" NAME="sqlitePlayground Coverage Results" MODIFIED="1660293942575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/stork$stork.coverage" NAME="stork Coverage Results" MODIFIED="1687519443550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
