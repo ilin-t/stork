@@ -8,16 +8,15 @@ from multiprocessing import Process
 from log_results import createLoggerPlain
 
 
-def collect_repos(repos_path):
-    years = [f.name for f in os.scandir(repos_path) if f.is_dir()]
+def collect_resources(root_folder):
+    years = [f.name for f in os.scandir(root_folder) if f.is_dir()]
     month_count = 0
     day_count = 0
     page_count = 0
     repo_count = 0
-    print(years)
     all_repos = []
     for year in years:
-        months = [f.path for f in os.scandir(f"{repos_path}{year}") if f.is_dir()]
+        months = [f.path for f in os.scandir(f"{root_folder}{year}") if f.is_dir()]
         month_count += len(months)
         for month in months:
             days = [f.path for f in os.scandir(f"{month}") if f.is_dir()]
@@ -31,7 +30,7 @@ def collect_repos(repos_path):
                     all_repos.extend(repos)
 
     # print(day_count)
-    print(repo_count)
+    # print(repo_count)
     return all_repos
 
 
@@ -49,7 +48,7 @@ def getYearMonthDayPage(repo_path):
     temp = repo_path.split("/")
     year, month, day, page = temp[len(temp) - 4:len(temp)]
 
-    print(f"{temp[len(temp) - 4:len(temp)]}")
+    # print(f"{temp[len(temp) - 4:len(temp)]}")
 
     return year, month, day, page
 
@@ -91,7 +90,7 @@ def parse_repo(repos_list, repo_count, packages_path, num_threads, thread_id,
     parsed_repos = []
 
     if (thread_id == num_threads - 1):
-        end_index = len(repos_list) - 1
+        end_index = repo_count - 1
 
     for i in range(start_index, end_index):
         parsed_repos.append(repos_list[i])
@@ -123,24 +122,31 @@ def aggregate_stats(repos_root, outputs_root):
             for line in f.readlines():
                 label, value = line.split("\t")
                 if label == "parsed_repos":
-                    stats[label].append(value.replace('[', '').replace(']', '').replace('\n', ''))
+                    stats[label].append(value.replace('[', '').replace(']', '').replace('\n', '').replace("\"", ""))
                 else:
                     stats[label] += float(value)
 
         f.close()
-    # stats["parsed_repos"] = [item for sublist in stats["parsed_repos"] for item in sublist]
-    # print(stats["parsed_repos"])
 
+    stats["parsed_repos"] = format_output(stats["parsed_repos"])
     with open(f"{outputs_root}/total_stats.txt", "w") as f:
         for key in stats.keys():
             f.write(f"{key}\t{stats[key]}\n")
-        all_repos = collect_repos(repos_root)
-        parsed_repos = stats["parsed_repos"]
-        skipped_repos = [x for x in all_repos if x not in parsed_repos]
+        all_repos = collect_resources(repos_root)
+
+        skipped_repos = [x for x in all_repos if x not in stats["parsed_repos"]]
         f.write(f"skipped_repos\t{skipped_repos}")
     f.close()
-    # print(stats)
 
+def format_output(parsed_repos):
+    formatted_repos=[]
+    for repo in parsed_repos:
+        strings = repo.split(",")
+        for string in strings:
+            string = string.strip().replace("'", "")
+            formatted_repos.append(string)
+
+    return formatted_repos
 
 def start_processes(processes):
     for process in processes:
@@ -168,7 +174,7 @@ def main():
 
     NUM_THREADS = int(args.threads)
 
-    repositories = collect_repos(repos_path=REPOS_PATH)
+    repositories = collect_resources(root_folder=REPOS_PATH)
     repo_count = len(repositories)
     processes = []
     # repos_list, repo_count, packages_path, outputs_root, num_threads, thread_id,
