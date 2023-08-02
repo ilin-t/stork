@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdfe07ff-d0a8-4f2a-8d98-85f37d083523" name="Changes" comment="Multithred repository parsing">
-      <change afterPath="$PROJECT_DIR$/src/log_modules/parse_requirements.py" afterDir="false" />
+    <list default="true" id="bdfe07ff-d0a8-4f2a-8d98-85f37d083523" name="Changes" comment="Multithread package count">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log_modules/parse_repos.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/parse_repos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/log_modules/parse_requirements.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/parse_requirements.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,30 +44,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ilint/HPI/repos/stork/src/log_modules&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "last_opened_file_path": "/home/ilint/HPI/repos/stork/src/log_modules",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
-      &quot;PostgreSQL&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
+      "PostgreSQL"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/log_modules" />
@@ -85,7 +85,7 @@
       <recent name="$PROJECT_DIR$/outputs/assignments" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.parse_repos">
+  <component name="RunManager" selected="Python.parse_requirements">
     <configuration name="DetectEmotionIntensity" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="stork" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -101,28 +101,6 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../github-pipelines/github-repos-3000/affects_in_twitter/DetectEmotionIntensity.py" />
       <option name="PARAMETERS" value="0,1,2,3" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="analyze_repos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="stork" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/log_modules" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/log_modules/analyze_repos.py" />
-      <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -240,6 +218,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="parse_requirements" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stork" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/log_modules" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/log_modules/parse_requirements.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="plot_libraries" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="stork" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -289,19 +289,19 @@
       <item itemvalue="Python.ast-playground-argus-eyes" />
       <item itemvalue="Python.ast-playground-sklearn-pipeline" />
       <item itemvalue="Python.ast-playground-test" />
+      <item itemvalue="Python.parse_requirements" />
       <item itemvalue="Python.parse_repos" />
       <item itemvalue="Python.parallel_download" />
       <item itemvalue="Python.plot_libraries" />
       <item itemvalue="Python.test" />
-      <item itemvalue="Python.analyze_repos" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.parse_requirements" />
         <item itemvalue="Python.parse_repos" />
         <item itemvalue="Python.parallel_download" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.plot_libraries" />
-        <item itemvalue="Python.analyze_repos" />
       </list>
     </recent_temporary>
   </component>
@@ -485,7 +485,8 @@
       <workItem from="1690468551775" duration="7692000" />
       <workItem from="1690544416221" duration="6153000" />
       <workItem from="1690553093412" duration="5601000" />
-      <workItem from="1690802069272" duration="8651000" />
+      <workItem from="1690802069272" duration="8967000" />
+      <workItem from="1690964515740" duration="9147000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit of import analyzer">
       <created>1658767795657</created>
@@ -741,7 +742,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690560652195</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Multithread package count">
+      <option name="closed" value="true" />
+      <created>1690816704750</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1690816704750</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -765,7 +774,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Track data input" />
     <MESSAGE value="Filter data inputs, receive new input. TODO: Replace it in the AST and generate new pipeline" />
     <MESSAGE value="minor fix of the prompts" />
     <MESSAGE value="Working version." />
@@ -790,7 +798,8 @@
     <MESSAGE value="bug fix" />
     <MESSAGE value="parallel download" />
     <MESSAGE value="Multithred repository parsing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Multithred repository parsing" />
+    <MESSAGE value="Multithread package count" />
+    <option name="LAST_COMMIT_MESSAGE" value="Multithread package count" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -849,6 +858,7 @@
     <SUITE FILE_PATH="coverage/stork$parallel_download.coverage" NAME="parallel_download Coverage Results" MODIFIED="1690208976289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
     <SUITE FILE_PATH="coverage/switcheroo$test.coverage" NAME="test Coverage Results" MODIFIED="1660230229247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/switcheroo$before_switcheroo.coverage" NAME="before-switcheroo Coverage Results" MODIFIED="1663683654829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/stork$parse_requirements.coverage" NAME="parse_requirements Coverage Results" MODIFIED="1690984062692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
     <SUITE FILE_PATH="coverage/switcheroo$variable_path_reading.coverage" NAME="variable_path_reading Coverage Results" MODIFIED="1683718568057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/util" />
     <SUITE FILE_PATH="coverage/switcheroo$random.coverage" NAME="random Coverage Results" MODIFIED="1682698585130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/util" />
     <SUITE FILE_PATH="coverage/stork$format.coverage" NAME="format Coverage Results" MODIFIED="1687532567437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/sample_pipelines/string_concat" />
