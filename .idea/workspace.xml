@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdfe07ff-d0a8-4f2a-8d98-85f37d083523" name="Changes" comment="Multithread package count">
-      <change afterPath="$PROJECT_DIR$/src/log_modules/experiment-description.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/setup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log_modules/parse_repos.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/parse_repos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log_modules/parse_requirements.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/parse_requirements.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log_modules/plot_libraries.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/plot_libraries.py" afterDir="false" />
+    <list default="true" id="bdfe07ff-d0a8-4f2a-8d98-85f37d083523" name="Changes" comment="Variety of plots added">
+      <change afterPath="$PROJECT_DIR$/setup_node.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,38 +43,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ilint/HPI/repos/stork/src/log_modules&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "last_opened_file_path": "/home/ilint/HPI/repos/stork",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
-      &quot;PostgreSQL&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
+      "PostgreSQL"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/log_modules" />
       <recent name="$PROJECT_DIR$/src/db_conn" />
       <recent name="$PROJECT_DIR$/measurement_scripts" />
       <recent name="$PROJECT_DIR$/postgres_setup" />
-      <recent name="$PROJECT_DIR$/examples/data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -492,7 +487,7 @@
       <workItem from="1690802069272" duration="8967000" />
       <workItem from="1690964515740" duration="9163000" />
       <workItem from="1691047219775" duration="8204000" />
-      <workItem from="1691061389260" duration="10484000" />
+      <workItem from="1691061389260" duration="11031000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit of import analyzer">
       <created>1658767795657</created>
@@ -764,7 +759,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690985472920</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Variety of plots added">
+      <option name="closed" value="true" />
+      <created>1691075494644</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1691075494644</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -788,7 +791,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Filter data inputs, receive new input. TODO: Replace it in the AST and generate new pipeline" />
     <MESSAGE value="minor fix of the prompts" />
     <MESSAGE value="Working version." />
     <MESSAGE value="Postgres connection established and sklearn pipeline added." />
@@ -813,7 +815,8 @@
     <MESSAGE value="parallel download" />
     <MESSAGE value="Multithred repository parsing" />
     <MESSAGE value="Multithread package count" />
-    <option name="LAST_COMMIT_MESSAGE" value="Multithread package count" />
+    <MESSAGE value="Variety of plots added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Variety of plots added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
