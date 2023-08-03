@@ -74,15 +74,7 @@ def get_filename(filepath):
     return os.path.basename(filepath)
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        prog='Parse repositories',
-        description='Extract packages from all downloaded repositories',
-    )
-
-    parser.add_argument('-t', '--threads', default=12)
-
-    args = parser.parse_args()
+def main(args):
 
     REPOS_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/"
     PACKAGES_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/packages/"
@@ -100,8 +92,11 @@ def main():
         # repositories_totals = createLoggerPlain(filename=f"{OUTPUTS_ROOT}/packages_stats-{i}.log",
         #                                         project_name=f"stats-{i}", level=logging.INFO)
 
-        processes.append(Process(target=parse_requirement, args=(requirements_files, requirements_count, PACKAGES_PATH,
-                                                                 NUM_THREADS, i,)))
+        processes.append(Process(target=parse_requirement, kwargs={"requirements_files": requirements_files,
+                                                                   "package_count": requirements_count,
+                                                                   "packages_path": PACKAGES_PATH,
+                                                                   "num_threads": NUM_THREADS,
+                                                                   "thread_id": i}))
 
     start_processes(processes)
     join_processes(processes)
@@ -109,4 +104,12 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(
+        prog='Parse repositories',
+        description='Extract packages from all downloaded repositories',
+    )
+
+    parser.add_argument('-t', '--threads', default=12)
+
+    args = parser.parse_args()
+    main(args)

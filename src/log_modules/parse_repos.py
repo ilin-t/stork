@@ -89,7 +89,7 @@ def parse_repo(repos_list, repo_count, packages_path, num_threads, thread_id,
     generated_packages_count = 0
     parsed_repos = []
 
-    if (thread_id == num_threads - 1):
+    if thread_id == num_threads - 1:
         end_index = repo_count - 1
 
     for i in range(start_index, end_index):
@@ -138,8 +138,9 @@ def aggregate_stats(repos_root, outputs_root):
         f.write(f"skipped_repos\t{skipped_repos}")
     f.close()
 
+
 def format_output(parsed_repos):
-    formatted_repos=[]
+    formatted_repos = []
     for repo in parsed_repos:
         strings = repo.split(",")
         for string in strings:
@@ -147,6 +148,7 @@ def format_output(parsed_repos):
             formatted_repos.append(string)
 
     return formatted_repos
+
 
 def start_processes(processes):
     for process in processes:
@@ -158,15 +160,8 @@ def join_processes(processes):
         process.join()
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        prog='Parse repositories',
-        description='Extract packages from all downloaded repositories',
-    )
+def main(args):
 
-    parser.add_argument('-t', '--threads', default=12)
-
-    args = parser.parse_args()
 
     REPOS_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/"
     PACKAGES_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/packages/"
@@ -185,15 +180,29 @@ def main():
         repositories_totals = createLoggerPlain(filename=f"{OUTPUTS_ROOT}repo_stats/stats-{i}.log",
                                                 project_name=f"stats-{i}", level=logging.INFO)
 
-        processes.append(Process(target=parse_repo, args=(repositories, repo_count, PACKAGES_PATH,
-                                                          NUM_THREADS, i, missing_repositories, repositories_totals,)))
+        processes.append(Process(target=parse_repo, kwargs={"repos_list": repositories, "repo_count": repo_count,
+                                                            "packages_path": PACKAGES_PATH, "num_threads": NUM_THREADS,
+                                                            "thread_id": i,
+                                                            "missing_repositories": missing_repositories,
+                                                            "repo_totals": repositories_totals}))
+        # missing_repositories, repo_totals, , , PACKAGES_PATH,
+        #                                            NUM_THREADS, i, missing_repositories, repositories_totals,}))
 
     start_processes(processes)
     join_processes(processes)
 
 
 if __name__ == '__main__':
-    # main()
+    parser = argparse.ArgumentParser(
+        prog='Parse repositories',
+        description='Extract packages from all downloaded repositories',
+    )
+
+    parser.add_argument('-t', '--threads', default=12)
+
+    args = parser.parse_args()
+    main(args)
+
     REPOS_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/"
     OUTPUTS_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/outputs/repo_stats/"
     aggregate_stats(outputs_root=OUTPUTS_ROOT, repos_root=REPOS_PATH)

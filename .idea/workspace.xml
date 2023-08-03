@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdfe07ff-d0a8-4f2a-8d98-85f37d083523" name="Changes" comment="Multithread package count">
+      <change afterPath="$PROJECT_DIR$/src/log_modules/experiment-description.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/setup.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/log_modules/parse_repos.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/parse_repos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/log_modules/parse_requirements.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/parse_requirements.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/log_modules/plot_libraries.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_modules/plot_libraries.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,31 +48,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
-    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
-    "last_opened_file_path": "/home/ilint/HPI/repos/stork/src/log_modules",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/ilint/HPI/repos/stork/src/log_modules&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
-      "PostgreSQL"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
+      &quot;PostgreSQL&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/log_modules" />
@@ -85,7 +89,7 @@
       <recent name="$PROJECT_DIR$/outputs/assignments" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.parse_requirements">
+  <component name="RunManager" selected="Python.plot_libraries">
     <configuration name="DetectEmotionIntensity" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="stork" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -297,11 +301,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.plot_libraries" />
         <item itemvalue="Python.parse_requirements" />
         <item itemvalue="Python.parse_repos" />
         <item itemvalue="Python.parallel_download" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.plot_libraries" />
       </list>
     </recent_temporary>
   </component>
@@ -486,7 +490,9 @@
       <workItem from="1690544416221" duration="6153000" />
       <workItem from="1690553093412" duration="5601000" />
       <workItem from="1690802069272" duration="8967000" />
-      <workItem from="1690964515740" duration="9147000" />
+      <workItem from="1690964515740" duration="9163000" />
+      <workItem from="1691047219775" duration="8204000" />
+      <workItem from="1691061389260" duration="10484000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit of import analyzer">
       <created>1658767795657</created>
@@ -750,7 +756,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690816704750</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Multithread package count">
+      <option name="closed" value="true" />
+      <created>1690985472920</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1690985472920</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -842,7 +856,7 @@
     <SUITE FILE_PATH="coverage/switcheroo$duckdb_python.coverage" NAME="duckdb-python Coverage Results" MODIFIED="1663765824036" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/switcheroo$switcheroo.coverage" NAME="switcheroo Coverage Results" MODIFIED="1687175741218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/switcheroo$ast_playground_sklearn_pipeline.coverage" NAME="ast-playground-sklearn-pipeline Coverage Results" MODIFIED="1661166161408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/stork$plot_libraries.coverage" NAME="plot_libraries Coverage Results" MODIFIED="1689861119123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
+    <SUITE FILE_PATH="coverage/stork$plot_libraries.coverage" NAME="plot_libraries Coverage Results" MODIFIED="1691074487047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
     <SUITE FILE_PATH="coverage/switcheroo$postgresqlPlayground.coverage" NAME="postgresqlPlayground Coverage Results" MODIFIED="1672654180104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/switcheroo$switcheroo__1_.coverage" NAME="switcheroo (1) Coverage Results" MODIFIED="1672594489054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/switcheroo$bytecode_test.coverage" NAME="bytecode_test Coverage Results" MODIFIED="1683644479425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/util" />
@@ -858,7 +872,7 @@
     <SUITE FILE_PATH="coverage/stork$parallel_download.coverage" NAME="parallel_download Coverage Results" MODIFIED="1690208976289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
     <SUITE FILE_PATH="coverage/switcheroo$test.coverage" NAME="test Coverage Results" MODIFIED="1660230229247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/switcheroo$before_switcheroo.coverage" NAME="before-switcheroo Coverage Results" MODIFIED="1663683654829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/stork$parse_requirements.coverage" NAME="parse_requirements Coverage Results" MODIFIED="1690984062692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
+    <SUITE FILE_PATH="coverage/stork$parse_requirements.coverage" NAME="parse_requirements Coverage Results" MODIFIED="1691072495840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/log_modules" />
     <SUITE FILE_PATH="coverage/switcheroo$variable_path_reading.coverage" NAME="variable_path_reading Coverage Results" MODIFIED="1683718568057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/util" />
     <SUITE FILE_PATH="coverage/switcheroo$random.coverage" NAME="random Coverage Results" MODIFIED="1682698585130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/util" />
     <SUITE FILE_PATH="coverage/stork$format.coverage" NAME="format Coverage Results" MODIFIED="1687532567437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples/sample_pipelines/string_concat" />
