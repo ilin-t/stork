@@ -1,6 +1,6 @@
 # Install
 python3 -m pip install --user virtualenv
-python3 -m venv venv
+python3 -m virtualenv venv
 source venv/bin/activate
 
 # Install the requirements for Stork
