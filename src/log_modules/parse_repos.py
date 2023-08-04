@@ -198,6 +198,7 @@ if __name__ == '__main__':
 
     parser.add_argument('-t', '--threads', default=12)
     parser.add_argument('-r', '--repos')
+    parser.add_argument('-p', '--packages')
     parser.add_argument('-o', '--outputs')
 
     args = parser.parse_args()
