@@ -75,14 +75,9 @@ def get_filename(filepath):
 
 
 def main(args):
-
-    REPOS_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/"
-    PACKAGES_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/packages/"
-    OUTPUTS_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/outputs/"
-
     NUM_THREADS = int(args.threads)
 
-    requirements_files = collect_resources(root_folder=PACKAGES_PATH)
+    requirements_files = collect_resources(root_folder=args.packages)
     requirements_count = len(requirements_files)
     processes = []
 
@@ -94,13 +89,13 @@ def main(args):
 
         processes.append(Process(target=parse_requirement, kwargs={"requirements_files": requirements_files,
                                                                    "package_count": requirements_count,
-                                                                   "packages_path": PACKAGES_PATH,
+                                                                   "packages_path": args.packages,
                                                                    "num_threads": NUM_THREADS,
                                                                    "thread_id": i}))
 
     start_processes(processes)
     join_processes(processes)
-    aggregate_counts(PACKAGES_PATH)
+    aggregate_counts(args.packages)
 
 
 if __name__ == '__main__':
@@ -108,8 +103,14 @@ if __name__ == '__main__':
         prog='Parse repositories',
         description='Extract packages from all downloaded repositories',
     )
+    # REPOS_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/"
+    # PACKAGES_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/packages/"
+    # OUTPUTS_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/outputs/"
 
     parser.add_argument('-t', '--threads', default=12)
+    # parser.add_argument('-r', '--repos')
+    parser.add_argument('-p', '--packages')
+    # parser.add_argument('-o', '--outputs')
 
     args = parser.parse_args()
     main(args)
