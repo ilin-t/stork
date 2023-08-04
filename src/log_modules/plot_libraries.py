@@ -86,7 +86,7 @@ def postgres_drivers_libs(occurrences_df):
 def main(args):
     occurrences_df = pd.read_csv(filepath_or_buffer=f"{args.path}library_count_all_threads.csv", header=0)
 
-    topX(df=occurrences_df, X=60, output_file=f"{args.path}top{40}.pdf")
+    topX(df=occurrences_df, X=60, output_file=f"{args.path}top{60}.pdf")
 
     # libraries = ['pandas', 'cudf', 'pyspark', 'spark', 'dask', 'arrow', 'duckdb', 'modin', 'polars', 'dplyr',
     #              'clickhouse_connect', 'datatable']
