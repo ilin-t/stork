@@ -113,7 +113,7 @@ def parse_repo(repos_list, repo_count, packages_path, num_threads, thread_id,
 
 
 def aggregate_stats(repos_root, outputs_root):
-    logs = [f.path for f in os.scandir(outputs_root) if ".log" in f.name]
+    logs = [f.path for f in os.scandir(f"{outputs_root}/repo_stats/") if ".log" in f.name]
     stats = {"repos_count_thread": 0, "repo_percentage_processed_by_thread": 0, "packages_generated": 0,
              "packages_generated_ratio": 0, "missing_repo_count": 0, "missing_repo_ratio_thread": 0, "parsed_repos": []}
 
