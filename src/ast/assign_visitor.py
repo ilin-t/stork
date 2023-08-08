@@ -7,12 +7,14 @@ from pathlib import Path
 
 from src.log_modules import util
 from src.db_conn.s3_connector import S3Connector
+
+
 # from src.ast.variable_crawler import retrieve_variable_from_assignment
 
 
 class AssignVisitor(ast.NodeVisitor):
     def __init__(self):
-        self.pipeline=""
+        self.pipeline = ""
         self.assignment = {"variable": str, "data_source": []}
         self.inputs = []
         self.assignments = []
@@ -21,7 +23,7 @@ class AssignVisitor(ast.NodeVisitor):
         self.new_inputs = []
         self.new_datasets = []
         self.datasets_urls = []
-        self.logger=None
+        self.logger = None
         self.variables = []
 
     def direct_visit(self, parent_object, node, towards):
@@ -67,9 +69,6 @@ class AssignVisitor(ast.NodeVisitor):
     # TODO Extract values from Expr Node
     def visit_Expr(self, node):
         return None
-
-    def setLogger(self, logger):
-        self.logger = logger
 
     def visit_Return(self, node):
         value = self.direct_visit(self, node, node.value)
@@ -192,6 +191,11 @@ class AssignVisitor(ast.NodeVisitor):
     def visit_ListComp(self, node):
         return 0
 
+    def visit_JoinedStr(self, node):
+        for element in node.values:
+            variable = self.direct_visit(self, node, element)
+            retrieve_variable_from_assignment
+
     def filter_Assignments(self):
         removed = []
         for assignment in self.assignments:
@@ -201,7 +205,8 @@ class AssignVisitor(ast.NodeVisitor):
             for source in assignment["data_source"]:
                 if self.keepDataSource(data_source=source) and assignment not in self.inputs:
                     self.inputs.append(assignment)
-                data_file_from_var = self.retrieve_variable_from_assignment(assignment=assignment, assignment_list=self.assignments)
+                data_file_from_var = self.retrieve_variable_from_assignment(assignment=assignment,
+                                                                            assignment_list=self.assignments)
                 new_assignment = self.var_assignment_to_input(var_assignment=data_file_from_var, assignment=assignment)
                 if new_assignment:
                     self.inputs.append(new_assignment)
@@ -224,7 +229,6 @@ class AssignVisitor(ast.NodeVisitor):
                 #     # self.inputs.append(assignment)
                 #     to_keep = True
                 #     # print("didn't remove\n")
-
 
                 # if to_keep and assignment not in self.inputs:
                 #     self.inputs.append(assignment)
@@ -252,8 +256,10 @@ class AssignVisitor(ast.NodeVisitor):
         try:
             data_path = var_assignment['data_source']
             for source in assignment['data_source']:
-                print(f"var_assignment['variable']: {var_assignment['variable']}, source['data_file']: {source['data_file']})")
-                if self.has_data_file_single_source(source=source) and (var_assignment['variable'] == source['data_file'][0]):
+                print(
+                    f"var_assignment['variable']: {var_assignment['variable']}, source['data_file']: {source['data_file']})")
+                if self.has_data_file_single_source(source=source) and (
+                        var_assignment['variable'] == source['data_file'][0]):
                     print("Yes")
                     source['data_file'] = data_path
                     print(f"New assignment: {assignment}")
@@ -261,7 +267,8 @@ class AssignVisitor(ast.NodeVisitor):
         except TypeError as e:
             print(e)
         return assignment
-# TODO
+
+    # TODO
     # def is_concatenated(self, string):
     #     if os.path.isfile(string):
     #         return False
@@ -280,8 +287,6 @@ class AssignVisitor(ast.NodeVisitor):
 
 
 
-
-
     def retrieve_variable_from_assignment(self, assignment, assignment_list):
         print(f"method call, length of assignments: {len(assignment_list)}")
         data_file = self.has_data_file(assignment=assignment)
@@ -293,7 +298,8 @@ class AssignVisitor(ast.NodeVisitor):
                     if data_file[0] == item["variable"]:
                         # print(f"Assignment: {item}")
                         # print(f"Path to dataset from variable {item['variable']}: {item['data_source'][0]}")
-                        last_change = self.find_closest_assignment(assignment=assignment, assignment_list=assignment_list)
+                        last_change = self.get_closest_assignment(assignment=assignment,
+                                                                  assignment_list=assignment_list)
                         print(f"Closest variable: {last_change}, to the assignment: {assignment}")
 
                 return last_change if last_change else None
@@ -311,13 +317,13 @@ class AssignVisitor(ast.NodeVisitor):
                         if data_file[0] == item["variable"]:
                             # print(f"Assignment: {item}")
                             # print(f"Path to dataset from variable {item['variable']}: {item['data_source'][0]}")
-                            last_change = self.find_closest_assignment(assignment=assignment,
-                                                                  assignment_list=assignment_list)
+                            last_change = self.get_closest_assignment(assignment=assignment,
+                                                                      assignment_list=assignment_list)
                             print(f"Closest variable: {last_change}, to the assignment: {assignment}")
             except (NameError, AttributeError) as e:
                 print(e)
 
-    def find_closest_assignment(self, assignment, assignment_list):
+    def get_closest_assignment(self, assignment, assignment_list):
         diff = sys.maxsize
         closest = None
         destination_line = assignment['lineno']
@@ -423,7 +429,6 @@ class AssignVisitor(ast.NodeVisitor):
         # print(len(bucket_name))
         return bucket_name.lower()
 
-
     # def addInputsToDatasets(self):
     #     self.new_datasets = self.datasets
     #     for input in self.new_inputs:
@@ -464,15 +469,15 @@ class AssignVisitor(ast.NodeVisitor):
                             # print(f"Source data file:{abs_path_dataset}")
                             self.datasets.append(abs_path_dataset)
 
-                                # dataset_name = self.getDatasetName(abs_path_dataset)
+                            # dataset_name = self.getDatasetName(abs_path_dataset)
 
-                                # print(f"Url: {self.connector.getObjectUrl(key=dataset_name, bucket=bucket_name)}")
+                            # print(f"Url: {self.connector.getObjectUrl(key=dataset_name, bucket=bucket_name)}")
 
-                                # self.assignVisitor.datasets_urls.append({"dataset_name": dataset,
-                                #                                          "url": self.connector.getObjectUrl(
-                                #                                              key=dataset_name, bucket=bucket_name)})
+                            # self.assignVisitor.datasets_urls.append({"dataset_name": dataset,
+                            #                                          "url": self.connector.getObjectUrl(
+                            #                                              key=dataset_name, bucket=bucket_name)})
 
-                                # self.connector.uploadFile(path=abs_path_dataset, bucket=bucket_name)
+                            # self.connector.uploadFile(path=abs_path_dataset, bucket=bucket_name)
 
                 except TypeError as e:
                     self.logger.error(e)
@@ -493,7 +498,7 @@ class AssignVisitor(ast.NodeVisitor):
     def createDatasetUrlInBucket(self, dataset, bucket):
         dataset_name = self.getDatasetName(self.parsePath(dataset))
         self.datasets_urls.append({"dataset_name": dataset,
-                                                 "url": S3Connector.getObjectUrl(key=dataset_name, bucket=bucket)})
+                                   "url": S3Connector.getObjectUrl(key=dataset_name, bucket=bucket)})
 
     def setPipeline(self, pipeline):
         self.pipeline = pipeline
@@ -502,7 +507,11 @@ class AssignVisitor(ast.NodeVisitor):
         return self.pipeline
 
     def setVariables(self):
-        self.variables = [{'variable': assignment["variable"], 'lineno': assignment["lineno"]} for assignment in self.assignments]
+        self.variables = [{'variable': assignment["variable"], 'lineno': assignment["lineno"]} for assignment in
+                          self.assignments]
 
     def getVariables(self):
         return self.variables
+
+    def setLogger(self, logger):
+        self.logger = logger

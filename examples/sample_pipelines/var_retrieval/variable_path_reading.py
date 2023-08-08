@@ -53,4 +53,4 @@ data5 = pd.read_csv(path4)
 # path2 = "/home/ilint/HPI/repos/stork/examples/data/random2.csv"
 # path3 = "/home/ilint/HPI/repos/stork/examples/data/random3.csv"
 # path4 = "/home/ilint/HPI/repos/stork/examples/data/random4.csv"
-path5 = "/home/ilint/HPI/repos/stork/examples/data/random5.csv"
+# path5 = "/home/ilint/HPI/repos/stork/examples/data/random5.csv"
