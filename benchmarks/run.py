@@ -4,27 +4,36 @@ from os.path import basename, normpath
 
 from src.stork import Stork
 from src.log_modules import util
+from src.log_modules.parse_repos import collect_resources, unzip
 from src.log_modules.log_results import createLogger
+
+
+# from src.log_modules.log_results import createLogger
 
 
 def list_folder_paths(path):
     return [f.path for f in os.scandir(path) if f.is_dir()]
 
+
 def list_folder_names(path):
     return [f.name for f in os.scandir(path) if f.is_dir()]
+
 
 def list_files_paths(path):
     return [f.path for f in os.scandir(path) if f.is_file()]
 
+
 def list_files_names(path):
     return [f.name for f in os.scandir(path) if f.is_file()]
+
 
 def filter_python_files(files):
     return [file for file in files if file.lower().endswith('.py')]
 
+
 def filter_folders(project_path):
     folder_paths = list_folder_paths(project_path)
-    folders=[]
+    folders = []
     for folder in folder_paths:
         if "env" in basename(normpath(folder)).lower() or "lib" in basename(normpath(folder)).lower():
             continue
@@ -34,6 +43,7 @@ def filter_folders(project_path):
             folders.append(folder)
 
     return folders
+
 
 def run_switcheroo(python_files, pipeline_logger, error_logger):
     stork = Stork(r"../examples/db_playgrounds/config.ini")
@@ -69,6 +79,7 @@ def run_switcheroo(python_files, pipeline_logger, error_logger):
             pipeline_logger.info(f"\t {dataset}")
         pipeline_logger.info("________________________________________________")
 
+
 def traverse_folders(path, project_logger, error_logger):
     folders = filter_folders(path)
     files = list_files_paths(path)
@@ -87,18 +98,20 @@ def traverse_folders(path, project_logger, error_logger):
 
 
 if __name__ == '__main__':
-
-    projects = filter_folders("/home/ilint/HPI/repos/read_csv_repos_300/test-run-1")
-    # projects = filter_folders("/home/ilint/HPI/repos/read_csv_repos_300/repositories")
-    # projects = filter_folders("/media/ilint/My Passport/HPI/stork/repositories")
-
+    repositories = collect_resources(root_folder="/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/")
     error_log = createLogger(filename=f"../logs/errors.log", project_name="error_log", level=logging.ERROR)
-    for project in projects:
-        project_name = os.path.split(project)[1]
-        print("________________________________________________________________________________________")
-        print(f"Processing {project_name}, repository {projects.index(project)+1} out of {len(projects)}")
-        logger = createLogger(filename=f"../logs/{project_name}.log",  project_name=project_name, level=logging.INFO)
+    # projects = filter_folders("/home/ilint/HPI/repos/read_csv_repos_300/test-run-1")
+    for repository in repositories:
+        parent_dir, repo_name = unzip(repo_path=repository)
+        projects = filter_folders(f"{parent_dir}/{repo_name}")
+        # projects = filter_folders("/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test")
+        # projects = filter_folders("/home/ilint/HPI/repos/read_csv_repos_300/repositories")
+        # projects = filter_folders("/media/ilint/My Passport/HPI/stork/repositories")
 
-        traverse_folders(project, logger, error_log)
+        for project in projects:
+            project_name = os.path.split(project)[1]
+            print("________________________________________________________________________________________")
+            print(f"Processing {project_name}, repository {projects.index(project) + 1} out of {len(projects)}")
+            logger = createLogger(filename=f"../logs/{project_name}.log", project_name=project_name, level=logging.INFO)
 
-
+            traverse_folders(project, logger, error_log)

@@ -9,15 +9,13 @@ from src.log_modules import util
 from src.db_conn.s3_connector import S3Connector
 
 
-# from src.ast.variable_crawler import retrieve_variable_from_assignment
-
-
 class AssignVisitor(ast.NodeVisitor):
     def __init__(self):
         self.pipeline = ""
-        self.assignment = {"variable": str, "data_source": []}
+        self.assignment = {"variable": str, "data_source": [], }
         self.inputs = []
         self.assignments = []
+        self.func_definitions = []
         self.datasets = []
         self.imports = []
         self.new_inputs = []
@@ -30,8 +28,8 @@ class AssignVisitor(ast.NodeVisitor):
         try:
             func_name = "visit_" + type(towards).__name__
             func = getattr(parent_object, func_name)
-            # print("Method %s will be called from node "
-            #       "type %s from object %s.\n" % (func_name, type(node), type(parent_object)))
+            # print(f"Method {func_name} will be called from node "
+            #       f"type {type(node)} from object {type(parent_object)} towards object {type(towards)}.\n")
             output = func(towards)
             return output
 
@@ -59,8 +57,17 @@ class AssignVisitor(ast.NodeVisitor):
         for element in decorator_list:
             function_body.append(element)
 
-        return {"function": node.name, "data_source": function_body}
-        # return None
+        func_def = {"function": node.name, "args": args, "data_source": function_body}
+        self.func_definitions.append(func_def)
+        return func_def
+
+    def visit_For(self, node):
+
+        target = self.direct_visit(self, node, node.target)
+        el_list = self.direct_visit(self, node, node.iter)
+
+        print(f"Target: {target}")
+        print(f"Possible elements: {el_list}")
 
     # TODO Extract values from If Node
     def visit_If(self, node):
@@ -113,10 +120,19 @@ class AssignVisitor(ast.NodeVisitor):
     def visit_BinOp(self, node):
         left = self.direct_visit(parent_object=self, node=node, towards=node.left)
         right = self.direct_visit(parent_object=self, node=node, towards=node.right)
-
+        # if type(node.left).__name__ == "Name":
+        #     var_value = self.get_value_from_var_name(variable=left, position=node.lineno)
+        #     left = var_value[0]
+        # if type(node.right).__name__ == "Name":
+        #     var_value = self.get_value_from_var_name(variable=right, position=node.lineno)
+        #     right = var_value[0]
         if type(node.op).__name__ == "Add":
-            if type(left) == str and type(right) == str:
-                return str(left + "+" + right)
+            return f"{left}{right}"
+        # elif type(node.op).__name__=="Mod":
+        #     for item in right:
+        #
+        #     return right
+        # print(f"BinOp for {node.lineno}. Left operand: {left}, right operand {right}.")
         return [left, right]
 
     def visit_Subscript(self, node):
@@ -124,12 +140,22 @@ class AssignVisitor(ast.NodeVisitor):
         filter_criteria = self.direct_visit(parent_object=self, node=node, towards=node.slice)
 
         return [load_var, filter_criteria]
+        # return load_var, filter_criteria
 
-    # TODO Check other AST nodes and what properties they carry.
-    # TODO Adapt for subscripts,
-    #  they are most commonly used for data filtering
+    def visit_Slice(self, node):
+        lower = self.direct_visit(self, node, node.lower)
+        upper = self.direct_visit(self, node, node.upper)
+
+        return [lower, upper]
 
     def visit_Name(self, node):
+        if type(node.ctx).__name__ == "Load":
+            var_value = self.get_value_from_var_name(variable=node.id, position=node.lineno)
+            if var_value:
+                print(f"Retrieving value for variable: {node.id}. Value: {var_value}")
+                return var_value
+            else:
+                return node.id
         return node.id
 
     def visit_Constant(self, node):
@@ -176,7 +202,7 @@ class AssignVisitor(ast.NodeVisitor):
         for element in node.elts:
             tuple_el.append(self.direct_visit(self, node, element))
 
-        return tuple(tuple_el)
+        return tuple_el
 
     def visit_Dict(self, node):
         content = {}
@@ -192,9 +218,25 @@ class AssignVisitor(ast.NodeVisitor):
         return 0
 
     def visit_JoinedStr(self, node):
+        string_parts = []
         for element in node.values:
             variable = self.direct_visit(self, node, element)
-            retrieve_variable_from_assignment
+            print(variable)
+            # if type(element).__name__ == "FormattedValue":
+            #     var_value = self.get_value_from_var_name(variable=variable, position=node.lineno)
+            #     string_parts.extend(var_value[0])
+            #     print(string_parts)
+            # else:
+            self.assignment["data_source"].extend(variable)
+        return string_parts
+
+    def visit_FormattedValue(self, node):
+        formatted_value = self.direct_visit(self, node, node.value)
+        if type(node.value).__name__ == "Name":
+            var_value = self.get_value_from_var_name(variable=formatted_value, position=node.value.lineno)
+            print(var_value[0])
+            return var_value
+        return formatted_value
 
     def filter_Assignments(self):
         removed = []
@@ -268,24 +310,37 @@ class AssignVisitor(ast.NodeVisitor):
             print(e)
         return assignment
 
-    # TODO
-    # def is_concatenated(self, string):
-    #     if os.path.isfile(string):
-    #         return False
-    #     else:
-    #
-    #         for variable in self.variables:
-    #             # if variable in string:
-    #
-    #
-    #
-    # def get_string_value(self, data_file):
-    #     return data_file['data_source']
-    #
-    #
-    # def find_variable(self, string):
+    def get_value_from_var_name(self, variable, position):
+        closest_variable_assignment = self.find_closest_variable(variable=variable, position=position)
+        try:
+            if closest_variable_assignment:
+                if self.has_data_file(closest_variable_assignment):
+                    data_source = closest_variable_assignment["data_source"]
+                    data_source = [i for i in data_source if i is not None]
+                    # print(f"Data source: {data_source}")
+                    for item in data_source:
+                        # print(f"Item: {item}")
+                        if isinstance(item, dict):
+                            # print(f"data_file: {item['data_file']}")
+                            return item["data_file"]
+                else:
+                    return closest_variable_assignment["data_source"]
+            else:
+                return None
+        except KeyError as e:
+            print(e)
 
-
+    def find_closest_variable(self, variable, position):
+        diff = sys.maxsize
+        closest = None
+        destination_line = position
+        for item in self.assignments:
+            if variable == item["variable"] and destination_line - item['lineno'] < diff:
+                diff = destination_line - item['lineno']
+                if diff <= 0:
+                    break
+                closest = item
+        return closest
 
     def retrieve_variable_from_assignment(self, assignment, assignment_list):
         print(f"method call, length of assignments: {len(assignment_list)}")

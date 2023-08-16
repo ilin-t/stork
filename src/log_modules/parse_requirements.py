@@ -11,6 +11,12 @@ from log_results import createLoggerPlain
 
 
 def get_packages(filepath):
+    DATA_PROCESSING_LIBRARIES = ['numpy', 'pandas', 'cudf', 'pyspark', 'spark', 'dask', 'arrow', 'duckdb', 'modin',
+                                 'polars', 'dplyr',
+                                 'clickhouse_connect', 'datatable']
+    ML_LIBRARIES = ['scikit_learn', "torch", "torchvision", "torchaudio", "tensorflow", "tensorboard", "keras",
+                    'theano']
+    flag = False
     packages_per_file = []
     with open(f"{filepath}", "r") as file:
         for line in file.readlines():
@@ -18,30 +24,38 @@ def get_packages(filepath):
             package = package.split("<")[0]
             package = package.split(">")[0]
             package = package.strip()
+            if package in DATA_PROCESSING_LIBRARIES or ML_LIBRARIES:
+                flag = True
             packages_per_file.append(package)
     # print(f"{requirements_file}: {packages_per_file}")
     file.close()
-    return packages_per_file
+    return flag, packages_per_file
 
 
-def parse_requirement(requirements_files, package_count, packages_path, num_threads, thread_id):
+def parse_requirement(requirements_files, package_count, packages_path, repositories_path, num_threads, thread_id):
+
     packages_per_thread = package_count // num_threads
     start_index = thread_id * packages_per_thread
     end_index = start_index + packages_per_thread
     # parsed_package_files = []
     total_packages = {}
     packages_list = []
+    flagged_repositories = []
 
     if thread_id == num_threads - 1:
         end_index = package_count - 1
 
     for i in range(start_index, end_index):
-        packages_from_file = get_packages(requirements_files[i])
+        flagged, packages_from_file = get_packages(requirements_files[i])
         requirements_file = get_filename(requirements_files[i])
+        if flagged:
+            flagged_repositories.append(f"{repositories_path}{requirements_file}")
         # parsed_package_files.append(packages_list[i])
         total_packages[requirements_file] = packages_from_file
 
         packages_list.extend(packages_from_file)
+
+
 
     occurrences = Counter(packages_list)
     print(total_packages)
@@ -51,6 +65,10 @@ def parse_requirement(requirements_files, package_count, packages_path, num_thre
             if library == "":
                 continue
             file.write(f'{str(library)},{str(count)}\n')
+    file.close()
+
+    with open(f"{repositories_path}flagged_repositories-{thread_id}.txt", "w") as file:
+        file.writelines(flagged_repositories)
     file.close()
 
 
@@ -110,6 +128,7 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--threads', default=12)
     # parser.add_argument('-r', '--repos')
     parser.add_argument('-p', '--packages')
+    parser.add_argument('-r', '--repositories')
     # parser.add_argument('-o', '--outputs')
 
     args = parser.parse_args()

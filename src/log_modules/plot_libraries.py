@@ -21,7 +21,7 @@ def topX(df, X, output_file):
         return 0
     else:
         print(subset)
-        plt.figure(figsize=(12, 9))
+        plt.figure(figsize=(18, 9))
         plt.bar(x=subset["library"], height=subset["count"], width=0.7,
                 label="Usage of Python Packages across Repositories")
         addlabels(x=subset["library"], y=subset["count"])
@@ -30,7 +30,7 @@ def topX(df, X, output_file):
         plt.ylim(0, max(subset["count"]) + 10)
         plt.xticks(rotation=60)
 
-        plt.yticks(range(0, (max(subset["count"]) + (max(subset["count"]) // 10)),
+        plt.yticks(range(0, (max(subset["count"]) + (max(subset["count"]) // 5)),
                          ((max(subset["count"]) + max(subset["count"]) // 10) // 5) + 1))
         plt.tight_layout()
         # plt.show()
@@ -54,13 +54,13 @@ def plot_libs(df, libraries, output_file):
 
 
 def data_analysis_libs(occurrences_df):
-    libraries = ['pandas', 'cudf', 'pyspark', 'spark', 'dask', 'arrow', 'duckdb', 'modin', 'polars', 'dplyr',
+    libraries = ['numpy', 'pandas', 'cudf', 'pyspark', 'spark', 'dask', 'arrow', 'duckdb', 'modin', 'polars', 'dplyr',
                  'clickhouse_connect', 'datatable']
     plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}{data_analysis_libs.__name__}.pdf")
 
 
 def machine_learning_libs(occurrences_df):
-    libraries = ['scikit-learn', "torch", "torchvision", "torchaudio", "tensorflow", "tensorboard", "keras", 'theano']
+    libraries = ['scikit_learn', "torch", "torchvision", "torchaudio", "tensorflow", "tensorboard", "keras", 'theano']
     plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}{machine_learning_libs.__name__}.pdf")
 
 
@@ -86,7 +86,7 @@ def postgres_drivers_libs(occurrences_df):
 def main(args):
     occurrences_df = pd.read_csv(filepath_or_buffer=f"{args.path}library_count_all_threads.csv", header=0)
 
-    topX(df=occurrences_df, X=60, output_file=f"{args.path}top{60}.pdf")
+    topX(df=occurrences_df, X=50, output_file=f"{args.path}top{50}.pdf")
 
     # libraries = ['pandas', 'cudf', 'pyspark', 'spark', 'dask', 'arrow', 'duckdb', 'modin', 'polars', 'dplyr',
     #              'clickhouse_connect', 'datatable']

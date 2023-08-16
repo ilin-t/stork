@@ -1,7 +1,5 @@
-import time, os
-from multiprocessing import Process, current_process
+from multiprocessing import Process
 from get_repos_mt import get_repos
-from analyze_repos_mt import generate_requirements, getTotalSize
 
 years = ['2018', '2019', '2020']
 months = [str(i).zfill(2) for i in range(1, 13)]

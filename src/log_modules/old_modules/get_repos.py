@@ -15,7 +15,7 @@ from log_results import createLogger
 # pages = range(1)
 per_page = 30
 storage_path = "/mnt/fs00/rabl/ilin.tolovski/stork/repositories-test/"
-output_path_local = "/home/ilint/HPI/repos/stork/outputs/"
+output_path_local = "/outputs/"
 output_path_mnt = "/mnt/fs00/rabl/ilin.tolovski/stork/outputs/"
 # # new token
 token = "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"

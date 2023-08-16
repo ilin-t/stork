@@ -5,7 +5,7 @@ import multiprocessing
 
 from multiprocessing import Process
 
-from log_results import createLoggerPlain
+from src.log_modules.log_results import createLoggerPlain
 
 
 def collect_resources(root_folder):
