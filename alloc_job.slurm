@@ -13,5 +13,6 @@
 #SBATCH --time=2:00:00
 
 #export PYTHONPATH=${PYTHONPATH}:/usr/bin/python3
+
 cd /hpi/fs00/share/fg-rabl/ilin.tolovski/projects/stork/
 srun bash scripts/setup_node.sh

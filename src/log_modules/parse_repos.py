@@ -5,7 +5,7 @@ import multiprocessing
 
 from multiprocessing import Process
 
-from src.log_modules.log_results import createLoggerPlain
+from log_results import createLoggerPlain
 
 
 def collect_resources(root_folder):
@@ -129,7 +129,7 @@ def aggregate_stats(repos_root, outputs_root):
         f.close()
 
     stats["parsed_repos"] = format_output(stats["parsed_repos"])
-    with open(f"{outputs_root}/total_stats.txt", "w") as f:
+    with open(f"{outputs_root}/repo_stats/total_stats.txt", "w") as f:
         for key in stats.keys():
             f.write(f"{key}\t{stats[key]}\n")
         all_repos = collect_resources(repos_root)
@@ -166,7 +166,7 @@ def main(args):
     # REPOS_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/"
     # PACKAGES_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/packages/"
     # OUTPUTS_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/outputs/"
-
+    os.makedirs(f"{args.outputs}/repo_stats/", exist_ok=True)
     NUM_THREADS = int(args.threads)
 
     repositories = collect_resources(root_folder=args.repos)

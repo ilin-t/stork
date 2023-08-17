@@ -32,8 +32,7 @@ def get_packages(filepath):
     return flag, packages_per_file
 
 
-def parse_requirement(requirements_files, package_count, packages_path, repositories_path, num_threads, thread_id):
-
+def parse_requirement(requirements_files, package_count, results_path, repositories_path, num_threads, thread_id):
     packages_per_thread = package_count // num_threads
     start_index = thread_id * packages_per_thread
     end_index = start_index + packages_per_thread
@@ -55,11 +54,9 @@ def parse_requirement(requirements_files, package_count, packages_path, reposito
 
         packages_list.extend(packages_from_file)
 
-
-
     occurrences = Counter(packages_list)
     print(total_packages)
-    with open(f"{packages_path}occurrences-thread-{thread_id}.csv", "w") as file:
+    with open(f"{results_path}/occurrences/occurrences-thread-{thread_id}.csv", "w") as file:
         file.write("library,count\n")
         for library, count in occurrences.items():
             if library == "":
@@ -67,13 +64,13 @@ def parse_requirement(requirements_files, package_count, packages_path, reposito
             file.write(f'{str(library)},{str(count)}\n')
     file.close()
 
-    with open(f"{repositories_path}flagged_repositories-{thread_id}.txt", "w") as file:
+    with open(f"{results_path}/flagged/flagged_repositories-{thread_id}.txt", "w") as file:
         file.writelines(flagged_repositories)
     file.close()
 
 
-def aggregate_counts(packages_root):
-    occurrences_files = [x for x in os.scandir(packages_root) if x.is_file()]
+def aggregate_counts(results_root):
+    occurrences_files = [x for x in os.scandir(f"{results_root}/occurrences/") if x.is_file()]
     total_occurrences = pd.DataFrame(columns=["library", "count"])
     for occurrences_file in occurrences_files:
         df = pd.read_csv(filepath_or_buffer=occurrences_file, header=0)
@@ -81,7 +78,7 @@ def aggregate_counts(packages_root):
 
     total_occurrences.sort_values(by="count", ascending=False, inplace=True)
 
-    total_occurrences.to_csv(path_or_buf=f"{packages_root}/library_count_all_threads.csv")
+    total_occurrences.to_csv(path_or_buf=f"{results_root}/occurrences/library_count_all_threads.csv")
 
 
 def get_parent_dir(filepath):
@@ -98,7 +95,8 @@ def main(args):
     requirements_files = collect_resources(root_folder=args.packages)
     requirements_count = len(requirements_files)
     processes = []
-
+    os.makedirs(f"{args.results}/occurrences/", exist_ok=True)
+    os.makedirs(f"{args.results}/flagged/", exist_ok=True)
     for i in range(0, int(NUM_THREADS)):
         # missing_repositories = createLoggerPlain(filename=f"{OUTPUTS_ROOT}missing_repositories-{i}.log",
         #                                          project_name=f"missing_repositories-{i}", level=logging.INFO)
@@ -107,13 +105,14 @@ def main(args):
 
         processes.append(Process(target=parse_requirement, kwargs={"requirements_files": requirements_files,
                                                                    "package_count": requirements_count,
-                                                                   "packages_path": args.packages,
+                                                                   "results_path": args.results,
+                                                                   "repositories_path": args.repositories,
                                                                    "num_threads": NUM_THREADS,
                                                                    "thread_id": i}))
 
     start_processes(processes)
     join_processes(processes)
-    aggregate_counts(args.packages)
+    aggregate_counts(args.results)
 
 
 if __name__ == '__main__':
@@ -128,6 +127,7 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--threads', default=12)
     # parser.add_argument('-r', '--repos')
     parser.add_argument('-p', '--packages')
+    parser.add_argument('-o', '--results')
     parser.add_argument('-r', '--repositories')
     # parser.add_argument('-o', '--outputs')
 

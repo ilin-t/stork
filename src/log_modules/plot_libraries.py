@@ -84,7 +84,7 @@ def postgres_drivers_libs(occurrences_df):
 #     plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}{database_driver_libs.__name__}.pdf")
 
 def main(args):
-    occurrences_df = pd.read_csv(filepath_or_buffer=f"{args.path}library_count_all_threads.csv", header=0)
+    occurrences_df = pd.read_csv(filepath_or_buffer=f"{args.path}/occurrences/library_count_all_threads.csv", header=0)
 
     topX(df=occurrences_df, X=50, output_file=f"{args.path}top{50}.pdf")
 

@@ -1,10 +1,11 @@
+import argparse
 import logging
 import os
 from os.path import basename, normpath
 
 from src.stork import Stork
 from src.log_modules import util
-from src.log_modules.parse_repos import collect_resources, unzip
+from src.log_modules.parse_repos import collect_resources, unzip, delete_repo
 from src.log_modules.log_results import createLogger
 
 
@@ -71,7 +72,7 @@ def run_switcheroo(python_files, pipeline_logger, error_logger):
         stork.assignVisitor.visit(tree)
         stork.assignVisitor.filter_Assignments()
         stork.assignVisitor.getDatasetsFromInputs()
-        error_log.error("________________________________________________")
+        error_logger.error("________________________________________________")
         pipeline_logger.info("________________________________________________")
         pipeline_logger.info(f"Pipeline {py_file} reads the following data files: ")
         print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
@@ -92,14 +93,14 @@ def traverse_folders(path, project_logger, error_logger):
         run_switcheroo(py_files, project_logger, error_logger)
     if folders:
         for folder in folders:
-            traverse_folders(folder, logger, error_logger)
+            traverse_folders(folder, project_logger, error_logger)
 
     return 0
 
 
-if __name__ == '__main__':
-    repositories = collect_resources(root_folder="/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/")
-    error_log = createLogger(filename=f"../logs/errors.log", project_name="error_log", level=logging.ERROR)
+def main(args):
+    repositories = collect_resources(root_folder=args.repositories)
+    error_log = createLogger(filename=f"{args.outputs}/logs/errors.log", project_name="error_log", level=logging.ERROR)
     # projects = filter_folders("/home/ilint/HPI/repos/read_csv_repos_300/test-run-1")
     for repository in repositories:
         parent_dir, repo_name = unzip(repo_path=repository)
@@ -112,6 +113,25 @@ if __name__ == '__main__':
             project_name = os.path.split(project)[1]
             print("________________________________________________________________________________________")
             print(f"Processing {project_name}, repository {projects.index(project) + 1} out of {len(projects)}")
-            logger = createLogger(filename=f"../logs/{project_name}.log", project_name=project_name, level=logging.INFO)
+            logger = createLogger(filename=f"{args.outputs}/logs/{project_name}.log", project_name=project_name, level=logging.INFO)
 
             traverse_folders(project, logger, error_log)
+
+            delete_repo(project)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        prog='Run Stork',
+        description='Run Stork on a set of repositories',
+    )
+
+    # --repositories = /mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/
+    # --outputs = /mnt/fs00/rabl/ilin.tolovski/results/DATE-REPO-NAME
+
+    parser.add_argument('-r', '--repositories')
+    parser.add_argument('-o', '--outputs')
+
+    args = parser.parse_args()
+    os.makedirs(f"{args.outputs}/logs", exist_ok=True)
+    main(args)
