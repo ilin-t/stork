@@ -1,7 +1,6 @@
 import logging
 import os
 import argparse
-import multiprocessing
 
 from multiprocessing import Process
 
@@ -29,8 +28,6 @@ def collect_resources(root_folder):
                     repo_count += len(repos)
                     all_repos.extend(repos)
 
-    # print(day_count)
-    # print(repo_count)
     return all_repos
 
 
@@ -47,8 +44,6 @@ def unzip(repo_path):
 def getYearMonthDayPage(repo_path):
     temp = repo_path.split("/")
     year, month, day, page = temp[len(temp) - 4:len(temp)]
-
-    # print(f"{temp[len(temp) - 4:len(temp)]}")
 
     return year, month, day, page
 
@@ -139,6 +134,20 @@ def aggregate_stats(repos_root, outputs_root):
     f.close()
 
 
+def aggregate_repositories(log_path):
+    repos = [f.path for f in os.scandir(log_path) if ".log" in f.name]
+    lines = []
+    for item in repos:
+        with open(item, "r") as file:
+            lines.extend(file.readlines())
+        file.close()
+
+    with open(f"{log_path}/aggregated_results.txt", "w") as file:
+        for line in lines:
+            file.write(line)
+        file.close()
+
+
 def format_output(parsed_repos):
     formatted_repos = []
     for repo in parsed_repos:
@@ -161,19 +170,15 @@ def join_processes(processes):
 
 
 def main(args):
-
-
-    # REPOS_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/"
-    # PACKAGES_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/packages/"
-    # OUTPUTS_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/outputs/"
     os.makedirs(f"{args.outputs}/repo_stats/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/missing/", exist_ok=True)
     NUM_THREADS = int(args.threads)
 
-    repositories = collect_resources(root_folder=args.repos)
+    repositories = collect_resources(root_folder=args.repositories)
     repo_count = len(repositories)
     processes = []
     for i in range(0, int(NUM_THREADS)):
-        missing_repositories = createLoggerPlain(filename=f"{args.outputs}missing_repositories-{i}.log",
+        missing_repositories = createLoggerPlain(filename=f"{args.outputs}/missing/missing_repositories-{i}.log",
                                                  project_name=f"missing_repositories-{i}", level=logging.INFO)
         repositories_totals = createLoggerPlain(filename=f"{args.outputs}repo_stats/stats-{i}.log",
                                                 project_name=f"stats-{i}", level=logging.INFO)
@@ -183,8 +188,6 @@ def main(args):
                                                             "thread_id": i,
                                                             "missing_repositories": missing_repositories,
                                                             "repo_totals": repositories_totals}))
-        # missing_repositories, repo_totals, , , PACKAGES_PATH,
-        #                                            NUM_THREADS, i, missing_repositories, repositories_totals,}))
 
     start_processes(processes)
     join_processes(processes)
@@ -197,10 +200,10 @@ if __name__ == '__main__':
     )
 
     parser.add_argument('-t', '--threads', default=12)
-    parser.add_argument('-r', '--repos')
+    parser.add_argument('-r', '--repositories')
     parser.add_argument('-p', '--packages')
     parser.add_argument('-o', '--outputs')
 
     args = parser.parse_args()
     main(args)
-    aggregate_stats(outputs_root=args.outputs, repos_root=args.repos)
+    aggregate_stats(outputs_root=args.outputs, repos_root=args.repositories)

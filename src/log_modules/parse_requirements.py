@@ -6,7 +6,7 @@ from collections import Counter
 
 import pandas as pd
 
-from parse_repos import collect_resources, start_processes, join_processes
+from parse_repos import collect_resources, start_processes, join_processes, aggregate_repositories
 from log_results import createLoggerPlain
 
 
@@ -27,19 +27,17 @@ def get_packages(filepath):
             if package in DATA_PROCESSING_LIBRARIES or ML_LIBRARIES:
                 flag = True
             packages_per_file.append(package)
-    # print(f"{requirements_file}: {packages_per_file}")
     file.close()
     return flag, packages_per_file
 
 
-def parse_requirement(requirements_files, package_count, results_path, repositories_path, num_threads, thread_id):
+def parse_requirement(requirements_files, package_count, results_path, repositories_path, flagged_repositories,
+                      num_threads, thread_id):
     packages_per_thread = package_count // num_threads
     start_index = thread_id * packages_per_thread
     end_index = start_index + packages_per_thread
-    # parsed_package_files = []
     total_packages = {}
     packages_list = []
-    flagged_repositories = []
 
     if thread_id == num_threads - 1:
         end_index = package_count - 1
@@ -48,8 +46,7 @@ def parse_requirement(requirements_files, package_count, results_path, repositor
         flagged, packages_from_file = get_packages(requirements_files[i])
         requirements_file = get_filename(requirements_files[i])
         if flagged:
-            flagged_repositories.append(f"{repositories_path}{requirements_file}")
-        # parsed_package_files.append(packages_list[i])
+            flagged_repositories.info(msg=f"{repositories_path}{requirements_file}")
         total_packages[requirements_file] = packages_from_file
 
         packages_list.extend(packages_from_file)
@@ -62,10 +59,6 @@ def parse_requirement(requirements_files, package_count, results_path, repositor
             if library == "":
                 continue
             file.write(f'{str(library)},{str(count)}\n')
-    file.close()
-
-    with open(f"{results_path}/flagged/flagged_repositories-{thread_id}.txt", "w") as file:
-        file.writelines(flagged_repositories)
     file.close()
 
 
@@ -95,41 +88,37 @@ def main(args):
     requirements_files = collect_resources(root_folder=args.packages)
     requirements_count = len(requirements_files)
     processes = []
-    os.makedirs(f"{args.results}/occurrences/", exist_ok=True)
-    os.makedirs(f"{args.results}/flagged/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/occurrences/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/flagged/", exist_ok=True)
     for i in range(0, int(NUM_THREADS)):
-        # missing_repositories = createLoggerPlain(filename=f"{OUTPUTS_ROOT}missing_repositories-{i}.log",
-        #                                          project_name=f"missing_repositories-{i}", level=logging.INFO)
-        # repositories_totals = createLoggerPlain(filename=f"{OUTPUTS_ROOT}/packages_stats-{i}.log",
-        #                                         project_name=f"stats-{i}", level=logging.INFO)
+        flagged_repositories = createLoggerPlain(filename=f"{args.outputs}/flagged/flagged_repositories-{i}.log",
+                                                 project_name=f"flagged_repositories-{i}", level=logging.INFO)
 
         processes.append(Process(target=parse_requirement, kwargs={"requirements_files": requirements_files,
                                                                    "package_count": requirements_count,
-                                                                   "results_path": args.results,
+                                                                   "results_path": args.outputs,
                                                                    "repositories_path": args.repositories,
+                                                                   "flagged_repositories": flagged_repositories,
                                                                    "num_threads": NUM_THREADS,
                                                                    "thread_id": i}))
 
     start_processes(processes)
     join_processes(processes)
-    aggregate_counts(args.results)
+    aggregate_counts(args.outputs)
+    aggregate_repositories(f"{args.outputs}/missing/")
+    aggregate_repositories(f"{args.outputs}/flagged/")
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        prog='Parse repositories',
+        prog='Parse requirement files',
         description='Extract packages from all downloaded repositories',
     )
-    # REPOS_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/"
-    # PACKAGES_PATH = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/packages/"
-    # OUTPUTS_ROOT = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/outputs/"
 
     parser.add_argument('-t', '--threads', default=12)
-    # parser.add_argument('-r', '--repos')
     parser.add_argument('-p', '--packages')
-    parser.add_argument('-o', '--results')
+    parser.add_argument('-o', '--outputs')
     parser.add_argument('-r', '--repositories')
-    # parser.add_argument('-o', '--outputs')
 
     args = parser.parse_args()
     main(args)

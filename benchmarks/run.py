@@ -9,9 +9,6 @@ from src.log_modules.parse_repos import collect_resources, unzip, delete_repo
 from src.log_modules.log_results import createLogger
 
 
-# from src.log_modules.log_results import createLogger
-
-
 def list_folder_paths(path):
     return [f.path for f in os.scandir(path) if f.is_dir()]
 
@@ -101,13 +98,9 @@ def traverse_folders(path, project_logger, error_logger):
 def main(args):
     repositories = collect_resources(root_folder=args.repositories)
     error_log = createLogger(filename=f"{args.outputs}/logs/errors.log", project_name="error_log", level=logging.ERROR)
-    # projects = filter_folders("/home/ilint/HPI/repos/read_csv_repos_300/test-run-1")
     for repository in repositories:
         parent_dir, repo_name = unzip(repo_path=repository)
         projects = filter_folders(f"{parent_dir}/{repo_name}")
-        # projects = filter_folders("/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test")
-        # projects = filter_folders("/home/ilint/HPI/repos/read_csv_repos_300/repositories")
-        # projects = filter_folders("/media/ilint/My Passport/HPI/stork/repositories")
 
         for project in projects:
             project_name = os.path.split(project)[1]
@@ -125,9 +118,6 @@ if __name__ == '__main__':
         prog='Run Stork',
         description='Run Stork on a set of repositories',
     )
-
-    # --repositories = /mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/
-    # --outputs = /mnt/fs00/rabl/ilin.tolovski/results/DATE-REPO-NAME
 
     parser.add_argument('-r', '--repositories')
     parser.add_argument('-o', '--outputs')

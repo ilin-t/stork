@@ -17,11 +17,10 @@ mkdir $ROOT/results/$DATE-$REPOSITORY
 mkdir $ROOT/results/$DATE-$REPOSITORY/packages
 
 
-python3 src/log_modules/parse_repos.py --threads=12 --repos=$ROOT/$REPOSITORY/repositories-test/ --packages=$ROOT/results/$DATE-$REPOSITORY/packages/ --outputs=$ROOT/results/$DATE-$REPOSITORY/
-python3 src/log_modules/parse_requirements.py --threads=12 --packages=$ROOT/$REPOSITORY/packages/ --results=$ROOT/results/$DATE-$REPOSITORY/ --repositories=$ROOT/$REPOSITORY/repositories-test/
-python3 src/log_modules/plot_libraries.py --path=$ROOT/results/$DATE-$REPOSITORY/
+python3 src/log_modules/parse_repos.py --threads=12 --repositories=$ROOT/$REPOSITORY/repositories-test/ --packages=$ROOT/results/$DATE-$REPOSITORY/packages/ --outputs=$ROOT/results/$DATE-$REPOSITORY/
+python3 src/log_modules/parse_requirements.py --threads=12 --packages=$ROOT/$REPOSITORY/packages/ --outputs=$ROOT/results/$DATE-$REPOSITORY/ --repositories=$ROOT/$REPOSITORY/repositories-test/
+python3 src/log_modules/plot_libraries.py --outputs=$ROOT/results/$DATE-$REPOSITORY/
 
-python3
 
 
 #python3 ../src/log_modules/parse_repos.py --threads=128 --repos=$ROOT/$REPOSITORY/repositories-test/ --packages=$ROOT/$REPOSITORY/packages/ --outputs=$ROOT/results/$DATE-$REPOSITORY

@@ -1,4 +1,5 @@
 import argparse
+import os
 from math import ceil
 
 from matplotlib import pyplot as plt
@@ -56,27 +57,27 @@ def plot_libs(df, libraries, output_file):
 def data_analysis_libs(occurrences_df):
     libraries = ['numpy', 'pandas', 'cudf', 'pyspark', 'spark', 'dask', 'arrow', 'duckdb', 'modin', 'polars', 'dplyr',
                  'clickhouse_connect', 'datatable']
-    plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}{data_analysis_libs.__name__}.pdf")
+    plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.outputs}/plots/{data_analysis_libs.__name__}.pdf")
 
 
 def machine_learning_libs(occurrences_df):
     libraries = ['scikit_learn', "torch", "torchvision", "torchaudio", "tensorflow", "tensorboard", "keras", 'theano']
-    plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}{machine_learning_libs.__name__}.pdf")
+    plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.outputs}/plots/{machine_learning_libs.__name__}.pdf")
 
 
 def visualization_libs(occurrences_df):
     libraries = ["matplotlib", "seaborn", "plotly", "ggplot", "bokeh"]
-    plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}{visualization_libs.__name__}.pdf")
+    plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.outputs}/plots/{visualization_libs.__name__}.pdf")
 
 
 def web_framework_libs(occurrences_df):
     libraries = ["Django", "Flask", "CherryPy", "Bottle", "Hug", "Falcon"]
-    plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}{web_framework_libs.__name__}.pdf")
+    plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.outputs}/plots/{web_framework_libs.__name__}.pdf")
 
 
 def postgres_drivers_libs(occurrences_df):
     libraries = ["sqlalchemy", "psycopg2_binary", "pg8000", "pygresql", "d6t", "psycopg2cffi"]
-    plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}{postgres_drivers_libs.__name__}.pdf")
+    plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.outputs}/plots/{postgres_drivers_libs.__name__}.pdf")
 
 
 # def database_driver_libs(occurrences_df):
@@ -84,13 +85,10 @@ def postgres_drivers_libs(occurrences_df):
 #     plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}{database_driver_libs.__name__}.pdf")
 
 def main(args):
-    occurrences_df = pd.read_csv(filepath_or_buffer=f"{args.path}/occurrences/library_count_all_threads.csv", header=0)
 
-    topX(df=occurrences_df, X=50, output_file=f"{args.path}top{50}.pdf")
-
-    # libraries = ['pandas', 'cudf', 'pyspark', 'spark', 'dask', 'arrow', 'duckdb', 'modin', 'polars', 'dplyr',
-    #              'clickhouse_connect', 'datatable']
-    # plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}data_libraries.pdf")
+    os.makedirs(f"{args.outputs}/plots/", exist_ok=True)
+    occurrences_df = pd.read_csv(filepath_or_buffer=f"{args.outputs}/occurrences/library_count_all_threads.csv", header=0)
+    topX(df=occurrences_df, X=50, output_file=f"{args.outputs}/plots/top{50}.pdf")
 
     data_analysis_libs(occurrences_df)
     machine_learning_libs(occurrences_df)
@@ -101,7 +99,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--path', help="The path to the library counts")
+    parser.add_argument('-o', '--outputs', help="The path to the library counts")
     args = parser.parse_args()
 
     main(args)
