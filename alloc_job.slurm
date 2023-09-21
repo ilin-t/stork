@@ -8,7 +8,7 @@
 #SBATCH --mail-user=ilin.tolovski@hpi.de
 #SBATCH --mem=64G
 #SBATCH --partition=magic
-#SBATCH --constraint=CPU_PROD:EPYC
+#SBATCH --nodelist=node-09
 #SBATCH --time=72:00:00
 
 #export PYTHONPATH=${PYTHONPATH}:/usr/bin/python3
