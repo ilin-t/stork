@@ -13,6 +13,9 @@ python3 -m pip install -r requirements.txt
 DATE=$(date +%d-%m-%Y-%H-%M)
 REPOSITORY=$1
 ROOT="/hpi/fs00/share/fg-rabl/ilin.tolovski"
+
+python3 src/log_modules/parallel_download.py
+
 mkdir $ROOT/results/$DATE-$REPOSITORY
 mkdir $ROOT/results/$DATE-$REPOSITORY/packages
 

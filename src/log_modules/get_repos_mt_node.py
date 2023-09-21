@@ -36,9 +36,9 @@ from log_results import createLogger
 
 def get_repos(years, months, days, pages, token):
     per_page = 30
-    storage_path = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-full/repositories-test/"
+    storage_path = "/hpi/fs00/share/fg-rabl/ilin.tolovski/stork-zip-full/repositories/"
     # output_path_local = "/home/ilint/HPI/repos/stork-zip-full/outputs/"
-    output_path_mnt = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-full/outputs/"
+    output_path_mnt = "/hpi/fs00/share/fg-rabl/ilin.tolovski/stork-zip-full/outputs/"
     eom = False
     log = None
     licenses = ['mit']

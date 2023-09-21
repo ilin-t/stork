@@ -98,7 +98,7 @@ class PsqlConnector:
             print(f"Connection time: {connection_time / 1000000} ms.")
 
             # self.connection.close()
-            print("Database connection closed.")
+            # print("Database connection closed.")
 
         except TypeError as error:
             print(error)
@@ -205,9 +205,9 @@ class PsqlConnector:
 
 if __name__ == '__main__':
     pp = PsqlConnector()
-    pp.stop_remove_container()
+    # pp.stop_remove_container()
 
-    pp.deploy_postgres()
+    # pp.deploy_postgres()
     pp.setup()
 
     # data = [(1, 2.1, 1.3, 'row1 text', 7.1),
@@ -218,7 +218,7 @@ if __name__ == '__main__':
     #
     # df = pd.DataFrame(data=data, columns=["col1", "col2", "col3", "col4", "col5"])
 
-    df = pd.read_csv("../../examples/datasets/amazon-reviews/products.csv")
+    df = pd.read_csv("../../examples/data/products.csv")
     schema_string = pp.generate_schema(df)
 
     # print(type(df))
