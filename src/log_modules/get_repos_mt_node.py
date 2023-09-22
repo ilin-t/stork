@@ -57,7 +57,7 @@ def get_repos(years, months, days, pages, token):
                     else:
                         query = f"q=license:mit+created:{year}-{month}-{day}+language:Python&type=repositories"
                         url = f"https://api.github.com/search/repositories?{query}&page={page}"
-                        print(url)
+                        # print(url)
                         headers = {
                             "Authorization": f"Bearer {token}",
                             "Accept": "application/vnd.github+json"
@@ -71,7 +71,7 @@ def get_repos(years, months, days, pages, token):
                                 f"{output_path_mnt}repo_lists/{day}-{month}-{year}/repos-read-csv-{day}-{month}-{year}-page-{page}.json",
                                 mode="w") as file:
                             json.dump(json_response, file)
-
+                        file.close()
                         repositories = {}
                         branches = {}
                         if "items" not in json_response.keys():
@@ -88,7 +88,7 @@ def get_repos(years, months, days, pages, token):
                                 branches[item["name"]] = item["default_branch"]
 
                             for repository in repositories:
-                                print(f"Repository: {repository}, url: {repositories[repository]}")
+                                # print(f"Repository: {repository}, url: {repositories[repository]}")
                                 log.info(f"Repository: {repository}, url: {repositories[repository]}, "
                                          f"date (yyyy-mm-dd):{year}-{month}-{day}")
                                 response = requests.request("GET", repositories[repository], headers=headers)
@@ -97,7 +97,7 @@ def get_repos(years, months, days, pages, token):
                                           f"{storage_path}year-{year}/month-{month}/day-{day}/page-{page}/{repository}.zip"
                                           f"")
 
-                        file.close()
+
                 if eom:
                     eom = False
                     break
