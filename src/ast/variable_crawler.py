@@ -4,6 +4,7 @@ import time
 from src.ast.assign_visitor import AssignVisitor
 from src.log_modules.util import getAst
 from src.stork import Stork
+from src.log_modules.parse_repos import unzip
 
 
 # def retrieve_variable_from_assignment(assignment, assignment_list):
@@ -146,8 +147,9 @@ def get_value_from_var_name(variable, position, assignment_list):
 if __name__ == '__main__':
     stork = Stork(config_path=r"../db_conn/config_s3.ini")
     # pipeline = "../../examples/sample_pipelines/sklearn_pipeline.py"
-    pipeline = ("/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/year-2020"
-                "/month-10/day-01/page-2/table_ocr/table_ocr-master/Evaluations/Tablebank/evaluation.py")
+    repo_path = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/year-2020/month-10/day-01/page-2/table_ocr/"
+    unzip(repo_path=repo_path)
+    pipeline = f"{repo_path}table_ocr-master/Evaluations/Tablebank/evaluation.py"
     # pipeline = "../../examples/sample_pipelines/var_retrieval/variable_path_reading.py"
     # pipeline = "../../examples/sample_pipelines/string_concat/fstring.py"
 

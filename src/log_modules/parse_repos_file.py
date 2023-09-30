@@ -4,7 +4,7 @@ import argparse
 
 from multiprocessing import Process
 
-from src.log_modules.log_results import createLoggerPlain
+from log_results import createLoggerPlain
 
 
 def collect_resources(root_folder):
@@ -36,8 +36,7 @@ def unzip(repo_path):
     repo_name = os.path.basename(repo_path).split(".")[0]
     os.makedirs(f"{parent_dir}/{repo_name}", exist_ok=True)
     os.system(f"unzip -u {repo_path} -d {parent_dir}/{repo_name} "
-              f"-x 'bin/*' 'www' 'js' 'virtual' '*virtual*' 'dist-packages' 'site-packages' "
-              f"'*env*' 'env' 'etc/*' 'include/*' 'lib/*' 'lib64/*' '.venv/*' '*/venv/*'")
+              f"-x 'bin/*' 'etc/*' 'include/*' 'lib/*' 'lib64/*' '.venv/*' '*/venv/*'")
 
     return parent_dir, repo_name
 
@@ -186,7 +185,7 @@ def main(args):
     NUM_THREADS = int(args.threads)
 
     # repositories = collect_resources(root_folder=args.repositories)
-    repositories = collect_resources_from_file("../../examples/data/missing-repos.txt")
+    repositories = collect_resources_from_file(args.missing_repo_file)
     repo_count = len(repositories)
     processes = []
     for i in range(0, int(NUM_THREADS)):
@@ -212,6 +211,7 @@ if __name__ == '__main__':
     )
 
     parser.add_argument('-t', '--threads', default=12)
+    parser.add_argument('-f', '--missing_repo_file')
     parser.add_argument('-r', '--repositories')
     parser.add_argument('-p', '--packages')
     parser.add_argument('-o', '--outputs')
@@ -219,4 +219,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
     main(args)
     aggregate_stats(outputs_root=args.outputs, repos_root=args.repositories)
-    main(args)

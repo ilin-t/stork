@@ -42,7 +42,9 @@ class PsqlConnector:
             print(params)
 
             conn_start = time.time_ns()
+            print("before connection")
             self.connection = psycopg2.connect(**params)
+            print("after connection")
             conn_duration = time.time_ns() - conn_start
             print(self.connection)
 
@@ -59,14 +61,19 @@ class PsqlConnector:
             db_version = self.cursor.fetchone()
             fetch_time = time.time_ns() - fetch_one_start
 
-            close_start = time.time_ns()
-            self.cursor.close()
-            close_time = time.time_ns() - close_start
+            fetch_all_start = time.time_ns()
+            # db_version = self.cursor.fetchall()
+            fetch_all_time = time.time_ns() - fetch_all_start
+
+            # close_start = time.time_ns()
+            # self.cursor.close()
+            # close_time = time.time_ns() - close_start
 
             print(f"Establishing a database connection: {conn_duration / 1000000} ms.")
             print(f"Setting a cursor: {cur_duration / 1000000} ms.")
             print(f"Executing a select version statement: {execute_time / 1000000} ms.")
             print(f"Fetching a single row: {fetch_time / 1000000} ms.")
+            print(f"Fetching all rows: {fetch_all_time / 1000000} ms.")
             print(f"Result: {db_version}")
             # print(f"Closing time: {close_time / 1000000} ms.")
 
@@ -81,7 +88,7 @@ class PsqlConnector:
                     self.connect()
 
         except Exception as exc:
-            print(exc)
+            print(f"Exception, {exc}")
 
         finally:
             if self.connection is not None:
@@ -101,10 +108,10 @@ class PsqlConnector:
             # print("Database connection closed.")
 
         except TypeError as error:
-            print(error)
+            print(f"TypeError: {error}")
 
         except AttributeError as error:
-            print(error)
+            print(f"Attribute error, {error}")
 
     def start_postgres(self):
         os.system('sudo ../../postgres_setup/run_config.sh')
@@ -112,25 +119,69 @@ class PsqlConnector:
     def stop_remove_container(self):
         os.system('sudo ../../postgres_setup/stop_remove_config.sh')
 
+    def create_schema(self, schema_name, user):
+        self.cursor = self.connection.cursor()
+        try:
+            stmt_string = f"CREATE SCHEMA IF NOT EXISTS {schema_name} AUTHORIZATION {user}"
+            sql_stmt = sql.SQL(stmt_string).format(
+                schema_name=sql.Identifier(schema_name),
+                user=sql.Identifier(user)
+            )
+            self.cursor.execute(sql_stmt)
+            self.connection.commit()
+        except:
+            print("Schema definition problem")
+
     def create_table(self, table_name, schema_order):
         self.cursor = self.connection.cursor()
+
         try:
             self.parse_schema(schema_string=schema_order)
         except ValueError as err:
             print(err)
             return False
 
-        stmt_string = f"CREATE TABLE IF NOT EXISTS {{table_name}} ({schema_order})"
-        sql_stmt = sql.SQL(stmt_string).format(
+        sql_stmt = sql.SQL("""CREATE TABLE IF NOT EXISTS {table_name} {schema_order}""").format(
             table_name=sql.Identifier(table_name),
+            schema_order=sql.Literal(wrapped=schema_order)
         )
 
-        print(type(sql_stmt))
+        # stmt_string = '''CREATE TABLE IF NOT EXISTS {table_name} ( {schema_order} )'''
+        # sql_stmt = sql.SQL(stmt_string).format(
+        #     table_name=sql.Identifier(table_name),
+        #     schema_order=sql.Literal(schema_order)
+        # )
+
         print(sql_stmt)
+
         self.cursor.execute(sql_stmt)
         self.connection.commit()
-        print(f"Table {table_name} created")
-        return True
+
+    # def create_table(self, table_name, schema_order):
+    #     self.cursor = self.connection.cursor()
+    #     print(self.cursor)
+    #     try:
+    #         self.parse_schema(schema_string=schema_order)
+    #     except ValueError as err:
+    #         print(err)
+    #         return False
+    #     #
+    #     # stmt_string = """CREATE TABLE IF NOT EXISTS {table_name} ({schema_order});"""
+    #     stmt_string = """CREATE TABLE IF NOT EXISTS {table_name}"""
+    #     sql_stmt = sql.SQL(stmt_string).format(
+    #         table_name=sql.Identifier(table_name),
+    #         schema_order=sql.Literal(wrapped=schema_order)
+    #     )
+    #
+    #
+    #
+    #     #
+    #     print(type(sql_stmt))
+    #     print(str(sql_stmt))
+    #     self.cursor.execute(sql_stmt)
+    #     self.connection.commit()
+    #     # print(f"Table {table_name} created")
+    #     # return True
 
     def insert_into_table(self, table_name, schema, data):
         # if not self.check_table(table_name):
@@ -168,11 +219,21 @@ class PsqlConnector:
 
         print(df.dtypes)
         schema_order = ""
-        for column in df.columns:
-            column_stripped = column.replace("Unnamed: ", "col_")
-            schema_order = schema_order + f"{column_stripped} {self.schema_map[str(df[column].dtype)]}, "
+        columns = df.columns
+        for i in range(0, len(columns)):
+            column_stripped = columns[i].replace("Unnamed: ", "col_")
+            if i==0:
+                schema_order = schema_order + f"{column_stripped}  {self.schema_map[str(df[columns[i]].dtype)]} PRIMARY KEY, "
+            else:
+                schema_order = schema_order + f"{column_stripped} {self.schema_map[str(df[columns[i]].dtype)]}, "
 
-        print(schema_order[:-2])
+
+
+        # for column in df.columns:
+        #     column_stripped = column.replace("Unnamed: ", "col_")
+        #     schema_order = schema_order + f"{column_stripped} {self.schema_map[str(df[column].dtype)]}, "
+
+        print(schema_order)
 
         return schema_order[:-2]
 
@@ -188,6 +249,8 @@ class PsqlConnector:
         # print(data)
         # for row in data:
         #     print(f"Retrieved from DB: {row}")
+
+        return data
 
     def parse_schema(self, schema_string):
         for keyword in self.forbidden:
@@ -220,12 +283,15 @@ if __name__ == '__main__':
 
     df = pd.read_csv("../../examples/data/products.csv")
     schema_string = pp.generate_schema(df)
+    print(schema_string)
 
+    pp.create_schema("testSchema", "postgres_test_user")
     # print(type(df))
     # pp.check_table(table_name="testTable")
-    # pp.create_table(table_name="testTable", schema_order=schema_string)
 
+    pp.create_table(table_name="testSchema.testTable", schema_order=schema_string)
+    #
     # pp.insert_into_table(table_name="testTable", schema=schema_string, data=df)
     # pp.create_table(table_name="newTable", schema_order=schema_string)
-    pp.insert_into_table(table_name="newTable", schema=schema_string, data=df)
+    # pp.insert_into_table(table_name="newTable", schema=schema_string, data=df)
     # pp.get_data("newTable")

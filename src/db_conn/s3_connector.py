@@ -55,10 +55,10 @@ class S3Connector:
             print(f"Please check whether the requested file exists. {e}")
 
     @staticmethod
-    def getObjectUrl(key, bucket="stork-test-bucket"):
+    def getObjectUrl(key, bucket="stork-storage"):
         return f'https://{bucket}.s3.amazonaws.com/{key}'
 
-    def downloadFile(self, key, bucket="stork-test-bucket"):
+    def downloadFile(self, key, bucket="stork-storage"):
         self.client.download_file(
             Filename=key,
             Bucket=bucket,

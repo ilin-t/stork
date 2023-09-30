@@ -17,7 +17,6 @@ class Stork:
             self.connector = S3Connector()
         elif "postgres" in connector:
             self.connector = PsqlConnector()
-        # TODO DuckDB - Probably not necessary
         else:
             self.connector = None
         self.assignVisitor = AssignVisitor()

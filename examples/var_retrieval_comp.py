@@ -27,7 +27,7 @@ from src.ast.assign_visitor import AssignVisitor
 from src.log_modules.util import getAst
 import importlib.util
 
-switcheroo = Stork(config_path="../examples/db_playgrounds/config.ini")
+switcheroo = Stork(config_path="db_playgrounds/config.ini")
 pipeline = "../src/log_modules/variable_path_reading.py"
 # pipeline = "../examples/argus_eyes.py"
 switcheroo.setup(pipeline=pipeline, new_pipeline="../src/log_modules/variable_path_reading_var_retrieval.py")
