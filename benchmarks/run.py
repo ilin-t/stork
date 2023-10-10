@@ -3,7 +3,7 @@ import logging
 import os
 from os.path import basename, normpath
 
-from src.stork import Stork
+from src.stork_main import Stork
 from src.log_modules import util
 from src.log_modules.parse_repos import collect_resources, unzip, delete_repo
 from src.log_modules.log_results import createLogger
@@ -32,9 +32,18 @@ def filter_python_files(files):
 def filter_folders(project_path):
     folder_paths = list_folder_paths(project_path)
     folders = []
+    ignore = False
+    to_ignore = ['bin/*', 'www', 'js', 'virtual', '*virtual*', 'dist-packages', 'site-packages',
+                 '*env*', 'env', 'etc/*', 'include/*', 'lib/*', 'lib64/*', '.venv/*', '*/venv/*']
     for folder in folder_paths:
-        if "env" in basename(normpath(folder)).lower() or "lib" in basename(normpath(folder)).lower():
+        for name in to_ignore:
+            if name in basename(normpath(folder)).lower():
+                ignore = True
+                break
+        if ignore:
             continue
+        # if "env" in basename(normpath(folder)).lower() or "lib" in basename(normpath(folder)).lower():
+        #     continue
         elif basename(normpath(folder)).startswith((".", "_")):
             continue
         else:
@@ -43,11 +52,14 @@ def filter_folders(project_path):
     return folders
 
 
-def run_switcheroo(python_files, pipeline_logger, error_logger):
-    stork = Stork(r"../examples/db_playgrounds/config.ini")
+def run_stork(python_files, pipeline_logger, error_logger):
+    stork = Stork(r"../src/db_conn/config_s3.ini")
+    stork.setClient(stork.access_key, stork.secret_access_key)
     for py_file in python_files:
         pipeline_logger.info(f"Pipeline: {py_file}")
         tree = []
+        stork.assignVisitor.setLogger(error_logger)
+        stork.assignVisitor.setLoggerConfig("test_logger.log", "test", logging.INFO)
 
         try:
             tree = util.getAst(pipeline=py_file)
@@ -55,27 +67,88 @@ def run_switcheroo(python_files, pipeline_logger, error_logger):
             error_logger.error("Logged from syntax error in run")
             error_logger.error(e)
             pipeline_logger.error(f"Pipeline {py_file} failed with the following error: {e}. Check the error logs.")
-        # finally:
-        #     tree=[]
-        #     logger.info(f"Pipeline {py_file} generated an empty AST. Check error logs.")
 
         if not tree:
             pipeline_logger.info(f"Pipeline {py_file} generated an empty AST. Check error logs.")
 
-        stork.assignVisitor.setLogger(error_logger)
         error_logger.error(f"Pipeline {py_file} generated the following errors:")
-
-        stork.assignVisitor.setPipeline(pipeline=py_file)
-        stork.assignVisitor.visit(tree)
+        try:
+            stork.assignVisitor.setPipeline(pipeline=py_file)
+            stork.assignVisitor.visit(tree)
+            print(stork.assignVisitor.assignments)
+        except (AttributeError, KeyError, TypeError) as e:
+            pipeline_logger.error(e)
         stork.assignVisitor.filter_Assignments()
+        # stork.assignVisitor.replace_variables_in_assignments()
         stork.assignVisitor.getDatasetsFromInputs()
+
+        # Add inputs and datasets to the global assignments and datasets dictionary
+        stork.assignments[py_file] = stork.assignVisitor.inputs
+        stork.datasets[py_file] = stork.assignVisitor.datasets
+
         error_logger.error("________________________________________________")
         pipeline_logger.info("________________________________________________")
         pipeline_logger.info(f"Pipeline {py_file} reads the following data files: ")
         print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
+        pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
+        print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
+        pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
+        for input in stork.assignVisitor.inputs:
+            pipeline_logger.info(f"\t {input}")
+        pipeline_logger.info("________________________________________________")
         for dataset in stork.assignVisitor.datasets:
             pipeline_logger.info(f"\t {dataset}")
         pipeline_logger.info("________________________________________________")
+
+        repo_name = stork.assignVisitor.parseRepoName(stork.assignVisitor.getRepositoryName())
+        buckets = stork.connector.getBucketNames()
+        bucket_name = "stork-storage"
+        stork.connector.createFolder(folder_name=repo_name, bucket=bucket_name)
+        print(f"Adapted repository and bucket name: {repo_name}")
+        new_pipeline = f"{py_file}_rewritten.py"
+        # if repo_name not in buckets:
+        #     self.connector.createBucket(bucket_name=bucket_name, region="eu-central-1")
+        #     print(f"Should create bucket: {bucket_name}")
+
+
+        # try:
+        # for member in stork.assignVisitor.inputs:
+        #     for source in member["data_source"]:
+        #         for dataset in source["data_file"]:
+        #             if util.checkFileExtension(dataset):
+        # print(f"dataset:{dataset}")
+        try:
+            for dataset in stork.datasets[py_file]:
+                print(f"Dataset: {dataset}")
+                if util.checkDataFile(dataset):
+                    abs_path_dataset = stork.assignVisitor.parsePath(dataset)
+                    print(f"Source data file:{abs_path_dataset}")
+                    stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, bucket=bucket_name)
+                    dataset_name = stork.assignVisitor.getDatasetName(abs_path_dataset)
+
+                    # print(f"Url: {stork.connector.getObjectUrl(key=dataset_name,folder=repo_name, bucket=bucket_name)}")
+                    stork.assignVisitor.datasets_urls.append({"dataset_name": dataset,
+                                                              "url": stork.connector.getObjectUrl(
+                                                                  key=dataset_name, folder=repo_name,
+                                                                  bucket=bucket_name)})
+            pipeline_logger.info(f"Pipeline data set urls {stork.assignVisitor.datasets_urls}")
+            stork.datasets_urls[py_file] = stork.assignVisitor.datasets_urls
+
+        except (TypeError, KeyError) as e:
+            pipeline_logger.error(e)
+
+        # self.assignVisitor.getDatasetsFromInputs()
+        # self.assignVisitor.uploadDatasets(bucket=bucket_name)
+        print(f"Datasets_urls {py_file}: {stork.datasets_urls[py_file]}")
+        stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline)
+        print(f"Datasets_urls complete: {stork.datasets_urls}")
+
+        stork.assignVisitor.clearAssignments()
+        stork.assignVisitor.clearInputs()
+        stork.assignVisitor.clearDatasets()
+        stork.assignVisitor.clearDatasetUrls()
+    # print(stork.assignments)
+    # print(stork.datasets)
 
 
 def traverse_folders(path, project_logger, error_logger):
@@ -87,7 +160,7 @@ def traverse_folders(path, project_logger, error_logger):
         project_logger.info(f"Folder: {path}, executing the following python files:")
         for py_file in py_files:
             project_logger.info(f"\t {py_file}")
-        run_switcheroo(py_files, project_logger, error_logger)
+        run_stork(py_files, project_logger, error_logger)
     if folders:
         for folder in folders:
             traverse_folders(folder, project_logger, error_logger)
@@ -96,21 +169,22 @@ def traverse_folders(path, project_logger, error_logger):
 
 
 def main(args):
-    repositories = collect_resources(root_folder=args.repositories)
+    # repositories = collect_resources(root_folder=args.repositories)
+    repositories = ["/home/ilint/HPI/repos/pipelines/trial/arguseyes.zip"]
+    print(repositories)
     error_log = createLogger(filename=f"{args.outputs}/logs/errors.log", project_name="error_log", level=logging.ERROR)
     for repository in repositories:
-        parent_dir, repo_name = unzip(repo_path=repository)
-        projects = filter_folders(f"{parent_dir}/{repo_name}")
-
+        # parent_dir, repo_name = unzip(repo_path=repository)
+        # projects = filter_folders(f"{parent_dir}/{repo_name}")
+        projects = filter_folders(f"/home/ilint/HPI/repos/pipelines/trial/arguseyes/")
         for project in projects:
             project_name = os.path.split(project)[1]
             print("________________________________________________________________________________________")
             print(f"Processing {project_name}, repository {projects.index(project) + 1} out of {len(projects)}")
-            logger = createLogger(filename=f"{args.outputs}/logs/{project_name}.log", project_name=project_name, level=logging.INFO)
+            logger = createLogger(filename=f"{args.outputs}/logs/{project_name}.log", project_name=project_name,
+                                  level=logging.INFO)
 
             traverse_folders(project, logger, error_log)
-
-            delete_repo(project)
 
 
 if __name__ == '__main__':
@@ -119,8 +193,8 @@ if __name__ == '__main__':
         description='Run Stork on a set of repositories',
     )
 
-    parser.add_argument('-r', '--repositories')
-    parser.add_argument('-o', '--outputs')
+    parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/trial/")
+    parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/pipelines/results-trial/")
 
     args = parser.parse_args()
     os.makedirs(f"{args.outputs}/logs", exist_ok=True)

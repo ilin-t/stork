@@ -18,9 +18,11 @@ def getAst(pipeline):
 #             return True
 
 def checkDataFile(data_file):
-    for item in data_file:
-        return checkFileExtension(item)
-
+    if isinstance(data_file, list):
+        for item in data_file:
+            return checkFileExtension(item)
+    else:
+        return checkFileExtension(data_file)
 
 def checkFileExtension(data_file):
     if type(data_file) is not str:
@@ -29,7 +31,7 @@ def checkFileExtension(data_file):
     if len(file) < 2:
         return False
     # Data files and compression support for numpy and pandas
-    elif file[-1] in ["csv", "txt", "zip", "parquet", "gz", "tar", "bz2", "zstd", "npy"]:
+    elif file[-1] in ["csv", "txt", "zip", "parquet", "gz", "tar", "bz2", "zstd", "npy", "py"]:
         return True
 
 

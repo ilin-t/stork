@@ -1,5 +1,5 @@
 from configparser import ConfigParser
-from src.stork import Stork
+from src.stork_main import Stork
 
 
 def parseConfig(config_path):

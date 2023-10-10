@@ -1,60 +1,36 @@
 import sys
 import time
 
-from src.ast.assign_visitor import AssignVisitor
+from assign_visitor import AssignVisitor
 from src.log_modules.util import getAst
-from src.stork import Stork
+from src.stork_main import Stork
 from src.log_modules.parse_repos import unzip
 
 
-# def retrieve_variable_from_assignment(assignment, assignment_list):
-#     print(f"method call, length of assignments: {len(assignment_list)}")
-#     data_file = has_data_file(assignment=assignment)
-#     try:
-#         if data_file:
-#             for item in assignment_list:
-#                 # print(f"Item: {item}")
-#                 if data_file[0] == item["variable"]:
-#                     # print(f"Assignment: {item}")
-#                     # print(f"Path to dataset from variable {item['variable']}: {item['data_source'][0]}")
-#                     last_change = find_closest_assignment(assignment=assignment, assignment_list=assignment_list)
-#                     print(f"Closest variable: {last_change}, to the assignment: {assignment}")
-#     except (NameError, AttributeError) as e:
-#         print(e)
-
 def retrieve_variable_from_assignment(assignment, assignment_list):
-    # print(f"method call, length of assignments: {len(assignment_list)}")
-    data_file = has_data_file(assignment=assignment)
+    data_file = has_data_file_assignment(assignment=assignment)
     last_change = None
     try:
         if data_file:
             for item in assignment_list:
-                # print(f"Item: {item}")
                 if data_file[0] == item["variable"]:
-                    # print(f"Assignment: {item}")
-                    # print(f"Path to dataset from variable {item['variable']}: {item['data_source'][0]}")
                     last_change = find_closest_assignment(assignment=assignment,
                                                           assignment_list=assignment_list)
-
-            # print(f"Closest variable: {last_change}, to the assignment: {assignment}")
             return last_change if last_change else None
     except (NameError, AttributeError) as e:
         print(e)
 
 
 def retrieve_variable_from_assignment_list(assignment_list):
-    print(f"method call, length of assignments: {len(assignment_list)}")
     mappings = {}
 
     for assignment in assignment_list:
-        data_file = has_data_file(assignment=assignment)
+        data_file = has_data_file_assignment(assignment=assignment)
         try:
             if data_file:
                 for item in assignment_list:
-                    # print(f"Item: {item}")
                     if data_file[0] == item["variable"]:
                         last_change = find_closest_assignment(assignment=assignment, assignment_list=assignment_list)
-                        # print(f"Closest variable: {last_change}, to the assignment: {assignment}")
                         mappings[assignment["variable"]] = last_change["data_source"]
         except (NameError, AttributeError) as e:
             print(e)
@@ -74,9 +50,9 @@ def find_closest_assignment(assignment, assignment_list):
     return closest
 
 
-def find_closest_variable(variable, position, assignment_list):
+def find_closest_variable(assignment, variable, position, assignment_list):
     diff = sys.maxsize
-    closest = None
+    closest = assignment
     destination_line = position
     for item in assignment_list:
         if variable == item["variable"] and destination_line - item['lineno'] < diff:
@@ -87,49 +63,97 @@ def find_closest_variable(variable, position, assignment_list):
     return closest
 
 
-def has_data_file(assignment):
+def has_data_file_assignment(assignment):
     for source in assignment["data_source"]:
         if isinstance(source, dict):
             try:
-                return source["data_file"]
+                return parse_data_file(source["data_file"])
             except KeyError as e:
                 print(e)
                 return False
 
 
-def has_data_file_single_source(source):
-    if isinstance(source, dict):
+def has_data_file_source(data_source):
+    if isinstance(data_source, dict):
         try:
-            return source["data_file"]
+            data_file = has_data_file_source(data_source["data_file"])
+            if data_file:
+                return parse_data_file(data_file["data_file"])
+            else:
+                return parse_data_file(data_source["data_file"])
         except KeyError as e:
             print(e)
             return False
 
 
+def parse_data_file(data_file):
+    if isinstance(data_file, list):
+        for item in data_file:
+            if isinstance(item, str):
+                return item
+            elif isinstance(item, dict):
+                try:
+                    if 'data_file' in item.keys():
+                        parse_data_file(item['data_file'])
+                except KeyError as e:
+                    print(f"KeyError: {e}")
+                    continue
+            else:
+                print("i enter here")
+                return None
+
+
 def get_variable_and_value(assignment):
     variable = assignment["variable"]
     value = assignment["data_source"]
-    # print(f"Variable: {variable}, value: {value}")
     return variable, value
 
 
 def get_var_value_in_assignment(assignment):
-    if not assignment["variable"] or len(assignment["data_source"]) > 1:
+    if not isinstance(assignment['data_source'], list):
+        data_source = assignment['data_source']
+        return data_source['data_file']
+    elif not assignment["variable"] or len(assignment["data_source"]) > 1:
         data_source = assignment['data_source'][0]
-        # print(f"Value from data_file: {data_source['data_file']}")
         return data_source['data_file']
     else:
-        # print(f"Value: {assignment['data_source']}")
         return assignment["data_source"]
 
 
-def get_value_from_var_name(variable, position, assignment_list):
-    closest_variable_assignment = find_closest_variable(variable=variable, position=position,
+def get_value_from_var_name(assignment, variable, position, assignment_list):
+    closest_variable_assignment = find_closest_variable(assignment=assignment, variable=variable, position=position,
                                                         assignment_list=assignment_list)
-    if closest_variable_assignment:
-        return closest_variable_assignment["data_source"]
+    print(f"closest {closest_variable_assignment}")
+    if closest_variable_assignment and closest_variable_assignment["data_source"]:
+        if isinstance(closest_variable_assignment["data_source"], list):
+            for source in closest_variable_assignment["data_source"]:
+                if isinstance(source, dict):
+                    data_file = source["data_file"]
+                    for item in data_file:
+                        if isinstance(item, dict):
+                            if 'data_file' in item.keys():
+                                return item['data_file'][0]
+        else:
+            return closest_variable_assignment["data_source"]
     else:
         return None
+
+
+def replace_variables_in_assignments(assignment_list):
+    for assignment in assignment_list:
+        if assignment:
+            variable, assignment_var = get_variable_and_value(assignment)
+            # print(f"variable {variable}, assignment_var: {assignment_var}")
+            data_file = get_var_value_in_assignment(assignment)
+            # print(f"print data_file: {data_file}")
+            val = get_value_from_var_name(assignment=assignment, variable=variable, position=assignment['lineno'],
+                                          assignment_list=assignments)
+            if val:
+                for source in assignment["data_source"]:
+                    if isinstance(source, dict):
+                        if 'data_file' in source.keys():
+                            source['data_file'] = val
+                print(f"{assignment}")
 
 
 #
@@ -146,15 +170,9 @@ def get_value_from_var_name(variable, position, assignment_list):
 
 if __name__ == '__main__':
     stork = Stork(config_path=r"../db_conn/config_s3.ini")
-    # pipeline = "../../examples/sample_pipelines/sklearn_pipeline.py"
-    repo_path = "/mnt/fs00/rabl/ilin.tolovski/stork-zip-2days/repositories-test/year-2020/month-10/day-01/page-2/table_ocr/"
+    repo_path = "/home/ilint/HPI/repos/stork/examples/data/table_ocr.zip"
     unzip(repo_path=repo_path)
-    pipeline = f"{repo_path}table_ocr-master/Evaluations/Tablebank/evaluation.py"
-    # pipeline = "../../examples/sample_pipelines/var_retrieval/variable_path_reading.py"
-    # pipeline = "../../examples/sample_pipelines/string_concat/fstring.py"
-
-    # pipeline = "../examples/argus_eyes.py"
-    # stork.setup(pipeline=pipeline, new_pipeline="../log_modules/variable_path_reading_var_retrieval.py")
+    pipeline = f"{repo_path[:-4]}/table_ocr-master/Evaluations/Tablebank/evaluation.py"
 
     stork.setClient(stork.access_key, stork.secret_access_key)
     stork.assignVisitor = AssignVisitor()
@@ -163,17 +181,5 @@ if __name__ == '__main__':
     stork.assignVisitor.visit(tree)
 
     assignments = stork.assignVisitor.assignments
-    print(f"Assignments: {assignments}")
+    replace_variables_in_assignments(assignments)
 
-    # variables = [{'variable': assignment["variable"], 'lineno': assignment["lineno"]} for assignment in assignments]
-    # print(f"Variables: {variables}")
-
-    # for assignment in assignments:
-    #
-    #     # variable_assignment = retrieve_variable_from_assignment(assignment, assignments)
-    #     if assignment:
-    #         # print(assignment)
-    #         variable, assignment_var = get_variable_and_value(assignment)
-    #         get_var_value_in_assignment(assignment)
-    #         val = get_value_from_var_name(variable=variable, position=assignment['lineno'], assignment_list=assignments)
-    #         print(val)

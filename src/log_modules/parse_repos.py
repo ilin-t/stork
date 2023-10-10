@@ -53,7 +53,8 @@ def generate_requirements(repo_path, repo_name, packages_path):
     year, month, day, page = getYearMonthDayPage(repo_path)
     os.makedirs(f"{packages_path}{year}/{month}/{day}/{page}", exist_ok=True)
     sys_return = os.system(f"python3 -m pipreqs.pipreqs {repo_path}/{repo_name} "
-                           f"--ignore bin,etc,include,lib,lib64,.venv --encoding=utf-8 "
+                           f"--ignore bin/* www js virtual *virtual* dist-packages site-packages "
+              f"*env* env etc/* include/* lib/* lib64/* .venv/* */venv/* --encoding=utf-8 "
                            f"--savepath {packages_path}{year}/{month}/{day}/{page}/{repo_name}")
     print(sys_return)
     if sys_return != 0:

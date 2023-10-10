@@ -22,7 +22,7 @@ realimport, builtins.__import__ = builtins.__import__, tryimport
 import os.path
 import sys
 
-from src.stork import Stork
+from src.stork_main import Stork
 from src.ast.assign_visitor import AssignVisitor
 from src.log_modules.util import getAst
 import importlib.util

@@ -43,20 +43,20 @@ class S3Connector:
         location = {'LocationConstraint': region}
         self.client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
 
-    def uploadFile(self, path, bucket="stork-test-bucket"):
+    def uploadFile(self, path, folder, bucket="stork-storage"):
         filename = os.path.split(path)[1]
         try:
             self.client.upload_file(
                 Filename=path,
                 Bucket=bucket,
-                Key=filename
+                Key=f"{folder}/{filename}"
             )
         except FileNotFoundError as e:
             print(f"Please check whether the requested file exists. {e}")
 
     @staticmethod
-    def getObjectUrl(key, bucket="stork-storage"):
-        return f'https://{bucket}.s3.amazonaws.com/{key}'
+    def getObjectUrl(key, folder, bucket="stork-storage"):
+        return f'https://{bucket}.s3.amazonaws.com/{f"{folder}/{key}"}'
 
     def downloadFile(self, key, bucket="stork-storage"):
         self.client.download_file(
@@ -64,6 +64,9 @@ class S3Connector:
             Bucket=bucket,
             Key=key
         )
+
+    def createFolder(self, folder_name, bucket="storage-stork"):
+        self.client.put_object(Bucket=bucket, Key=f"{folder_name}/")
 
     def getBuckets(self):
         # for bucket in self.resource.buckets.all():

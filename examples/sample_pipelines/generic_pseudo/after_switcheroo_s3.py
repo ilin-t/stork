@@ -21,7 +21,7 @@ from s3_connector import S3Connector
 
 dataset_key = "examples/data/dataset-31-credit-g.csv"
 s3connector = S3Connector()
-s3connector.uploadFile(dataset_key)
+# s3connector.uploadFile(dataset_key)
 
 # end - uploader side
 
