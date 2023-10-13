@@ -75,11 +75,10 @@ def run_stork(python_files, pipeline_logger, error_logger):
         try:
             stork.assignVisitor.setPipeline(pipeline=py_file)
             stork.assignVisitor.visit(tree)
-            print(stork.assignVisitor.assignments)
         except (AttributeError, KeyError, TypeError) as e:
             pipeline_logger.error(e)
         stork.assignVisitor.filter_Assignments()
-        # stork.assignVisitor.replace_variables_in_assignments()
+        stork.assignVisitor.replace_variables_in_assignments()
         stork.assignVisitor.getDatasetsFromInputs()
 
         # Add inputs and datasets to the global assignments and datasets dictionary
@@ -95,6 +94,7 @@ def run_stork(python_files, pipeline_logger, error_logger):
         pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
         for input in stork.assignVisitor.inputs:
             pipeline_logger.info(f"\t {input}")
+            # print(f"Input: {input}")
         pipeline_logger.info("________________________________________________")
         for dataset in stork.assignVisitor.datasets:
             pipeline_logger.info(f"\t {dataset}")
@@ -140,15 +140,15 @@ def run_stork(python_files, pipeline_logger, error_logger):
         # self.assignVisitor.getDatasetsFromInputs()
         # self.assignVisitor.uploadDatasets(bucket=bucket_name)
         print(f"Datasets_urls {py_file}: {stork.datasets_urls[py_file]}")
-        stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline)
+        # stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline)
         print(f"Datasets_urls complete: {stork.datasets_urls}")
-
+        util.reportAssign(stork.pipeline, stork.assignVisitor.assignments, "full")
         stork.assignVisitor.clearAssignments()
         stork.assignVisitor.clearInputs()
         stork.assignVisitor.clearDatasets()
         stork.assignVisitor.clearDatasetUrls()
     # print(stork.assignments)
-    # print(stork.datasets)
+    print(stork.datasets)
 
 
 def traverse_folders(path, project_logger, error_logger):

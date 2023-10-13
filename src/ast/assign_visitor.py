@@ -43,6 +43,7 @@ class AssignVisitor(ast.NodeVisitor):
                       f"error message: {e}")
         except TypeError as e:
             self.logger.error(e)
+
     def visit_With(self, node):
         # items = self.direct_visit(self, node, node.items)
         # body = self.direct_visit(self, node, node.body)
@@ -50,7 +51,6 @@ class AssignVisitor(ast.NodeVisitor):
             args = self.direct_visit(self, node, item)
         for item in node.body:
             body_el = self.direct_visit(self, node, item)
-
 
     def visit_withitem(self, node):
 
@@ -60,9 +60,6 @@ class AssignVisitor(ast.NodeVisitor):
         self.assignment["data_source"] = context_expr
 
         self.assignments.append(self.assignment)
-
-
-
 
     def visit_FunctionDef(self, node):
         args = self.direct_visit(self, node, node.args)
@@ -134,7 +131,8 @@ class AssignVisitor(ast.NodeVisitor):
             params.append(self.direct_visit(self, node, keyword))
         try:
             if type(node.func).__name__ == "Attribute" and self.assignment["data_source"]:
-                self.assignment["data_source"].append({"func_call": func_call, "data_file": args_names, "params": params})
+                self.assignment["data_source"].append(
+                    {"func_call": func_call, "data_file": args_names, "params": params})
             else:
                 return {"func_call": func_call, "data_file": args_names, "params": params}
         except(KeyError, TypeError, AttributeError) as e:
@@ -179,14 +177,7 @@ class AssignVisitor(ast.NodeVisitor):
         return [lower, upper]
 
     def visit_Name(self, node):
-        # if type(node.ctx).__name__ == "Load":
-        #     var_value = self.get_value_from_var_name_node(variable=node.id, position=node.lineno)
-        #     if var_value:
-        #         self.logger.info(f"Retrieving value for variable: {node.id}. Value: {var_value}")
-        #         # print(f"Retrieving value for variable: {node.id}. Value: {var_value}")
-        #         return var_value
-        #     else:
-        #         return node.id
+
         return node.id
 
     def visit_Constant(self, node):
@@ -248,14 +239,25 @@ class AssignVisitor(ast.NodeVisitor):
         for element in node.values:
             variable = self.direct_visit(self, node, element)
             if isinstance(variable, str):
-                string_parts=string_parts+variable
+                string_parts = string_parts + variable
             else:
-                string_parts=string_parts+variable[0]
+                string_parts = string_parts + variable[0]
+            # print(f"STRING PARTS {string_parts}")
 
         return string_parts
 
     def visit_FormattedValue(self, node):
         formatted_value = self.direct_visit(self, node, node.value)
+        # print(type(node.value).__name__)
+        if isinstance(node.value, ast.Name):
+            # print(f"YES {formatted_value}")
+            var_value = self.get_assignment_value_from_var_name_node(variable=formatted_value, position=node.lineno)
+            if var_value:
+                self.logger.info(f"Retrieving value for variable: {node.value}. Value: {var_value}")
+                # print(f"Retrieving value for variable: {node.value}. Value: {var_value}")
+                return var_value
+            else:
+                return formatted_value
         return formatted_value
 
     def filter_Assignments(self):
@@ -263,17 +265,19 @@ class AssignVisitor(ast.NodeVisitor):
         try:
             for assignment in self.assignments:
                 # print("Type of the above assignment: %s" % type(assignment["data_source"]))
+                # print(f"Assignment: {assignment}")
                 assignment["data_source"] = [i for i in assignment["data_source"] if i is not None]
                 for source in assignment["data_source"]:
                     if self.keepDataSource(data_source=source) and assignment not in self.inputs:
                         self.inputs.append(assignment)
-                    # data_file_from_var = self.retrieve_variable_from_assignment(assignment=assignment,
-                    #                                                             assignment_list=self.assignments)
-                    #
-                    # new_assignment = self.var_assignment_to_input(var_assignment=data_file_from_var, assignment=assignment)
-                    # if new_assignment and new_assignment not in self.inputs:
-                        # self.inputs.append(new_assignment)
-        # self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
+                    data_file_from_var = self.retrieve_variable_from_assignment(assignment=assignment,
+                                                                                assignment_list=self.assignments)
+                    # print(f"Data file from var: {data_file_from_var}")
+                    new_assignment = self.var_assignment_to_input(var_assignment=data_file_from_var,
+                                                                  assignment=assignment)
+                    if new_assignment and new_assignment not in self.inputs:
+                        self.inputs.append(new_assignment)
+            self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
         except (AttributeError, KeyError, TypeError) as e:
             self.logger.error(e)
 
@@ -300,8 +304,10 @@ class AssignVisitor(ast.NodeVisitor):
         try:
             data_path = var_assignment['data_source']
             for source in assignment['data_source']:
-                # print(
-                #     f"var_assignment['variable']: {var_assignment['variable']}, source['data_file']: {source['data_file']})")
+                print(
+                    f"var_assignment['variable']: {var_assignment['variable']}, source['data_file']: {source['data_file']})")
+                print(
+                    f"var_assignment['variable']: {assignment['variable']}, source['data_file']: {source['data_file']})")
                 if self.has_data_file_single_source(source=source) and (
                         var_assignment['variable'] == source['data_file'][0]):
                     source['data_file'] = data_path
@@ -327,31 +333,56 @@ class AssignVisitor(ast.NodeVisitor):
     #             return None
     #     except KeyError as e:
     #         self.logger.error(e)
-    #
-    # def find_closest_variable_node(self, variable, position):
-    #     diff = sys.maxsize
-    #     closest = None
-    #     destination_line = position
-    #     for item in self.assignments:
-    #         if variable == item["variable"] and destination_line - item['lineno'] < diff:
-    #             diff = destination_line - item['lineno']
-    #             if diff <= 0:
-    #                 break
-    #             closest = item
-    #     return closest
-    #
-    # def retrieve_variable_from_assignment(self, assignment, assignment_list):
-    #     data_file = self.has_data_file(assignment=assignment)
-    #     last_change = None
-    #     try:
-    #         if data_file:
-    #             for item in assignment_list:
-    #                 if data_file[0] == item["variable"]:
-    #                     last_change = self.get_closest_assignment(assignment=assignment,
-    #                                                               assignment_list=assignment_list)
-    #             return last_change if last_change else None
-    #     except (NameError, AttributeError, TypeError, KeyError) as e:
-    #         self.logger.error(e)
+
+    def get_assignment_value_from_var_name_node(self, variable, position):
+        try:
+            closest_variable_assignment = self.find_closest_variable_node(variable=variable, position=position)
+            if isinstance(closest_variable_assignment["data_source"], list):
+                for source in closest_variable_assignment["data_source"]:
+                    # print(f"SOURCE: {source}")
+                    if isinstance(source, dict):
+                        data_file = source["data_file"]
+                        for item in data_file:
+                            if isinstance(item, dict):
+                                if 'data_file' in item.keys():
+                                    try:
+                                        return item['data_file'][0]
+                                    except IndexError as e:
+                                        self.logger.error(e)
+
+                    else:
+                        return closest_variable_assignment["data_source"]
+            else:
+                return closest_variable_assignment["data_source"]
+
+        except (RecursionError, AttributeError, KeyError, TypeError) as e:
+            self.logger.error(e)
+
+    def find_closest_variable_node(self, variable, position):
+        diff = sys.maxsize
+        closest = None
+        destination_line = position
+        for item in self.assignments:
+            if variable == item["variable"] and destination_line - item['lineno'] < diff:
+                diff = destination_line - item['lineno']
+                if diff <= 0:
+                    break
+                closest = item
+        return closest
+
+    def retrieve_variable_from_assignment(self, assignment, assignment_list):
+        data_file = self.has_data_file(assignment=assignment)
+        last_change = None
+        try:
+            if data_file:
+                for item in assignment_list:
+                    if data_file[0] == item["variable"]:
+                        last_change = self.get_closest_assignment(assignment=item,
+                                                                  assignment_list=assignment_list)
+                return last_change if last_change else None
+        except (NameError, AttributeError, TypeError, KeyError) as e:
+            self.logger.error(e)
+
     # # def retrieve_variable_from_assignment_list(self, assignment_list):
     #     for assignment in assignment_list:
     #         data_file = self.has_data_file(assignment=assignment)
@@ -444,8 +475,9 @@ class AssignVisitor(ast.NodeVisitor):
 
     def get_value_from_var_name(self, assignment, variable, position, assignment_list):
         try:
-            closest_variable_assignment = self.find_closest_variable(assignment=assignment, variable=variable, position=position,
-                                                                assignment_list=assignment_list)
+            closest_variable_assignment = self.find_closest_variable(assignment=assignment, variable=variable,
+                                                                     position=position,
+                                                                     assignment_list=assignment_list)
             if closest_variable_assignment and closest_variable_assignment["data_source"]:
                 if isinstance(closest_variable_assignment["data_source"], list):
                     for source in closest_variable_assignment["data_source"]:
@@ -471,9 +503,13 @@ class AssignVisitor(ast.NodeVisitor):
             for assignment in self.assignments:
                 if assignment:
                     variable, assignment_var = self.get_variable_and_value(assignment)
+                    # print(f"Variable: {variable}, value: {assignment_var}")
                     data_file = self.get_var_value_in_assignment(assignment)
-                    val = self.get_value_from_var_name(assignment=assignment, variable=variable, position=assignment['lineno'],
-                                                  assignment_list=self.assignments)
+                    # print(f"Data file: {data_file}")
+                    val = self.get_value_from_var_name(assignment=assignment, variable=variable,
+                                                       position=assignment['lineno'],
+                                                       assignment_list=self.assignments)
+                    # print(f"Value: {val}")
                     if val and assignment["data_source"]:
                         for source in assignment["data_source"]:
                             if isinstance(source, dict):
@@ -488,11 +524,11 @@ class AssignVisitor(ast.NodeVisitor):
         closest = None
         destination_line = assignment['lineno']
         for item in assignment_list:
-            if destination_line - item['lineno'] < diff:
+            if destination_line - item['lineno'] <= diff:
                 diff = destination_line - item['lineno']
+                closest = item
                 if diff <= 0:
                     break
-                closest = item
         return closest
 
     def has_data_file(self, assignment):
@@ -616,21 +652,21 @@ class AssignVisitor(ast.NodeVisitor):
         for member in self.inputs:
             try:
                 for source in member["data_source"]:
-                        for dataset in source["data_file"]:
-                            if util.checkFileExtension(dataset):
-                                # if log_modules.checkDataFile(dataset):
-                                # abs_path_dataset = self.parsePath(dataset)
-                                self.datasets.append(dataset)
+                    for dataset in source["data_file"]:
+                        if util.checkFileExtension(dataset):
+                            # if log_modules.checkDataFile(dataset):
+                            # abs_path_dataset = self.parsePath(dataset)
+                            self.datasets.append(dataset)
 
-                                # dataset_name = self.getDatasetName(abs_path_dataset)
-                                #
-                                # print(f"Url: {self.connector.getObjectUrl(key=dataset_name, bucket=bucket_name)}")
-                                #
-                                # self.assignVisitor.datasets_urls.append({"dataset_name": dataset,
-                                #                                          "url": self.connector.getObjectUrl(
-                                #                                              key=dataset_name, bucket=bucket_name)})
-                                #
-                                # self.connector.uploadFile(path=abs_path_dataset, bucket=bucket_name)
+                            # dataset_name = self.getDatasetName(abs_path_dataset)
+                            #
+                            # print(f"Url: {self.connector.getObjectUrl(key=dataset_name, bucket=bucket_name)}")
+                            #
+                            # self.assignVisitor.datasets_urls.append({"dataset_name": dataset,
+                            #                                          "url": self.connector.getObjectUrl(
+                            #                                              key=dataset_name, bucket=bucket_name)})
+                            #
+                            # self.connector.uploadFile(path=abs_path_dataset, bucket=bucket_name)
 
             except (TypeError, KeyError) as e:
                 self.logger.error(e)

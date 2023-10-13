@@ -48,13 +48,13 @@ class Stork:
         # self.setResource(self.access_key, self.secret_access_key)
 
         self.setPipeline(pipeline=pipeline)
-        self.assignVisitor.setLoggerConfig("amazon-reviews.log", "test", logging.INFO)
+        self.assignVisitor.setLoggerConfig("test-reviews.log", "test", logging.INFO)
 
         tree = util.getAst(pipeline=pipeline)
         self.assignVisitor.visit(tree)
-        self.assignVisitor.replace_variables_in_assignments()
         self.assignVisitor.filter_Assignments()
-        # self.assignVisitor.filter_datasets()
+        self.assignVisitor.replace_variables_in_assignments()
+        # self.assignVisitor.getDatasetsFromInputs()
 
         repo_name = self.assignVisitor.parseRepoName(self.assignVisitor.getRepositoryName())
         buckets = self.connector.getBucketNames()
@@ -134,8 +134,8 @@ if __name__ == '__main__':
     # unzip(repo_path=repo_path)
     # pipeline = f"{repo_path[:-4]}/table_ocr-master/Evaluations/Tablebank/evaluation.py"
 
-    # pipeline = '/home/ilint/HPI/repos/stork/examples/sample_pipelines/var_retrieval/data_read_test.py'
-    pipeline = "/home/ilint/HPI/repos/pipelines/trial/arguseyes/arguseyes/example_pipelines/amazon-reviews.py"
+    pipeline = '/home/ilint/HPI/repos/stork/examples/sample_pipelines/var_retrieval/data_read_test.py'
+    # pipeline = "/home/ilint/HPI/repos/pipelines/trial/arguseyes/arguseyes/example_pipelines/amazon-reviews.py"
 
     stork.setup(pipeline = pipeline, new_pipeline="new_amazon_reviews.py")
     util.reportAssign(stork.pipeline, stork.assignVisitor.assignments, "full")
