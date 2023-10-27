@@ -11,25 +11,40 @@ from log_results import createLoggerPlain
 
 
 def get_packages(filepath):
-    DATA_PROCESSING_LIBRARIES = ['numpy', 'pandas', 'cudf', 'pyspark', 'spark', 'dask', 'arrow', 'duckdb', 'modin',
-                                 'polars', 'dplyr',
-                                 'clickhouse_connect', 'datatable']
-    ML_LIBRARIES = ['scikit_learn', "torch", "torchvision", "torchaudio", "tensorflow", "tensorboard", "keras",
-                    'theano']
-    flag = False
     packages_per_file = []
     with open(f"{filepath}", "r") as file:
         for line in file.readlines():
             package = line.split("==")[0]
             package = package.split("<")[0]
             package = package.split(">")[0]
-            package = package.strip()
-            if package in DATA_PROCESSING_LIBRARIES or ML_LIBRARIES:
-                flag = True
+            package = package.strip().lower()
             packages_per_file.append(package)
     file.close()
-    return flag, packages_per_file
+    # print(f"filepath: {filepath}, packages_per_file: {packages_per_file}")
+    return packages_per_file
 
+def contains_dpf(package_list):
+    DATA_PROCESSING_LIBRARIES = ['numpy', 'pandas', 'cudf', 'pyspark', 'spark', 'dask', 'arrow', 'duckdb', 'modin',
+                                 'polars', 'dplyr', 'clickhouse_connect', 'datatable', 'sqlalchemy', 'psycopg2_binary',
+                                 'pymysql', 'mysql_connector_repackaged', 'MySQL-python', 'aiomysql', 'django_mysql',
+                                 'mysqlclient']
+    flag = False
+    for package in package_list:
+        if package in DATA_PROCESSING_LIBRARIES:
+            flag = True
+            return flag
+    return flag
+
+def contains_mlf(package_list):
+    ML_LIBRARIES = ['scikit_learn', 'torch', 'torchvision', 'torchaudio', 'tensorflow', 'tensorboard', "keras",
+                    'theano']
+
+    flag = False
+    for package in package_list:
+        if package in ML_LIBRARIES:
+            flag = True
+            return flag
+    return flag
 
 def parse_requirement(requirements_files, package_count, results_path, repositories_path, flagged_repositories,
                       num_threads, thread_id):
@@ -40,24 +55,25 @@ def parse_requirement(requirements_files, package_count, results_path, repositor
     packages_list = []
 
     if thread_id == num_threads - 1:
-        end_index = package_count - 1
+        end_index = package_count
 
     for i in range(start_index, end_index):
-        flagged, packages_from_file = get_packages(requirements_files[i])
+        packages_from_file = get_packages(requirements_files[i])
+        # print(packages_from_file)
         requirements_file = get_filename(requirements_files[i])
-        if flagged:
-            flagged_repositories.info(msg=f"{repositories_path}{requirements_file}")
+        if contains_dpf(packages_from_file) or contains_mlf(packages_from_file):
+            flagged_repositories.info(msg=f"{requirements_files[i]}")
         total_packages[requirements_file] = packages_from_file
 
         packages_list.extend(packages_from_file)
 
     occurrences = Counter(packages_list)
-    print(total_packages)
     with open(f"{results_path}/occurrences/occurrences-thread-{thread_id}.csv", "w") as file:
         file.write("library,count\n")
         for library, count in occurrences.items():
             if library == "":
                 continue
+            # print(f"library: {str(library)}, count {str(count)}")
             file.write(f'{str(library)},{str(count)}\n')
     file.close()
 
@@ -90,6 +106,7 @@ def main(args):
     processes = []
     os.makedirs(f"{args.outputs}/occurrences/", exist_ok=True)
     os.makedirs(f"{args.outputs}/flagged/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/missing/", exist_ok=True)
     for i in range(0, int(NUM_THREADS)):
         flagged_repositories = createLoggerPlain(filename=f"{args.outputs}/flagged/flagged_repositories-{i}.log",
                                                  project_name=f"flagged_repositories-{i}", level=logging.INFO)
@@ -116,9 +133,9 @@ if __name__ == '__main__':
     )
 
     parser.add_argument('-t', '--threads', default=12)
-    parser.add_argument('-p', '--packages')
-    parser.add_argument('-o', '--outputs')
-    parser.add_argument('-r', '--repositories')
+    parser.add_argument('-p', '--packages', default='/home/ilint/HPI/Stork/results/27-10-stork-100k/packages-mini/')
+    parser.add_argument('-o', '--outputs', default='/home/ilint/HPI/Stork/results/27-10-stork-100k/outputs-mini/')
+    parser.add_argument('-r', '--repositories', default='/home/ilint/HPI/Stork/results/27-10-stork-100k/packages-mini/')
 
     args = parser.parse_args()
     main(args)

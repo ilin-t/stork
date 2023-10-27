@@ -24,6 +24,8 @@ class AssignVisitor(ast.NodeVisitor):
         self.datasets_urls = []
         self.logger = None
         self.variables = []
+        self.read_methods={'raw_string': [], 'variable': [], 'external': []}
+        self.datasets_read_methods = {'raw_string': [], 'variable': [], 'external': []}
 
     def direct_visit(self, parent_object, node, towards):
         try:
@@ -270,12 +272,14 @@ class AssignVisitor(ast.NodeVisitor):
                 for source in assignment["data_source"]:
                     if self.keepDataSource(data_source=source) and assignment not in self.inputs:
                         self.inputs.append(assignment)
+                        self.read_methods['raw_string'].append(assignment)
                     data_file_from_var = self.retrieve_variable_from_assignment(assignment=assignment,
                                                                                 assignment_list=self.assignments)
                     # print(f"Data file from var: {data_file_from_var}")
                     new_assignment = self.var_assignment_to_input(var_assignment=data_file_from_var,
                                                                   assignment=assignment)
                     if new_assignment and new_assignment not in self.inputs:
+                        self.read_methods['variable'].append(new_assignment)
                         self.inputs.append(new_assignment)
             self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
         except (AttributeError, KeyError, TypeError) as e:
@@ -304,14 +308,14 @@ class AssignVisitor(ast.NodeVisitor):
         try:
             data_path = var_assignment['data_source']
             for source in assignment['data_source']:
-                print(
-                    f"var_assignment['variable']: {var_assignment['variable']}, source['data_file']: {source['data_file']})")
-                print(
-                    f"var_assignment['variable']: {assignment['variable']}, source['data_file']: {source['data_file']})")
+                self.logger.info(
+                    f"var_assignment['variable']: {var_assignment['variable']}, source['data_file']: {data_path}, var_assignment: {var_assignment}")
+                self.logger.info(
+                    f"assignment['variable']: {assignment['variable']}, source['data_file']: {source['data_file']})")
                 if self.has_data_file_single_source(source=source) and (
                         var_assignment['variable'] == source['data_file'][0]):
                     source['data_file'] = data_path
-                    print(f"New assignment: {assignment}")
+                    self.logger.info(f"New assignment: {assignment}")
                     break
         except TypeError as e:
             self.logger.error(e)
@@ -631,6 +635,29 @@ class AssignVisitor(ast.NodeVisitor):
     #         else:
     #             continue
 
+    # def transformScript(self, script, new_script):
+    #     temp = self.datasets_urls
+    #
+    #     with open(new_script, "w") as new:
+    #         with open(script, "r") as old:
+    #             row_old = iter(old)
+    #             for row in row_old:
+    #                 for source in temp:
+    #                     dataset_name = self.getDatasetName(source['dataset_name'])
+    #                     if source['dataset_name'] in row:
+    #                         row = row.replace(source['dataset_name'], source['url'])
+    #                         temp.remove(source)
+    #                     elif dataset_name in row:
+    #                         # for i in range(0, len(source["dataset"])):
+    #                         matches = re.search(f".[=]{dataset_name}", row)
+    #                         # print(f"Matches: {matches.string}")
+    #                         # row = row.replace(re.search(f".{dataset_name}, source["url"])
+    #                         temp.remove(source)
+    #
+    #                 new.write(row)
+    #             old.close()
+    #         new.close()
+
     def transformScript(self, script, new_script):
         temp = self.datasets_urls
 
@@ -638,15 +665,21 @@ class AssignVisitor(ast.NodeVisitor):
             with open(script, "r") as old:
                 row_old = iter(old)
                 for row in row_old:
+                    # row_parts = row.strip().split("=")
                     for source in temp:
-                        if source["dataset_name"] in row:
-                            # for i in range(0, len(source["dataset"])):
-                            row = row.replace(source["dataset_name"], source["url"])
+                        dataset_name = self.getDatasetName(source['dataset_name'])
+                        if isinstance(source['variable'], dict):
+                            source['variable'] = f"{source['variable']['from']}.{source['variable']['method']}"
+                        if source['variable'] in row:
+                            row = row.replace(source['dataset_name'], source['url'])
                             temp.remove(source)
-
+                        elif dataset_name in row:
+                            row = row.replace(source['dataset_name'], source["url"])
+                            temp.remove(source)
                     new.write(row)
                 old.close()
             new.close()
+
 
     def getDatasetsFromInputs(self):
         for member in self.inputs:
@@ -654,24 +687,27 @@ class AssignVisitor(ast.NodeVisitor):
                 for source in member["data_source"]:
                     for dataset in source["data_file"]:
                         if util.checkFileExtension(dataset):
-                            # if log_modules.checkDataFile(dataset):
-                            # abs_path_dataset = self.parsePath(dataset)
-                            self.datasets.append(dataset)
-
-                            # dataset_name = self.getDatasetName(abs_path_dataset)
-                            #
-                            # print(f"Url: {self.connector.getObjectUrl(key=dataset_name, bucket=bucket_name)}")
-                            #
-                            # self.assignVisitor.datasets_urls.append({"dataset_name": dataset,
-                            #                                          "url": self.connector.getObjectUrl(
-                            #                                              key=dataset_name, bucket=bucket_name)})
-                            #
-                            # self.connector.uploadFile(path=abs_path_dataset, bucket=bucket_name)
+                            self.datasets.append({'variable': member['variable'], 'dataset': dataset, 'lineno': member['lineno']})
 
             except (TypeError, KeyError) as e:
                 self.logger.error(e)
 
         return self.datasets
+
+    def getDatasetsFromReadMethods(self):
+        for key in self.read_methods.keys():
+            for member in self.read_methods[key]:
+                try:
+                    for dataset in self.datasets:
+                        if member['variable'] == dataset['variable'] and dataset not in self.datasets_read_methods[key]:
+                            self.datasets_read_methods[key].append(dataset)
+
+                except (TypeError, KeyError) as e:
+                    self.logger.error(e)
+
+        return self.datasets_read_methods
+
+
 
     # def uploadDatasets(self, bucket):
     #     for dataset in self.datasets:
@@ -714,3 +750,9 @@ class AssignVisitor(ast.NodeVisitor):
 
     def clearDatasetUrls(self):
         self.datasets_urls = []
+
+    def clearDatasetReadMethods(self):
+        self.datasets_read_methods = {'raw_string': [], 'variable': [], 'external': []}
+
+    def clearReadMethods(self):
+        self.read_methods = {'raw_string': [], 'variable': [], 'external': []}

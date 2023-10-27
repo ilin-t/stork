@@ -59,7 +59,7 @@ def run_stork(python_files, pipeline_logger, error_logger):
         pipeline_logger.info(f"Pipeline: {py_file}")
         tree = []
         stork.assignVisitor.setLogger(error_logger)
-        stork.assignVisitor.setLoggerConfig("test_logger.log", "test", logging.INFO)
+        # stork.assignVisitor.setLoggerConfig("test_logger.log", "test", logging.INFO)
 
         try:
             tree = util.getAst(pipeline=py_file)
@@ -80,6 +80,7 @@ def run_stork(python_files, pipeline_logger, error_logger):
         stork.assignVisitor.filter_Assignments()
         stork.assignVisitor.replace_variables_in_assignments()
         stork.assignVisitor.getDatasetsFromInputs()
+        stork.assignVisitor.getDatasetsFromReadMethods()
 
         # Add inputs and datasets to the global assignments and datasets dictionary
         stork.assignments[py_file] = stork.assignVisitor.inputs
@@ -93,13 +94,19 @@ def run_stork(python_files, pipeline_logger, error_logger):
         print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
         pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
         for input in stork.assignVisitor.inputs:
-            pipeline_logger.info(f"\t {input}")
+            pipeline_logger.info(f"\t Input: {input}")
             # print(f"Input: {input}")
         pipeline_logger.info("________________________________________________")
+        pipeline_logger.info("Datasets: ")
         for dataset in stork.assignVisitor.datasets:
             pipeline_logger.info(f"\t {dataset}")
         pipeline_logger.info("________________________________________________")
 
+        for key in stork.assignVisitor.datasets_read_methods.keys():
+            pipeline_logger.info(f"Datasets in {py_file} read via {key}")
+            for dset_read_method in stork.assignVisitor.datasets_read_methods[key]:
+                pipeline_logger.info(f"\t {dset_read_method}")
+            pipeline_logger.info("\t ________________________________________________")
         repo_name = stork.assignVisitor.parseRepoName(stork.assignVisitor.getRepositoryName())
         buckets = stork.connector.getBucketNames()
         bucket_name = "stork-storage"
@@ -118,37 +125,49 @@ def run_stork(python_files, pipeline_logger, error_logger):
         #             if util.checkFileExtension(dataset):
         # print(f"dataset:{dataset}")
         try:
+            print(stork.datasets[py_file])
             for dataset in stork.datasets[py_file]:
-                print(f"Dataset: {dataset}")
-                if util.checkDataFile(dataset):
-                    abs_path_dataset = stork.assignVisitor.parsePath(dataset)
+                print(f"Dataset: {dataset['dataset']}")
+                if util.checkFileExtension(dataset['dataset']):
+                    abs_path_dataset = stork.assignVisitor.parsePath(dataset['dataset'])
                     print(f"Source data file:{abs_path_dataset}")
+                    # stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, bucket=bucket_name)
                     stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, bucket=bucket_name)
                     dataset_name = stork.assignVisitor.getDatasetName(abs_path_dataset)
 
-                    # print(f"Url: {stork.connector.getObjectUrl(key=dataset_name,folder=repo_name, bucket=bucket_name)}")
-                    stork.assignVisitor.datasets_urls.append({"dataset_name": dataset,
-                                                              "url": stork.connector.getObjectUrl(
-                                                                  key=dataset_name, folder=repo_name,
-                                                                  bucket=bucket_name)})
+                    print(f"Url: {stork.connector.getObjectUrl(key=dataset_name,folder=repo_name, bucket=bucket_name)}")
+                    # stork.assignVisitor.datasets_urls.append({"dataset_name": dataset,
+                    #                                           "url": stork.connector.getObjectUrl(
+                    #                                               key=dataset_name, folder=repo_name,
+                    #                                               bucket=bucket_name)})
+
+                    stork.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset['dataset'],
+                                                             "url": stork.connector.getObjectUrl(
+                                                                 key=dataset_name, folder=repo_name,
+                                                                 bucket=bucket_name), "lineno": dataset['lineno']})
+
             pipeline_logger.info(f"Pipeline data set urls {stork.assignVisitor.datasets_urls}")
             stork.datasets_urls[py_file] = stork.assignVisitor.datasets_urls
+            stork.read_methods[py_file] = stork.assignVisitor.read_methods
+            stork.datasets_read_methods[py_file] = stork.assignVisitor.datasets_read_methods
 
         except (TypeError, KeyError) as e:
             pipeline_logger.error(e)
 
         # self.assignVisitor.getDatasetsFromInputs()
         # self.assignVisitor.uploadDatasets(bucket=bucket_name)
-        print(f"Datasets_urls {py_file}: {stork.datasets_urls[py_file]}")
-        # stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline)
+        # print(f"Datasets_urls {py_file}: {stork.datasets_urls[py_file]}")
+        stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline)
         print(f"Datasets_urls complete: {stork.datasets_urls}")
         util.reportAssign(stork.pipeline, stork.assignVisitor.assignments, "full")
         stork.assignVisitor.clearAssignments()
         stork.assignVisitor.clearInputs()
         stork.assignVisitor.clearDatasets()
         stork.assignVisitor.clearDatasetUrls()
-    # print(stork.assignments)
-    print(stork.datasets)
+        stork.assignVisitor.clearDatasetReadMethods()
+        stork.assignVisitor.clearReadMethods()
+        # print(stork.assignments)
+        # print(stork.datasets)
 
 
 def traverse_folders(path, project_logger, error_logger):
@@ -169,14 +188,14 @@ def traverse_folders(path, project_logger, error_logger):
 
 
 def main(args):
-    # repositories = collect_resources(root_folder=args.repositories)
-    repositories = ["/home/ilint/HPI/repos/pipelines/trial/arguseyes.zip"]
+    repositories = collect_resources(root_folder=args.repositories)
+    # repositories = ["/home/ilint/HPI/repos/pipelines/trial/arguseyes.zip"]
     print(repositories)
     error_log = createLogger(filename=f"{args.outputs}/logs/errors.log", project_name="error_log", level=logging.ERROR)
     for repository in repositories:
-        # parent_dir, repo_name = unzip(repo_path=repository)
-        # projects = filter_folders(f"{parent_dir}/{repo_name}")
-        projects = filter_folders(f"/home/ilint/HPI/repos/pipelines/trial/arguseyes/")
+        parent_dir, repo_name = unzip(repo_path=repository)
+        projects = filter_folders(f"{parent_dir}/{repo_name}")
+        # projects = filter_folders(f"/home/ilint/HPI/repos/pipelines/trial/arguseyes/")
         for project in projects:
             project_name = os.path.split(project)[1]
             print("________________________________________________________________________________________")
@@ -193,9 +212,11 @@ if __name__ == '__main__':
         description='Run Stork on a set of repositories',
     )
 
-    parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/trial/")
-    parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/pipelines/results-trial/")
-
+    # parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/trial/")
+    # parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/pipelines/results-trial/")
+    # parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/stork-zip-2days/repositories-test/")
+    parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/Stork/results/27-10-stork-100k/repositories-mini/")
+    parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/Stork/results/27-10-stork-100k/")
     args = parser.parse_args()
     os.makedirs(f"{args.outputs}/logs", exist_ok=True)
     main(args)

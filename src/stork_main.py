@@ -28,6 +28,8 @@ class Stork:
         self.assignments = {}
         self.datasets = {}
         self.datasets_urls = {}
+        self.read_methods = {}
+        self.datasets_read_methods = {}
 
     def setPipeline(self, pipeline):
         self.pipeline = pipeline
@@ -54,7 +56,8 @@ class Stork:
         self.assignVisitor.visit(tree)
         self.assignVisitor.filter_Assignments()
         self.assignVisitor.replace_variables_in_assignments()
-        # self.assignVisitor.getDatasetsFromInputs()
+        self.assignVisitor.getDatasetsFromInputs()
+        self.assignVisitor.getDatasetsFromReadMethods()
 
         repo_name = self.assignVisitor.parseRepoName(self.assignVisitor.getRepositoryName())
         buckets = self.connector.getBucketNames()
@@ -66,7 +69,7 @@ class Stork:
         #     print(f"Should create bucket: {bucket_name}")
 
         for member in self.assignVisitor.inputs:
-            print(f"variable: {member['variable']}")
+            # print(f"variable: {member['variable']}")
             for source in member["data_source"]:
                 print(f"source: {source}")
                 try:
@@ -78,18 +81,15 @@ class Stork:
 
                                 abs_path_dataset = self.assignVisitor.parsePath(dataset)
                                 print(f"Source data file:{abs_path_dataset}")
-                                self.connector.uploadFile(path=abs_path_dataset, bucket=bucket_name)
+                                self.connector.uploadFile(path=abs_path_dataset, folder="test-folder", bucket=bucket_name)
                                 dataset_name = self.assignVisitor.getDatasetName(abs_path_dataset)
 
-                                print(f"Url: {self.connector.getObjectUrl(key=dataset_name, bucket=bucket_name)}")
-                                self.assignVisitor.datasets_urls.append({"dataset_name": dataset,
+                                print(f"Url: {self.connector.getObjectUrl(key=dataset_name, folder='test-folder', bucket=bucket_name)}")
+                                self.assignVisitor.datasets_urls.append({"variable": member['variable'], "dataset_name": dataset,
                                                                          "url": self.connector.getObjectUrl(
-                                                                             key=dataset_name, bucket=bucket_name)})
+                                                                             key=dataset_name, folder='test-folder', bucket=bucket_name), "lineno": member['lineno']})
 
-                except TypeError as e:
-                    print(e)
-
-                except KeyError as e:
+                except (TypeError, KeyError) as e:
                     print(e)
 
         # self.assignVisitor.getDatasetsFromInputs()
@@ -138,4 +138,13 @@ if __name__ == '__main__':
     # pipeline = "/home/ilint/HPI/repos/pipelines/trial/arguseyes/arguseyes/example_pipelines/amazon-reviews.py"
 
     stork.setup(pipeline = pipeline, new_pipeline="new_amazon_reviews.py")
+    print(stork.assignVisitor.inputs)
+    # print(stork.datasets)
+    # print(stork.assignments)
+    print(stork.assignVisitor.datasets)
+    print(stork.assignVisitor.read_methods)
+    print(stork.assignVisitor.datasets_read_methods)
+    # print(stork.assignVisitor.datasets_urls)
+    # print(stork.datasets_urls)
+    # print(stork.assignVisitor)
     util.reportAssign(stork.pipeline, stork.assignVisitor.assignments, "full")
