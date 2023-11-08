@@ -30,26 +30,30 @@ def topX(df, X, output_file):
         subset = df.iloc[:X][:]
     else:
         subset = df
-    if max(subset["count"]) == 0:
-        return 0
-    else:
-        print(subset)
-        plt.figure(figsize=(11, 5))
-        plt.bar(x=subset["library"], height=subset["count"], width=0.8, align='center',
-                label="Usage of Python Packages across Repositories")
-        addlabels(x=subset["library"], y=subset["count"])
-        # plt.xlabel("Python Packages")
-        plt.ylabel("# of Occurences")
-        plt.ylim(0, max(subset["count"]) + 10)
-        plt.xlim([-0.75, len(subset["library"]) - 0.25])
-        plt.xticks(rotation=60)
+    try:
+        if max(subset["count"]) == 0:
+            return 0
+        else:
+            print(subset)
+            plt.figure(figsize=(11, 5))
+            plt.bar(x=subset["library"], height=subset["count"], width=0.8, align='center',
+                    label="Usage of Python Packages across Repositories")
+            addlabels(x=subset["library"], y=subset["count"])
+            # plt.xlabel("Python Packages")
+            plt.ylabel("# of Occurences")
+            plt.ylim(0, max(subset["count"]) + 10)
+            plt.xlim([-0.75, len(subset["library"]) - 0.25])
+            plt.xticks(rotation=60)
 
-        plt.yticks(range(0, (max(subset["count"]) + (max(subset["count"]) // 5)),
-                         ((max(subset["count"]) + max(subset["count"]) // 10) // 5) + 1))
-        plt.rcParams.update({'font.size': 18})
-        plt.tight_layout()
-        # plt.show()
-        plt.savefig(fname=output_file, dpi=300, pad_inches=0)
+            plt.yticks(range(0, (max(subset["count"]) + (max(subset["count"]) // 5)),
+                             ((max(subset["count"]) + max(subset["count"]) // 10) // 5) + 1))
+            plt.rcParams.update({'font.size': 18})
+            plt.tight_layout()
+            # plt.show()
+            plt.savefig(fname=output_file, dpi=300, pad_inches=0)
+
+    except ValueError as e:
+        print(e)
 
 
 def yearly_splits(years, nr_repos, output_file):
@@ -245,19 +249,19 @@ def plot_lines_df(df_list, libs, libgroup):
 #     plot_libs(df=occurrences_df, libraries=libraries, output_file=f"{args.path}{database_driver_libs.__name__}.pdf")
 
 def main(args):
-    # os.makedirs(f"{args.outputs}/plots/", exist_ok=True)
-    # occurrences_df = pd.read_csv(filepath_or_buffer=f"{args.outputs}/occurrences/library_count_all_threads.csv",
-    #                              header=0)
-    #
-    # topX(df=occurrences_df, X=20, output_file=f"{args.outputs}/plots/top{20}.svg")
-    occurrences_df = pd.read_csv("../../analysis_results/yearly_splits/occurences_summed.csv")
-    topX(df=occurrences_df, X=20, output_file="../../analysis_results/plots/top20.png")
-    # plot_data_analysis_libs(occurrences_df)
-    # plot_machine_learning_libs(occurrences_df)
-    # plot_visualization_libs(occurrences_df)
-    # plot_web_framework_libs(occurrences_df)
-    # plot_postgres_drivers_libs(occurrences_df)
-    # plot_db_libs(occurrences_df)
+    os.makedirs(f"{args.outputs}/plots/", exist_ok=True)
+    occurrences_df = pd.read_csv(filepath_or_buffer=f"{args.outputs}/occurrences/library_count_all_threads.csv",
+                                 header=0)
+
+    topX(df=occurrences_df, X=20, output_file=f"{args.outputs}/plots/top{20}.svg")
+    # occurrences_df = pd.read_csv("../../analysis_results/yearly_splits/occurences_summed.csv")
+    # topX(df=occurrences_df, X=20, output_file="../../analysis_results/plots/top20.png")
+    plot_data_analysis_libs(occurrences_df)
+    plot_machine_learning_libs(occurrences_df)
+    plot_visualization_libs(occurrences_df)
+    plot_web_framework_libs(occurrences_df)
+    plot_postgres_drivers_libs(occurrences_df)
+    plot_db_libs(occurrences_df)
 
     years = ['2018', '2019', '2020', '2021', '2022', '2023']
     nr_repos = [65648, 65440, 54924, 115288, 107436, 85785]
@@ -271,18 +275,18 @@ def main(args):
     dm_libs = ['numpy', 'pandas', 'scipy', 'sqlalchemy']
     ml_libs = ['sklearn', 'tensorflow', 'keras', 'torch']
 
-    numpy_counts = aggregate_counts_per_year(library='numpy', start_year=2018, end_year=2023)
-    sklearn_counts = aggregate_counts_per_year(library='scikit_learn', start_year=2018, end_year=2023)
-    pandas_counts = aggregate_counts_per_year(library='pandas', start_year=2018, end_year=2023)
-    scipy_counts = aggregate_counts_per_year(library='scipy', start_year=2018, end_year=2023)
-    tf_counts = aggregate_counts_per_year(library='tensorflow', start_year=2018, end_year=2023)
-    sqlalchemy_counts = aggregate_counts_per_year(library='SQLAlchemy', start_year=2018, end_year=2023)
-    keras_counts = aggregate_counts_per_year(library='keras', start_year=2018, end_year=2023)
-    torchvision_counts = aggregate_counts_per_year(library='torchvision', start_year=2018, end_year=2023)
-    torch_counts = aggregate_counts_per_year(library='torch', start_year=2018, end_year=2023)
+    # numpy_counts = aggregate_counts_per_year(library='numpy', start_year=2018, end_year=2023)
+    # sklearn_counts = aggregate_counts_per_year(library='scikit_learn', start_year=2018, end_year=2023)
+    # pandas_counts = aggregate_counts_per_year(library='pandas', start_year=2018, end_year=2023)
+    # scipy_counts = aggregate_counts_per_year(library='scipy', start_year=2018, end_year=2023)
+    # tf_counts = aggregate_counts_per_year(library='tensorflow', start_year=2018, end_year=2023)
+    # sqlalchemy_counts = aggregate_counts_per_year(library='SQLAlchemy', start_year=2018, end_year=2023)
+    # keras_counts = aggregate_counts_per_year(library='keras', start_year=2018, end_year=2023)
+    # torchvision_counts = aggregate_counts_per_year(library='torchvision', start_year=2018, end_year=2023)
+    # torch_counts = aggregate_counts_per_year(library='torch', start_year=2018, end_year=2023)
 
     # plot_lines_df([numpy_counts, pandas_counts, scipy_counts, sqlalchemy_counts], dm_libs, libgroup='dm_libs')
-    plot_lines_df([sklearn_counts, tf_counts, keras_counts, torch_counts], ml_libs, libgroup='ml_libs')
+    # plot_lines_df([sklearn_counts, tf_counts, keras_counts, torch_counts], ml_libs, libgroup='ml_libs')
 
 
 
@@ -296,12 +300,12 @@ def main(args):
     # bar_plot_df(df=torchvision_counts, library='torchvision', output_file='torchvision_yearly_18_23.png')
     # bar_plot_df(df=sqlalchemy_counts, library='SQLAlchemy', output_file='sqlalchemy_yearly_18_23.png')
     # bar_plot_df(df=keras_counts, library='keras', output_file='../../analysis_results/plots/keras_yearly_18_23.png')
-    # # yearly_splits(years=numpy_counts.index, nr_repos=numpy_counts['count'].values, output_file='numpy_yearly_18_23_1.png')
+    # yearly_splits(years=numpy_counts.index, nr_repos=numpy_counts['count'].values, output_file='numpy_yearly_18_23_1.png')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    # parser.add_argument('-o', '--outputs', help="The path to the library counts")
+    parser.add_argument('-o', '--outputs', help="The path to the library counts")
     args = parser.parse_args()
 
     main(args)
