@@ -23,6 +23,7 @@ def get_packages(filepath):
     # print(f"filepath: {filepath}, packages_per_file: {packages_per_file}")
     return packages_per_file
 
+
 def contains_dpf(package_list):
     DATA_PROCESSING_LIBRARIES = ['numpy', 'pandas', 'cudf', 'pyspark', 'spark', 'dask', 'arrow', 'duckdb', 'modin',
                                  'polars', 'dplyr', 'clickhouse_connect', 'datatable', 'sqlalchemy', 'psycopg2_binary',
@@ -35,6 +36,7 @@ def contains_dpf(package_list):
             return flag
     return flag
 
+
 def contains_mlf(package_list):
     ML_LIBRARIES = ['scikit_learn', 'torch', 'torchvision', 'torchaudio', 'tensorflow', 'tensorboard', "keras",
                     'theano']
@@ -45,6 +47,7 @@ def contains_mlf(package_list):
             flag = True
             return flag
     return flag
+
 
 def parse_requirement(requirements_files, package_count, results_path, repositories_path, flagged_repositories,
                       num_threads, thread_id):

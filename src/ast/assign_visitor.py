@@ -14,6 +14,7 @@ class AssignVisitor(ast.NodeVisitor):
     def __init__(self):
         self.pipeline = ""
         self.assignment = {"variable": str, "data_source": [], }
+        self.imports= {}
         self.inputs = []
         self.assignments = []
         self.func_definitions = []
@@ -45,6 +46,18 @@ class AssignVisitor(ast.NodeVisitor):
                       f"error message: {e}")
         except TypeError as e:
             self.logger.error(e)
+
+    def visit_Import(self, node):
+        for alias in node.names:
+            self.imports.append({"import" : alias.name})
+        self.generic_visit(node)
+
+    def visit_ImportFrom(self, node):
+        temp = {"from": node.module, "import": []}
+        for alias in node.names:
+            temp["import"].append(alias.name)
+        self.imports.append({"from": temp})
+        self.generic_visit(node)
 
     def visit_With(self, node):
         # items = self.direct_visit(self, node, node.items)

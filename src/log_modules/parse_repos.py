@@ -35,7 +35,7 @@ def unzip(repo_path):
     parent_dir = os.path.dirname(repo_path)
     repo_name = os.path.basename(repo_path).split(".")[0]
     os.makedirs(f"{parent_dir}/{repo_name}", exist_ok=True)
-    os.system(f"unzip -u {repo_path} -d {parent_dir}/{repo_name} "
+    os.system(f"unzip -qq -u {repo_path} -d {parent_dir}/{repo_name} "
               f"-x 'bin/*' 'www' 'js' 'virtual' '*virtual*' 'dist-packages' 'site-packages' "
               f"'*env*' 'env' 'etc/*' 'include/*' 'lib/*' 'lib64/*' '.venv/*' '*/venv/*'")
 

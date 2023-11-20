@@ -1,10 +1,15 @@
-Filter out the data processing pipelines that are using native python
+Filter out the data processing pipelines that are using native python (done)
 Filter out all repositories that are using data processing frameworks (done)
-Show that import of pandas is actually processing data (false positives)
-    - Count how many repositories actually read data!
+Show that import of pandas is actually processing data (false positives) (done)
+    - Count how many repositories actually read data! (done)
 
-How many pipelines are redaing data? (native + DPF)
+How many pipelines are reading data? (native + DPF) (done)
 What are the ways in which data is being read?
+
+Coverage of Stork on the full set of pipelines.
+    - Yearly breakdown
+    - Percentage of repositories that read data
+    - Categorize data reading methods
 
 Methods of interest:
     - numpy: load, loadtxt, genfromtxt, fromfile

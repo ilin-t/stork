@@ -25,3 +25,10 @@ def createLoggerPlain(filename, project_name, level):
     logger.addHandler(handler)
 
     return logger
+
+
+def closeLog(logger):
+    handlers = logger.handlers[:]
+    for handler in handlers:
+        logger.removeHandler(handler)
+        handler.close()
