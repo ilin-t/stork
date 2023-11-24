@@ -132,7 +132,8 @@ def run_stork(python_files, pipeline_logger, error_logger):
                     abs_path_dataset = stork.assignVisitor.parsePath(dataset['dataset'])
                     print(f"Source data file:{abs_path_dataset}")
                     # stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, bucket=bucket_name)
-                    stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, bucket=bucket_name)
+                    stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, logger="dataset_logger",
+                                               bucket=bucket_name)
                     dataset_name = stork.assignVisitor.getDatasetName(abs_path_dataset)
 
                     print(f"Url: {stork.connector.getObjectUrl(key=dataset_name,folder=repo_name, bucket=bucket_name)}")

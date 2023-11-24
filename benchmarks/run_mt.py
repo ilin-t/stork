@@ -1,12 +1,15 @@
 import argparse
 import logging
 import os
+import shutil
 from multiprocessing import Process
 from os.path import basename, normpath
 
+from src.log_modules.flag_repositories import get_repository_list
 from src.stork_main import Stork
 from src.log_modules import util
-from src.log_modules.parse_repos import collect_resources, unzip, delete_repo, start_processes, join_processes
+from src.log_modules.parse_repos import collect_resources, unzip, delete_repo, start_processes, join_processes, \
+    aggregate_repositories
 from src.log_modules.log_results import createLogger, closeLog
 
 
@@ -53,8 +56,8 @@ def filter_folders(project_path):
     return folders
 
 
-def run_stork(python_files, pipeline_logger, error_logger):
-    stork = Stork(r"../src/db_conn/config_s3.ini")
+def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger, files_logger, error_logger):
+    stork = Stork(r"/hpi/fs00/share/fg/rabl/ilin.tolovski/projects/stork/src/db_conn/config_s3.ini")
     stork.setClient(stork.access_key, stork.secret_access_key)
 
     for py_file in python_files:
@@ -79,10 +82,13 @@ def run_stork(python_files, pipeline_logger, error_logger):
             stork.assignVisitor.visit(tree)
         except (AttributeError, KeyError, TypeError) as e:
             pipeline_logger.error(e)
-        stork.assignVisitor.filter_Assignments()
-        stork.assignVisitor.replace_variables_in_assignments()
-        stork.assignVisitor.getDatasetsFromInputs()
-        stork.assignVisitor.getDatasetsFromReadMethods()
+        try:
+            stork.assignVisitor.filter_Assignments()
+            stork.assignVisitor.replace_variables_in_assignments()
+            stork.assignVisitor.getDatasetsFromInputs()
+            stork.assignVisitor.getDatasetsFromReadMethods()
+        except RecursionError as e:
+            pipeline_logger.info(e)
 
         # Add inputs and datasets to the global assignments and datasets dictionary
         stork.assignments[py_file] = stork.assignVisitor.inputs
@@ -95,10 +101,10 @@ def run_stork(python_files, pipeline_logger, error_logger):
         pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
         print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
         pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
-        for input in stork.assignVisitor.inputs:
-            pipeline_logger.info(f"\t Input: {input}")
-            # print(f"Input: {input}")
-        pipeline_logger.info("________________________________________________")
+        # for input in stork.assignVisitor.inputs:
+        #     pipeline_logger.info(f"\t Input: {input}")
+        #     # print(f"Input: {input}")
+        # pipeline_logger.info("________________________________________________")
         pipeline_logger.info("Datasets: ")
         for dataset in stork.assignVisitor.datasets:
             pipeline_logger.info(f"\t {dataset}")
@@ -119,7 +125,6 @@ def run_stork(python_files, pipeline_logger, error_logger):
         #     self.connector.createBucket(bucket_name=bucket_name, region="eu-central-1")
         #     print(f"Should create bucket: {bucket_name}")
 
-
         # try:
         # for member in stork.assignVisitor.inputs:
         #     for source in member["data_source"]:
@@ -128,32 +133,35 @@ def run_stork(python_files, pipeline_logger, error_logger):
         # print(f"dataset:{dataset}")
         try:
             print(stork.datasets[py_file])
+            if len(stork.datasets[py_file]) > 0:
+                dataset_logger.info({py_file: stork.datasets[py_file]})
             for dataset in stork.datasets[py_file]:
                 print(f"Dataset: {dataset['dataset']}")
                 if util.checkFileExtension(dataset['dataset']):
                     abs_path_dataset = stork.assignVisitor.parsePath(dataset['dataset'])
                     print(f"Source data file:{abs_path_dataset}")
                     # stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, bucket=bucket_name)
-                    stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, bucket=bucket_name)
-                    dataset_name = stork.assignVisitor.getDatasetName(abs_path_dataset)
-
-                    print(f"Url: {stork.connector.getObjectUrl(key=dataset_name,folder=repo_name, bucket=bucket_name)}")
-                    # stork.assignVisitor.datasets_urls.append({"dataset_name": dataset,
-                    #                                           "url": stork.connector.getObjectUrl(
-                    #                                               key=dataset_name, folder=repo_name,
-                    #                                               bucket=bucket_name)})
-
-                    stork.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset['dataset'],
-                                                             "url": stork.connector.getObjectUrl(
-                                                                 key=dataset_name, folder=repo_name,
-                                                                 bucket=bucket_name), "lineno": dataset['lineno']})
+                    stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, logger=files_logger,
+                                               bucket=bucket_name)
+                    # dataset_name = stork.assignVisitor.getDatasetName(abs_path_dataset)
+                    #
+                    # print(f"Url: {stork.connector.getObjectUrl(key=dataset_name,folder=repo_name, bucket=bucket_name)}")
+                    # # stork.assignVisitor.datasets_urls.append({"dataset_name": dataset,
+                    # #                                           "url": stork.connector.getObjectUrl(
+                    # #                                               key=dataset_name, folder=repo_name,
+                    # #                                               bucket=bucket_name)})
+                    #
+                    # stork.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset['dataset'],
+                    #                                          "url": stork.connector.getObjectUrl(
+                    #                                              key=dataset_name, folder=repo_name,
+                    #                                              bucket=bucket_name), "lineno": dataset['lineno']})
 
             pipeline_logger.info(f"Pipeline data set urls {stork.assignVisitor.datasets_urls}")
             stork.datasets_urls[py_file] = stork.assignVisitor.datasets_urls
             stork.read_methods[py_file] = stork.assignVisitor.read_methods
             stork.datasets_read_methods[py_file] = stork.assignVisitor.datasets_read_methods
-
-        except (TypeError, KeyError) as e:
+            read_method_logger.info({"ds_read_methods": stork.datasets_read_methods[py_file]})
+        except (OSError, TypeError, KeyError) as e:
             pipeline_logger.error(e)
 
         # self.assignVisitor.getDatasetsFromInputs()
@@ -172,7 +180,7 @@ def run_stork(python_files, pipeline_logger, error_logger):
         # print(stork.datasets)
 
 
-def traverse_folders(path, project_logger, error_logger):
+def traverse_folders(path, project_logger, error_logger, dataset_logger, read_method_logger, files_logger):
     folders = filter_folders(path)
     files = list_files_paths(path)
     py_files = filter_python_files(files)
@@ -181,17 +189,20 @@ def traverse_folders(path, project_logger, error_logger):
         project_logger.info(f"Folder: {path}, executing the following python files:")
         for py_file in py_files:
             project_logger.info(f"\t {py_file}")
-        run_stork(py_files, project_logger, error_logger)
+        run_stork(python_files=py_files, pipeline_logger=project_logger, error_logger=error_logger,
+                  dataset_logger=dataset_logger, read_method_logger=read_method_logger, files_logger=files_logger)
     if folders:
         for folder in folders:
-            traverse_folders(folder, project_logger, error_logger)
+            traverse_folders(path=folder, project_logger=project_logger, error_logger=error_logger,
+                             dataset_logger=dataset_logger, read_method_logger=read_method_logger, files_logger=files_logger)
 
     return 0
 
-def analyze_repository(repos_to_run, repos_count, error_log, successfull_log, num_threads, thread_id):
 
+def analyze_repository(repos_to_run, repos_count, error_log, dataset_logger, read_method_logger, num_threads,
+                       thread_id):
     # repositories = ["/home/ilint/HPI/repos/pipelines/trial/arguseyes.zip"]
-    error_log = createLogger(filename=f"{args.outputs}/logs/errors.log", project_name="error_log", level=logging.ERROR)
+
     repos_per_thread = repos_count // num_threads
     start_index = thread_id * repos_per_thread
     end_index = start_index + repos_per_thread
@@ -200,38 +211,63 @@ def analyze_repository(repos_to_run, repos_count, error_log, successfull_log, nu
         end_index = repos_count
 
     for i in range(start_index, end_index):
-        parent_dir, repo_name = unzip(repo_path=repos_to_run[i])
+        repository = repos_to_run[i].strip()
+        parent_dir, repo_name = unzip(repo_path=repository)
         projects = filter_folders(f"{parent_dir}/{repo_name}")
         # projects = filter_folders(f"/home/ilint/HPI/repos/pipelines/trial/arguseyes/")
         for project in projects:
             project_name = os.path.split(project)[1]
             print("________________________________________________________________________________________")
             print(f"Processing {project_name}, repository {projects.index(project) + 1} out of {len(projects)}")
-            logger = createLogger(filename=f"{args.outputs}/logs/{project_name}.log", project_name=project_name,
+            files_logger = createLogger(filename=f"{args.outputs}/individual_logs/{project_name}.log", project_name=project_name,
                                   level=logging.INFO)
 
-            traverse_folders(project, logger, error_log)
+            logger = createLogger(filename=f"{args.outputs}/individual_logs/{project_name}_files.log", project_name=f"{project_name}_files",
+                                  level=logging.INFO)
+
+            traverse_folders(path=project, project_logger=logger, error_logger=error_log, dataset_logger=dataset_logger,
+                             read_method_logger=read_method_logger, files_logger=files_logger)
 
             closeLog(logger)
+
+        shutil.rmtree(repository)
 
 
 def main(args):
     NUM_THREADS = int(args.threads)
     processes = []
-    repos_to_run = collect_resources(root_folder=args.repositories)
+    # repos_to_run = collect_resources(root_folder=args.repositories)
+    repos_to_run = get_repository_list(args.repositories)
     repos_count = len(repos_to_run)
 
+    os.makedirs(f"{args.outputs}/errors/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/dataset_logs/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/individual_logs/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/read_method_logs/", exist_ok=True)
+
     for i in range(NUM_THREADS):
+        error_log = createLogger(filename=f"{args.outputs}/errors/errors-{i}.log", project_name=f"error_log-{i}",
+                                 level=logging.ERROR)
 
-        processes.append(Process(target=analyze_repository, kwargs={"repos_to_flag": repos_to_run,
-                                                                   "repos_to_flag_count": repos_count,
-                                                                   "num_threads": NUM_THREADS,
-                                                                   "thread_id": i}))
-
+        dataset_logger = createLogger(filename=f"{args.outputs}/dataset_logs/dataset_logger-{i}.log",
+                                      project_name=f"dataset_logger-{i}",
+                                      level=logging.INFO)
+        read_method_logger = createLogger(filename=f"{args.outputs}/read_method_logs/read_method_logger-{i}.log",
+                                          project_name=f"read_method_logger-{i}",
+                                          level=logging.INFO)
+        processes.append(Process(target=analyze_repository, kwargs={"repos_to_run": repos_to_run,
+                                                                    "repos_count": repos_count,
+                                                                    "error_log": error_log,
+                                                                    "dataset_logger": dataset_logger,
+                                                                    "read_method_logger": read_method_logger,
+                                                                    "num_threads": NUM_THREADS,
+                                                                    "thread_id": i}))
 
     start_processes(processes)
     join_processes(processes)
 
+    aggregate_repositories(f"{args.outputs}/dataset_logs/")
+    aggregate_repositories(f"{args.outputs}/read_method_logs/")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -242,8 +278,10 @@ if __name__ == '__main__':
     # parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/trial/")
     # parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/pipelines/results-trial/")
     # parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/stork-zip-2days/repositories-test/")
-    parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/Stork/results/27-10-stork-100k/repositories-mini/")
+    parser.add_argument('-r', '--repositories',
+                        default="/home/ilint/HPI/Stork/results/27-10-stork-100k/repositories-mini/")
     parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/Stork/results/27-10-stork-100k/")
+    parser.add_argument('-t', '--threads', default=12)
     args = parser.parse_args()
-    os.makedirs(f"{args.outputs}/logs", exist_ok=True)
+
     main(args)

@@ -108,12 +108,6 @@ def main(args):
                                                                    "num_threads": NUM_THREADS,
                                                                    "thread_id": i}))
 
-        closeLog(error_log)
-        closeLog(data_read_pipelines_lib)
-        closeLog(data_processing_repos_lib)
-        closeLog(data_read_pipelines_py)
-        closeLog(data_processing_repos_py)
-
     start_processes(processes)
     join_processes(processes)
 
@@ -131,10 +125,10 @@ if __name__ == '__main__':
 
     parser.add_argument('-t', '--threads', default=1)
     parser.add_argument('-r', '--list_of_repos',
-                        default='/home/ilint/HPI/repos/stork/analysis_results/repository_list/local_list_repositories.txt')
+                        default='/home/ilint/HPI/repos/stork/analysis_results/repository_list/local_list_repositories_old.txt')
     parser.add_argument('-l', '--individual_logs',
                         default='/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list/individual_logs')
-    parser.add_argument('-o', '--outputs', default='/home/ilint/HPI/repos/stork/analysis_results/single_repo')
+    parser.add_argument('-o', '--outputs', default='/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list')
 
     args = parser.parse_args()
     main(args)

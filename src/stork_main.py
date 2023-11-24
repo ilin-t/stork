@@ -81,7 +81,8 @@ class Stork:
 
                                 abs_path_dataset = self.assignVisitor.parsePath(dataset)
                                 print(f"Source data file:{abs_path_dataset}")
-                                self.connector.uploadFile(path=abs_path_dataset, folder="test-folder", bucket=bucket_name)
+                                self.connector.uploadFile(path=abs_path_dataset, folder="test-folder",
+                                                          logger="dataset_logger", bucket=bucket_name)
                                 dataset_name = self.assignVisitor.getDatasetName(abs_path_dataset)
 
                                 print(f"Url: {self.connector.getObjectUrl(key=dataset_name, folder='test-folder', bucket=bucket_name)}")
@@ -129,7 +130,7 @@ if __name__ == '__main__':
 
     # ak, sak = stork.parseConfig()
 
-    stork = Stork(config_path=r"db_conn/config_s3.ini")
+    stork = Stork(config_path=r"/db_conn/config_s3.ini")
     # repo_path = "/home/ilint/HPI/repos/stork/examples/data/table_ocr.zip"
     # unzip(repo_path=repo_path)
     # pipeline = f"{repo_path[:-4]}/table_ocr-master/Evaluations/Tablebank/evaluation.py"

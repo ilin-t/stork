@@ -43,15 +43,18 @@ class S3Connector:
         location = {'LocationConstraint': region}
         self.client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
 
-    def uploadFile(self, path, folder, bucket="stork-storage"):
+    def uploadFile(self, path, folder, logger, bucket="stork-storage"):
         filename = os.path.split(path)[1]
         try:
-            self.client.upload_file(
-                Filename=path,
-                Bucket=bucket,
-                Key=f"{folder}/{filename}"
-            )
+
+            # self.client.upload_file(
+            #     Filename=path,
+            #     Bucket=bucket,
+            #     Key=f"{folder}/{filename}"
+            # )
+            logger.info(f"File {path} found.")
         except FileNotFoundError as e:
+            logger.info(f"File {path} not found.")
             print(f"Please check whether the requested file exists. {e}")
 
     @staticmethod
