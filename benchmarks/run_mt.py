@@ -2,13 +2,17 @@ import argparse
 import logging
 import os
 import shutil
+import time
 from multiprocessing import Process
 from os.path import basename, normpath
+
+import numpy as np
+import pandas as pd
 
 from src.log_modules.flag_repositories import get_repository_list
 from src.stork_main import Stork
 from src.log_modules import util
-from src.log_modules.parse_repos import collect_resources, unzip, delete_repo, start_processes, join_processes, \
+from src.log_modules.parse_repos import unzip, start_processes, join_processes, \
     aggregate_repositories
 from src.log_modules.log_results import createLogger, closeLog
 
@@ -56,8 +60,10 @@ def filter_folders(project_path):
     return folders
 
 
-def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger, files_logger, error_logger):
-    stork = Stork(r"/hpi/fs00/share/fg/rabl/ilin.tolovski/projects/stork/src/db_conn/config_s3.ini")
+def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
+              files_logger, error_logger, yearly_stats_thread):
+    # stork = Stork(r"/hpi/fs00/share/fg/rabl/ilin.tolovski/projects/stork/src/db_conn/config_s3.ini")
+    stork = Stork(r"/mnt/fs00/rabl/ilin.tolovski/projects/stork/src/db_conn/config_s3.ini")
     stork.setClient(stork.access_key, stork.secret_access_key)
 
     for py_file in python_files:
@@ -69,7 +75,6 @@ def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
         try:
             tree = util.getAst(pipeline=py_file)
         except SyntaxError as e:
-            error_logger.error("Logged from syntax error in run")
             error_logger.error(e)
             pipeline_logger.error(f"Pipeline {py_file} failed with the following error: {e}. Check the error logs.")
 
@@ -94,6 +99,8 @@ def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
         stork.assignments[py_file] = stork.assignVisitor.inputs
         stork.datasets[py_file] = stork.assignVisitor.datasets
 
+        yearly_stats_thread["pipelines_processed"] = yearly_stats_thread["pipelines_processed"] + 1
+
         error_logger.error("________________________________________________")
         pipeline_logger.info("________________________________________________")
         pipeline_logger.info(f"Pipeline {py_file} reads the following data files: ")
@@ -105,12 +112,26 @@ def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
         #     pipeline_logger.info(f"\t Input: {input}")
         #     # print(f"Input: {input}")
         # pipeline_logger.info("________________________________________________")
+
+        if len(stork.datasets[py_file]) > 0:
+            yearly_stats_thread["total_datasets"] = (yearly_stats_thread["total_datasets"]
+                                                     + len(stork.datasets[py_file]))
+
+            yearly_stats_thread["pipelines_success"] = (yearly_stats_thread["pipelines_success"]
+                                                        + len(stork.datasets[py_file]))
+        else:
+            yearly_stats_thread["pipelines_failed"] = (yearly_stats_thread["pipelines_failed"] + 1)
+
         pipeline_logger.info("Datasets: ")
         for dataset in stork.assignVisitor.datasets:
             pipeline_logger.info(f"\t {dataset}")
         pipeline_logger.info("________________________________________________")
 
         for key in stork.assignVisitor.datasets_read_methods.keys():
+            yearly_stats_thread[f"read_{key}"] = (yearly_stats_thread[f"read_{key}"] +
+                                                  len(stork.assignVisitor.datasets_read_methods[key]))
+            yearly_stats_thread[f"total_reads_classified"] = (yearly_stats_thread[f"total_reads_classified"] +
+                                                              len(stork.assignVisitor.datasets_read_methods[key]))
             pipeline_logger.info(f"Datasets in {py_file} read via {key}")
             for dset_read_method in stork.assignVisitor.datasets_read_methods[key]:
                 pipeline_logger.info(f"\t {dset_read_method}")
@@ -167,8 +188,8 @@ def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
         # self.assignVisitor.getDatasetsFromInputs()
         # self.assignVisitor.uploadDatasets(bucket=bucket_name)
         # print(f"Datasets_urls {py_file}: {stork.datasets_urls[py_file]}")
-        stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline)
-        print(f"Datasets_urls complete: {stork.datasets_urls}")
+        # stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline)
+        # print(f"Datasets_urls complete: {stork.datasets_urls}")
         util.reportAssign(stork.pipeline, stork.assignVisitor.assignments, "full")
         stork.assignVisitor.clearAssignments()
         stork.assignVisitor.clearInputs()
@@ -180,7 +201,8 @@ def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
         # print(stork.datasets)
 
 
-def traverse_folders(path, project_logger, error_logger, dataset_logger, read_method_logger, files_logger):
+def traverse_folders(path, yearly_stats_thread, project_logger, error_logger, dataset_logger, read_method_logger,
+                     files_logger):
     folders = filter_folders(path)
     files = list_files_paths(path)
     py_files = filter_python_files(files)
@@ -190,47 +212,90 @@ def traverse_folders(path, project_logger, error_logger, dataset_logger, read_me
         for py_file in py_files:
             project_logger.info(f"\t {py_file}")
         run_stork(python_files=py_files, pipeline_logger=project_logger, error_logger=error_logger,
-                  dataset_logger=dataset_logger, read_method_logger=read_method_logger, files_logger=files_logger)
+                  dataset_logger=dataset_logger, read_method_logger=read_method_logger,
+                  files_logger=files_logger, yearly_stats_thread=yearly_stats_thread)
     if folders:
         for folder in folders:
             traverse_folders(path=folder, project_logger=project_logger, error_logger=error_logger,
-                             dataset_logger=dataset_logger, read_method_logger=read_method_logger, files_logger=files_logger)
+                             dataset_logger=dataset_logger, read_method_logger=read_method_logger,
+                             files_logger=files_logger, yearly_stats_thread=yearly_stats_thread)
 
     return 0
 
 
-def analyze_repository(repos_to_run, repos_count, error_log, dataset_logger, read_method_logger, num_threads,
-                       thread_id):
+def analyze_repository(repos_to_run, yearly_stats_thread, repos_count, error_log, dataset_logger, read_method_logger,
+                       num_threads, thread_id):
     # repositories = ["/home/ilint/HPI/repos/pipelines/trial/arguseyes.zip"]
 
     repos_per_thread = repos_count // num_threads
     start_index = thread_id * repos_per_thread
     end_index = start_index + repos_per_thread
 
+    yearly_stats_thread["thread_id"] = thread_id
+    yearly_stats_thread["total_repositories"] = repos_count
+    yearly_stats_thread["repositories_per_thread"] = repos_per_thread
+
     if thread_id == num_threads - 1:
         end_index = repos_count
 
     for i in range(start_index, end_index):
+        failed_repos = []
         repository = repos_to_run[i].strip()
         parent_dir, repo_name = unzip(repo_path=repository)
+        assert parent_dir, repo_name
         projects = filter_folders(f"{parent_dir}/{repo_name}")
         # projects = filter_folders(f"/home/ilint/HPI/repos/pipelines/trial/arguseyes/")
         for project in projects:
-            project_name = os.path.split(project)[1]
-            print("________________________________________________________________________________________")
-            print(f"Processing {project_name}, repository {projects.index(project) + 1} out of {len(projects)}")
-            files_logger = createLogger(filename=f"{args.outputs}/individual_logs/{project_name}.log", project_name=project_name,
-                                  level=logging.INFO)
+            try:
+                project_name = os.path.split(project)[1]
+                print("________________________________________________________________________________________")
+                print(
+                    f"Thread {thread_id} processes {project_name}, repository {i - start_index + 1} "
+                    f"out of {end_index - start_index}")
+                files_logger = createLogger(filename=f"{args.outputs}/individual_logs/{project_name}.log",
+                                            project_name=project_name,
+                                            level=logging.INFO)
 
-            logger = createLogger(filename=f"{args.outputs}/individual_logs/{project_name}_files.log", project_name=f"{project_name}_files",
-                                  level=logging.INFO)
+                logger = createLogger(filename=f"{args.outputs}/individual_logs/{project_name}_files.log",
+                                      project_name=f"{project_name}_files",
+                                      level=logging.INFO)
 
-            traverse_folders(path=project, project_logger=logger, error_logger=error_log, dataset_logger=dataset_logger,
-                             read_method_logger=read_method_logger, files_logger=files_logger)
+                traverse_folders(path=project, project_logger=logger, error_logger=error_log,
+                                 dataset_logger=dataset_logger, yearly_stats_thread=yearly_stats_thread,
+                                 read_method_logger=read_method_logger, files_logger=files_logger)
 
-            closeLog(logger)
+                closeLog(logger)
+                yearly_stats_thread["repositories_processed"] = yearly_stats_thread["repositories_processed"] + 1
+            except (OSError, TypeError, SyntaxError, FileNotFoundError) as e:
+                failed_repos.append(project)
+                print(e)
+                print(f"REPO NOT PROCESSED: {project}")
+                yearly_stats_thread.to_csv(f"{args.outputs}/yearly-stats-{thread_id}.csv")
 
+        time.sleep(0.5)
         shutil.rmtree(repository)
+
+
+def aggregate_stats(list_of_stats):
+    agg_stats = pd.DataFrame(
+        columns=["thread_id", "total_repositories", "repositories_per_thread", "repositories_processed",
+                 "pipelines_total", "pipelines_processed", "pipelines_success",
+                 "pipelines_failed", "success_rate", "total_datasets", "reads_per_pipeline",
+                 "read_variable", "read_var_pct", "read_raw_string", "read_str_pct",
+                 "read_external", "read_external_pct", "total_reads_classified"],
+        data=np.zeros(shape=(1, 18)))
+    for stats in list_of_stats:
+        agg_stats = pd.concat(objs=[agg_stats, stats], axis=0)
+
+    agg_stats.loc['Total'] = agg_stats.sum(numeric_only=True)
+
+    agg_stats['success_rate'] = agg_stats['pipelines_success'] / agg_stats['pipelines_total']
+    agg_stats['reads_per_pipeline'] = agg_stats['total_datasets'] / agg_stats['pipelines_success']
+    agg_stats['read_var_pct'] = agg_stats['read_variable'] / agg_stats['total_datasets']
+    agg_stats['read_str_pct'] = agg_stats['read_raw_string'] / agg_stats['total_datasets']
+    agg_stats['read_external_pct'] = agg_stats['read_external'] / agg_stats['total_datasets']
+
+    agg_stats.to_csv(f"{args.outputs}/aggregated-stats.csv")
 
 
 def main(args):
@@ -245,6 +310,8 @@ def main(args):
     os.makedirs(f"{args.outputs}/individual_logs/", exist_ok=True)
     os.makedirs(f"{args.outputs}/read_method_logs/", exist_ok=True)
 
+    yearly_stats_threads = []
+
     for i in range(NUM_THREADS):
         error_log = createLogger(filename=f"{args.outputs}/errors/errors-{i}.log", project_name=f"error_log-{i}",
                                  level=logging.ERROR)
@@ -252,12 +319,23 @@ def main(args):
         dataset_logger = createLogger(filename=f"{args.outputs}/dataset_logs/dataset_logger-{i}.log",
                                       project_name=f"dataset_logger-{i}",
                                       level=logging.INFO)
+
         read_method_logger = createLogger(filename=f"{args.outputs}/read_method_logs/read_method_logger-{i}.log",
                                           project_name=f"read_method_logger-{i}",
                                           level=logging.INFO)
+
+        yearly_stats_threads.append(pd.DataFrame(
+            columns=["thread_id", "total_repositories", "repositories_per_thread", "repositories_processed",
+                     "pipelines_total", "pipelines_processed", "pipelines_success",
+                     "pipelines_failed", "success_rate", "total_datasets", "reads_per_pipeline",
+                     "read_variable", "read_var_pct", "read_raw_string", "read_str_pct",
+                     "read_external", "read_external_pct", "total_reads_classified"],
+            data=np.zeros(shape=(1, 18))))
+
         processes.append(Process(target=analyze_repository, kwargs={"repos_to_run": repos_to_run,
                                                                     "repos_count": repos_count,
                                                                     "error_log": error_log,
+                                                                    "yearly_stats_thread": yearly_stats_threads[i],
                                                                     "dataset_logger": dataset_logger,
                                                                     "read_method_logger": read_method_logger,
                                                                     "num_threads": NUM_THREADS,
@@ -266,8 +344,11 @@ def main(args):
     start_processes(processes)
     join_processes(processes)
 
+    aggregate_stats(yearly_stats_threads)
+
     aggregate_repositories(f"{args.outputs}/dataset_logs/")
     aggregate_repositories(f"{args.outputs}/read_method_logs/")
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -279,9 +360,9 @@ if __name__ == '__main__':
     # parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/pipelines/results-trial/")
     # parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/stork-zip-2days/repositories-test/")
     parser.add_argument('-r', '--repositories',
-                        default="/home/ilint/HPI/Stork/results/27-10-stork-100k/repositories-mini/")
-    parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/Stork/results/27-10-stork-100k/")
-    parser.add_argument('-t', '--threads', default=12)
+                        default="/home/ilint/HPI/repos/stork/analysis_results/repository_list/local_list_repositories_old.txt")
+    parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list/")
+    parser.add_argument('-t', '--threads', default=6)
     args = parser.parse_args()
 
     main(args)
