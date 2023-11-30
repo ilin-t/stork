@@ -130,12 +130,14 @@ if __name__ == '__main__':
 
     # ak, sak = stork.parseConfig()
 
-    stork = Stork(config_path=r"/db_conn/config_s3.ini")
+    stork = Stork(config_path=r"./db_conn/config_s3.ini")
     # repo_path = "/home/ilint/HPI/repos/stork/examples/data/table_ocr.zip"
     # unzip(repo_path=repo_path)
     # pipeline = f"{repo_path[:-4]}/table_ocr-master/Evaluations/Tablebank/evaluation.py"
 
-    pipeline = '/home/ilint/HPI/repos/stork/examples/sample_pipelines/var_retrieval/data_read_test.py'
+    # pipeline = '/home/ilint/HPI/repos/stork/examples/sample_pipelines/var_retrieval/data_read_test.py'
+    pipeline = ('/home/ilint/HPI/repos/pipelines/stork-zip-trial/repositories/year-2023/month-04/day-03/page-7/'
+                'amplify-benchmark/amplify-benchmark-main/amplify_bench/problem/maxcut.py')
     # pipeline = "/home/ilint/HPI/repos/pipelines/trial/arguseyes/arguseyes/example_pipelines/amazon-reviews.py"
 
     stork.setup(pipeline = pipeline, new_pipeline="new_amazon_reviews.py")
@@ -145,6 +147,7 @@ if __name__ == '__main__':
     print(stork.assignVisitor.datasets)
     print(stork.assignVisitor.read_methods)
     print(stork.assignVisitor.datasets_read_methods)
+    print(stork.assignVisitor.func_definitions)
     # print(stork.assignVisitor.datasets_urls)
     # print(stork.datasets_urls)
     # print(stork.assignVisitor)

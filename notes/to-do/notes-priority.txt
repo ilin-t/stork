@@ -4,12 +4,24 @@ Show that import of pandas is actually processing data (false positives) (done)
     - Count how many repositories actually read data! (done)
 
 How many pipelines are reading data? (native + DPF) (done)
-What are the ways in which data is being read?
+What are the ways in which data is being read? (done)
 
 Coverage of Stork on the full set of pipelines.
-    - Yearly breakdown
-    - Percentage of repositories that read data
-    - Categorize data reading methods
+    - Yearly breakdown (done)
+    - Percentage of repositories that read data (done)
+    - Categorize data reading methods (done)
+
+Run the experiments on the current state.
+Separate the py_read pipelines from the lib_read pipelines from the results.
+Number of pipelines that can be rewritten and run.
+
+Execution Scheme:
+
+    - Try to execute pipelines and report file not found.
+    - These are pipelines relevant to be translated and rewritten?
+    -
+
+
 
 Methods of interest:
     - numpy: load, loadtxt, genfromtxt, fromfile

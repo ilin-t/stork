@@ -46,12 +46,11 @@ class S3Connector:
     def uploadFile(self, path, folder, logger, bucket="stork-storage"):
         filename = os.path.split(path)[1]
         try:
-
-            # self.client.upload_file(
-            #     Filename=path,
-            #     Bucket=bucket,
-            #     Key=f"{folder}/{filename}"
-            # )
+            self.client.upload_file(
+                Filename=path,
+                Bucket=bucket,
+                Key=f"{folder}/{filename}"
+            )
             logger.info(f"File {path} found.")
         except FileNotFoundError as e:
             logger.info(f"File {path} not found.")

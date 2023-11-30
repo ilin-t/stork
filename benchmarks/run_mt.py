@@ -63,14 +63,20 @@ def filter_folders(project_path):
 def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
               files_logger, error_logger, yearly_stats_thread):
     # stork = Stork(r"/hpi/fs00/share/fg/rabl/ilin.tolovski/projects/stork/src/db_conn/config_s3.ini")
-    stork = Stork(r"/mnt/fs00/rabl/ilin.tolovski/projects/stork/src/db_conn/config_s3.ini")
+    stork = Stork(r"../src/db_conn/config_s3.ini")
     stork.setClient(stork.access_key, stork.secret_access_key)
 
+    repo_name = stork.assignVisitor.parseRepoName(stork.assignVisitor.getRepositoryName())
+    buckets = stork.connector.getBucketNames()
+    bucket_name = "stork-storage"
+    stork.connector.createFolder(folder_name=repo_name, bucket=bucket_name)
+    print(f"Adapted repository and bucket name: {repo_name}")
+
+    yearly_stats_thread["pipelines_total"] = yearly_stats_thread["pipelines_total"] + len(python_files)
     for py_file in python_files:
         pipeline_logger.info(f"Pipeline: {py_file}")
         tree = []
         stork.assignVisitor.setLogger(error_logger)
-        # stork.assignVisitor.setLoggerConfig("test_logger.log", "test", logging.INFO)
 
         try:
             tree = util.getAst(pipeline=py_file)
@@ -90,6 +96,7 @@ def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
         try:
             stork.assignVisitor.filter_Assignments()
             stork.assignVisitor.replace_variables_in_assignments()
+            # stork.assignVisitor.setVariables()
             stork.assignVisitor.getDatasetsFromInputs()
             stork.assignVisitor.getDatasetsFromReadMethods()
         except RecursionError as e:
@@ -104,21 +111,20 @@ def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
         error_logger.error("________________________________________________")
         pipeline_logger.info("________________________________________________")
         pipeline_logger.info(f"Pipeline {py_file} reads the following data files: ")
-        print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
+        # print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
         pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
-        print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
+        # print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
         pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
         # for input in stork.assignVisitor.inputs:
         #     pipeline_logger.info(f"\t Input: {input}")
         #     # print(f"Input: {input}")
-        # pipeline_logger.info("________________________________________________")
+        pipeline_logger.info("________________________________________________")
 
         if len(stork.datasets[py_file]) > 0:
             yearly_stats_thread["total_datasets"] = (yearly_stats_thread["total_datasets"]
                                                      + len(stork.datasets[py_file]))
 
-            yearly_stats_thread["pipelines_success"] = (yearly_stats_thread["pipelines_success"]
-                                                        + len(stork.datasets[py_file]))
+            yearly_stats_thread["pipelines_success"] = (yearly_stats_thread["pipelines_success"] + 1)
         else:
             yearly_stats_thread["pipelines_failed"] = (yearly_stats_thread["pipelines_failed"] + 1)
 
@@ -136,12 +142,9 @@ def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
             for dset_read_method in stork.assignVisitor.datasets_read_methods[key]:
                 pipeline_logger.info(f"\t {dset_read_method}")
             pipeline_logger.info("\t ________________________________________________")
-        repo_name = stork.assignVisitor.parseRepoName(stork.assignVisitor.getRepositoryName())
-        buckets = stork.connector.getBucketNames()
-        bucket_name = "stork-storage"
-        stork.connector.createFolder(folder_name=repo_name, bucket=bucket_name)
-        print(f"Adapted repository and bucket name: {repo_name}")
-        new_pipeline = f"{py_file}_rewritten.py"
+        pipeline_name = py_file.split("/")
+        pipeline_name = pipeline_name[-1]
+        new_pipeline = f"{args.outputs}/rewritten_pipelines/{pipeline_name[:-3]}_rewritten.py"
         # if repo_name not in buckets:
         #     self.connector.createBucket(bucket_name=bucket_name, region="eu-central-1")
         #     print(f"Should create bucket: {bucket_name}")
@@ -162,23 +165,30 @@ def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
                     abs_path_dataset = stork.assignVisitor.parsePath(dataset['dataset'])
                     print(f"Source data file:{abs_path_dataset}")
                     # stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, bucket=bucket_name)
-                    stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, logger=files_logger,
+                    if os.path.isfile(abs_path_dataset):
+                        stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, logger=files_logger,
                                                bucket=bucket_name)
-                    # dataset_name = stork.assignVisitor.getDatasetName(abs_path_dataset)
-                    #
+                        yearly_stats_thread["dataset_exists"] = yearly_stats_thread["dataset_exists"] + 1
+                        yearly_stats_thread["pipeline_rewritten"] = yearly_stats_thread["pipeline_rewritten"] + 1
+                        # ADD dataset to log
+                        # rewrite pipeline
+
+                        dataset_name = stork.assignVisitor.getDatasetName(abs_path_dataset)
+                        # stork.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset['dataset'],
+                        #                                      "url": stork.connector.getObjectUrl(
+                        #                                          key=dataset_name, folder=repo_name,
+                        #                                          bucket=bucket_name), "lineno": dataset['lineno']})
+                        # stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline, datasets_urls=stork.assignVisitor.datasets_urls)
+        #
                     # print(f"Url: {stork.connector.getObjectUrl(key=dataset_name,folder=repo_name, bucket=bucket_name)}")
                     # # stork.assignVisitor.datasets_urls.append({"dataset_name": dataset,
                     # #                                           "url": stork.connector.getObjectUrl(
                     # #                                               key=dataset_name, folder=repo_name,
                     # #                                               bucket=bucket_name)})
-                    #
-                    # stork.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset['dataset'],
-                    #                                          "url": stork.connector.getObjectUrl(
-                    #                                              key=dataset_name, folder=repo_name,
-                    #                                              bucket=bucket_name), "lineno": dataset['lineno']})
-
             pipeline_logger.info(f"Pipeline data set urls {stork.assignVisitor.datasets_urls}")
             stork.datasets_urls[py_file] = stork.assignVisitor.datasets_urls
+            print(stork.datasets_urls)
+            print(stork.assignVisitor.datasets_urls)
             stork.read_methods[py_file] = stork.assignVisitor.read_methods
             stork.datasets_read_methods[py_file] = stork.assignVisitor.datasets_read_methods
             read_method_logger.info({"ds_read_methods": stork.datasets_read_methods[py_file]})
@@ -188,9 +198,9 @@ def run_stork(python_files, pipeline_logger, dataset_logger, read_method_logger,
         # self.assignVisitor.getDatasetsFromInputs()
         # self.assignVisitor.uploadDatasets(bucket=bucket_name)
         # print(f"Datasets_urls {py_file}: {stork.datasets_urls[py_file]}")
-        # stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline)
+        #
         # print(f"Datasets_urls complete: {stork.datasets_urls}")
-        util.reportAssign(stork.pipeline, stork.assignVisitor.assignments, "full")
+        # util.reportAssign(stork.pipeline, stork.assignVisitor.assignments, "full")
         stork.assignVisitor.clearAssignments()
         stork.assignVisitor.clearInputs()
         stork.assignVisitor.clearDatasets()
@@ -252,12 +262,12 @@ def analyze_repository(repos_to_run, yearly_stats_thread, repos_count, error_log
                 print(
                     f"Thread {thread_id} processes {project_name}, repository {i - start_index + 1} "
                     f"out of {end_index - start_index}")
-                files_logger = createLogger(filename=f"{args.outputs}/individual_logs/{project_name}.log",
-                                            project_name=project_name,
+                files_logger = createLogger(filename=f"{args.outputs}/individual_logs/{project_name}_files.log",
+                                            project_name=f"{project_name}_files",
                                             level=logging.INFO)
 
-                logger = createLogger(filename=f"{args.outputs}/individual_logs/{project_name}_files.log",
-                                      project_name=f"{project_name}_files",
+                logger = createLogger(filename=f"{args.outputs}/individual_logs/{project_name}.log",
+                                      project_name=f"{project_name}",
                                       level=logging.INFO)
 
                 traverse_folders(path=project, project_logger=logger, error_logger=error_log,
@@ -270,32 +280,41 @@ def analyze_repository(repos_to_run, yearly_stats_thread, repos_count, error_log
                 failed_repos.append(project)
                 print(e)
                 print(f"REPO NOT PROCESSED: {project}")
-                yearly_stats_thread.to_csv(f"{args.outputs}/yearly-stats-{thread_id}.csv")
+
+            yearly_stats_thread.to_csv(f"{args.outputs}/yearly-stats-{thread_id}.csv")
 
         time.sleep(0.5)
         shutil.rmtree(repository)
 
 
-def aggregate_stats(list_of_stats):
+def aggregate_stats(dir_path):
+    list_of_stats = [f for f in os.listdir(path=dir_path) if f"yearly-stats" in f]
+    print(list_of_stats)
     agg_stats = pd.DataFrame(
         columns=["thread_id", "total_repositories", "repositories_per_thread", "repositories_processed",
                  "pipelines_total", "pipelines_processed", "pipelines_success",
                  "pipelines_failed", "success_rate", "total_datasets", "reads_per_pipeline",
                  "read_variable", "read_var_pct", "read_raw_string", "read_str_pct",
-                 "read_external", "read_external_pct", "total_reads_classified"],
-        data=np.zeros(shape=(1, 18)))
+                 "read_external", "read_external_pct", "total_reads_classified", "dataset_exists", "dataset_exists_pct", "pipeline_rewritten"]
+        )
     for stats in list_of_stats:
-        agg_stats = pd.concat(objs=[agg_stats, stats], axis=0)
+        df_year = pd.read_csv(f"{dir_path}/{stats}")
+        agg_stats = pd.concat(objs=[df_year, agg_stats], axis=0, copy=True)
 
-    agg_stats.loc['Total'] = agg_stats.sum(numeric_only=True)
+    cols_to_sum = ["repositories_processed", "pipelines_total", "pipelines_processed", "pipelines_success",
+                   "pipelines_failed", "total_datasets", "read_variable", "read_raw_string", "read_external",
+                   "total_reads_classified", "dataset_exists", "pipeline_rewritten"]
 
-    agg_stats['success_rate'] = agg_stats['pipelines_success'] / agg_stats['pipelines_total']
+    agg_stats.loc['Total'] = agg_stats[cols_to_sum].sum(axis=0)
+
+    agg_stats['success_rate'] = agg_stats['pipelines_success'] / agg_stats['pipelines_processed']
     agg_stats['reads_per_pipeline'] = agg_stats['total_datasets'] / agg_stats['pipelines_success']
     agg_stats['read_var_pct'] = agg_stats['read_variable'] / agg_stats['total_datasets']
     agg_stats['read_str_pct'] = agg_stats['read_raw_string'] / agg_stats['total_datasets']
     agg_stats['read_external_pct'] = agg_stats['read_external'] / agg_stats['total_datasets']
+    agg_stats['dataset_exists_pct'] = agg_stats['dataset_exists'] / agg_stats['total_datasets']
 
-    agg_stats.to_csv(f"{args.outputs}/aggregated-stats.csv")
+    agg_stats.to_csv(f"{dir_path}/aggregated-stats.csv")
 
 
 def main(args):
@@ -309,6 +328,7 @@ def main(args):
     os.makedirs(f"{args.outputs}/dataset_logs/", exist_ok=True)
     os.makedirs(f"{args.outputs}/individual_logs/", exist_ok=True)
     os.makedirs(f"{args.outputs}/read_method_logs/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/rewritten_pipelines/", exist_ok=True)
 
     yearly_stats_threads = []
 
@@ -329,8 +349,8 @@ def main(args):
                      "pipelines_total", "pipelines_processed", "pipelines_success",
                      "pipelines_failed", "success_rate", "total_datasets", "reads_per_pipeline",
                      "read_variable", "read_var_pct", "read_raw_string", "read_str_pct",
-                     "read_external", "read_external_pct", "total_reads_classified"],
-            data=np.zeros(shape=(1, 18))))
+                     "read_external", "read_external_pct", "total_reads_classified", "dataset_exists", "dataset_exists_pct", "pipeline_rewritten"],
+            data=np.zeros(shape=(1, 21)), index=[i]))
 
         processes.append(Process(target=analyze_repository, kwargs={"repos_to_run": repos_to_run,
                                                                     "repos_count": repos_count,
@@ -344,10 +364,9 @@ def main(args):
     start_processes(processes)
     join_processes(processes)
 
-    aggregate_stats(yearly_stats_threads)
-
     aggregate_repositories(f"{args.outputs}/dataset_logs/")
     aggregate_repositories(f"{args.outputs}/read_method_logs/")
+    aggregate_stats(f"{args.outputs}")
 
 
 if __name__ == '__main__':

@@ -19,6 +19,7 @@ class AssignVisitor(ast.NodeVisitor):
         self.assignments = []
         self.func_definitions = []
         self.datasets = []
+        self.datasets_files = []
         self.imports = []
         self.new_inputs = []
         self.new_datasets = []
@@ -83,10 +84,10 @@ class AssignVisitor(ast.NodeVisitor):
         for item in node.body:
             function_body.append(self.direct_visit(self, node, item))
 
-        for element in decorator_list:
-            function_body.append(element)
+        for element in node.decorator_list:
+            decorator_list.append(element)
 
-        func_def = {"function": node.name, "args": args, "data_source": function_body}
+        func_def = {"function": node.name, "args": args, "data_source": function_body, "decorator_list":decorator_list}
         self.func_definitions.append(func_def)
         return func_def
 
@@ -671,8 +672,8 @@ class AssignVisitor(ast.NodeVisitor):
     #             old.close()
     #         new.close()
 
-    def transformScript(self, script, new_script):
-        temp = self.datasets_urls
+    def transformScript(self, script, new_script, datasets_urls):
+        temp = datasets_urls
 
         with open(new_script, "w") as new:
             with open(script, "r") as old:
@@ -738,6 +739,10 @@ class AssignVisitor(ast.NodeVisitor):
 
     def getPipeline(self):
         return self.pipeline
+
+    def getPipelineName(self):
+        pipeline_path, pipeline_name = os.path.split(self.pipeline)
+        return pipeline_name
 
     def setVariables(self):
         self.variables = [{'variable': assignment["variable"], 'lineno': assignment["lineno"]} for assignment in

@@ -128,7 +128,7 @@ if __name__ == '__main__':
                         default='/home/ilint/HPI/repos/stork/analysis_results/repository_list/local_list_repositories_old.txt')
     parser.add_argument('-l', '--individual_logs',
                         default='/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list/individual_logs')
-    parser.add_argument('-o', '--outputs', default='/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list')
+    parser.add_argument('-o', '--outputs', default='/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list_flag')
 
     args = parser.parse_args()
     main(args)

@@ -175,7 +175,7 @@ class RepositoryMarker():
                                 continue
                             elif "import_method" in library.keys():
                                 for method in self.dpfs[library['from']]:
-                                    if f"{method}" in line:
+                                    if f"{method}(" in line:
                                         print(
                                             f"Method {method} called in {pipeline} in the following line number: {lines.index(line)}. Method call: {line}")
                                         flagged_pipeline_library = True
