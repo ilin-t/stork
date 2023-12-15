@@ -1,0 +1,43 @@
+Prompt:
+There is no connection to the DB in the code you provided
+-------------------------------------------------------------------
+Code response:
+
+import numpy as np
+import pandas as pd
+import examples.db_playgrounds.postgresqlPlayground as pp
+
+def create_postgres_connection():
+    # Replace these values with your actual Postgres database credentials
+    db_host = 'your_db_host'
+    db_port = 'your_db_port'
+    db_name = 'your_db_name'
+    db_user = 'your_db_user'
+    db_password = 'your_db_password'
+
+    postgres = pp.PostgresqlPlayground(db_host, db_port, db_name, db_user, db_password)
+    postgres.connect()
+
+    return postgres
+
+def fetch_data_from_postgres(postgres, table_name):
+    # Assuming 'table_name' is the table you want to retrieve data from
+    sql_query = f"SELECT * FROM {table_name}"
+    result = postgres.execute_query(sql_query)
+    data = pd.DataFrame(result.fetchall(), columns=result.keys())
+
+    return data
+
+# Create a Postgres connection
+postgres_connection = create_postgres_connection()
+
+# Retrieve data from the Postgres table
+table_name = 'YOUR_TABLE_NAME'  # Replace with your actual table name
+data_from_postgres = fetch_data_from_postgres(postgres_connection, table_name)
+
+# Add double output, e.g., train/test split from a single file
+
+# Assuming 'train_data' and 'test_data' are your train and test splits
+train_data, test_data = your_split_function(data_from_postgres)
+
+# Continue with the rest of your code

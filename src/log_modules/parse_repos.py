@@ -31,11 +31,33 @@ def collect_resources(root_folder):
     return all_repos
 
 
+def collect_resources_year(root_folder):
+    month_count = 0
+    day_count = 0
+    page_count = 0
+    repo_count = 0
+    all_repos = []
+    months = [f.path for f in os.scandir(f"{root_folder}") if f.is_dir()]
+    month_count += len(months)
+    for month in months:
+        days = [f.path for f in os.scandir(f"{month}") if f.is_dir()]
+        day_count += len(days)
+        for day in days:
+            pages = [f.path for f in os.scandir(f"{day}") if f.is_dir()]
+            page_count += len(pages)
+            for page in pages:
+                repos = [f.path for f in os.scandir(f"{page}") if f.is_file()]
+                repo_count += len(repos)
+                all_repos.extend(repos)
+
+    return all_repos
+
+
 def unzip(repo_path):
     parent_dir = os.path.dirname(repo_path)
     repo_name = os.path.basename(repo_path).split(".")[0]
     os.makedirs(f"{parent_dir}/{repo_name}", exist_ok=True)
-    os.system(f"unzip -qq -u {repo_path} -d {parent_dir}/{repo_name} "
+    os.system(f"unzip -o -qq -u {repo_path} -d {parent_dir}/{repo_name} "
               f"-x 'bin/*' 'www' 'js' 'virtual' '*virtual*' 'dist-packages' 'site-packages' "
               f"'*env*' 'env' 'etc/*' 'include/*' 'lib/*' 'lib64/*' '.venv/*' '*/venv/*'")
 

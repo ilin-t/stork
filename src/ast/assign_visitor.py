@@ -681,15 +681,18 @@ class AssignVisitor(ast.NodeVisitor):
                 for row in row_old:
                     # row_parts = row.strip().split("=")
                     for source in temp:
-                        dataset_name = self.getDatasetName(source['dataset_name'])
+                        print(f"Source: {source}")
+                        dataset_name = source['dataset_name']
                         if isinstance(source['variable'], dict):
                             source['variable'] = f"{source['variable']['from']}.{source['variable']['method']}"
-                        if source['variable'] in row:
+                        if (source['variable'] in row and dataset_name in row):
                             row = row.replace(source['dataset_name'], source['url'])
                             temp.remove(source)
+                            print(f"NEW ROW: {row}")
                         elif dataset_name in row:
                             row = row.replace(source['dataset_name'], source["url"])
                             temp.remove(source)
+                            print(f"NEW ROW: {row}")
                     new.write(row)
                 old.close()
             new.close()

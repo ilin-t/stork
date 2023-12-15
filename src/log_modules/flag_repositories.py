@@ -6,7 +6,8 @@ from multiprocessing import Process
 
 from benchmarks.run import filter_folders
 from src.log_modules.log_results import createLogger, createLoggerPlain, closeLog
-from src.log_modules.parse_repos import unzip, start_processes, join_processes, aggregate_repositories
+from src.log_modules.parse_repos import unzip, start_processes, join_processes, aggregate_repositories, \
+    collect_resources, collect_resources_year
 from src.ast.repo_marker import RepositoryMarker
 
 
@@ -59,7 +60,7 @@ def flag_repositories(repos_to_flag, repos_to_flag_count,
         if repo_marker.flagged_repository_python:
             data_processing_repos_py.info(repository)
 
-        shutil.rmtree(repository)
+        shutil.rmtree(f"{parent_dir}/{repo_name}")
 
 
 def main(args):
@@ -73,7 +74,8 @@ def main(args):
     os.makedirs(f"{args.outputs}/errors/", exist_ok=True)
 
     # repos_to_flag = get_repository_list("../../analysis_results/repository_list/local_list_repositories.txt")
-    repos_to_flag = get_repository_list(args.list_of_repos)
+    # repos_to_flag = get_repository_list(args.list_of_repos)
+    repos_to_flag = collect_resources_year(root_folder=args.repositories)
     repos_to_flag_count = len(repos_to_flag)
     processes = []
 
@@ -124,7 +126,9 @@ if __name__ == '__main__':
     )
 
     parser.add_argument('-t', '--threads', default=1)
-    parser.add_argument('-r', '--list_of_repos',
+    # parser.add_argument('-lr', '--list_of_repos',
+    #                     default='/home/ilint/HPI/repos/stork/analysis_results/repository_list/local_list_repositories_old.txt')
+    parser.add_argument('-r', '--repositories',
                         default='/home/ilint/HPI/repos/stork/analysis_results/repository_list/local_list_repositories_old.txt')
     parser.add_argument('-l', '--individual_logs',
                         default='/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list/individual_logs')
@@ -132,3 +136,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     main(args)
+    # print(collect_resources_year("/mnt/fs00/rabl/ilin.tolovski/repositories/stork-zip-full/repositories/year-2018/"))

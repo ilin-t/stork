@@ -1,0 +1,55 @@
+Prompt:
+
+In the following code, transfer the data input to aws s3
+```
+import numpy as np
+import pandas as pd
+import examples.db_playgrounds.postgresqlPlayground as pp
+
+path = "data"
+
+from_path = open("data/random.txt").read()
+from_csv = pd.read_csv("data/random.csv")
+auto_generate = np.zeros_like(from_csv)
+# Add double output i.e., train/test split from a single file
+
+postgres = pp.PostgresqlPlayground()
+postgres.connect()
+```
+Code response:
+
+```
+import numpy as np
+import pandas as pd
+import examples.db_playgrounds.postgresqlPlayground as pp
+import boto3
+
+def upload_to_s3(data, bucket_name, key):
+    # Create an S3 client
+    s3 = boto3.client('s3')
+
+    # Upload the data to S3
+    s3.put_object(Body=data, Bucket=bucket_name, Key=key)
+
+path = "data"
+
+from_path = open("data/random.txt").read()
+from_csv = pd.read_csv("data/random.csv")
+auto_generate = np.zeros_like(from_csv)
+
+# Add double output, e.g., train/test split from a single file
+
+# Assuming 'train_data' and 'test_data' are your train and test splits
+train_data, test_data = your_split_function(from_csv)
+
+# Upload train data to S3
+train_key = 'train_data.csv'  # Replace with your desired key/filename
+upload_to_s3(train_data.to_csv(index=False), 'YOUR_BUCKET_NAME', train_key)
+
+# Upload test data to S3
+test_key = 'test_data.csv'  # Replace with your desired key/filename
+upload_to_s3(test_data.to_csv(index=False), 'YOUR_BUCKET_NAME', test_key)
+
+postgres = pp.PostgresqlPlayground()
+postgres.connect()
+```

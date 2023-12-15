@@ -19,9 +19,7 @@ Execution Scheme:
 
     - Try to execute pipelines and report file not found.
     - These are pipelines relevant to be translated and rewritten?
-    -
-
-
+    - Pipelines containing main method or calls to functions - filter these out
 
 Methods of interest:
     - numpy: load, loadtxt, genfromtxt, fromfile

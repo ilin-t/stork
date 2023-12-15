@@ -1,0 +1,2 @@
+	thread_id	total_repositories	repositories_per_thread	repositories_processed	pipelines_total	pipelines_processed	pipelines_success	pipelines_failed	success_rate	total_datasets	reads_per_pipeline	read_variable	read_var_pct	read_raw_string	read_str_pct	read_external	read_external_pct	total_reads_classified	dataset_exists	dataset_exists_pct	pipeline_rewritten	repositories_successful	repositories_success_rate
+13	13	5159	143	143.0	3678.0	3675.0	201.0	3474.0	0.0	372.0	0.0	172.0	0.0	253.0	0.0	0.0	0.0	425.0	104.0	0.0	104.0	0.0	0.0

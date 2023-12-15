@@ -33,7 +33,7 @@ def checkFileExtension(data_file):
     if len(file) < 2:
         return False
     # Data files and compression support for numpy and pandas
-    elif file[-1] in ["csv", "txt", "zip", "parquet", "gz", "tar", "bz2", "zstd", "npy", "py"]:
+    elif file[-1] in ["csv", "txt", "zip", "pkl", "parquet", "gz", "tar", "bz2", "zstd", "npy", "py"]:
         return True
 
 

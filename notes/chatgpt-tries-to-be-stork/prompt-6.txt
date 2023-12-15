@@ -1,0 +1,29 @@
+Prompt:
+Instead of s3 use an existing Postgres connection
+-------------------------------------------------------------------------
+Code response:
+
+import numpy as np
+import pandas as pd
+import examples.db_playgrounds.postgresqlPlayground as pp
+
+# Assuming you already have a Postgres connection object 'postgres' created
+# Adjust the connection details based on your existing connection
+
+path = "data"
+
+# Assuming 'YOUR_TABLE_NAME' is the table you want to retrieve data from
+table_name = 'YOUR_TABLE_NAME'
+
+# Retrieve data from the Postgres table
+from_sql_query = f"SELECT * FROM {table_name}"
+from_sql = postgres.execute_query(from_sql_query)
+from_csv = pd.DataFrame(from_sql.fetchall(), columns=from_sql.keys())
+auto_generate = np.zeros_like(from_csv)
+
+# Add double output, e.g., train/test split from a single file
+
+# Assuming 'train_data' and 'test_data' are your train and test splits
+train_data, test_data = your_split_function(from_csv)
+
+# Continue with the rest of your code
