@@ -51,9 +51,9 @@ class S3Connector:
                 Bucket=bucket,
                 Key=f"{folder}/{filename}"
             )
-            logger.info(f"File {path} found.")
+            # logger.info(f"File {path} found.")
         except FileNotFoundError as e:
-            logger.info(f"File {path} not found.")
+            # logger.info(f"File {path} not found.")
             print(f"Please check whether the requested file exists. {e}")
 
     @staticmethod

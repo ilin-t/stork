@@ -55,9 +55,9 @@ class Stork:
         tree = util.getAst(pipeline=pipeline)
         self.assignVisitor.visit(tree)
         self.assignVisitor.filter_Assignments()
+        self.assignVisitor.getDatasetsFromReadMethods()
         self.assignVisitor.replace_variables_in_assignments()
         self.assignVisitor.getDatasetsFromInputs()
-        self.assignVisitor.getDatasetsFromReadMethods()
 
         repo_name = self.assignVisitor.parseRepoName(self.assignVisitor.getRepositoryName())
         buckets = self.connector.getBucketNames()
@@ -71,7 +71,7 @@ class Stork:
         for member in self.assignVisitor.inputs:
             # print(f"variable: {member['variable']}")
             for source in member["data_source"]:
-                print(f"source: {source}")
+                # print(f"source: {source}")
                 try:
                     # print(f"source['data_file']: {source['data_file']}")
                     for dataset in source["data_file"]:
@@ -80,12 +80,12 @@ class Stork:
                             if util.checkDataFile(dataset):
 
                                 abs_path_dataset = self.assignVisitor.parsePath(dataset)
-                                print(f"Source data file:{abs_path_dataset}")
+                                # print(f"Source data file:{abs_path_dataset}")
                                 self.connector.uploadFile(path=abs_path_dataset, folder="test-folder",
                                                           logger="dataset_logger", bucket=bucket_name)
                                 dataset_name = self.assignVisitor.getDatasetName(abs_path_dataset)
 
-                                print(f"Url: {self.connector.getObjectUrl(key=dataset_name, folder='test-folder', bucket=bucket_name)}")
+                                # print(f"Url: {self.connector.getObjectUrl(key=dataset_name, folder='test-folder', bucket=bucket_name)}")
                                 self.assignVisitor.datasets_urls.append({"variable": member['variable'], "dataset_name": dataset,
                                                                          "url": self.connector.getObjectUrl(
                                                                              key=dataset_name, folder='test-folder', bucket=bucket_name), "lineno": member['lineno']})
@@ -96,8 +96,8 @@ class Stork:
         # self.assignVisitor.getDatasetsFromInputs()
         # self.assignVisitor.uploadDatasets(bucket=bucket_name)
 
-        print(f"Datasets_urls: {self.assignVisitor.datasets_urls}")
-        self.assignVisitor.transformScript(script=pipeline, new_script=new_pipeline)
+        # print(f"Datasets_urls: {self.assignVisitor.datasets_urls}")
+        # self.assignVisitor.transformScript(script=pipeline, new_script=new_pipeline)
         # TODO Check which buckets exist for this user. Whether a new bucket should be created for this
         # for dataset in self.assignVisitor.datasets:
         #     self.connector.uploadFile(path=dataset)
@@ -135,19 +135,19 @@ if __name__ == '__main__':
     # unzip(repo_path=repo_path)
     # pipeline = f"{repo_path[:-4]}/table_ocr-master/Evaluations/Tablebank/evaluation.py"
 
-    # pipeline = '/home/ilint/HPI/repos/stork/examples/sample_pipelines/var_retrieval/data_read_test.py'
-    pipeline = ('/home/ilint/HPI/repos/pipelines/stork-zip-trial/repositories/year-2023/month-04/day-03/page-7/'
-                'amplify-benchmark/amplify-benchmark-main/amplify_bench/problem/maxcut.py')
+    pipeline = '/home/ilint/HPI/repos/stork/examples/sample_pipelines/var_retrieval/data_read_test.py'
+    # pipeline = ('/home/ilint/HPI/repos/pipelines/stork-zip-trial/repositories/year-2023/month-04/day-03/page-7/'
+    #             'amplify-benchmark/amplify-benchmark-main/amplify_bench/problem/maxcut.py')
     # pipeline = "/home/ilint/HPI/repos/pipelines/trial/arguseyes/arguseyes/example_pipelines/amazon-reviews.py"
 
     stork.setup(pipeline = pipeline, new_pipeline="new_amazon_reviews.py")
     print(stork.assignVisitor.inputs)
     # print(stork.datasets)
     # print(stork.assignments)
-    print(stork.assignVisitor.datasets)
-    print(stork.assignVisitor.read_methods)
-    print(stork.assignVisitor.datasets_read_methods)
-    print(stork.assignVisitor.func_definitions)
+    # print(stork.assignVisitor.datasets)
+    # print(stork.assignVisitor.read_methods)
+    # print(stork.assignVisitor.datasets_read_methods)
+    # print(stork.assignVisitor.func_definitions)
     # print(stork.assignVisitor.datasets_urls)
     # print(stork.datasets_urls)
     # print(stork.assignVisitor)

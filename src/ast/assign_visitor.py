@@ -137,6 +137,23 @@ class AssignVisitor(ast.NodeVisitor):
         self.assignments.append(self.assignment)
 
     #
+    # def visit_Call(self, node):
+    #     func_call = self.direct_visit(parent_object=self, node=node, towards=node.func)
+    #     args_names = []
+    #     params = []
+    #     for arg in node.args:
+    #         args_names.append(self.direct_visit(self, node, arg))
+    #     for keyword in node.keywords:
+    #         params.append(self.direct_visit(self, node, keyword))
+    #     try:
+    #         if type(node.func).__name__ == "Attribute" and self.assignment["data_source"]:
+    #             self.assignment["data_source"].append(
+    #                 {"func_call": func_call, "data_file": args_names, "params": params})
+    #         else:
+    #             return {"func_call": func_call, "data_file": args_names, "params": params}
+    #     except(KeyError, TypeError, AttributeError) as e:
+    #         self.logger.error(e)
+
     def visit_Call(self, node):
         func_call = self.direct_visit(parent_object=self, node=node, towards=node.func)
         args_names = []
@@ -163,22 +180,20 @@ class AssignVisitor(ast.NodeVisitor):
             return {"from": package, "method": method}
 
     def visit_BinOp(self, node):
-        left = self.direct_visit(parent_object=self, node=node, towards=node.left)
-        right = self.direct_visit(parent_object=self, node=node, towards=node.right)
-        # if type(node.left).__name__ == "Name":
-        #     var_value = self.get_value_from_var_name(variable=left, position=node.lineno)
-        #     left = var_value[0]
-        # if type(node.right).__name__ == "Name":
-        #     var_value = self.get_value_from_var_name(variable=right, position=node.lineno)
-        #     right = var_value[0]
+        right_var_value = self.direct_visit(parent_object=self, node=node, towards=node.right)
+        left_var_value = self.direct_visit(parent_object=self, node=node, towards=node.left)
+
+        if isinstance(node.left, ast.Name):
+            left_var_value = self.get_assignment_value_from_var_name_node(variable=left_var_value, position=node.lineno)[0]
+
+        if isinstance(node.right, ast.Name):
+            right_var_value = self.get_assignment_value_from_var_name_node(variable=right_var_value, position=node.lineno)[0]
+
         if type(node.op).__name__ == "Add":
-            return f"{left}{right}"
-        # elif type(node.op).__name__=="Mod":
-        #     for item in right:
-        #
-        #     return right
-        # print(f"BinOp for {node.lineno}. Left operand: {left}, right operand {right}.")
-        return [left, right]
+            return f"{left_var_value}{right_var_value}"
+
+        print(f"BinOp for {node.lineno}. Left operand: {left_var_value}, right operand {right_var_value}.")
+        return [left_var_value, right_var_value]
 
     def visit_Subscript(self, node):
         load_var = self.direct_visit(parent_object=self, node=node, towards=node.value)
@@ -284,17 +299,25 @@ class AssignVisitor(ast.NodeVisitor):
                 # print(f"Assignment: {assignment}")
                 assignment["data_source"] = [i for i in assignment["data_source"] if i is not None]
                 for source in assignment["data_source"]:
-                    if self.keepDataSource(data_source=source) and assignment not in self.inputs:
-                        self.inputs.append(assignment)
-                        self.read_methods['raw_string'].append(assignment)
+
                     data_file_from_var = self.retrieve_variable_from_assignment(assignment=assignment,
                                                                                 assignment_list=self.assignments)
+                    print(f"Data file from variable retrieved: {data_file_from_var}")
                     # print(f"Data file from var: {data_file_from_var}")
                     new_assignment = self.var_assignment_to_input(var_assignment=data_file_from_var,
                                                                   assignment=assignment)
+                    print(f"New assigment: {new_assignment}")
                     if new_assignment and new_assignment not in self.inputs:
+                        print(f"Assignment to be stored as a 'var access': {new_assignment}")
                         self.read_methods['variable'].append(new_assignment)
                         self.inputs.append(new_assignment)
+                        break
+
+                    if self.keepDataSource(data_source=source) and assignment not in self.inputs:
+                        self.inputs.append(assignment)
+                        print(f"Raw string data assignment: {assignment}")
+                        self.read_methods['raw_string'].append(assignment)
+                        break
             self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
         except (AttributeError, KeyError, TypeError) as e:
             self.logger.error(e)
@@ -390,11 +413,14 @@ class AssignVisitor(ast.NodeVisitor):
 
     def retrieve_variable_from_assignment(self, assignment, assignment_list):
         data_file = self.has_data_file(assignment=assignment)
+
         last_change = None
         try:
             if data_file:
+                print(f"Data file retrieved: {data_file}")
                 for item in assignment_list:
                     if data_file[0] == item["variable"]:
+                        print(f"Data file {data_file} matching variable {item}")
                         last_change = self.get_closest_assignment(assignment=item,
                                                                   assignment_list=assignment_list)
                 return last_change if last_change else None

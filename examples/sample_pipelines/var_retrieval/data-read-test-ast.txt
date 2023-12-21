@@ -1,0 +1,159 @@
+Module(
+   body=[
+      Import(
+         names=[
+            alias(name='pandas', asname='pd')]),
+      Import(
+         names=[
+            alias(name='numpy', asname='np')]),
+      Import(
+         names=[
+            alias(name='argparse')]),
+      FunctionDef(
+         name='read_data',
+         args=arguments(
+            posonlyargs=[],
+            args=[
+               arg(arg='path')],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='df', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Name(id='path', ctx=Load())],
+                  keywords=[])),
+            Return(
+               value=Name(id='df', ctx=Load()))],
+         decorator_list=[]),
+      FunctionDef(
+         name='main',
+         args=arguments(
+            posonlyargs=[],
+            args=[
+               arg(arg='args')],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='user_root', ctx=Store())],
+               value=Constant(value='/home/user1/')),
+            Assign(
+               targets=[
+                  Name(id='data_file', ctx=Store())],
+               value=Constant(value='/home/user1/raw_data.csv')),
+            Assign(
+               targets=[
+                  Name(id='df1', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     JoinedStr(
+                        values=[
+                           FormattedValue(
+                              value=Name(id='user_root', ctx=Load()),
+                              conversion=-1),
+                           Constant(value='raw_data_1.csv')])],
+                  keywords=[])),
+            Assign(
+               targets=[
+                  Name(id='df', ctx=Store())],
+               value=Call(
+                  func=Name(id='read_data', ctx=Load()),
+                  args=[
+                     Constant(value='/home/user1/raw_data1.csv')],
+                  keywords=[])),
+            Assign(
+               targets=[
+                  Name(id='user_root', ctx=Store())],
+               value=Attribute(
+                  value=Name(id='args', ctx=Load()),
+                  attr='root',
+                  ctx=Load())),
+            Assign(
+               targets=[
+                  Name(id='data_path', ctx=Store())],
+               value=Attribute(
+                  value=Name(id='args', ctx=Load()),
+                  attr='data',
+                  ctx=Load())),
+            Assign(
+               targets=[
+                  Name(id='df2', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='pd', ctx=Load()),
+                     attr='read_csv',
+                     ctx=Load()),
+                  args=[
+                     Name(id='data_path', ctx=Load())],
+                  keywords=[]))],
+         decorator_list=[]),
+      If(
+         test=Compare(
+            left=Name(id='__name__', ctx=Load()),
+            ops=[
+               Eq()],
+            comparators=[
+               Constant(value='__main__')]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='args', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='argparse', ctx=Load()),
+                     attr='ArgumentParser',
+                     ctx=Load()),
+                  args=[],
+                  keywords=[])),
+            Expr(
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='args', ctx=Load()),
+                     attr='add_argument',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='-r'),
+                     Constant(value='--root')],
+                  keywords=[])),
+            Expr(
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='args', ctx=Load()),
+                     attr='add_argument',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='-d'),
+                     Constant(value='--data')],
+                  keywords=[])),
+            Assign(
+               targets=[
+                  Name(id='args', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='args', ctx=Load()),
+                     attr='parse_args',
+                     ctx=Load()),
+                  args=[],
+                  keywords=[])),
+            Expr(
+               value=Call(
+                  func=Name(id='main', ctx=Load()),
+                  args=[
+                     Name(id='args', ctx=Load())],
+                  keywords=[]))],
+         orelse=[])],
+   type_ignores=[])
