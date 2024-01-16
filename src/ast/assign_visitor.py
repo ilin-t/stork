@@ -158,11 +158,20 @@ class AssignVisitor(ast.NodeVisitor):
         func_call = self.direct_visit(parent_object=self, node=node, towards=node.func)
         args_names = []
         params = []
+        var_flag = False
         for arg in node.args:
-            args_names.append(self.direct_visit(self, node, arg))
+            temp = self.get_assignment_value_from_var_name_node(variable=self.direct_visit(self, node, arg), position=arg.lineno)
+            if temp:
+                args_names.append(temp[0])
+                var_flag = True
+            else:
+                args_names.append(self.direct_visit(parent_object=self, node=node, towards=arg))
         for keyword in node.keywords:
             params.append(self.direct_visit(self, node, keyword))
         try:
+            if var_flag:
+                args_names = "".join(args_names)
+            print(f"Args_names: {args_names}")
             if type(node.func).__name__ == "Attribute" and self.assignment["data_source"]:
                 self.assignment["data_source"].append(
                     {"func_call": func_call, "data_file": args_names, "params": params})
@@ -531,7 +540,7 @@ class AssignVisitor(ast.NodeVisitor):
                                 if isinstance(item, dict):
                                     if 'data_file' in item.keys():
                                         try:
-                                            return item['data_file'][0]
+                                            return item['data_file']
                                         except IndexError as e:
                                             self.logger.error(e)
 

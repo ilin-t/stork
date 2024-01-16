@@ -10,7 +10,7 @@ def read_data(path):
 
 def main(args):
     user_root = "/home/ilint/"
-    data_file = "/home/ilint/occurrences-2018.csv"
+    data_file = "occurrences-2018.csv"
     data_folder="data/"
 
     df1 = pd.read_csv(f"{user_root}occurrences-2019.csv")
