@@ -171,7 +171,7 @@ class AssignVisitor(ast.NodeVisitor):
         try:
             if var_flag:
                 args_names = "".join(args_names)
-            print(f"Args_names: {args_names}")
+            # print(f"Args_names: {args_names}")
             if type(node.func).__name__ == "Attribute" and self.assignment["data_source"]:
                 self.assignment["data_source"].append(
                     {"func_call": func_call, "data_file": args_names, "params": params})
@@ -201,7 +201,7 @@ class AssignVisitor(ast.NodeVisitor):
         if type(node.op).__name__ == "Add":
             return f"{left_var_value}{right_var_value}"
 
-        print(f"BinOp for {node.lineno}. Left operand: {left_var_value}, right operand {right_var_value}.")
+        # print(f"BinOp for {node.lineno}. Left operand: {left_var_value}, right operand {right_var_value}.")
         return [left_var_value, right_var_value]
 
     def visit_Subscript(self, node):
@@ -248,16 +248,34 @@ class AssignVisitor(ast.NodeVisitor):
 
     def visit_List(self, node):
         list_el = []
+        var_flag = False
         for element in node.elts:
-            list_el.append(self.direct_visit(self, node, element))
+            temp = self.get_assignment_value_from_var_name_node(variable=self.direct_visit(self, node, element),
+                                                                position=element.lineno)
+            if temp:
+                list_el.append(temp[0])
+                var_flag = True
+            else:
+                list_el.append(self.direct_visit(parent_object=self, node=node, towards=element))
+        if var_flag:
+            list_el = "".join(list_el)
 
         return list_el
 
     #
     def visit_Tuple(self, node):
         tuple_el = []
+        var_flag = False
         for element in node.elts:
-            tuple_el.append(self.direct_visit(self, node, element))
+            temp = self.get_assignment_value_from_var_name_node(variable=self.direct_visit(self, node, element),
+                                                                position=element.lineno)
+            if temp:
+                tuple_el.append(temp[0])
+                var_flag = True
+            else:
+                tuple_el.append(self.direct_visit(parent_object=self, node=node, towards=element))
+        if var_flag:
+            tuple_el = "".join(tuple_el)
 
         return tuple_el
 
@@ -311,20 +329,20 @@ class AssignVisitor(ast.NodeVisitor):
 
                     data_file_from_var = self.retrieve_variable_from_assignment(assignment=assignment,
                                                                                 assignment_list=self.assignments)
-                    print(f"Data file from variable retrieved: {data_file_from_var}")
+                    # print(f"Data file from variable retrieved: {data_file_from_var}")
                     # print(f"Data file from var: {data_file_from_var}")
                     new_assignment = self.var_assignment_to_input(var_assignment=data_file_from_var,
                                                                   assignment=assignment)
-                    print(f"New assigment: {new_assignment}")
+                    # print(f"New assigment: {new_assignment}")
                     if new_assignment and new_assignment not in self.inputs:
-                        print(f"Assignment to be stored as a 'var access': {new_assignment}")
+                        # print(f"Assignment to be stored as a 'var access': {new_assignment}")
                         self.read_methods['variable'].append(new_assignment)
                         self.inputs.append(new_assignment)
                         break
 
                     if self.keepDataSource(data_source=source) and assignment not in self.inputs:
                         self.inputs.append(assignment)
-                        print(f"Raw string data assignment: {assignment}")
+                        # print(f"Raw string data assignment: {assignment}")
                         self.read_methods['raw_string'].append(assignment)
                         break
             self.inputs = [assignment for assignment in self.assignments if assignment not in removed]
@@ -426,10 +444,10 @@ class AssignVisitor(ast.NodeVisitor):
         last_change = None
         try:
             if data_file:
-                print(f"Data file retrieved: {data_file}")
+                # print(f"Data file retrieved: {data_file}")
                 for item in assignment_list:
                     if data_file[0] == item["variable"]:
-                        print(f"Data file {data_file} matching variable {item}")
+                        # print(f"Data file {data_file} matching variable {item}")
                         last_change = self.get_closest_assignment(assignment=item,
                                                                   assignment_list=assignment_list)
                 return last_change if last_change else None
@@ -670,7 +688,7 @@ class AssignVisitor(ast.NodeVisitor):
     def parseRepoName(self, repo_name):
         if len(repo_name) > 30:
             repo_name = repo_name[0:29]
-            print(repo_name)
+            # print(repo_name)
 
         bucket_name = re.sub(r'[\W_]+', '-', repo_name) + "-" + str(hashlib.md5(repo_name.encode()).hexdigest())
         # print(len(bucket_name))
@@ -716,18 +734,15 @@ class AssignVisitor(ast.NodeVisitor):
                 for row in row_old:
                     # row_parts = row.strip().split("=")
                     for source in temp:
-                        print(f"Source: {source}")
                         dataset_name = source['dataset_name']
                         if isinstance(source['variable'], dict):
                             source['variable'] = f"{source['variable']['from']}.{source['variable']['method']}"
                         if (source['variable'] in row and dataset_name in row):
                             row = row.replace(source['dataset_name'], source['url'])
                             temp.remove(source)
-                            print(f"NEW ROW: {row}")
                         elif dataset_name in row:
                             row = row.replace(source['dataset_name'], source["url"])
                             temp.remove(source)
-                            print(f"NEW ROW: {row}")
                     new.write(row)
                 old.close()
             new.close()

@@ -18,7 +18,9 @@ def main(args):
     df4 = pd.read_csv(user_root + data_folder + "occurrences-2019.csv")
     df6 = pd.read_csv(user_root + data_folder + data_file)
     df = read_data("/home/ilint/occurrences-2020.csv")
-    df5 = pd.read_csv("{}/{}/{}".format(user_root, data_folder, "occurrences-2022.csv"))
+    df5 = pd.read_csv("/".format(user_root, data_folder, "occurrences-2022.csv"))
+    df8 = pd.read_csv("/".join([user_root, data_folder, "occurrences-2022.csv"]))
+    df10 = pd.read_csv("%s%s%s" % (user_root,data_folder, "occurrences-2023.csv"))
 
     # user_root = args.root
     # data_path = args.data
