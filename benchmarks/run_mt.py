@@ -331,79 +331,79 @@ def aggregate_stats(dir_path):
     agg_stats.to_csv(f"{dir_path}/aggregated-stats.tsv", sep="\t")
 
 
-# def main(args):
-    # NUM_THREADS = int(args.threads)
-    # processes = []
-    # # repos_to_run = collect_resources(root_folder=args.repositories)
-    # repos_to_run = get_repository_list(args.repositories)
-    # repos_count = len(repos_to_run)
-    #
-    # os.makedirs(f"{args.outputs}/errors/", exist_ok=True)
-    # os.makedirs(f"{args.outputs}/dataset_logs/", exist_ok=True)
-    # os.makedirs(f"{args.outputs}/individual_logs/", exist_ok=True)
-    # os.makedirs(f"{args.outputs}/read_method_logs/", exist_ok=True)
-    # os.makedirs(f"{args.outputs}/rewritten_pipelines/", exist_ok=True)
-    # os.makedirs(f"{args.outputs}/rewrite_logs/", exist_ok=True)
-    #
-    # yearly_stats_threads = []
-    #
-    # for i in range(NUM_THREADS):
-    #     error_log = createLogger(filename=f"{args.outputs}/errors/errors-{i}.log", project_name=f"error_log-{i}",
-    #                              level=logging.ERROR)
-    #
-    #     dataset_logger = createLogger(filename=f"{args.outputs}/dataset_logs/dataset_logger-{i}.log",
-    #                                   project_name=f"dataset_logger-{i}",
-    #                                   level=logging.INFO)
-    #
-    #     pipelines_to_rewrite_logger = createLogger(filename=f"{args.outputs}/rewrite_logs/pipelines_to_rewrite-{i}.log",
-    #                                   project_name=f"pipelines_to_rewrite-{i}",
-    #                                   level=logging.INFO)
-    #
-    #     read_method_logger = createLogger(filename=f"{args.outputs}/read_method_logs/read_method_logger-{i}.log",
-    #                                       project_name=f"read_method_logger-{i}",
-    #                                       level=logging.INFO)
-    #
-    #     yearly_stats_threads.append(pd.DataFrame(
-    #         columns=["thread_id", "total_repositories", "repositories_per_thread", "repositories_processed",
-    #                  "pipelines_total", "pipelines_processed", "pipelines_success",
-    #                  "pipelines_failed", "success_rate", "total_datasets", "reads_per_pipeline",
-    #                  "read_variable", "read_var_pct", "read_raw_string", "read_str_pct",
-    #                  "read_external", "read_external_pct", "total_reads_classified", "dataset_exists", "dataset_exists_pct", "pipeline_rewritten", "repositories_successful", "repositories_success_rate"],
-    #         data=np.zeros(shape=(1, 23)), index=[i]))
-    #
-    #     processes.append(Process(target=analyze_repository, kwargs={"repos_to_run": repos_to_run,
-    #                                                                 "repos_count": repos_count,
-    #                                                                 "error_log": error_log,
-    #                                                                 "yearly_stats_thread": yearly_stats_threads[i],
-    #                                                                 "dataset_logger": dataset_logger,
-    #                                                                 "read_method_logger": read_method_logger,
-    #                                                                 "pipelines_to_rewrite_logger": pipelines_to_rewrite_logger,
-    #                                                                 "num_threads": NUM_THREADS,
-    #                                                                 "thread_id": i}))
-    #
-    # start_processes(processes)
-    # join_processes(processes)
-    #
-    # aggregate_repositories(f"{args.outputs}/dataset_logs/")
-    # aggregate_repositories(f"{args.outputs}/read_method_logs/")
-    # aggregate_repositories(f"{args.outputs}/rewrite_logs/")
-    # aggregate_stats(f"{args.outputs}")
+def main(args):
+    NUM_THREADS = int(args.threads)
+    processes = []
+    # repos_to_run = collect_resources(root_folder=args.repositories)
+    repos_to_run = get_repository_list(args.repositories)
+    repos_count = len(repos_to_run)
+
+    os.makedirs(f"{args.outputs}/errors/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/dataset_logs/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/individual_logs/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/read_method_logs/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/rewritten_pipelines/", exist_ok=True)
+    os.makedirs(f"{args.outputs}/rewrite_logs/", exist_ok=True)
+
+    yearly_stats_threads = []
+
+    for i in range(NUM_THREADS):
+        error_log = createLogger(filename=f"{args.outputs}/errors/errors-{i}.log", project_name=f"error_log-{i}",
+                                 level=logging.ERROR)
+
+        dataset_logger = createLogger(filename=f"{args.outputs}/dataset_logs/dataset_logger-{i}.log",
+                                      project_name=f"dataset_logger-{i}",
+                                      level=logging.INFO)
+
+        pipelines_to_rewrite_logger = createLogger(filename=f"{args.outputs}/rewrite_logs/pipelines_to_rewrite-{i}.log",
+                                      project_name=f"pipelines_to_rewrite-{i}",
+                                      level=logging.INFO)
+
+        read_method_logger = createLogger(filename=f"{args.outputs}/read_method_logs/read_method_logger-{i}.log",
+                                          project_name=f"read_method_logger-{i}",
+                                          level=logging.INFO)
+
+        yearly_stats_threads.append(pd.DataFrame(
+            columns=["thread_id", "total_repositories", "repositories_per_thread", "repositories_processed",
+                     "pipelines_total", "pipelines_processed", "pipelines_success",
+                     "pipelines_failed", "success_rate", "total_datasets", "reads_per_pipeline",
+                     "read_variable", "read_var_pct", "read_raw_string", "read_str_pct",
+                     "read_external", "read_external_pct", "total_reads_classified", "dataset_exists", "dataset_exists_pct", "pipeline_rewritten", "repositories_successful", "repositories_success_rate"],
+            data=np.zeros(shape=(1, 23)), index=[i]))
+
+        processes.append(Process(target=analyze_repository, kwargs={"repos_to_run": repos_to_run,
+                                                                    "repos_count": repos_count,
+                                                                    "error_log": error_log,
+                                                                    "yearly_stats_thread": yearly_stats_threads[i],
+                                                                    "dataset_logger": dataset_logger,
+                                                                    "read_method_logger": read_method_logger,
+                                                                    "pipelines_to_rewrite_logger": pipelines_to_rewrite_logger,
+                                                                    "num_threads": NUM_THREADS,
+                                                                    "thread_id": i}))
+
+    start_processes(processes)
+    join_processes(processes)
+
+    aggregate_repositories(f"{args.outputs}/dataset_logs/")
+    aggregate_repositories(f"{args.outputs}/read_method_logs/")
+    aggregate_repositories(f"{args.outputs}/rewrite_logs/")
+    aggregate_stats(f"{args.outputs}")
 
 
 if __name__ == '__main__':
     aggregate_stats("test-2021/")
-    # parser = argparse.ArgumentParser(
-    #     prog='Run Stork',
-    #     description='Run Stork on a set of repositories',
-    # )
-    #
-    # # parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/trial/")
-    # # parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/pipelines/results-trial/")
-    # # parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/stork-zip-2days/repositories-test/")
-    # parser.add_argument('-r', '--repositories',
-    #                     default="/home/ilint/HPI/repos/stork/analysis_results/repository_list/local_list_repositories_old.txt")
-    # parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list/")
-    # parser.add_argument('-t', '--threads', default=6)
-    # args = parser.parse_args()
-    #
-    # main(args)
+    parser = argparse.ArgumentParser(
+        prog='Run Stork',
+        description='Run Stork on a set of repositories',
+    )
+
+    # parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/trial/")
+    # parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/pipelines/results-trial/")
+    # parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/stork-zip-2days/repositories-test/")
+    parser.add_argument('-r', '--repositories',
+                        default="/home/ilint/HPI/repos/stork/analysis_results/repository_list/local_list_repositories_old.txt")
+    parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list/")
+    parser.add_argument('-t', '--threads', default=6)
+    args = parser.parse_args()
+
+    main(args)

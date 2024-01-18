@@ -136,24 +136,6 @@ class AssignVisitor(ast.NodeVisitor):
 
         self.assignments.append(self.assignment)
 
-    #
-    # def visit_Call(self, node):
-    #     func_call = self.direct_visit(parent_object=self, node=node, towards=node.func)
-    #     args_names = []
-    #     params = []
-    #     for arg in node.args:
-    #         args_names.append(self.direct_visit(self, node, arg))
-    #     for keyword in node.keywords:
-    #         params.append(self.direct_visit(self, node, keyword))
-    #     try:
-    #         if type(node.func).__name__ == "Attribute" and self.assignment["data_source"]:
-    #             self.assignment["data_source"].append(
-    #                 {"func_call": func_call, "data_file": args_names, "params": params})
-    #         else:
-    #             return {"func_call": func_call, "data_file": args_names, "params": params}
-    #     except(KeyError, TypeError, AttributeError) as e:
-    #         self.logger.error(e)
-
     def visit_Call(self, node):
         func_call = self.direct_visit(parent_object=self, node=node, towards=node.func)
         args_names = []
