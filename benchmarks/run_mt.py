@@ -212,24 +212,25 @@ def traverse_folders(path, yearly_stats_thread, flagged_pipelines, project_logge
 
 
 def analyze_repository(repos_to_run, flagged_pipelines, yearly_stats_thread, repos_count, error_log, dataset_logger, read_method_logger,
-                       num_threads, thread_id, split, pipelines_to_rewrite_logger):
+                       num_threads, thread_id, pipelines_to_rewrite_logger):
     # repositories = ["/home/ilint/HPI/repos/pipelines/trial/arguseyes.zip"]
 
     repos_per_thread = repos_count // num_threads
-
-    if split == 2:
-        start_index = repos_count + ((thread_id) * repos_per_thread)
-        end_index = start_index + repos_per_thread
-
-    elif split == 1:
-        start_index = (thread_id * repos_per_thread)
-        end_index = start_index + repos_per_thread
+    start_index = 0
+    end_index = 0
+    # if split == 2:
+    #     start_index = repos_count + ((thread_id) * repos_per_thread)
+    #     end_index = start_index + repos_per_thread
+    #
+    # elif split == 1:
+    #     start_index = (thread_id * repos_per_thread)
+    #     end_index = start_index + repos_per_thread
 
     print(f"Start index: {start_index}")
     print(f"End index: {end_index}")
 
-    # start_index = (thread_id * repos_per_thread)
-    # end_index = start_index + repos_per_thread
+    start_index = (thread_id * repos_per_thread)
+    end_index = start_index + repos_per_thread
     yearly_stats_thread["thread_id"] = thread_id
     yearly_stats_thread["total_repositories"] = repos_count
     yearly_stats_thread["repositories_per_thread"] = repos_per_thread
@@ -312,13 +313,13 @@ def aggregate_stats(dir_path):
 def main(args):
     NUM_THREADS = int(args.threads)
     processes = []
-    SPLIT_INTO = args.split
+    # SPLIT_INTO = args.split
     # repos_to_run = collect_resources(root_folder=args.repositories)
     repos_to_run = get_repository_list(args.repositories)
     flagged_pipelines = get_repository_list(args.pipelines)
     flagged_pipelines = [pipeline.strip() for pipeline in flagged_pipelines]
     # repos_count = len(repos_to_run) // 2
-    repos_count = len(repos_to_run) // 2
+    repos_count = len(repos_to_run)
 
     os.makedirs(f"{args.outputs}/errors/", exist_ok=True)
     os.makedirs(f"{args.outputs}/dataset_logs/", exist_ok=True)
@@ -356,16 +357,18 @@ def main(args):
             data=np.zeros(shape=(1, 23)), index=[i]))
 
         processes.append(Process(target=analyze_repository, kwargs={"repos_to_run": repos_to_run,
+                                                                    "flagged_pipelines": flagged_pipelines,
+                                                                    "yearly_stats_thread": yearly_stats_threads[i],
                                                                     "repos_count": repos_count,
                                                                     "error_log": error_log,
-                                                                    "yearly_stats_thread": yearly_stats_threads[i],
                                                                     "dataset_logger": dataset_logger,
                                                                     "read_method_logger": read_method_logger,
-                                                                    "pipelines_to_rewrite_logger": pipelines_to_rewrite_logger,
-                                                                    "split": SPLIT_INTO,
                                                                     "num_threads": NUM_THREADS,
-                                                                    "flagged_pipelines": flagged_pipelines,
-                                                                    "thread_id": i}))
+                                                                    "thread_id": i,
+                                                                    # "split": SPLIT_INTO,
+                                                                    "pipelines_to_rewrite_logger": pipelines_to_rewrite_logger
+                                                                    }))
+
 
     start_processes(processes)
     join_processes(processes)
@@ -386,13 +389,13 @@ if __name__ == '__main__':
     # parser.add_argument('-r', '--repositories', default="/home/ilint/HPI/repos/pipelines/trial/")
     # parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/pipelines/results-trial/")
     # parser.add_argument('-s', '--split', default=2)
-    parser.add_argument('-s', '--split', default=1)
+    # parser.add_argument('-s', '--split', default=1)
     parser.add_argument('-r', '--repositories',
                         default="/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list_flag/repositories/library_reads/aggregated_results.txt")
     parser.add_argument('-p', '--pipelines',
                         default="/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list_flag/pipelines/library_reads/aggregated_results.txt")
     parser.add_argument('-o', '--outputs', default="/home/ilint/HPI/repos/stork/analysis_results/outputs_local_list/")
-    parser.add_argument('-t', '--threads', default=2)
+    parser.add_argument('-t', '--threads', default=6)
     args = parser.parse_args()
 
     main(args)

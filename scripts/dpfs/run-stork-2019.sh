@@ -11,4 +11,4 @@ REPOSITORY=$1
 YEAR=$2
 ROOT="/hpi/fs00/share/fg-rabl/ilin.tolovski"
 
-python3 src/log_modules/run_mt.py --threads=36 --repositories=$ROOT/results/21-11-2023-12-10-stork-zip-flag-year-2019/repositories/library_reads/aggregated_results.txt --outputs=$ROOT/results/$DATE-$REPOSITORY-year-$YEAR/
+python3 benchmarks/run_mt.py --threads=36 --repositories=$ROOT/results/21-11-2023-12-10-stork-zip-flag-year-2019/repositories/library_reads/aggregated_results.txt --outputs=$ROOT/results/$DATE-$REPOSITORY-year-$YEAR/ --pipelines=$ROOT/results/21-11-2023-12-10-stork-zip-flag-year-2019/pipelines/library_reads/aggregated_results.txt
