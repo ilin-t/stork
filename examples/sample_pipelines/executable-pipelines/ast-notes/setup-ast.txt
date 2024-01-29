@@ -1,0 +1,54 @@
+Module(
+   body=[
+      ImportFrom(
+         module='setuptools',
+         names=[
+            alias(name='setup'),
+            alias(name='find_packages')],
+         level=0),
+      Expr(
+         value=Call(
+            func=Name(id='setup', ctx=Load()),
+            args=[],
+            keywords=[
+               keyword(
+                  arg='name',
+                  value=Constant(value='datahinge-cli')),
+               keyword(
+                  arg='version',
+                  value=Constant(value='1.0.0')),
+               keyword(
+                  arg='author',
+                  value=Constant(value='Sudo-Ivan')),
+               keyword(
+                  arg='author_email',
+                  value=Constant(value='contact@ivanryan.slmail.me')),
+               keyword(
+                  arg='description',
+                  value=Constant(value='A command-line interface for my awesome Python project')),
+               keyword(
+                  arg='packages',
+                  value=Call(
+                     func=Name(id='find_packages', ctx=Load()),
+                     args=[],
+                     keywords=[])),
+               keyword(
+                  arg='entry_points',
+                  value=Dict(
+                     keys=[
+                        Constant(value='console_scripts')],
+                     values=[
+                        List(
+                           elts=[
+                              Constant(value='datahinge-cli=datahinge_cli.__main__:main')],
+                           ctx=Load())])),
+               keyword(
+                  arg='install_requires',
+                  value=List(
+                     elts=[
+                        Constant(value='prompt_toolkit>=3.0.36'),
+                        Constant(value='pygments>=2.7.0'),
+                        Constant(value='GitPython>=3.1.31'),
+                        Constant(value='requests>=2.28.2')],
+                     ctx=Load()))]))],
+   type_ignores=[])

@@ -518,7 +518,7 @@ class AssignVisitor(ast.NodeVisitor):
             if not isinstance(assignment['data_source'], list):
                 data_source = assignment['data_source']
                 return data_source['data_file']
-            elif not assignment["variable"] or len(assignment["data_source"]) > 1:
+            elif (not assignment["variable"]) or (len(assignment["data_source"]) > 1):
                 data_source = assignment['data_source'][0]
                 return data_source['data_file']
             else:
@@ -557,7 +557,7 @@ class AssignVisitor(ast.NodeVisitor):
                 if assignment:
                     variable, assignment_var = self.get_variable_and_value(assignment)
                     # print(f"Variable: {variable}, value: {assignment_var}")
-                    data_file = self.get_var_value_in_assignment(assignment)
+                    # data_file = self.get_var_value_in_assignment(assignment)
                     # print(f"Data file: {data_file}")
                     val = self.get_value_from_var_name(assignment=assignment, variable=variable,
                                                        position=assignment['lineno'],

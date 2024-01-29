@@ -1,5 +1,45 @@
 import ast
+import os
 import os.path
+from os.path import basename, normpath
+
+
+def list_folder_names(path):
+    return [f.name for f in os.scandir(path) if f.is_dir()]
+
+
+def list_files_paths(path):
+    return [f.path for f in os.scandir(path) if f.is_file()]
+
+
+def list_files_names(path):
+    return [f.name for f in os.scandir(path) if f.is_file()]
+
+
+def filter_python_files(files):
+    return [file for file in files if file.lower().endswith('.py')]
+
+
+def filter_folders(project_path):
+    folder_paths = list_folder_paths(project_path)
+    folders = []
+    ignore = False
+    to_ignore = ['bin/*', 'www', 'js', 'virtual', '*virtual*', 'dist-packages', 'site-packages',
+                 '*env*', 'env', 'etc/*', 'include/*', 'lib/*', 'lib64/*', '.venv/*', '*/venv/*']
+    for folder in folder_paths:
+        for name in to_ignore:
+            if name in basename(normpath(folder)).lower():
+                ignore = True
+                break
+        if ignore:
+            continue
+        # if "env" in basename(normpath(folder)).lower() or "lib" in basename(normpath(folder)).lower():
+        #     continue
+        elif basename(normpath(folder)).startswith((".", "_")):
+            continue
+        else:
+            folders.append(folder)
+    return folders
 
 
 def getAst(pipeline):
@@ -26,6 +66,7 @@ def checkDataFile(data_file):
     else:
         return checkFileExtension(data_file)
 
+
 def checkFileExtension(data_file):
     if type(data_file) is not str:
         return False
@@ -40,6 +81,7 @@ def checkFileExtension(data_file):
 def fileExists(data_file):
     os.path.isfile(data_file)
 
+
 def reportAssign(pipeline, assignments, full):
     path = str.split(pipeline, "/")
     filename = str.split(path[len(path) - 1], ".")
@@ -51,14 +93,14 @@ def reportAssign(pipeline, assignments, full):
 
 
 def compareTwoFiles(file1, file2, output):
-    lines1=[]
-    lines2=[]
+    lines1 = []
+    lines2 = []
     with open(file1) as f:
-        lines1=f.readlines()
+        lines1 = f.readlines()
     f.close()
 
     with open(file2) as f:
-        lines2=f.readlines()
+        lines2 = f.readlines()
     f.close()
 
     set_lines2 = set(lines2)
@@ -74,6 +116,7 @@ def compareTwoFiles(file1, file2, output):
 
     return diff
 
+
 if __name__ == '__main__':
     # compareTwoFiles("../../analysis_results/stork-coverage/aggregated_results_local.txt",
     #                 "../../analysis_results/stork-coverage/aggregated_results_local_shorter.txt",
@@ -84,3 +127,7 @@ if __name__ == '__main__':
     compareTwoFiles("../../examples/repo_lists/aggregated_results_py.txt",
                     "../../examples/repo_lists/aggregated_results_libs.txt",
                     "../../analysis_results/stork-coverage/difference_py.txt")
+
+
+def list_folder_paths(path):
+    return [f.path for f in os.scandir(path) if f.is_dir()]

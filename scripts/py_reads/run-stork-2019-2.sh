@@ -13,5 +13,5 @@ ROOT="/hpi/fs00/share/fg-rabl/ilin.tolovski"
 
 python3 src/log_modules/run_mt.py --threads=36
         --repositories=$ROOT/results/21-11-2023-12-10-stork-zip-flag-year-2019/repositories/python_reads/aggregated_results.txt \
-        --outputs=$ROOT/results/$DATE-$REPOSITORY-year-$YEAR/ --split=1 \
+        --outputs=$ROOT/results/$DATE-$REPOSITORY-year-$YEAR/ --split=2 \
         --pipelines=$ROOT/results/21-11-2023-12-10-stork-zip-flag-year-2019/pipelines/python_reads/aggregated_results.txt

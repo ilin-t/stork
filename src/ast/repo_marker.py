@@ -1,5 +1,6 @@
 import re
 
+from benchmarks.filter_pipelines import filter_pipeline
 from src.ast.import_visitor import ImportVisitor
 from src.log_modules import util
 from benchmarks.run import filter_folders, list_files_paths, filter_python_files
@@ -78,8 +79,12 @@ class RepositoryMarker():
 
     def flag_repository(self, file_list, project_logger, data_read_pipelines_lib, data_read_pipelines_py):
         for py_file in file_list:
-            self.flag_pipeline(py_file, project_logger, data_read_pipelines_lib=data_read_pipelines_lib,
-                               data_read_pipelines_py=data_read_pipelines_py)
+            if not filter_pipeline(input_pipeline=py_file):
+                print(f"pipeline not executable: {py_file}")
+                continue
+            else:
+                self.flag_pipeline(py_file, project_logger, data_read_pipelines_lib=data_read_pipelines_lib,
+                                   data_read_pipelines_py=data_read_pipelines_py)
 
     def flag_pipeline(self, pipeline, project_logger, data_read_pipelines_lib, data_read_pipelines_py):
         try:
@@ -161,7 +166,7 @@ class RepositoryMarker():
                         continue
                     else:
                         for library in library_list:
-                            if "import_library" in  library.keys():
+                            if "import_library" in library.keys():
                                 # print(f"Library {library}")
                                 # print(f"Library list {library_list}")
                                 # print(f"Library method: {library['import_library']}")
@@ -175,7 +180,10 @@ class RepositoryMarker():
                                 continue
                             elif "import_method" in library.keys():
                                 for method in self.dpfs[library['from']]:
+                                    print(f"Method: {method}, dpfs library: {self.dpfs[library['from']]}")
+                                    print(f"line to check: {line}")
                                     if f"{method}(" in line:
+                                        print(f"{method} Detected.")
                                         print(
                                             f"Method {method} called in {pipeline} in the following line number: {lines.index(line)}. Method call: {line}")
                                         flagged_pipeline_library = True
