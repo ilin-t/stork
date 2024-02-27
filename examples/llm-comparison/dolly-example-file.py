@@ -47,7 +47,7 @@ def main(args):
     except FileNotFoundError:
         results = pd.DataFrame(columns=["pipeline", "prompt_time", "pipeline_time", "inference_time"])
 
-    for py_file in args.pipelines:
+    for py_file in args.code:
         results.loc[-1] = process_pipeline(prompt_file=args.prompt, pipeline_file=py_file)
 
 

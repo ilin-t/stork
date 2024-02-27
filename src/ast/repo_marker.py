@@ -1,6 +1,6 @@
 import re
 
-from benchmarks.filter_pipelines import filter_pipeline
+from src.log_modules.filter_pipelines import filter_pipeline
 from src.ast.import_visitor import ImportVisitor
 from src.log_modules import util
 from benchmarks.run import filter_folders, list_files_paths, filter_python_files
@@ -84,7 +84,7 @@ class RepositoryMarker():
                 continue
             else:
                 self.flag_pipeline(py_file, project_logger, data_read_pipelines_lib=data_read_pipelines_lib,
-                                   data_read_pipelines_py=data_read_pipelines_py)
+                                       data_read_pipelines_py=data_read_pipelines_py)
 
     def flag_pipeline(self, pipeline, project_logger, data_read_pipelines_lib, data_read_pipelines_py):
         try:
@@ -158,7 +158,7 @@ class RepositoryMarker():
                     if " open(" in line:
                         match = re.search(r'(?<=[\'\"])[xabt+]*r[xabt+]*(?=[\'\"])', line)
                         if match:
-                            print(f"Data was read in native Python in {pipeline} in the following line: {line}")
+                            print(f"Data was read in native Python in {pipeline}  in the following line number: {lines.index(line)+1}. Method call: {line}")
                             flagged_pipeline_python = True
                             method_calls_python += 1
                         else:
@@ -173,7 +173,7 @@ class RepositoryMarker():
                                 for method in self.dpfs[library['import_library']]:
                                     if f"{library['asname']}.{method}(" in line:
                                         print(
-                                            f"Method {method} called in {pipeline} in the following line number: {lines.index(line)}. Method call: {line}")
+                                            f"Method {method} called in {pipeline} in the following line number: {lines.index(line)+1}. Method call: {line}")
                                         flagged_pipeline_library = True
                                         method_calls_library += 1
                                         break
@@ -182,10 +182,10 @@ class RepositoryMarker():
                                 for method in self.dpfs[library['from']]:
                                     print(f"Method: {method}, dpfs library: {self.dpfs[library['from']]}")
                                     print(f"line to check: {line}")
-                                    if f"{method}(" in line:
+                                    if f"{method}" in line:
                                         print(f"{method} Detected.")
                                         print(
-                                            f"Method {method} called in {pipeline} in the following line number: {lines.index(line)}. Method call: {line}")
+                                            f"Method {method} called in {pipeline} in the following line number: {lines.index(line)+1}. Method call: {line}")
                                         flagged_pipeline_library = True
                                         method_calls_library += 1
                                         break

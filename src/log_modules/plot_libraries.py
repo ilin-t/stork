@@ -189,9 +189,12 @@ def count_occurrences(libraries, occurrences_df):
     count = 0
     for lib in libraries:
         try:
-            temp = occurrences_df.loc[occurrences_df["library"] == lib, "count"]
-            if temp.values.size > 0:
-                count += temp.values[0]
+            print(f"Library: {lib_occurence}")
+            if lib_occurence.lower() in lib.lower():
+                temp = occurrences_df.loc[occurrences_df["library"] == lib_occurence, "count"]
+                print(f"Library: {lib_occurence} found in {lib}. Count: {temp}")
+                if temp.values.size > 0:
+                    count += temp.values[0]
         except KeyError as e:
             print(f"Library {lib} not found in occurrences list.")
     return count
@@ -250,21 +253,23 @@ def plot_lines_df(df_list, libs, libgroup):
 
 def main(args):
     os.makedirs(f"{args.outputs}/plots/", exist_ok=True)
-    occurrences_df = pd.read_csv(filepath_or_buffer=f"{args.outputs}/occurrences/library_count_all_threads.csv",
-                                 header=0)
+    # occurrences_df = pd.read_csv(filepath_or_buffer=f"{args.outputs}/occurrences/library_count_all_threads.csv",
+    #                              header=0)
 
-    topX(df=occurrences_df, X=20, output_file=f"{args.outputs}/plots/top{20}.svg")
-    # occurrences_df = pd.read_csv("../../analysis_results/yearly_splits/occurences_summed.csv")
+    # topX(df=occurrences_df, X=20, output_file=f"{args.outputs}/plots/top{20}.svg")
+    occurrences_df = pd.read_csv("../../analysis_results/yearly_splits/occurences_summed.csv")
     # topX(df=occurrences_df, X=20, output_file="../../analysis_results/plots/top20.png")
-    plot_data_analysis_libs(occurrences_df)
-    plot_machine_learning_libs(occurrences_df)
-    plot_visualization_libs(occurrences_df)
-    plot_web_framework_libs(occurrences_df)
-    plot_postgres_drivers_libs(occurrences_df)
-    plot_db_libs(occurrences_df)
+    # plot_data_analysis_libs(occurrences_df)
+    # plot_machine_learning_libs(occurrences_df)
+    # plot_visualization_libs(occurrences_df)
+    # plot_web_framework_libs(occurrences_df)
+    # plot_postgres_drivers_libs(occurrences_df)
+    # plot_db_libs(occurrences_df)
 
     years = ['2018', '2019', '2020', '2021', '2022', '2023']
     nr_repos = [65648, 65440, 54924, 115288, 107436, 85785]
+
+    aggregate_db_libs(occurrences_df=occurrences_df)
 
     # yearly_splits(years = years, nr_repos = nr_repos, output_file= "python_repos.pdf")
     # yearly_splits(years = years, nr_repos = nr_repos, output_file= "python_repos.svg")

@@ -8,20 +8,19 @@ from multiprocessing import Process
 import numpy as np
 import pandas as pd
 
-from benchmarks.filter_pipelines import filter_pipeline
 from src.log_modules.util import filter_folders, list_files_paths, filter_python_files
 from src.log_modules.flag_repositories import get_repository_list
 from src.stork_main import Stork
 from src.log_modules import util
 from src.log_modules.parse_repos import unzip, start_processes, join_processes, \
-    aggregate_repositories, collect_resources
+    aggregate_repositories
 from src.log_modules.log_results import createLogger, closeLog
 
 
 def run_stork(python_files, flagged_pipelines, pipeline_logger, dataset_logger, read_method_logger,
               files_logger, error_logger, yearly_stats_thread, pipelines_to_rewrite_logger):
-    # stork = Stork(r"/hpi/fs00/share/fg/rabl/ilin.tolovski/projects/stork/src/db_conn/config_s3.ini")
-    stork = Stork(r"../src/db_conn/config_s3.ini")
+    stork = Stork(r"/hpi/fs00/share/fg/rabl/ilin.tolovski/projects/stork/src/db_conn/config_s3.ini")
+    # stork = Stork(r"../src/db_conn/config_s3.ini")
     stork.setClient(stork.access_key, stork.secret_access_key)
 
     buckets = stork.connector.getBucketNames()
@@ -31,160 +30,160 @@ def run_stork(python_files, flagged_pipelines, pipeline_logger, dataset_logger, 
     # print(f"Flagged files: {flagged_pipelines}")
     for py_file in python_files:
         if py_file in flagged_pipelines:
-            if not filter_pipeline(input_pipeline=py_file):
+            # if not filter_pipeline(input_pipeline=py_file):
+            #     continue
+            # else:
+            pipeline_logger.info(f"Pipeline: {py_file}")
+            tree = []
+            stork.assignVisitor.setLogger(error_logger)
+
+            try:
+                tree = util.getAst(pipeline=py_file)
+            except SyntaxError as e:
+                error_logger.error(e)
+                pipeline_logger.error(f"Pipeline {py_file} failed with the following error: {e}. Check the error logs.")
+
+            if not tree:
+                pipeline_logger.info(f"Pipeline {py_file} generated an empty AST. Check error logs.")
+
+            error_logger.error(f"Pipeline {py_file} generated the following errors:")
+            try:
+                stork.assignVisitor.setPipeline(pipeline=py_file)
+                stork.assignVisitor.visit(tree)
+
+            except (AttributeError, KeyError, TypeError) as e:
+                pipeline_logger.error(e)
+            try:
+                stork.assignVisitor.filter_Assignments()
+                stork.assignVisitor.replace_variables_in_assignments()
+                # stork.assignVisitor.setVariables()
+                stork.assignVisitor.getDatasetsFromInputs()
+                stork.assignVisitor.getDatasetsFromReadMethods()
+            except RecursionError as e:
+                pipeline_logger.info(e)
                 continue
+
+            # repo_name = stork.assignVisitor.parseRepoName(stork.assignVisitor.getRepositoryName())
+            repo_name = py_file.split("/page-")[1]
+            repo_name = repo_name.split("/")
+            repo_name = repo_name[1]
+            stork.assignments[py_file] = stork.assignVisitor.inputs
+            stork.datasets[py_file] = stork.assignVisitor.datasets
+
+            yearly_stats_thread["pipelines_processed"] = yearly_stats_thread["pipelines_processed"] + 1
+
+            error_logger.error("________________________________________________")
+            pipeline_logger.info("________________________________________________")
+            pipeline_logger.info(f"Pipeline {py_file} reads the following data files: ")
+            # print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
+            pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
+            # print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
+            pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
+            # for input in stork.assignVisitor.inputs:
+            #     pipeline_logger.info(f"\t Input: {input}")
+            #     # print(f"Input: {input}")
+            pipeline_logger.info("________________________________________________")
+
+            if len(stork.datasets[py_file]) > 0:
+                stork.connector.createFolder(folder_name=repo_name, bucket=bucket_name)
+                print(f"Adapted repository and bucket name: {repo_name}")
+                # Add inputs and datasets to the global assignments and datasets dictionary
+                yearly_stats_thread["total_datasets"] = (yearly_stats_thread["total_datasets"]
+                                                         + len(stork.datasets[py_file]))
+
+                yearly_stats_thread["pipelines_success"] = (yearly_stats_thread["pipelines_success"] + 1)
             else:
-                pipeline_logger.info(f"Pipeline: {py_file}")
-                tree = []
-                stork.assignVisitor.setLogger(error_logger)
+                yearly_stats_thread["pipelines_failed"] = (yearly_stats_thread["pipelines_failed"] + 1)
 
-                try:
-                    tree = util.getAst(pipeline=py_file)
-                except SyntaxError as e:
-                    error_logger.error(e)
-                    pipeline_logger.error(f"Pipeline {py_file} failed with the following error: {e}. Check the error logs.")
+            pipeline_logger.info("Datasets: ")
+            for dataset in stork.assignVisitor.datasets:
+                pipeline_logger.info(f"\t {dataset}")
+            pipeline_logger.info("________________________________________________")
 
-                if not tree:
-                    pipeline_logger.info(f"Pipeline {py_file} generated an empty AST. Check error logs.")
+            for key in stork.assignVisitor.datasets_read_methods.keys():
+                yearly_stats_thread[f"read_{key}"] = (yearly_stats_thread[f"read_{key}"] +
+                                                      len(stork.assignVisitor.datasets_read_methods[key]))
+                yearly_stats_thread[f"total_reads_classified"] = (yearly_stats_thread[f"total_reads_classified"] +
+                                                                  len(stork.assignVisitor.datasets_read_methods[key]))
+                pipeline_logger.info(f"Datasets in {py_file} read via {key}")
+                for dset_read_method in stork.assignVisitor.datasets_read_methods[key]:
+                    pipeline_logger.info(f"\t {dset_read_method}")
+                pipeline_logger.info("\t ________________________________________________")
+            pipeline_name = py_file.split("/")
+            pipeline_name = pipeline_name[-1]
+            new_pipeline = f"{args.outputs}/rewritten_pipelines/{pipeline_name[:-3]}_rewritten.py"
+            # if repo_name not in buckets:
+            #     self.connector.createBucket(bucket_name=bucket_name, region="eu-central-1")
+            #     print(f"Should create bucket: {bucket_name}")
 
-                error_logger.error(f"Pipeline {py_file} generated the following errors:")
-                try:
-                    stork.assignVisitor.setPipeline(pipeline=py_file)
-                    stork.assignVisitor.visit(tree)
-
-                except (AttributeError, KeyError, TypeError) as e:
-                    pipeline_logger.error(e)
-                try:
-                    stork.assignVisitor.filter_Assignments()
-                    stork.assignVisitor.replace_variables_in_assignments()
-                    # stork.assignVisitor.setVariables()
-                    stork.assignVisitor.getDatasetsFromInputs()
-                    stork.assignVisitor.getDatasetsFromReadMethods()
-                except RecursionError as e:
-                    pipeline_logger.info(e)
-                    continue
-
-                # repo_name = stork.assignVisitor.parseRepoName(stork.assignVisitor.getRepositoryName())
-                repo_name = py_file.split("/page-")[1]
-                repo_name = repo_name.split("/")
-                repo_name = repo_name[1]
-                stork.assignments[py_file] = stork.assignVisitor.inputs
-                stork.datasets[py_file] = stork.assignVisitor.datasets
-
-                yearly_stats_thread["pipelines_processed"] = yearly_stats_thread["pipelines_processed"] + 1
-
-                error_logger.error("________________________________________________")
-                pipeline_logger.info("________________________________________________")
-                pipeline_logger.info(f"Pipeline {py_file} reads the following data files: ")
-                # print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
-                pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.datasets)} datasets.")
-                # print(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
-                pipeline_logger.info(f"Pipeline {py_file} accesses {len(stork.assignVisitor.inputs)} inputs.")
-                # for input in stork.assignVisitor.inputs:
-                #     pipeline_logger.info(f"\t Input: {input}")
-                #     # print(f"Input: {input}")
-                pipeline_logger.info("________________________________________________")
-
+            # try:
+            # for member in stork.assignVisitor.inputs:
+            #     for source in member["data_source"]:
+            #         for dataset in source["data_file"]:
+            #             if util.checkFileExtension(dataset):
+            # print(f"dataset:{dataset}")
+            try:
+                # print(stork.datasets[py_file])
                 if len(stork.datasets[py_file]) > 0:
-                    stork.connector.createFolder(folder_name=repo_name, bucket=bucket_name)
-                    print(f"Adapted repository and bucket name: {repo_name}")
-                    # Add inputs and datasets to the global assignments and datasets dictionary
-                    yearly_stats_thread["total_datasets"] = (yearly_stats_thread["total_datasets"]
-                                                             + len(stork.datasets[py_file]))
+                    dataset_logger.info({py_file: stork.datasets[py_file]})
+                for dataset in stork.datasets[py_file]:
+                    print(f"Dataset: {dataset['dataset']}")
+                    if util.checkFileExtension(dataset['dataset']):
+                        abs_path_dataset = stork.assignVisitor.parsePath(dataset['dataset'])
+                        print(f"Source data file:{abs_path_dataset}")
+                        # stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, bucket=bucket_name)
+                        if os.path.isfile(abs_path_dataset):
+                            stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, logger=files_logger,
+                                                       bucket=bucket_name)
+                            yearly_stats_thread["dataset_exists"] = yearly_stats_thread["dataset_exists"] + 1
+                            yearly_stats_thread["pipeline_rewritten"] = yearly_stats_thread["pipeline_rewritten"] + 1
 
-                    yearly_stats_thread["pipelines_success"] = (yearly_stats_thread["pipelines_success"] + 1)
-                else:
-                    yearly_stats_thread["pipelines_failed"] = (yearly_stats_thread["pipelines_failed"] + 1)
+                            # ADD dataset to log
+                            # rewrite pipeline
 
-                pipeline_logger.info("Datasets: ")
-                for dataset in stork.assignVisitor.datasets:
-                    pipeline_logger.info(f"\t {dataset}")
-                pipeline_logger.info("________________________________________________")
+                            dataset_name = stork.assignVisitor.getDatasetName(abs_path_dataset)
 
-                for key in stork.assignVisitor.datasets_read_methods.keys():
-                    yearly_stats_thread[f"read_{key}"] = (yearly_stats_thread[f"read_{key}"] +
-                                                          len(stork.assignVisitor.datasets_read_methods[key]))
-                    yearly_stats_thread[f"total_reads_classified"] = (yearly_stats_thread[f"total_reads_classified"] +
-                                                                      len(stork.assignVisitor.datasets_read_methods[key]))
-                    pipeline_logger.info(f"Datasets in {py_file} read via {key}")
-                    for dset_read_method in stork.assignVisitor.datasets_read_methods[key]:
-                        pipeline_logger.info(f"\t {dset_read_method}")
-                    pipeline_logger.info("\t ________________________________________________")
-                pipeline_name = py_file.split("/")
-                pipeline_name = pipeline_name[-1]
-                new_pipeline = f"{args.outputs}/rewritten_pipelines/{pipeline_name[:-3]}_rewritten.py"
-                # if repo_name not in buckets:
-                #     self.connector.createBucket(bucket_name=bucket_name, region="eu-central-1")
-                #     print(f"Should create bucket: {bucket_name}")
+                            stork.assignVisitor.datasets_urls.append(
+                                {"variable": dataset['variable'], "dataset_name": dataset['dataset'],
+                                 "url": stork.connector.getObjectUrl(
+                                     key=dataset_name, folder=repo_name,
+                                     bucket=bucket_name), "lineno": dataset['lineno']})
+                            stork.datasets_urls[py_file] = stork.assignVisitor.datasets_urls
 
-                # try:
-                # for member in stork.assignVisitor.inputs:
-                #     for source in member["data_source"]:
-                #         for dataset in source["data_file"]:
-                #             if util.checkFileExtension(dataset):
-                # print(f"dataset:{dataset}")
-                try:
-                    # print(stork.datasets[py_file])
-                    if len(stork.datasets[py_file]) > 0:
-                        dataset_logger.info({py_file: stork.datasets[py_file]})
-                    for dataset in stork.datasets[py_file]:
-                        print(f"Dataset: {dataset['dataset']}")
-                        if util.checkFileExtension(dataset['dataset']):
-                            abs_path_dataset = stork.assignVisitor.parsePath(dataset['dataset'])
-                            print(f"Source data file:{abs_path_dataset}")
-                            # stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, bucket=bucket_name)
-                            if os.path.isfile(abs_path_dataset):
-                                stork.connector.uploadFile(path=abs_path_dataset, folder=repo_name, logger=files_logger,
-                                                           bucket=bucket_name)
-                                yearly_stats_thread["dataset_exists"] = yearly_stats_thread["dataset_exists"] + 1
-                                yearly_stats_thread["pipeline_rewritten"] = yearly_stats_thread["pipeline_rewritten"] + 1
+                            pipelines_to_rewrite_logger.info(
+                                {"pipeline": py_file, "dataset_urls": stork.datasets_urls[py_file]})
 
-                                # ADD dataset to log
-                                # rewrite pipeline
-
-                                dataset_name = stork.assignVisitor.getDatasetName(abs_path_dataset)
-
-                                stork.assignVisitor.datasets_urls.append(
-                                    {"variable": dataset['variable'], "dataset_name": dataset['dataset'],
-                                     "url": stork.connector.getObjectUrl(
-                                         key=dataset_name, folder=repo_name,
-                                         bucket=bucket_name), "lineno": dataset['lineno']})
-                                stork.datasets_urls[py_file] = stork.assignVisitor.datasets_urls
-
-                                pipelines_to_rewrite_logger.info(
-                                    {"pipeline": py_file, "dataset_urls": stork.datasets_urls[py_file]})
-
-                                stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline,
-                                                                    datasets_urls=stork.assignVisitor.datasets_urls)
-                    #
-                    # print(f"Url: {stork.connector.getObjectUrl(key=dataset_name,folder=repo_name, bucket=bucket_name)}")
-                    # # stork.assignVisitor.datasets_urls.append({"dataset_name": dataset,
-                    # #                                           "url": stork.connector.getObjectUrl(
-                    # #                                               key=dataset_name, folder=repo_name,
-                    # #                                               bucket=bucket_name)})
-                    pipeline_logger.info(f"Pipeline data set urls {stork.assignVisitor.datasets_urls}")
-                    stork.datasets_urls[py_file] = stork.assignVisitor.datasets_urls
-                    print(stork.datasets_urls[py_file])
-                    stork.read_methods[py_file] = stork.assignVisitor.read_methods
-                    stork.datasets_read_methods[py_file] = stork.assignVisitor.datasets_read_methods
-                    read_method_logger.info({"ds_read_methods": stork.datasets_read_methods[py_file]})
-                except (OSError, TypeError, KeyError) as e:
-                    pipeline_logger.error(e)
-
-                # self.assignVisitor.getDatasetsFromInputs()
-                # self.assignVisitor.uploadDatasets(bucket=bucket_name)
-                # print(f"Datasets_urls {py_file}: {stork.datasets_urls[py_file]}")
+                            stork.assignVisitor.transformScript(script=py_file, new_script=new_pipeline,
+                                                                datasets_urls=stork.assignVisitor.datasets_urls)
                 #
-                # print(f"Datasets_urls complete: {stork.datasets_urls}")
-                # util.reportAssign(stork.pipeline, stork.assignVisitor.assignments, "full")
-                stork.assignVisitor.clearAssignments()
-                stork.assignVisitor.clearInputs()
-                stork.assignVisitor.clearDatasets()
-                stork.assignVisitor.clearDatasetUrls()
-                stork.assignVisitor.clearDatasetReadMethods()
-                stork.assignVisitor.clearReadMethods()
-                # print(stork.assignments)
-                # print(stork.datasets)
+                # print(f"Url: {stork.connector.getObjectUrl(key=dataset_name,folder=repo_name, bucket=bucket_name)}")
+                # # stork.assignVisitor.datasets_urls.append({"dataset_name": dataset,
+                # #                                           "url": stork.connector.getObjectUrl(
+                # #                                               key=dataset_name, folder=repo_name,
+                # #                                               bucket=bucket_name)})
+                pipeline_logger.info(f"Pipeline data set urls {stork.assignVisitor.datasets_urls}")
+                stork.datasets_urls[py_file] = stork.assignVisitor.datasets_urls
+                print(stork.datasets_urls[py_file])
+                stork.read_methods[py_file] = stork.assignVisitor.read_methods
+                stork.datasets_read_methods[py_file] = stork.assignVisitor.datasets_read_methods
+                read_method_logger.info({"ds_read_methods": stork.datasets_read_methods[py_file]})
+            except (OSError, TypeError, KeyError) as e:
+                pipeline_logger.error(e)
+
+            # self.assignVisitor.getDatasetsFromInputs()
+            # self.assignVisitor.uploadDatasets(bucket=bucket_name)
+            # print(f"Datasets_urls {py_file}: {stork.datasets_urls[py_file]}")
+            #
+            # print(f"Datasets_urls complete: {stork.datasets_urls}")
+            # util.reportAssign(stork.pipeline, stork.assignVisitor.assignments, "full")
+            stork.assignVisitor.clearAssignments()
+            stork.assignVisitor.clearInputs()
+            stork.assignVisitor.clearDatasets()
+            stork.assignVisitor.clearDatasetUrls()
+            stork.assignVisitor.clearDatasetReadMethods()
+            stork.assignVisitor.clearReadMethods()
+            # print(stork.assignments)
+            # print(stork.datasets)
 
 
 def traverse_folders(path, yearly_stats_thread, flagged_pipelines, project_logger, error_logger, dataset_logger, read_method_logger,

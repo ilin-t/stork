@@ -92,7 +92,7 @@ def reportAssign(pipeline, assignments, full):
         output.close()
 
 
-def compareTwoFiles(file1, file2, output):
+def compareTwoFiles(file1, file2):
     lines1 = []
     lines2 = []
     with open(file1) as f:
@@ -103,30 +103,51 @@ def compareTwoFiles(file1, file2, output):
         lines2 = f.readlines()
     f.close()
 
-    set_lines2 = set(lines2)
-    diff = [x for x in lines1 if x not in set_lines2]
+    set_lines1 = set(lines1)
+    diff = [x for x in lines2 if x not in set_lines1]
     # diff = [i for i in lines1 + lines2 if i not in lines1 or i not in lines2]
 
+    return diff
+
+def addToList(list, diff):
     print(len(diff))
     print(diff)
-    with open(output, "w") as f:
+    with open(list, "a") as f:
         for el in diff:
             f.write(el)
     f.close()
 
-    return diff
+def addToNewList(input_file, diff, output):
+    lines1=[]
+    with open(input_file) as f:
+        lines1 = f.readlines()
+    f.close()
+
+    with open(output, "a") as f:
+        f.writelines(lines1)
+        f.write("\n")
+        f.writelines(diff)
+    f.close()
+
 
 
 if __name__ == '__main__':
     # compareTwoFiles("../../analysis_results/stork-coverage/aggregated_results_local.txt",
     #                 "../../analysis_results/stork-coverage/aggregated_results_local_shorter.txt",
     #                 "../../analysis_results/stork-coverage/difference.txt")
-    compareTwoFiles("../../examples/repo_lists/aggregated_results_libs.txt",
-                    "../../examples/repo_lists/aggregated_results_py.txt",
-                    "../../analysis_results/stork-coverage/difference_lib.txt")
-    compareTwoFiles("../../examples/repo_lists/aggregated_results_py.txt",
-                    "../../examples/repo_lists/aggregated_results_libs.txt",
-                    "../../analysis_results/stork-coverage/difference_py.txt")
+    # compareTwoFiles("../../examples/repo_lists/aggregated_results_libs.txt",
+    #                 "../../examples/repo_lists/aggregated_results_py.txt",
+    #                 "../../analysis_results/stork-coverage/difference_lib.txt")
+    # compareTwoFiles("../../examples/repo_lists/aggregated_results_py.txt",
+    #                 "../../examples/repo_lists/aggregated_results_libs.txt",
+    #                 "../../analysis_results/stork-coverage/difference_py.txt")
+
+    diff = compareTwoFiles("../../analysis_results/repository_list/shortened_list_repositories_1.txt",
+                    "../../analysis_results/repository_list/shortened_list_repositories_2.txt")
+
+    addToNewList(input_file="../../analysis_results/repository_list/shortened_list_repositories_1.txt",
+                 diff=diff,
+                 output="../../analysis_results/repository_list/diff_short.txt")
 
 
 def list_folder_paths(path):

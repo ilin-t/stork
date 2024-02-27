@@ -1,6 +1,4 @@
-import hashlib
 import logging
-import os
 
 from configparser import ConfigParser
 
@@ -8,8 +6,6 @@ from src.log_modules import util
 from src.db_conn.s3_connector import S3Connector
 from src.db_conn.psqlConnector import PsqlConnector
 from src.ast.assign_visitor import AssignVisitor
-from src.log_modules.parse_repos import unzip
-from benchmarks.filter_pipelines import filter_pipeline
 
 
 class Stork:

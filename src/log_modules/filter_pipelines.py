@@ -33,19 +33,15 @@ def filter_pipeline(input_pipeline):
                     flag = True
             except AttributeError as e:
                 print(e)
-                # logger.info(e)
 
         elif isinstance(node, ast.Expr):
-            # logger.info("Expression node.")
-            print("Expression node")
+            flag=True
 
         elif isinstance(node, ast.FunctionDef):
             if node.name == 'main':
-                # logger.info("Defined main method, pipeline executable.")
                 print("Defined main method")
 
         elif isinstance(node, ast.Call):
-            # logger.info("Method call, pipeline executable.")
             flag = True
 
     print(f"Pipeline {input_pipeline} processed. Executable status: {flag}.")
