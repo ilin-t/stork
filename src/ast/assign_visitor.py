@@ -10,6 +10,14 @@ from src.db_conn.s3_connector import S3Connector
 from src.log_modules.log_results import createLogger
 
 
+def getDatasetName(dataset_path):
+    dataset_path, dataset_name = os.path.split(dataset_path)
+    for part in dataset_name.split("."):
+        if part not in util.getFileExtensions():
+            return part
+    return dataset_name
+
+
 class AssignVisitor(ast.NodeVisitor):
     def __init__(self):
         self.pipeline = ""
@@ -143,7 +151,7 @@ class AssignVisitor(ast.NodeVisitor):
         var_flag = False
         for arg in node.args:
             temp = self.get_assignment_value_from_var_name_node(variable=self.direct_visit(self, node, arg), position=arg.lineno)
-            if temp:
+            if temp and isinstance(temp, list):
                 args_names.append(temp[0])
                 var_flag = True
             else:
@@ -280,7 +288,7 @@ class AssignVisitor(ast.NodeVisitor):
             variable = self.direct_visit(self, node, element)
             if isinstance(variable, str):
                 string_parts = string_parts + variable
-            else:
+            elif isinstance(variable, list):
                 string_parts = string_parts + variable[0]
             # print(f"STRING PARTS {string_parts}")
 
@@ -613,10 +621,6 @@ class AssignVisitor(ast.NodeVisitor):
     # #                 duplicate = True
     #
 
-    def getDatasetName(self, dataset_path):
-        dataset_path, dataset_name = os.path.split(dataset_path)
-        return dataset_name
-
     # def filter_datasets(self):
     #     processing_steps = []
     #     for assignment in self.inputs:
@@ -640,19 +644,21 @@ class AssignVisitor(ast.NodeVisitor):
                 continue
 
     def parsePath(self, data_path):
-
-        pipeline_directory = self.getRepositoryPath()
-
-        if data_path[0] == "/":
-            return data_path
-        elif data_path[0].isalnum():
-            return pipeline_directory[0] + "/" + data_path
-        elif data_path[0] == ".":
-            if data_path[1] == "/":
-                return pipeline_directory[0] + "/" + data_path[2:]
-            else:
-                parent_dir = Path(pipeline_directory[0]).parent.absolute()
-                return str(parent_dir) + "/" + data_path[3:]
+        if data_path:
+            pipeline_directory = self.getRepositoryPath()
+            print(pipeline_directory)
+            if data_path['dataset'][0] == "/":
+                return data_path
+            elif data_path['dataset'][0].isalnum():
+                return pipeline_directory[0] + "/" + data_path['dataset']
+            elif data_path['dataset'][0] == ".":
+                if data_path['dataset'][0] == "/":
+                    return pipeline_directory[0] + "/" + data_path['dataset'][2:]
+                else:
+                    parent_dir = Path(pipeline_directory[0]).parent.absolute()
+                    return str(parent_dir) + "/" + data_path['dataset'][3:]
+        else:
+            return "a"
 
     def getRepositoryPath(self):
         pipeline_path = os.path.abspath(self.pipeline)

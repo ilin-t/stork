@@ -3,7 +3,7 @@ import logging
 import os
 from os.path import basename, normpath
 
-from src.stork_main import Stork
+from src.stork_s3 import Stork
 from src.log_modules import util
 from src.log_modules.parse_repos import collect_resources, unzip, delete_repo
 from src.log_modules.log_results import createLogger

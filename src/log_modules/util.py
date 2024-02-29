@@ -4,6 +4,9 @@ import os.path
 from os.path import basename, normpath
 
 
+def getFileExtensions():
+    return ["csv", "txt", "zip", "pkl", "parquet", "gz", "tar", "bz2", "zstd", "npy", "py"]
+
 def list_folder_names(path):
     return [f.name for f in os.scandir(path) if f.is_dir()]
 
@@ -79,7 +82,7 @@ def checkFileExtension(data_file):
 
 
 def fileExists(data_file):
-    os.path.isfile(data_file)
+    return os.path.isfile(data_file)
 
 
 def reportAssign(pipeline, assignments, full):

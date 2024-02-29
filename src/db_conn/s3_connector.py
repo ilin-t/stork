@@ -9,9 +9,13 @@ class S3Connector:
     def __init__(self):
         self.client = None
         self.connection = None
-        # self.resource = None
+        self.logger = None
         self.pipeline = ""
         self.ast = ""
+
+
+    def set_logger(self, logger):
+        self.logger = logger
 
     def setClient(self, aws_access_key, aws_secret_access_key, client="s3", region=""):
         self.client = boto3.client(service_name=client, aws_access_key_id=aws_access_key,

@@ -1,5 +1,8 @@
 import os
 import re
+from pathlib import Path
+
+import cchardet as chardet
 
 import psycopg2
 from configparser import ConfigParser
@@ -7,12 +10,14 @@ import time
 
 import pandas as pd
 
-from psycopg2 import sql
+from psycopg2 import sql, extras
 
 
 class PsqlConnector:
-    def __init__(self):
+    def __init__(self, config_path):
         self.db_config = {}
+        self.logger = None
+        self.config_path = config_path
         self.connection = None
         self.cursor = None
         self.schema_map = {"object": "varchar", "int64": "bigint", "int8": "smallint", "int16": "smallint",
@@ -21,7 +26,7 @@ class PsqlConnector:
                            "float32": "real", "float64": "double precision"}
         self.forbidden = ["select ", "--", ";", "drop ", "where ", "from ", "delete ", "insert ", "database "]
 
-    def config(self, filename='config_db.ini', section='psycopg2'):
+    def config(self, filename, section):
         parser = ConfigParser()
         parser.read(filename)
 
@@ -37,7 +42,7 @@ class PsqlConnector:
 
     def connect(self):
         try:
-            params = self.config()
+            params = self.config(filename=self.config_path, section="psycopg2")
 
             print(params)
 
@@ -96,6 +101,9 @@ class PsqlConnector:
                 # self.connection.close()
                 # print('Database connection closed')
 
+    def set_logger(self, logger):
+        self.logger = logger
+
     def setup(self):
         try:
             connection_start = time.time_ns()
@@ -133,83 +141,114 @@ class PsqlConnector:
             print("Schema definition problem")
 
     def create_table(self, table_name, schema_order):
-        self.cursor = self.connection.cursor()
-
         try:
+            self.cursor = self.connection.cursor()
             self.parse_schema(schema_string=schema_order)
-        except ValueError as err:
-            print(err)
+            create_table_query = '''
+                 CREATE TABLE IF NOT EXISTS {} (
+                     {}
+                 );
+             '''.format(table_name, schema_order)
+
+            self.cursor.execute(create_table_query)
+            self.connection.commit()
+
+            return True
+
+        except (Exception, psycopg2.Error, ValueError) as error:
+            print("Error creating table:", error)
+
+            # Rollback the transaction in case of an error
+            if self.connection:
+                self.connection.rollback()
+                self.connection.commit()
             return False
 
-        # SQL statement to create a table with the specified schema
-        create_table_query = f'''
-            CREATE TABLE IF NOT EXISTS {table_name} (
-                {schema_order}
-            );
-        '''
-
-
-        self.cursor.execute(create_table_query)
-        self.connection.commit()
-
-
+    def replace_unnamed(self, df):
+        df.rename(columns={'Unnamed: 0': ''})
 
     def insert_into_table(self, table_name, schema, data):
-        # if not self.check_table(table_name):
-        #     self.create_table(table_name=table_name, schema_order=schema)
 
-        self.cursor = self.connection.cursor()
-        for row in list(data.itertuples(index=False, name=None)):
-            print(row)
-            # sql_stmt = sql.SQL("""INSERT INTO {table_name} VALUES {row}""").format(
-            #     table_name=sql.Identifier(table_name),
-            #     row=sql.Literal(wrapped=row)
-            # )
-            print(schema)
+        try:
+            self.cursor = self.connection.cursor()
+            columns_string = ', '.join(data.columns)
+            data_to_insert = list(data.itertuples(index=False, name=None))
 
             insert_query = '''
-                INSERT INTO {}
-                VALUES %s;
+                INSERT INTO {} ({}) VALUES %s;
             '''.format(
-                table_name  # Parameter placeholders
+                table_name,
+                columns_string
+                # Parameter placeholders
             )
-
+            extras.execute_values(self.cursor, insert_query, data_to_insert)
             # print(sql_stmt.as_string(context=self.connection))
-            self.cursor.execute(insert_query, (row,))
-        self.connection.commit()
+            # self.cursor.execute(insert_query, (row,))
+            self.connection.commit()
+            print(f"{len(data_to_insert)} rows inserted into '{table_name}' in schema '{schema}' successfully!")
+
+            return True
+
+        except (psycopg2.errors.SyntaxError, psycopg2.errors.UndefinedColumn) as error:
+            self.connection.commit()
+            self.logger.info(error)
+            return False
 
     def check_table(self, table_name):
         try:
             self.cursor = self.connection.cursor()
             self.cursor.execute("SELECT * FROM " + table_name)
             data = self.cursor.fetchone()
+            self.connection.commit()
             print("Table %s already exists. Row data: \n %s \n" % (table_name, data))
 
             return True
 
         except psycopg2.OperationalError:
-            print("Table %s doesn't exist in the database.\n" % table_name)
+            print("Operational Error: Table %s doesn't exist in the database.\n" % table_name)
+            self.connection.commit()
             return False
 
         except psycopg2.errors.UndefinedTable:
-            print("Table %s doesn't exist in the database.\n" % table_name)
+            print("Undefined Table %s doesn't exist in the database.\n" % table_name)
+            self.connection.commit()
             return False
 
     def generate_schema(self, df):
+        if isinstance(df, pd.DataFrame):
+            print(df.dtypes)
+            schema_order = "id_X UUID DEFAULT gen_random_uuid() PRIMARY KEY, "
+            df.rename(columns=lambda x: x.replace("Unnamed: ", "col_"), inplace=True)
+            columns = df.columns
+            for i in range(0, len(columns)):
+                schema_order = schema_order + f"{columns[i]}  {self.schema_map[str(df[columns[i]].dtype)]}, "
 
-        print(df.dtypes)
-        schema_order = ""
-        columns = df.columns
-        for i in range(0, len(columns)):
-            column_stripped = columns[i].replace("Unnamed: ", "col_")
-            if i==0:
-                schema_order = schema_order + f"{column_stripped}  {self.schema_map[str(df[columns[i]].dtype)]} PRIMARY KEY, "
-            else:
-                schema_order = schema_order + f"{column_stripped} {self.schema_map[str(df[columns[i]].dtype)]}, "
+            print(schema_order[:-2])
+            return schema_order[:-2]
 
-        print(schema_order)
+        else:
+            print(f"The data is of format {df.type}. Cannot create schema.")
 
-        return schema_order[:-2]
+    def get_one(self, table_name):
+
+        # sql_stmt = sql.SQL('''SELECT * FROM {table_name}''').format(
+        #     table_name=sql.Identifier(table_name)
+        # )
+
+        select_query = '''
+            SELECT * FROM {} LIMIT 1
+        '''.format(table_name)
+
+        self.cursor = self.connection.cursor()
+        self.cursor.execute(select_query)
+        data = self.cursor.fetchall()
+        # print(f"Retrieved from DB:")
+        # print(data)
+        for row in data:
+            print(f"Retrieved from DB: {row}")
+
+        return data
+
 
     def get_data(self, table_name):
 
@@ -236,6 +275,49 @@ class PsqlConnector:
             if keyword in schema_string.lower():
                 raise ValueError(f"The provided schema contains reserved words or characters. Value: {keyword}")
 
+    def read_file(self, file_path):
+        file_extension = file_path.split('.')[-1].lower()
+
+        blob = Path(file_path).read_bytes()
+
+        detection = chardet.detect(blob)
+        result = detection["encoding"]
+        print(f"Result: {result}")
+
+        # with open(file_path, 'rb') as f:
+        #     result = chardet.detect(f.read())
+        # f.close()
+        supported_formats = {
+            'csv': pd.read_csv,
+            'xlsx': pd.read_excel,
+            'xls': pd.read_excel,
+            'json': pd.read_json,
+            'zip': pd.read_csv,
+            'gzip': pd.read_csv,
+            'gz': pd.read_csv,
+            'bz2': pd.read_csv,
+            'zstd': pd.read_csv,
+            'xz': pd.read_csv,
+            'tar': pd.read_csv,
+            'parquet': pd.read_parquet,
+            'xml': pd.read_xml,
+            'orc': pd.read_orc,
+            'sas': pd.read_sas,
+            'html': pd.read_html,
+            'txt': pd.read_csv,
+            'h5': pd.read_hdf,
+            'feather': pd.read_feather
+        }
+        # Check if the file extension is supported
+        if file_extension in supported_formats:
+            # Use the corresponding read method
+            read_method = supported_formats[file_extension]
+            df = read_method(file_path, encoding=result, on_bad_lines='skip')
+            return df
+        else:
+            # File extension not supported
+            raise ValueError(f"Unsupported file extension: {file_extension}")
+
 
 # TODO Deploy postgres via ssh connection to a dedicated IP
 # TODO Execute on multiple pipelines
@@ -246,22 +328,21 @@ class PsqlConnector:
 # TODO Measure and compare the overhead of stork and PSQL to a client execution
 
 if __name__ == '__main__':
-    pp = PsqlConnector()
+    pp = PsqlConnector(config_path="config_db.ini")
     # pp.stop_remove_container()
 
     # pp.deploy_postgres()
     pp.setup()
 
-    df = pd.read_csv("../../examples/data/products.csv")
+    df = pp.read_file("../../examples/data/products.zip")
     schema_string = pp.generate_schema(df)
-    print(schema_string)
+    # print(schema_string)
 
-    pp.create_schema("testSchema", "postgres_test_user")
-    print(pp.check_table(table_name="testSchema.testTable"))
+    pp.create_schema("testschema", "postgres_test_user")
 
-    pp.create_table(table_name="testSchema.testTable", schema_order=schema_string)
+    pp.create_table(table_name="testschema.testTable2", schema_order=schema_string)
     #
     # pp.insert_into_table(table_name="testSchema.testTable", schema=schema_string, data=df)
     # pp.create_table(table_name="newTable", schema_order=schema_string)
     # pp.insert_into_table(table_name="newTable", schema=schema_string, data=df)
-    pp.get_data('testSchema.testTable')
+    # pp.get_data('testSchema.testTable')

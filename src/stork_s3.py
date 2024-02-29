@@ -1,19 +1,24 @@
+import argparse
 import logging
+import os
+import time
 
 from configparser import ConfigParser
 
 from src.log_modules import util
 from src.db_conn.s3_connector import S3Connector
 from src.db_conn.psqlConnector import PsqlConnector
-from src.ast.assign_visitor import AssignVisitor
+from src.ast.assign_visitor import AssignVisitor, getDatasetName
+from src.log_modules.log_results import createLogger, createLoggerPlain
 
 
 class Stork:
 
-    def __init__(self, config_path, connector="s3"):
+    def __init__(self, config_path, logger, connector="s3"):
 
         if "s3" in connector:
             self.connector = S3Connector()
+            self.connector.set_logger(logger)
         elif "postgres" in connector:
             self.connector = PsqlConnector()
         else:
@@ -27,6 +32,11 @@ class Stork:
         self.datasets_urls = {}
         self.read_methods = {}
         self.datasets_read_methods = {}
+        self.translation_times = {}
+        self.schema_generation_times = {}
+        self.table_creation_times = {}
+        self.file_upload = {}
+        self.dataframe_sizes = {}
 
     def setPipeline(self, pipeline):
         self.pipeline = pipeline
@@ -47,16 +57,24 @@ class Stork:
         # self.setResource(self.access_key, self.secret_access_key)
 
         self.setPipeline(pipeline=pipeline)
+        self.assignVisitor.setPipeline(pipeline=self.pipeline)
         self.assignVisitor.setLoggerConfig("test-reviews.log", "test", logging.INFO)
 
+        translation_start = time.time_ns()
         tree = util.getAst(pipeline=pipeline)
         self.assignVisitor.visit(tree)
         self.assignVisitor.filter_Assignments()
         self.assignVisitor.getDatasetsFromReadMethods()
         self.assignVisitor.replace_variables_in_assignments()
         self.assignVisitor.getDatasetsFromInputs()
+        translation_end = time.time_ns() - translation_start
+
+        self.translation_times = translation_end / 1000000
+        self.connector.logger.info(f"Translation time: {translation_end / 1000000} ms")
 
         repo_name = self.assignVisitor.parseRepoName(self.assignVisitor.getRepositoryName())
+
+        create_bucket_start = time.time_ns()
         buckets = self.connector.getBucketNames()
         bucket_name = "stork-storage"
         self.connector.createFolder(folder_name=repo_name, bucket=bucket_name)
@@ -64,42 +82,31 @@ class Stork:
         # if repo_name not in buckets:
         #     self.connector.createBucket(bucket_name=bucket_name, region="eu-central-1")
         #     print(f"Should create bucket: {bucket_name}")
+        create_bucket_end = time.time_ns() - create_bucket_start
 
-        for member in self.assignVisitor.inputs:
-            # print(f"variable: {member['variable']}")
-            for source in member["data_source"]:
-                # print(f"source: {source}")
-                try:
-                    # print(f"source['data_file']: {source['data_file']}")
-                    for dataset in source["data_file"]:
-                        if util.checkFileExtension(dataset):
-                            print(f"dataset:{dataset}")
-                            if util.checkDataFile(dataset):
+        self.connector.logger.info(f"Bucket generation for {repo_name}: {create_bucket_end / 1000000} ms")
+        self.schema_generation_times = (create_bucket_end / 1000000)
+        print(f"Datasets recognized: {len(self.assignVisitor.datasets)}")
+        for dataset in self.assignVisitor.datasets:
+            abs_path_dataset = self.assignVisitor.parsePath(dataset)
+            print(f"Absolute path: {abs_path_dataset}")
+            if abs_path_dataset and util.fileExists(abs_path_dataset):
+                print(f"Dataset: {dataset}")
+                # print(f"Source data file:{abs_path_dataset}")
+                dataset_name = getDatasetName(abs_path_dataset)
+                dataset_name = ''.join([i for i in dataset_name if i.isalpha()])
+                insert_start = time.time_ns()
+                self.connector.uploadFile(path=abs_path_dataset, folder="external",
+                                          logger="dataset_logger", bucket=bucket_name)
+                insert_end = time.time_ns() - insert_start
+                self.file_upload[dataset_name] = (insert_end / 1000000)
+                self.connector.logger.info(f"Upload time for {dataset_name}: {insert_end / 1000000}ms")
 
-                                abs_path_dataset = self.assignVisitor.parsePath(dataset)
-                                # print(f"Source data file:{abs_path_dataset}")
-                                self.connector.uploadFile(path=abs_path_dataset, folder="test-folder",
-                                                          logger="dataset_logger", bucket=bucket_name)
-                                dataset_name = self.assignVisitor.getDatasetName(abs_path_dataset)
+                # print(f"Url: {self.connector.getObjectUrl(key=dataset_name, folder='test-folder', bucket=bucket_name)}")
+                self.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset_name,
+                                                         "url": self.connector.getObjectUrl(
+                                                             key=dataset_name, folder='external', bucket=bucket_name), "lineno": dataset['lineno']})
 
-                                # print(f"Url: {self.connector.getObjectUrl(key=dataset_name, folder='test-folder', bucket=bucket_name)}")
-                                self.assignVisitor.datasets_urls.append({"variable": member['variable'], "dataset_name": dataset,
-                                                                         "url": self.connector.getObjectUrl(
-                                                                             key=dataset_name, folder='test-folder', bucket=bucket_name), "lineno": member['lineno']})
-
-                except (TypeError, KeyError) as e:
-                    print(e)
-
-        # self.assignVisitor.getDatasetsFromInputs()
-        # self.assignVisitor.uploadDatasets(bucket=bucket_name)
-
-        # print(f"Datasets_urls: {self.assignVisitor.datasets_urls}")
-        # self.assignVisitor.transformScript(script=pipeline, new_script=new_pipeline)
-        # TODO Check which buckets exist for this user. Whether a new bucket should be created for this
-        # for dataset in self.assignVisitor.datasets:
-        #     self.connector.uploadFile(path=dataset)
-        #     filename = os.path.split(dataset)[1]
-        #     self.assignVisitor.inputs.append(self.connector.getObjectUrl(filename))
 
 
     def setClient(self, access_key, secret_access_key, client="s3"):
@@ -119,30 +126,60 @@ class Stork:
         return credentials["aws_access_key_id"], credentials["aws_secret_access_key"]
 
 
+def get_repository_list(filename):
+    with open(filename, "r") as f:
+        lines = f.readlines()
+    f.close()
 
+    return lines
+
+
+
+
+def run_stork(args):
+
+    pipelines = get_repository_list(f"{args.repositories}/{args.mode}_full_paths.txt")
+    output_logger = createLoggerPlain(filename=f"{args.outputs}/{args.mode}_times.log",
+                                 project_name=f"{args.mode}_outputs",
+                                 level=logging.INFO)
+    stats={}
+    for pipeline in pipelines:
+        pipeline_name = getDatasetName(pipeline.strip())
+        logger = createLogger(filename=f"{args.individual_logs}/{pipeline_name}.log", project_name=f"{pipeline_name}_project",
+                              level=logging.INFO)
+        stork = Stork(logger = logger, config_path=r"./db_conn/config_s3.ini")
+
+        stork.setup(pipeline = pipeline.strip(), new_pipeline=f"new_{pipeline}.py")
+
+        stats[pipeline]= {"translation_time": stork.translation_times,
+                          "datasets": {"schema_gen": stork.schema_generation_times},
+                                        "table_creation": stork.table_creation_times,
+                                        "table_insertion": stork.file_upload,
+                                        "data_sizes": stork.dataframe_sizes
+                          }
+        output_logger.info(f"{pipeline.split('/')[-1].strip()}: {stats[pipeline]}")
+
+def main(args):
+    os.makedirs(args.repositories, exist_ok=True)
+    os.makedirs(args.individual_logs, exist_ok=True)
+    os.makedirs(args.outputs, exist_ok=True)
+
+    run_stork(args)
 
 
 if __name__ == '__main__':
-    # stork = Stork(r"../src/db_conn/config_s3.ini")
+    parser = argparse.ArgumentParser(
+        prog='Run Stork with a Postgres Backend',
+    )
 
-    # ak, sak = stork.parseConfig()
+    parser.add_argument('-r', '--repositories',
+                        default='/home/ilint/HPI/Stork/average-runtime/')
+    parser.add_argument('-l', '--individual_logs',
+                        default='/home/ilint/HPI/Stork/average-runtime/individual_logs/')
+    parser.add_argument('-o', '--outputs',
+                        default='/home/ilint/HPI/Stork/average-runtime/outputs')
+    parser.add_argument('-m', '--mode',
+                        default='external')
 
-    stork = Stork(config_path=r"./db_conn/config_s3.ini")
-
-    pipeline = '/home/ilint/HPI/repos/stork/examples/sample_pipelines/var_retrieval/data_read_test.py'
-    # pipeline = ('/home/ilint/HPI/repos/pipelines/stork-zip-trial/repositories/year-2023/month-04/day-03/page-7/'
-    #             'amplify-benchmark/amplify-benchmark-main/amplify_bench/problem/maxcut.py')
-    # pipeline = "/home/ilint/HPI/repos/pipelines/trial/arguseyes/arguseyes/example_pipelines/amazon-reviews.py"
-
-    stork.setup(pipeline = pipeline, new_pipeline="new_amazon_reviews.py")
-    print(stork.assignVisitor.inputs)
-    # print(stork.datasets)
-    # print(stork.assignments)
-    # print(stork.assignVisitor.datasets)
-    # print(stork.assignVisitor.read_methods)
-    # print(stork.assignVisitor.datasets_read_methods)
-    # print(stork.assignVisitor.func_definitions)
-    # print(stork.assignVisitor.datasets_urls)
-    # print(stork.datasets_urls)
-    # print(stork.assignVisitor)
-    util.reportAssign(stork.pipeline, stork.assignVisitor.assignments, "full")
+    args = parser.parse_args()
+    main(args)
