@@ -37,7 +37,7 @@ fig.subplots_adjust(wspace=0)
 
 # pie chart parameters
 overall_ratios = [514841, 288476, 217578, 232771, 552735]
-labels = ['DM', 'WEB', 'VISUAL', 'SETUP', 'OTHER']
+labels = ['DM', 'Web', 'Visual', 'Setup', 'Other']
 explode = [0.1, 0, 0, 0, 0]
 # rotate so that first wedge is split by the x-axis
 angle = -45 * overall_ratios[0]
@@ -45,7 +45,7 @@ wedges, *_ = ax1.pie(overall_ratios, autopct='%1.1f%%', startangle=angle,
                      labels=labels, explode=explode, colors=COLORS)
 
 
-dm_libaries = {'CLOUD': 22370, 'DBMS': 50040, 'ML': 173360, 'BD': 269071}
+dm_libaries = {'Cloud': 22370, 'DBMS': 50040, 'ML \& DL': 173360, 'Big Data': 269071}
 
 bottom = 1
 width = 2

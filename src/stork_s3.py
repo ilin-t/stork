@@ -128,9 +128,6 @@ if __name__ == '__main__':
     # ak, sak = stork.parseConfig()
 
     stork = Stork(config_path=r"./db_conn/config_s3.ini")
-    # repo_path = "/home/ilint/HPI/repos/stork/examples/data/table_ocr.zip"
-    # unzip(repo_path=repo_path)
-    # pipeline = f"{repo_path[:-4]}/table_ocr-master/Evaluations/Tablebank/evaluation.py"
 
     pipeline = '/home/ilint/HPI/repos/stork/examples/sample_pipelines/var_retrieval/data_read_test.py'
     # pipeline = ('/home/ilint/HPI/repos/pipelines/stork-zip-trial/repositories/year-2023/month-04/day-03/page-7/'

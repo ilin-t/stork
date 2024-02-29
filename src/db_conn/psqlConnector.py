@@ -141,47 +141,18 @@ class PsqlConnector:
             print(err)
             return False
 
-        sql_stmt = sql.SQL("""CREATE TABLE IF NOT EXISTS {table_name} {schema_order}""").format(
-            table_name=sql.Identifier(table_name),
-            schema_order=sql.Literal(wrapped=schema_order)
-        )
+        # SQL statement to create a table with the specified schema
+        create_table_query = f'''
+            CREATE TABLE IF NOT EXISTS {table_name} (
+                {schema_order}
+            );
+        '''
 
-        # stmt_string = '''CREATE TABLE IF NOT EXISTS {table_name} ( {schema_order} )'''
-        # sql_stmt = sql.SQL(stmt_string).format(
-        #     table_name=sql.Identifier(table_name),
-        #     schema_order=sql.Literal(schema_order)
-        # )
 
-        print(sql_stmt)
-
-        self.cursor.execute(sql_stmt)
+        self.cursor.execute(create_table_query)
         self.connection.commit()
 
-    # def create_table(self, table_name, schema_order):
-    #     self.cursor = self.connection.cursor()
-    #     print(self.cursor)
-    #     try:
-    #         self.parse_schema(schema_string=schema_order)
-    #     except ValueError as err:
-    #         print(err)
-    #         return False
-    #     #
-    #     # stmt_string = """CREATE TABLE IF NOT EXISTS {table_name} ({schema_order});"""
-    #     stmt_string = """CREATE TABLE IF NOT EXISTS {table_name}"""
-    #     sql_stmt = sql.SQL(stmt_string).format(
-    #         table_name=sql.Identifier(table_name),
-    #         schema_order=sql.Literal(wrapped=schema_order)
-    #     )
-    #
-    #
-    #
-    #     #
-    #     print(type(sql_stmt))
-    #     print(str(sql_stmt))
-    #     self.cursor.execute(sql_stmt)
-    #     self.connection.commit()
-    #     # print(f"Table {table_name} created")
-    #     # return True
+
 
     def insert_into_table(self, table_name, schema, data):
         # if not self.check_table(table_name):
@@ -190,12 +161,21 @@ class PsqlConnector:
         self.cursor = self.connection.cursor()
         for row in list(data.itertuples(index=False, name=None)):
             print(row)
-            sql_stmt = sql.SQL("""INSERT INTO {table_name} VALUES {row}""").format(
-                table_name=sql.Identifier(table_name),
-                row=sql.Literal(wrapped=row)
+            # sql_stmt = sql.SQL("""INSERT INTO {table_name} VALUES {row}""").format(
+            #     table_name=sql.Identifier(table_name),
+            #     row=sql.Literal(wrapped=row)
+            # )
+            print(schema)
+
+            insert_query = '''
+                INSERT INTO {}
+                VALUES %s;
+            '''.format(
+                table_name  # Parameter placeholders
             )
-            print(sql_stmt.as_string(context=self.connection))
-            self.cursor.execute(sql_stmt)
+
+            # print(sql_stmt.as_string(context=self.connection))
+            self.cursor.execute(insert_query, (row,))
         self.connection.commit()
 
     def check_table(self, table_name):
@@ -227,28 +207,27 @@ class PsqlConnector:
             else:
                 schema_order = schema_order + f"{column_stripped} {self.schema_map[str(df[columns[i]].dtype)]}, "
 
-
-
-        # for column in df.columns:
-        #     column_stripped = column.replace("Unnamed: ", "col_")
-        #     schema_order = schema_order + f"{column_stripped} {self.schema_map[str(df[column].dtype)]}, "
-
         print(schema_order)
 
         return schema_order[:-2]
 
     def get_data(self, table_name):
 
-        sql_stmt = sql.SQL("""SELECT * FROM {table_name}""").format(
-            table_name=sql.Identifier(table_name)
-        )
+        # sql_stmt = sql.SQL('''SELECT * FROM {table_name}''').format(
+        #     table_name=sql.Identifier(table_name)
+        # )
+
+        select_query = '''
+            SELECT * FROM {}
+        '''.format(table_name)
+
         self.cursor = self.connection.cursor()
-        self.cursor.execute(sql_stmt)
+        self.cursor.execute(select_query)
         data = self.cursor.fetchall()
         # print(f"Retrieved from DB:")
         # print(data)
-        # for row in data:
-        #     print(f"Retrieved from DB: {row}")
+        for row in data:
+            print(f"Retrieved from DB: {row}")
 
         return data
 
@@ -273,25 +252,16 @@ if __name__ == '__main__':
     # pp.deploy_postgres()
     pp.setup()
 
-    # data = [(1, 2.1, 1.3, 'row1 text', 7.1),
-    #         (2, 2.2, 2.3, 'row2 text', 7.2),
-    #         (3, 2.3, 3.3, 'row3 text', 7.3),
-    #         (4, 2.4, 4.3, 'row4 text', 7.4),
-    #         (5, 2.5, 5.3, 'row5 text', 7.5)]
-    #
-    # df = pd.DataFrame(data=data, columns=["col1", "col2", "col3", "col4", "col5"])
-
     df = pd.read_csv("../../examples/data/products.csv")
     schema_string = pp.generate_schema(df)
     print(schema_string)
 
     pp.create_schema("testSchema", "postgres_test_user")
-    # print(type(df))
-    # pp.check_table(table_name="testTable")
+    print(pp.check_table(table_name="testSchema.testTable"))
 
     pp.create_table(table_name="testSchema.testTable", schema_order=schema_string)
     #
-    # pp.insert_into_table(table_name="testTable", schema=schema_string, data=df)
+    # pp.insert_into_table(table_name="testSchema.testTable", schema=schema_string, data=df)
     # pp.create_table(table_name="newTable", schema_order=schema_string)
     # pp.insert_into_table(table_name="newTable", schema=schema_string, data=df)
-    # pp.get_data("newTable")
+    pp.get_data('testSchema.testTable')

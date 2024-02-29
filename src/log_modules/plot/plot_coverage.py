@@ -52,23 +52,23 @@ def plot_coverage(values, labels, output_file):
 
 def coverage_plots():
     plot_coverage(values=[56444 - 40431, 40431], labels=['Translated', 'Skipped'],
-                  output_file="../../analysis_results/plots/evaluation/pipeline_coverage.svg")
+                  output_file="../../../analysis_results/plots/evaluation/pipeline_coverage.svg")
 
     plot_coverage(values=[14498, 72663 - 14498], labels=['Accessible', 'No Data Access'],
-                  output_file="../../analysis_results/plots/evaluation/dataset_availability.svg")
+                  output_file="../../../analysis_results/plots/evaluation/dataset_availability.svg")
 
     plot_coverage(values=[56444, 152554 - 56444], labels=['Executable', 'Non-Executable'],
-                  output_file="../../analysis_results/plots/evaluation/executable_pipelines.svg")
+                  output_file="../../../analysis_results/plots/evaluation/executable_pipelines.svg")
 
     plot_coverage(values=[54757, 494586 - 166631 - 54757, 166631],
                   labels=['Reading Local Data', 'Processing Data','No Data Access'],
-                  output_file="../../analysis_results/plots/evaluation/repository_landscape.svg")
+                  output_file="../../../analysis_results/plots/evaluation/repository_landscape.svg")
 
 def plot_landscape():
     lib = {'DBMS': 50040, 'WEB': 288476.0, 'ML': 173360.0, 'DM': 269071.0, 'VISUAL': 217578.0, 'CLOUD': 22370.0,
      'SETUP': 232771.0, 'OTHER': 552735.0}
 
-    plot_coverage(values=list(lib.values()), labels=lib.keys(), output_file="../../analysis_results/plots/evaluation/library.svg")
+    plot_coverage(values=list(lib.values()), labels=lib.keys(), output_file="../../../analysis_results/plots/evaluation/library.svg")
 
 def main():
     plot_landscape()

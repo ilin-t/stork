@@ -257,7 +257,7 @@ def main(args):
     #                              header=0)
 
     # topX(df=occurrences_df, X=20, output_file=f"{args.outputs}/plots/top{20}.svg")
-    occurrences_df = pd.read_csv("../../analysis_results/yearly_splits/occurences_summed.csv")
+    occurrences_df = pd.read_csv("../../../analysis_results/yearly_splits/occurences_summed.csv")
     # topX(df=occurrences_df, X=20, output_file="../../analysis_results/plots/top20.png")
     # plot_data_analysis_libs(occurrences_df)
     # plot_machine_learning_libs(occurrences_df)

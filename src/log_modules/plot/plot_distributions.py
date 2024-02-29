@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
 
 # occurences_large = pd.read_csv('../../analysis_results/yearly_splits/occurrences-434k.csv')
 # occurences_small = pd.read_csv('../../analysis_results/yearly_splits/occurrences-20k.csv')
@@ -80,14 +81,18 @@ def get_df_percentile(topx, file_root):
     print(f"Coverage: {subset_imports/total*100:.2f}%")
     return subset
 
-def plot_bar_chart(in_dict, title, ylabel, fig_name):
+def shorten_yaxis(value, pos):
+    thousands = value / 1e3
+    return f'{thousands:.1f}k'
+
+def plot_bar_chart(in_dict, ylabel, fig_name):
     plt.subplots(layout="constrained")
-    percentages = ["{:.2f}\%".format(x/sum(in_dict.values())) for x in in_dict.values()]
+    percentages = ["{:.2f}\%".format(x/sum(in_dict.values())*100) for x in in_dict.values()]
     bars = plt.bar(x = in_dict.keys(), height = in_dict.values(), width = 0.4, align = 'center',
             fill=False, edgecolor=COLORS, label=in_dict.keys(), hatch=HATCHES)
     plt.ylabel(ylabel)
-    plt.title(title)
     plt.legend(loc='upper right', ncols=len(in_dict.keys())/3, handletextpad=0.5, columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
+    plt.gca().yaxis.set_major_formatter(FuncFormatter(shorten_yaxis))
     plt.ylim(0, max(in_dict.values()) + 0.2*(max(in_dict.values())))
     plt.tick_params(axis='both', which='major', labelsize=11)
     plt.bar_label(bars, labels=percentages, padding=2)
@@ -96,8 +101,8 @@ def plot_bar_chart(in_dict, title, ylabel, fig_name):
     plt.savefig(f"../../analysis_results/plots/distributions/{fig_name}.svg", transparent=True)
 
 def merge_counts():
-    occ434 = pd.read_csv("../../analysis_results/yearly_splits/occurrences-434k.csv")
-    occ20 = pd.read_csv("../../analysis_results/yearly_splits/occurrences-20k.csv")
+    occ434 = pd.read_csv("../../../analysis_results/yearly_splits/occurrences-434k.csv")
+    occ20 = pd.read_csv("../../../analysis_results/yearly_splits/occurrences-20k.csv")
 
     new = occ434.merge(occ20, how='outer', on=['library'])
     new['count_x'].fillna(0, inplace=True)
@@ -111,29 +116,33 @@ def merge_counts():
 
 if __name__ == '__main__':
 
-    db_counts = generate_db_counts(file_root="../../analysis_results/yearly_splits/occurences_summed_plot.csv")
-    web_counts = count_group(group_root=WEB_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
-    ml_counts = count_group(group_root=ML_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
-    dm_counts = count_group(group_root=DM_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
-    vis_counts = count_group(group_root=VISUAL_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
-    setup_counts = count_group(group_root=SETUP_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
-    cloud_counts = count_group(group_root=CLOUD_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+    db_counts = generate_db_counts(file_root="../../../analysis_results/yearly_splits/occurences_summed_plot.csv")
+    # web_counts = count_group(group_root=WEB_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+    # ml_counts = count_group(group_root=ML_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+    # dm_counts = count_group(group_root=DM_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+    # vis_counts = count_group(group_root=VISUAL_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+    # setup_counts = count_group(group_root=SETUP_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+    # cloud_counts = count_group(group_root=CLOUD_ROOTS, file_root="../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+    #
+    # covered_libs = {'DBMS': sum(db_counts.values()), 'WEB': sum(web_counts.values()), 'ML': sum(ml_counts.values()),
+    # 'DM': sum(dm_counts.values()), 'VISUAL': sum(vis_counts.values()), 'CLOUD': sum(cloud_counts.values()),
+    #                 'SETUP': sum(setup_counts.values())}
+    #
+    # complete = pd.read_csv("../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+    #
+    # print(f"Categorized libraries: {sum(covered_libs.values())}")
+    # other = complete["count"].sum() - sum(covered_libs.values())
+    # print(sum(covered_libs.values())/complete["count"].sum())
+    # print(other)
+    #
+    # covered_libs['OTHER'] = other
+    # print(covered_libs)
+    #
+    perc95 = get_df_percentile(30, "../../../analysis_results/yearly_splits/occurrences_aggregated.csv")
 
-    covered_libs = {'DBMS': sum(db_counts.values()), 'WEB': sum(web_counts.values()), 'ML': sum(ml_counts.values()),
-    'DM': sum(dm_counts.values()), 'VISUAL': sum(vis_counts.values()), 'CLOUD': sum(cloud_counts.values()),
-                    'SETUP': sum(setup_counts.values())}
+    subset_keys = ['mongo','sqlalchemy', 'mysql', 'postgres',  'redis', 'elasticsearch']
 
-    complete = pd.read_csv("../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+    subset_dict = {key: db_counts[key] for key in subset_keys if key in db_counts}
 
-    print(f"Categorized libraries: {sum(covered_libs.values())}")
-    other = complete["count"].sum() - sum(covered_libs.values())
-    print(sum(covered_libs.values())/complete["count"].sum())
-    print(other)
-
-    covered_libs['OTHER'] = other
-    print(covered_libs)
-
-    perc95 = get_df_percentile(1200, "../../analysis_results/yearly_splits/occurrences_aggregated.csv")
-
-    # plot_bar_chart(in_dict=db_counts, ylabel="\# of Imports", title="Data Backends", fig_name="db_sys_dist")
+    # plot_bar_chart(in_dict=subset_dict, ylabel="\# of Imports", fig_name="db_sys_dist")
 
