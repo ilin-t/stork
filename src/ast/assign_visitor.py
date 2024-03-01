@@ -646,7 +646,7 @@ class AssignVisitor(ast.NodeVisitor):
     def parsePath(self, data_path):
         if data_path:
             pipeline_directory = self.getRepositoryPath()
-            print(pipeline_directory)
+            print(data_path)
             if data_path['dataset'][0] == "/":
                 return data_path
             elif data_path['dataset'][0].isalnum():

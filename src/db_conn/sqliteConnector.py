@@ -25,7 +25,7 @@ class sqliteConnector:
         self.engine = create_engine('sqlite:///' + db_file)
         self.logger = None
         # self.config_path = config_path
-        self.connection = None
+        self.connection = self.engine.connect()
         self.schema_map = {"object": "varchar", "int64": "bigint", "int8": "smallint", "int16": "smallint",
                            "int32": "integer", "uint8": "smallint",
                            "uint16": "smallint", "uint32": "integer", "uint64": "bigint", "float16": "real",

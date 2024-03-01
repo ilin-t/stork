@@ -130,7 +130,8 @@ def run_stork(python_files, flagged_pipelines, pipeline_logger, dataset_logger, 
                 # print(stork.datasets[py_file])
                 for dataset in stork.datasets[py_file]:
                     print(f"Dataset: {dataset['dataset']}")
-                    abs_path_dataset = stork.assignVisitor.parsePath(dataset['dataset'])
+                    abs_path_dataset = stork.assignVisitor.parsePath(dataset)
+                    print(f"Abs Dataset: {abs_path_dataset}")
                     dataset_logger.info(abs_path_dataset)
                     if abs_path_dataset and util.fileExists(abs_path_dataset):
                         existent_dataset_logger.info(abs_path_dataset)
@@ -144,7 +145,7 @@ def run_stork(python_files, flagged_pipelines, pipeline_logger, dataset_logger, 
 
                         schema_string = stork.connector.generate_schema(dataset_df)
 
-                        if stork.connector.create_table(table_name=f"{schema_name}.{dataset_name}",
+                        if stork.connector.create_table(table_name=f"{schema_name}_{dataset_name}",
                                                        schema_order=schema_string):
                             insert_start = time.time_ns()
                             # if stork.connector.insert_into_table(table_name=f"{schema_name}.{dataset_name}",
