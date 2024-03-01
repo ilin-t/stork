@@ -137,26 +137,28 @@ def get_repository_list(filename):
 
 
 def run_stork(args):
-
-    pipelines = get_repository_list(f"{args.repositories}/{args.mode}_full_paths.txt")
-    output_logger = createLoggerPlain(filename=f"{args.outputs}/{args.mode}_times.log",
-                                 project_name=f"{args.mode}_outputs",
-                                 level=logging.INFO)
-    stats={}
+    # pipelines = get_repository_list(f"{args.repositories}/{args.mode}_full_paths.txt")
+    pipelines = [f.path for f in os.scandir(args.repositories) if f.is_file()]
+    print(pipelines)
+    output_logger = createLoggerPlain(filename=f"{args.outputs}/paper_example_times.log",
+                                      project_name=f"paper_example_outputs",
+                                      level=logging.INFO)
+    stats = {}
     for pipeline in pipelines:
         pipeline_name = getDatasetName(pipeline.strip())
-        logger = createLogger(filename=f"{args.individual_logs}/{pipeline_name}.log", project_name=f"{pipeline_name}_project",
+        logger = createLogger(filename=f"{args.individual_logs}/{pipeline_name}.log",
+                              project_name=f"{pipeline_name}_project",
                               level=logging.INFO)
-        stork = Stork(logger = logger, config_path=r"./db_conn/config_s3.ini")
+        stork = Stork(logger=logger, config_path=r"./db_conn/config_s3.ini")
 
-        stork.setup(pipeline = pipeline.strip(), new_pipeline=f"new_{pipeline}.py")
+        stork.setup(pipeline=pipeline.strip(), new_pipeline=f"new_{pipeline}.py")
 
-        stats[pipeline]= {"translation_time": stork.translation_times,
-                          "datasets": {"schema_gen": stork.schema_generation_times},
-                                        "table_creation": stork.table_creation_times,
-                                        "table_insertion": stork.file_upload,
-                                        "data_sizes": stork.dataframe_sizes
-                          }
+        stats[pipeline] = {"translation_time": stork.translation_times,
+                           "datasets": {"schema_gen": stork.schema_generation_times},
+                           "table_creation": stork.table_creation_times,
+                           "file_upload": stork.file_upload,
+                           "data_sizes": stork.dataframe_sizes
+                           }
         output_logger.info(f"{pipeline.split('/')[-1].strip()}: {stats[pipeline]}")
 
 def main(args):
@@ -173,7 +175,7 @@ if __name__ == '__main__':
     )
 
     parser.add_argument('-r', '--repositories',
-                        default='/home/ilint/HPI/Stork/average-runtime/')
+                        default='/home/ilint/HPI/Stork/average-runtime/paper-example/')
     parser.add_argument('-l', '--individual_logs',
                         default='/home/ilint/HPI/Stork/average-runtime/individual_logs/')
     parser.add_argument('-o', '--outputs',

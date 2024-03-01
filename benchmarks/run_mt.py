@@ -10,7 +10,7 @@ import pandas as pd
 
 from src.log_modules.util import filter_folders, list_files_paths, filter_python_files
 from src.log_modules.flag_repositories import get_repository_list
-from src.stork_main import Stork
+from src.stork_s3 import Stork
 from src.log_modules import util
 from src.log_modules.parse_repos import unzip, start_processes, join_processes, \
     aggregate_repositories

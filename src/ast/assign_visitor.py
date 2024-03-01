@@ -657,8 +657,6 @@ class AssignVisitor(ast.NodeVisitor):
                 else:
                     parent_dir = Path(pipeline_directory[0]).parent.absolute()
                     return str(parent_dir) + "/" + data_path['dataset'][3:]
-        else:
-            return "a"
 
     def getRepositoryPath(self):
         pipeline_path = os.path.abspath(self.pipeline)

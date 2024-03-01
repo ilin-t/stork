@@ -1,13 +1,13 @@
 import argparse
 import logging
 import os
+import shutil
 import sys
 import time
 
 from configparser import ConfigParser
 from glob import glob
 
-from src.db_conn.sqliteConnector import sqliteConnector
 from src.log_modules import util
 from src.db_conn.s3_connector import S3Connector
 from src.db_conn.psqlConnector import PsqlConnector
@@ -25,13 +25,12 @@ class Stork:
         elif "postgres" in connector:
             self.connector = PsqlConnector(config_path)
             self.connector.set_logger(logger)
-        elif "sqlite" in connector:
-            self.connector = sqliteConnector(db_file=config_path)
+        else:
+            self.connector = None
         self.assignVisitor = AssignVisitor()
         self.pipeline = ""
         self.config_path = config_path
         # self.access_key, self.secret_access_key = self.parseConfig(config_path=self.config_path)
-        # self.config = self.connector.config(filename=config_path, section='psycopg2')
         self.config = None
         self.assignments = {}
         self.datasets = {}
@@ -57,7 +56,7 @@ class Stork:
 
     def setup(self, pipeline, new_pipeline):
 
-        self.connector.setup()
+        # self.connector.setup()
 
         self.setPipeline(pipeline=pipeline)
         self.assignVisitor.setPipeline(pipeline=self.pipeline)
@@ -78,39 +77,38 @@ class Stork:
         # repo_name = self.assignVisitor.parseRepoName(self.assignVisitor.getRepositoryName())
         # print(f"Adapted repository and bucket name: {repo_name}")
         schema_name = "variable"
-        if len(self.assignVisitor.datasets) > 0:
-            self.connector.create_schema(schema_name, "postgres_test_user")
+        # if len(self.assignVisitor.datasets) > 0:
+        #     self.connector.create_schema(schema_name, "postgres_test_user")
         print(self.assignVisitor.datasets)
         for dataset in self.assignVisitor.datasets:
             abs_path_dataset = self.assignVisitor.parsePath(dataset)
             print(f"Absolute path: {abs_path_dataset}")
             if abs_path_dataset and util.fileExists(abs_path_dataset):
-                dataset_df = self.connector.read_file(abs_path_dataset)
+                # dataset_df = self.connector.read_file(abs_path_dataset)
                 dataset_name = getDatasetName(abs_path_dataset)
                 dataset_name = ''.join([i for i in dataset_name if i.isalpha()])
-                df_size = sys.getsizeof(dataset_df)
-                self.connector.logger.info(f"Dataset size: {df_size}")
-                self.dataframe_sizes[dataset_name]=df_size
+                # df_size = sys.getsizeof(dataset_df)
+                # self.connector.logger.info(f"Dataset size: {df_size}")
+                # self.dataframe_sizes[dataset_name]=df_size
                 # print(f"df head: {dataset_df.head()}")
 
                 schema_gen_start = time.time_ns()
-                schema_string = self.connector.generate_schema(dataset_df)
+                # schema_string = self.connector.generate_schema(dataset_df)
                 schema_gen_end = time.time_ns() - schema_gen_start
                 self.connector.logger.info(f"Schema generation for {dataset_name}: {schema_gen_end/1000000} ms")
                 self.schema_generation_times[dataset_name]=(schema_gen_end/1000000)
                 print(dataset_name)
-                if self.connector.create_table(table_name=f"{schema_name}.{dataset_name}", schema_order=schema_string):
-                    insert_start = time.time_ns()
-                    if self.connector.insert_into_table(table_name=f"{schema_name}.{dataset_name}",
-                                                     schema=schema_string, data=dataset_df):
-                        insert_end = time.time_ns() - insert_start
-                        self.table_insertion_times[dataset_name]=(insert_end/1000000)
-                        self.connector.logger.info(f"Insertion time for {dataset_name}: {insert_end/1000000}ms")
-                        self.connector.get_one(f"{schema_name}.{dataset_name}")
-                    else:
-                        self.connector.logger.info(f"Failed to insert data in {dataset_name} from {pipeline}.")
+                # if self.connector.create_table(table_name=f"{schema_name}.{dataset_name}", schema_order=schema_string):
+
+                insert_start = time.time_ns()
+                if shutil.move(abs_path_dataset, f"/mnt/fs00/ilin.tolovski/{dataset_name}.csv"):
+                    insert_end = time.time_ns() - insert_start
+                    self.table_insertion_times[dataset_name]=(insert_end/1000000)
+                    self.connector.logger.info(f"Insertion time for {dataset_name}: {insert_end/1000000}ms")
+                    self.connector.get_one(f"{schema_name}.{dataset_name}")
                 else:
-                    self.connector.logger.info(f"Failed to create table for {dataset_name} from {pipeline}.")
+                    self.connector.logger.info(f"Failed to insert data in {dataset_name} from {pipeline}.")
+
 
 
     def parseConfig(self, config_path):
@@ -154,7 +152,7 @@ def run_stork(args):
         pipeline_name = getDatasetName(pipeline.strip())
         logger = createLogger(filename=f"{args.individual_logs}/{pipeline_name}.log", project_name=f"{pipeline_name}_project",
                               level=logging.INFO)
-        stork = Stork(logger = logger, config_path=r"./db_conn/config_db.ini")
+        stork = Stork(logger = logger, config_path=r"./db_conn/config_db.ini", connector='postgres')
 
         stork.setup(pipeline = pipeline.strip(), new_pipeline=f"new_{pipeline}.py")
 
