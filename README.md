@@ -10,19 +10,7 @@ Stork migrates the data and project in three steps:
 
 Through parsing the AST of each pipeline in a given repository, Stork generates essential metadata regarding the location and format of the data. Next, Stork formats and migrates the data to a new destination in a hosted Database Management System or a cloud storage service. 
 
-## Setup [TODO - outdated]
-To setup the virtual environment and install the required dependencies, run the setup.sh script with:
+## Setup [TODO]
 
-* bash ./setup.sh
 
-## Using the system [TODO - outdated]
-Run the pipeline transformer with:
-
-* python ast-playground.py --pipeline=examples/PIPELINE_NAME
-
-There are two example pipelines:
-
-test.py - handles only data ingestion from a local .txt file, .csv file with pandas, 
-and auto-generated numpy arrays.
-
-argus-eyes.py - example pipeline that imports four .csv files from the ArgusEyes paper by Schelter et al. 
+## Using the system [TODO]
