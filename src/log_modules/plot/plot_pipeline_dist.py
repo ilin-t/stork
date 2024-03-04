@@ -13,9 +13,9 @@ def shorten_yaxis(value, pos):
     return f'{thousands:.1f}k'
 
 
-plt.rcParams["font.size"] = '14'
+plt.rcParams["font.size"] = '11'
 plt.rcParams["figure.figsize"] = (5,2)
-plt.rcParams["legend.fontsize"] = '14'
+plt.rcParams["legend.fontsize"] = '11'
 plt.rcParams.update({'text.usetex' : True,
                      'pgf.rcfonts': False,
                      'text.latex.preamble':
@@ -32,12 +32,12 @@ plt.rcParams.update({'text.usetex' : True,
                     })
 
 plt.rcParams.update({
-        'font.size': 14,
+        'font.size': 11,
         'svg.fonttype': 'none',
     })
 
-plt.rcParams["ytick.labelsize"] = '14'
-plt.rcParams["xtick.labelsize"] = '14'
+plt.rcParams["ytick.labelsize"] = '10'
+plt.rcParams["xtick.labelsize"] = '10'
 
 read_types = ("string path", "variable path", "external path")
 
@@ -75,4 +75,4 @@ ax.legend(loc='upper left', ncols=1, handletextpad=0.5,
            columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
 
 # plt.show()
-fig.savefig("../../../analysis_results/plots/distributions/pipeline_distribution.svg", transparent=True)
+fig.savefig("../../analysis_results/plots/distributions/pipeline_distribution.svg", transparent=True)

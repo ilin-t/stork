@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-plt.rcParams["font.size"] = '14'
-plt.rcParams["figure.figsize"] = (5,2.5)
-plt.rcParams["legend.fontsize"] = '14'
+plt.rcParams["font.size"] = '11'
+plt.rcParams["figure.figsize"] = (5,2.7)
+plt.rcParams["legend.fontsize"] = '11'
 
 plt.rcParams.update({'text.usetex' : True,
                      'pgf.rcfonts': False,
@@ -21,8 +21,8 @@ plt.rcParams.update({'text.usetex' : True,
                      'ytick.labelsize' : 'xx-small',
                      'xtick.labelsize' : 'xx-small'
                     })
-plt.rcParams["ytick.labelsize"] = '14'
-plt.rcParams["xtick.labelsize"] = '14'
+plt.rcParams["ytick.labelsize"] = '10'
+plt.rcParams["xtick.labelsize"] = '10'
 
 HATCHES = ['//', 'oo', '++', 'xx', '|||', '--']
 COLORS = ['#d73027', '#fc8d59', '#fee090', '#018571', '#af8dc3', '#4575b4']
@@ -60,7 +60,7 @@ plt.axvline(x=index_99_percent,color=COLORS[4], linestyle=':', label=f'99\% ({in
 plt.xscale('log')
 
 # Style adjustments
-plt.ylabel('Cumulative Percentage', fontsize=14)
-plt.legend(loc='lower right', handletextpad=0.5, columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
+plt.ylabel('Cumulative Percentage', fontsize=12)
+plt.legend(loc='upper left', handletextpad=0.5, columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
 
-plt.savefig(f"../../../analysis_results/plots/distributions/cum_library.svg", transparent=True, bbox_inches='tight')
+plt.savefig(f"../../analysis_results/plots/distributions/cum_library.svg", transparent=True)

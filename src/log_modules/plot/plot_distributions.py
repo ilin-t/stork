@@ -6,9 +6,9 @@ from matplotlib.ticker import FuncFormatter
 # occurences_small = pd.read_csv('../../analysis_results/yearly_splits/occurrences-20k.csv')
 
 
-plt.rcParams["font.size"] = '14'
-plt.rcParams["figure.figsize"] = (5.5,2)
-plt.rcParams["legend.fontsize"] = '14'
+plt.rcParams["font.size"] = '11'
+plt.rcParams["figure.figsize"] = (4.5,2)
+plt.rcParams["legend.fontsize"] = '11'
 
 plt.rcParams.update({'text.usetex' : True,
                      'pgf.rcfonts': False,
@@ -25,8 +25,8 @@ plt.rcParams.update({'text.usetex' : True,
                      'ytick.labelsize' : 'xx-small',
                      'xtick.labelsize' : 'xx-small'
                     })
-plt.rcParams["ytick.labelsize"] = '14'
-plt.rcParams["xtick.labelsize"] = '14'
+plt.rcParams["ytick.labelsize"] = '10'
+plt.rcParams["xtick.labelsize"] = '10'
 
 HATCHES = ['//', 'oo', '++', 'xx', '|||', '--']
 COLORS = ['#d73027', '#fc8d59', '#fee090', '#018571', '#af8dc3', '#4575b4']
@@ -94,11 +94,11 @@ def plot_bar_chart(in_dict, ylabel, fig_name):
     plt.legend(loc='upper right', ncols=len(in_dict.keys())/3, handletextpad=0.5, columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
     plt.gca().yaxis.set_major_formatter(FuncFormatter(shorten_yaxis))
     plt.ylim(0, max(in_dict.values()) + 0.2*(max(in_dict.values())))
-    plt.tick_params(axis='both', which='major')
+    plt.tick_params(axis='both', which='major', labelsize=11)
     plt.bar_label(bars, labels=percentages, padding=2)
 
 
-    plt.savefig(f"../../../analysis_results/plots/distributions/{fig_name}.svg", transparent=True)
+    plt.savefig(f"../../analysis_results/plots/distributions/{fig_name}.svg", transparent=True)
 
 def merge_counts():
     occ434 = pd.read_csv("../../../analysis_results/yearly_splits/occurrences-434k.csv")
@@ -144,5 +144,5 @@ if __name__ == '__main__':
 
     subset_dict = {key: db_counts[key] for key in subset_keys if key in db_counts}
 
-    plot_bar_chart(in_dict=subset_dict, ylabel="\# of Imports", fig_name="db_sys_dist")
+    # plot_bar_chart(in_dict=subset_dict, ylabel="\# of Imports", fig_name="db_sys_dist")
 

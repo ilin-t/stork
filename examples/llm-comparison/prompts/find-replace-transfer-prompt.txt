@@ -1,1 +1,0 @@
-Find where data is being ingested in the following code, and return the path of the dataset. Once you find the datasets, transfer them to an AWS S3 bucket, and rewrite the code, so the paths are now pointing to the S3 bucket.

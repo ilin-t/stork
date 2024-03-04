@@ -15,9 +15,9 @@ import numpy as np
 plt.rcParams["axes.prop_cycle"] = plt.cycler('color', ['#d7191c', '#fdae61', '#018571', '#abd9e9', '#2c7bb6'])
 
 
-plt.rcParams["font.size"] = '18'
-plt.rcParams["figure.figsize"] = (8,3)
-plt.rcParams["legend.fontsize"] = '18'
+plt.rcParams["font.size"] = '16'
+plt.rcParams["figure.figsize"] = (11,4)
+plt.rcParams["legend.fontsize"] = '16'
 plt.rcParams.update({'text.usetex' : True,
                      'pgf.rcfonts': False,
                      'text.latex.preamble':
@@ -30,11 +30,8 @@ plt.rcParams.update({'text.usetex' : True,
                             \else
                                 \RequirePackage[tt=false, type1=true]{libertine}
                             \fi""",
-                     # 'ytick.labelsize' : 'xx-small'
+                     'ytick.labelsize' : 'xx-small'
                     })
-
-plt.rcParams["ytick.labelsize"] = '18'
-plt.rcParams["xtick.labelsize"] = '18'
 
 read_types = ("string path", "variable path", "external path")
 outputs = {
@@ -46,17 +43,17 @@ outputs = {
 }
 
 x = np.arange(3)  # the label locations
-width = 0.18  # the width of the bars
+width = 0.16  # the width of the bars
 multiplier = 0
 
 fig, ax = plt.subplots(layout='constrained')
-hatches = ['/', 'o', '+', 'x', '|']
-COLORS = ['#018571', '#af8dc3', '#4575b4', '#d73027', '#fc8d59', '#fee090']
+hatches = ['//', 'oo', '++', 'xx', '|||']
+colors = ['#d7191c', '#fdae61', '#018571', '#abd9e9', '#2c7bb6']
 
 for attribute, measurement in outputs.items():
     offset = width * multiplier
     print(measurement)
-    rects = ax.bar(x + offset, measurement, width, fill=False, edgecolor=COLORS[multiplier], label=attribute, hatch=hatches[multiplier])
+    rects = ax.bar(x + offset, measurement, width, fill=False, edgecolor=colors[multiplier], label=attribute, hatch=hatches[multiplier])
     pcts = [int(pct) for pct in measurement]
     pcts[0] = "{:.1f}".format(pcts[0]/25*100)
     pcts[1] = "{:.1f}".format(pcts[1]/25*100)
@@ -66,11 +63,12 @@ for attribute, measurement in outputs.items():
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('\# Pipelines')
+ax.set_title('LLM outputs by read type')
 ax.set_xticks(x + width, read_types)
-ax.legend(loc='upper left', ncols=3, handletextpad=0.5, columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
-ax.set_ylim(0, 18)
-ax.tick_params(axis='both', which='major', labelsize=18)
+ax.legend(loc='upper left', ncols=5)
+ax.set_ylim(0, 14)
+ax.tick_params(axis='both', which='major', labelsize=16)
 
 
 # plt.show()
-fig.savefig("../../../analysis_results/plots/evaluation/llm_results.svg", transparent=True)
+fig.savefig("../../analysis_results/plots/evaluation/llm_results.svg", transparent=True)
