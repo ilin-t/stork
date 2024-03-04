@@ -2,8 +2,10 @@ import argparse
 import logging
 import os
 import shutil
+import subprocess
 import sys
 import time
+import paramiko
 
 from configparser import ConfigParser
 from glob import glob
@@ -29,6 +31,7 @@ class Stork:
             self.connector = None
         self.assignVisitor = AssignVisitor()
         self.pipeline = ""
+        self.logger = logger
         self.config_path = config_path
         # self.access_key, self.secret_access_key = self.parseConfig(config_path=self.config_path)
         self.config = None
@@ -95,19 +98,17 @@ class Stork:
                 schema_gen_start = time.time_ns()
                 # schema_string = self.connector.generate_schema(dataset_df)
                 schema_gen_end = time.time_ns() - schema_gen_start
-                self.connector.logger.info(f"Schema generation for {dataset_name}: {schema_gen_end/1000000} ms")
+                self.logger.info(f"Schema generation for {dataset_name}: {schema_gen_end/1000000} ms")
                 self.schema_generation_times[dataset_name]=(schema_gen_end/1000000)
                 print(dataset_name)
                 # if self.connector.create_table(table_name=f"{schema_name}.{dataset_name}", schema_order=schema_string):
 
                 insert_start = time.time_ns()
-                if shutil.move(abs_path_dataset, f"/mnt/fs00/ilin.tolovski/{dataset_name}.csv"):
-                    insert_end = time.time_ns() - insert_start
-                    self.table_insertion_times[dataset_name]=(insert_end/1000000)
-                    self.connector.logger.info(f"Insertion time for {dataset_name}: {insert_end/1000000}ms")
-                    self.connector.get_one(f"{schema_name}.{dataset_name}")
-                else:
-                    self.connector.logger.info(f"Failed to insert data in {dataset_name} from {pipeline}.")
+                shutil.copy(abs_path_dataset, "/mnt/fs00/ilin.tolovski/{dataset}_{pipeline}.csv")
+                insert_end = time.time_ns() - insert_start
+                self.table_insertion_times[dataset_name]=(insert_end/1000000)
+                self.logger.info(f"Insertion time for {dataset_name}: {insert_end/1000000}ms")
+                # self.logger.get_one(f"{schema_name}.{dataset_name}")
 
 
 
@@ -152,7 +153,7 @@ def run_stork(args):
         pipeline_name = getDatasetName(pipeline.strip())
         logger = createLogger(filename=f"{args.individual_logs}/{pipeline_name}.log", project_name=f"{pipeline_name}_project",
                               level=logging.INFO)
-        stork = Stork(logger = logger, config_path=r"./db_conn/config_db.ini", connector='postgres')
+        stork = Stork(logger = logger, config_path="db_conn/config_db.ini", connector="postgres")
 
         stork.setup(pipeline = pipeline.strip(), new_pipeline=f"new_{pipeline}.py")
 
