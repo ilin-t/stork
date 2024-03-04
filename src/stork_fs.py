@@ -58,7 +58,7 @@ class Stork:
         except len(pipeline.split(".")) > 2:
             print("Pipeline name has wrong formatting.")
 
-    def setup(self, pipeline, new_pipeline):
+    def setup(self, pipeline, new_pipeline, destination_path):
 
         # self.connector.setup()
 
@@ -78,12 +78,8 @@ class Stork:
         self.translation_times = translation_end / 1000000
         self.connector.logger.info(f"Translation time: {translation_end / 1000000} ms")
 
-        # repo_name = self.assignVisitor.parseRepoName(self.assignVisitor.getRepositoryName())
-        # print(f"Adapted repository and bucket name: {repo_name}")
-        schema_name = "variable"
-        # if len(self.assignVisitor.datasets) > 0:
-        #     self.connector.create_schema(schema_name, "postgres_test_user")
         print(self.assignVisitor.datasets)
+        self.logger.info(f"Stork detected the following datasets: {self.assignVisitor.datasets}")
         for dataset in self.assignVisitor.datasets:
             abs_path_dataset = self.assignVisitor.parsePath(dataset)
             print(f"Absolute path: {abs_path_dataset}")
@@ -91,10 +87,6 @@ class Stork:
                 # dataset_df = self.connector.read_file(abs_path_dataset)
                 dataset_name = getDatasetName(abs_path_dataset)
                 dataset_name = ''.join([i for i in dataset_name if i.isalpha()])
-                # df_size = sys.getsizeof(dataset_df)
-                # self.connector.logger.info(f"Dataset size: {df_size}")
-                # self.dataframe_sizes[dataset_name]=df_size
-                # print(f"df head: {dataset_df.head()}")
 
                 schema_gen_start = time.time_ns()
                 # schema_string = self.connector.generate_schema(dataset_df)
@@ -102,30 +94,19 @@ class Stork:
                 self.logger.info(f"Schema generation for {dataset_name}: {schema_gen_end / 1000000} ms")
                 self.schema_generation_times[dataset_name] = (schema_gen_end / 1000000)
                 print(dataset_name)
-                # if self.connector.create_table(table_name=f"{schema_name}.{dataset_name}", schema_order=schema_string):
 
                 insert_start = time.time_ns()
-                shutil.copy(abs_path_dataset, "/mnt/fs00/ilin.tolovski/{dataset}_{pipeline}.csv")
+                shutil.copy(abs_path_dataset, f"{destination_path}/{dataset}_{pipeline}.csv")
                 insert_end = time.time_ns() - insert_start
                 self.table_insertion_times[dataset_name] = (insert_end / 1000000)
                 self.logger.info(f"Insertion time for {dataset_name}: {insert_end / 1000000}ms")
-                # self.logger.get_one(f"{schema_name}.{dataset_name}")
 
-    def parseConfig(self, config_path):
-        config = ConfigParser()
-        config.read(config_path)
-        credentials = config['credentials']
-
-        return credentials["aws_access_key_id"], credentials["aws_secret_access_key"]
-
-
-def extract_files():
-    root_path = "/home/ilint/HPI/Stork/stork-dolly-example/pipelines/"
+def extract_files(root_path):
+    # root_path = "/home/ilint/HPI/Stork/stork-dolly-example/pipelines/"
     modes = ["raw-string", "variable", "external"]
     full_paths = {"raw-string": [], "variable": [], "external": []}
     for mode in modes:
         list_files = [f.name for f in os.scandir(f"{root_path}{mode}_python_files") if f.is_file()]
-        # list_files = [x.replace("Dolly_", "") for x in list_files]
 
         full_projects = glob(os.path.join(f"{root_path}{mode}/", '**', '*.py'), recursive=True)
 

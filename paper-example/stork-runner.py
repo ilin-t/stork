@@ -11,8 +11,9 @@ def main():
 
     stork = Stork(logger=logger)
     logger.info("Stork has been initialized.")
-    stork.setPipeline(pipeline="pipelines/example.py")
+    stork.setup(pipeline="pipelines/example.py", new_pipeline="destination-path/example_rewritten.py", destination_path="destination-path/")
     logger.info(f"{stork.pipeline} is set.")
+
 
 
 if __name__ == '__main__':
