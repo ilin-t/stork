@@ -21,19 +21,11 @@ from src.log_modules.log_results import createLogger, createLoggerPlain
 class Stork:
 
     def __init__(self, logger):
-        #
-        # if "s3" in connector:
-        #     self.connector = S3Connector()
-        # elif "postgres" in connector:
-        #     # self.connector = PsqlConnector(config_path)
-        #     self.connector.set_logger(logger)
-        # else:
         self.connector = None
         self.assignVisitor = AssignVisitor()
         self.pipeline = ""
         self.logger = logger
         self.config_path = None
-        # self.access_key, self.secret_access_key = self.parseConfig(config_path=self.config_path)
         self.config = None
         self.assignments = {}
         self.datasets = {}
@@ -59,8 +51,6 @@ class Stork:
             print("Pipeline name has wrong formatting.")
 
     def setup(self, pipeline, new_pipeline, destination_path):
-
-        # self.connector.setup()
 
         self.setPipeline(pipeline=pipeline)
         self.assignVisitor.setPipeline(pipeline=self.pipeline)
@@ -89,7 +79,6 @@ class Stork:
                 dataset_name = ''.join([i for i in dataset_name if i.isalpha()])
 
                 schema_gen_start = time.time_ns()
-                # schema_string = self.connector.generate_schema(dataset_df)
                 schema_gen_end = time.time_ns() - schema_gen_start
                 self.logger.info(f"Schema generation for {dataset_name}: {schema_gen_end / 1000000} ms")
                 self.schema_generation_times[dataset_name] = (schema_gen_end / 1000000)
@@ -102,7 +91,6 @@ class Stork:
                 self.logger.info(f"Insertion time for {dataset_name}: {insert_end / 1000000}ms")
 
 def extract_files(root_path):
-    # root_path = "/home/ilint/HPI/Stork/stork-dolly-example/pipelines/"
     modes = ["raw-string", "variable", "external"]
     full_paths = {"raw-string": [], "variable": [], "external": []}
     for mode in modes:
@@ -123,7 +111,6 @@ def extract_files(root_path):
 
 
 def run_stork(args):
-    # pipelines = get_repository_list(f"{args.repositories}/{args.mode}_full_paths.txt")
     pipelines = [f.path for f in os.scandir(args.repositories) if f.is_file()]
     print(pipelines)
     output_logger = createLoggerPlain(filename=f"{args.outputs}/paper_example_times.log",
@@ -167,8 +154,6 @@ if __name__ == '__main__':
                         default='/home/ilint/HPI/Stork/average-runtime/individual_logs/')
     parser.add_argument('-o', '--outputs',
                         default='/home/ilint/HPI/Stork/average-runtime/outputs')
-    # parser.add_argument('-m', '--mode',
-    #                     default='variable')
 
     args = parser.parse_args()
     main(args)
