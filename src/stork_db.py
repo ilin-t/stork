@@ -142,7 +142,7 @@ def run_stork(args):
         pipeline_name = getDatasetName(pipeline.strip())
         logger = createLogger(filename=f"{args.individual_logs}/{pipeline_name}.log", project_name=f"{pipeline_name}_project",
                               level=logging.INFO)
-        stork = Stork(logger = logger, config_path=r"./db_conn/config_db.ini")
+        stork = Stork(logger = logger, config_path=args.credentials)
 
         stork.setup(pipeline = pipeline.strip(), new_pipeline=f"new_{pipeline}.py")
 
@@ -173,8 +173,7 @@ if __name__ == '__main__':
                         default='/home/ilint/HPI/Stork/average-runtime/individual_logs/')
     parser.add_argument('-o', '--outputs',
                         default='/home/ilint/HPI/Stork/average-runtime/outputs')
-    # parser.add_argument('-m', '--mode',
-    #                     default='variable')
+    parser.add_argument('-c', '--credentials')
 
     args = parser.parse_args()
     main(args)
