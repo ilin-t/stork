@@ -2,26 +2,18 @@ import argparse
 import logging
 import os
 import shutil
-import subprocess
-import sys
 import time
-import paramiko
 
-from configparser import ConfigParser
 from glob import glob
 
 from src.log_modules import util
-from src.db_conn.s3_connector import S3Connector
-from src.db_conn.psqlConnector import PsqlConnector
 from src.ast.assign_visitor import AssignVisitor, getDatasetName
-from src.log_modules.flag_repositories import get_repository_list
 from src.log_modules.log_results import createLogger, createLoggerPlain
 
 
 class Stork:
 
     def __init__(self, logger):
-        self.connector = None
         self.assignVisitor = AssignVisitor()
         self.pipeline = ""
         self.logger = logger
@@ -66,7 +58,7 @@ class Stork:
         translation_end = time.time_ns() - translation_start
 
         self.translation_times = translation_end / 1000000
-        self.connector.logger.info(f"Translation time: {translation_end / 1000000} ms")
+        self.logger.info(f"Translation time: {translation_end / 1000000} ms")
 
         print(self.assignVisitor.datasets)
         self.logger.info(f"Stork detected the following datasets: {self.assignVisitor.datasets}")
@@ -74,9 +66,8 @@ class Stork:
             abs_path_dataset = self.assignVisitor.parsePath(dataset)
             print(f"Absolute path: {abs_path_dataset}")
             if abs_path_dataset and util.fileExists(abs_path_dataset):
-                # dataset_df = self.connector.read_file(abs_path_dataset)
                 dataset_name = getDatasetName(abs_path_dataset)
-                dataset_name = ''.join([i for i in dataset_name if i.isalpha()])
+                dataset_name = ''.join([i for i in dataset_name if i.isalnum()])
 
                 schema_gen_start = time.time_ns()
                 schema_gen_end = time.time_ns() - schema_gen_start
@@ -85,10 +76,12 @@ class Stork:
                 print(dataset_name)
 
                 insert_start = time.time_ns()
-                shutil.copy(abs_path_dataset, f"{destination_path}/{dataset}_{pipeline}.csv")
+                shutil.copy(abs_path_dataset, f"{destination_path}/{dataset_name}.csv")
                 insert_end = time.time_ns() - insert_start
                 self.table_insertion_times[dataset_name] = (insert_end / 1000000)
                 self.logger.info(f"Insertion time for {dataset_name}: {insert_end / 1000000}ms")
+                self.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset_name,
+                                                         "url": f"{destination_path}/{dataset_name}.csv", "lineno": dataset['lineno']})
 
 def extract_files(root_path):
     modes = ["raw-string", "variable", "external"]
@@ -153,7 +146,7 @@ if __name__ == '__main__':
     parser.add_argument('-l', '--individual_logs',
                         default='/home/ilint/HPI/Stork/average-runtime/individual_logs/')
     parser.add_argument('-o', '--outputs',
-                        default='/home/ilint/HPI/Stork/average-runtime/outputs')
+                        default='/home/ilint/HPI/Stork/average-runtime/outputs/')
 
     args = parser.parse_args()
     main(args)

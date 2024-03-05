@@ -688,50 +688,49 @@ class AssignVisitor(ast.NodeVisitor):
     #         else:
     #             continue
 
-    # def transformScript(self, script, new_script):
-    #     temp = self.datasets_urls
-    #
-    #     with open(new_script, "w") as new:
-    #         with open(script, "r") as old:
-    #             row_old = iter(old)
-    #             for row in row_old:
-    #                 for source in temp:
-    #                     dataset_name = self.getDatasetName(source['dataset_name'])
-    #                     if source['dataset_name'] in row:
-    #                         row = row.replace(source['dataset_name'], source['url'])
-    #                         temp.remove(source)
-    #                     elif dataset_name in row:
-    #                         # for i in range(0, len(source["dataset"])):
-    #                         matches = re.search(f".[=]{dataset_name}", row)
-    #                         # print(f"Matches: {matches.string}")
-    #                         # row = row.replace(re.search(f".{dataset_name}, source["url"])
-    #                         temp.remove(source)
-    #
-    #                 new.write(row)
-    #             old.close()
-    #         new.close()
-
-    def transformScript(self, script, new_script, datasets_urls):
-        temp = datasets_urls
-
+    def transformScript(self, script, new_script):
+        temp = self.datasets_urls
+        print(temp)
         with open(new_script, "w") as new:
             with open(script, "r") as old:
                 row_old = iter(old)
                 for row in row_old:
-                    # row_parts = row.strip().split("=")
                     for source in temp:
-                        dataset_name = source['dataset_name']
-                        if isinstance(source['variable'], dict):
-                            source['variable'] = f"{source['variable']['from']}.{source['variable']['method']}"
-                        if (source['variable'] in row and dataset_name in row):
+                        dataset_name =source['dataset_name']
+                        if source['dataset_name'] in row:
                             row = row.replace(source['dataset_name'], source['url'])
-                            temp.remove(source)
                         elif dataset_name in row:
-                            row = row.replace(source['dataset_name'], source["url"])
+                            # for i in range(0, len(source["dataset"])):
+                            matches = re.search(f".[=]{dataset_name}", row)
+                            # print(f"Matches: {matches.string}")
+                            # row = row.replace(re.search(f".{dataset_name}, source["url"])
                             temp.remove(source)
+
                     new.write(row)
                 old.close()
             new.close()
+
+    # def transformScript(self, script, new_script, datasets_urls):
+    #     temp = datasets_urls
+    #     print(temp)
+    #     with open(new_script, "w") as new:
+    #         with open(script, "r") as old:
+    #             row_old = iter(old)
+    #             for row in row_old:
+    #                 # row_parts = row.strip().split("=")
+    #                 for source in temp:
+    #                     dataset_name = source['dataset_name']
+    #                     if isinstance(source['variable'], dict):
+    #                         source['variable'] = f"{source['variable']['from']}.{source['variable']['method']}"
+    #                     if (source['variable'] in row and dataset_name in row):
+    #                         row = row.replace(source['dataset_name'], source['url'])
+    #                         temp.remove(source)
+    #                     elif dataset_name in row:
+    #                         row = row.replace(source['dataset_name'], source["url"])
+    #                         temp.remove(source)
+    #                 new.write(row)
+    #             old.close()
+    #         new.close()
 
 
     def getDatasetsFromInputs(self):

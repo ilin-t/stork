@@ -7,12 +7,9 @@ import time
 from configparser import ConfigParser
 from glob import glob
 
-from src.db_conn.sqliteConnector import sqliteConnector
 from src.log_modules import util
-from src.db_conn.s3_connector import S3Connector
 from src.db_conn.psqlConnector import PsqlConnector
 from src.ast.assign_visitor import AssignVisitor, getDatasetName
-from src.log_modules.flag_repositories import get_repository_list
 from src.log_modules.log_results import createLogger, createLoggerPlain
 
 
@@ -80,7 +77,7 @@ class Stork:
             if abs_path_dataset and util.fileExists(abs_path_dataset):
                 dataset_df = self.connector.read_file(abs_path_dataset)
                 dataset_name = getDatasetName(abs_path_dataset)
-                dataset_name = ''.join([i for i in dataset_name if i.isalpha()])
+                dataset_name = ''.join([i for i in dataset_name if i.isalnum()])
                 df_size = sys.getsizeof(dataset_df)
                 self.connector.logger.info(f"Dataset size: {df_size}")
                 self.dataframe_sizes[dataset_name]=df_size
