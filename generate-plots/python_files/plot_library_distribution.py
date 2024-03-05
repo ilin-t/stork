@@ -1,3 +1,5 @@
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -85,4 +87,4 @@ con.set_color([0, 0, 0])
 ax2.add_artist(con)
 con.set_linewidth(2)
 
-plt.savefig("../../analysis_results/plots/distributions/library_distribution.svg", transparent=True, bbox_inches='tight')
+plt.savefig("../plots/library_distribution.svg", transparent=True, bbox_inches='tight')

@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 import plot_libraries as pl
@@ -28,5 +30,4 @@ keras_pct = get_yearly_participation('keras', 2018, 2023, repo_counts)
 dm_libs = ['numpy', 'pandas', 'scipy']
 ml_libs = ['sklearn', 'tensorflow', 'keras', 'torch']
 
-# pl.plot_lines_df(df_list=[numpy_pct, pandas_pct, scipy_pct], libgroup='dm_pct', libs = dm_libs)
 pl.plot_lines_df(df_list=[sk_learn_pct, tf_pct, keras_pct, torch_pct], libgroup='ml_pct', libs = ml_libs)

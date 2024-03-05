@@ -1,3 +1,5 @@
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -27,7 +29,7 @@ plt.rcParams["xtick.labelsize"] = '10'
 HATCHES = ['//', 'oo', '++', 'xx', '|||', '--']
 COLORS = ['#d73027', '#fc8d59', '#fee090', '#018571', '#af8dc3', '#4575b4']
 
-df = pd.read_csv("../../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+df = pd.read_csv("../raw-data/occurrences_aggregated.csv")
 data = df["count"].to_numpy()
 # Generate example data with a long-tail distribution
 # data = np.random.pareto(2, 1000) + 1
@@ -63,4 +65,4 @@ plt.xscale('log')
 plt.ylabel('Cumulative Percentage', fontsize=12)
 plt.legend(loc='upper left', handletextpad=0.5, columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
 
-plt.savefig(f"../../analysis_results/plots/distributions/cum_library.svg", transparent=True)
+plt.savefig(f"../plots/cum_library.svg", transparent=True)

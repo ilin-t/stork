@@ -1,16 +1,8 @@
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-# plt.rcParams["axes.prop_cycle"] = plt.cycler('color',
-#                                              ['#66c2a5', '#8da0cb', '#fc8d62', '#e78ac3',
-#                                               '#a6d854', '#ffd92f', '#e5c494', '#b3b3b3'])
-# plt.rcParams["axes.prop_cycle"] = plt.cycler('color',
-#                                              ['#3E89D6', '#E1A03C', '#9DA9C0', '#72DF96',
-#                                               '#596366', '#ffd92f', '#e5c494', '#b3b3b3'])
-
-# plt.rcParams["axes.prop_cycle"] = plt.cycler('color',
-#                                              ['#029e73', '#d55e00', '#cc78bc', '#56b4e9', '#ca9161',
-#                                               '#fbafe4', '#949494', '#ece133', '#56b4e9', '#0173b2', '#de8f05',])
 
 plt.rcParams["axes.prop_cycle"] = plt.cycler('color', ['#d7191c', '#fdae61', '#018571', '#abd9e9', '#2c7bb6'])
 
@@ -71,4 +63,4 @@ ax.tick_params(axis='both', which='major', labelsize=16)
 
 
 # plt.show()
-fig.savefig("../../analysis_results/plots/evaluation/llm_results.svg", transparent=True)
+fig.savefig("../plots/llm_results.svg", transparent=True)
