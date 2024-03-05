@@ -1,18 +1,26 @@
+import argparse
 import logging
 
 from src.log_modules.log_results import createLogger
-from src.stork_fs import Stork
+from src.stork_s3 import Stork
 
 
-def main():
+def main(args):
     logger = createLogger(filename=f"logs/example.log",
                           project_name=f"pipelines/example.py",
                           level=logging.INFO)
 
-    stork = Stork(logger=logger)
+    stork = Stork(logger=logger, config_path=args.credentials)
     logger.info("Stork has been initialized.")
-    stork.setup(pipeline="pipelines/example.py", new_pipeline="destination-path/example_rewritten.py", destination_path="destination-path/")
+    stork.setup(pipeline="pipelines/example.py", new_pipeline="destination-path/example_rewritten.py")
     logger.info(f"{stork.pipeline} is set.")
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(
+        prog='Run Stork with a S3 Backend',
+    )
+
+    parser.add_argument('-c', '--credentials')
+
+    args = parser.parse_args()
+    main(args)
