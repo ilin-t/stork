@@ -68,7 +68,6 @@ class Stork:
             if abs_path_dataset and util.fileExists(abs_path_dataset):
                 dataset_name = getDatasetName(abs_path_dataset)
                 dataset_name = ''.join([i for i in dataset_name if i.isalnum()])
-
                 schema_gen_start = time.time_ns()
                 schema_gen_end = time.time_ns() - schema_gen_start
                 self.logger.info(f"Schema generation for {dataset_name}: {schema_gen_end / 1000000} ms")
@@ -80,8 +79,10 @@ class Stork:
                 insert_end = time.time_ns() - insert_start
                 self.table_insertion_times[dataset_name] = (insert_end / 1000000)
                 self.logger.info(f"Insertion time for {dataset_name}: {insert_end / 1000000}ms")
-                self.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset_name,
-                                                         "url": f"{destination_path}/{dataset_name}.csv", "lineno": dataset['lineno']})
+                self.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset['dataset'],
+                                                         "url": f"{destination_path}{dataset_name}.csv", "lineno": dataset['lineno']})
+                self.logger.info(self.assignVisitor.datasets_urls)
+                self.assignVisitor.transformScript(script=pipeline, new_script=new_pipeline)
 
 def extract_files(root_path):
     modes = ["raw-string", "variable", "external"]

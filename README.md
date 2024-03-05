@@ -42,9 +42,10 @@ python3 examples/stork-init.py
 
 ## Run Pipeline Analysis with Stork
 
-To run an example pipeline with Stork, execute the Stork runner with the provided **example.py** pipeline:
+To run an example pipeline with Stork, execute the Stork runner with the provided **example.py** pipeline. In order to generate a small dataset of 1MB, we run the **example.py** pipeline first:
 
 ```
+python3 examples/pipelines/example.py
 python3 examples/stork-runner.py --pipeline=examples/pipelines/example.py
 ```
 
@@ -69,7 +70,7 @@ In order to use Stork with AWS S3 as data backend, an existing S3 configuration 
 Provide the config file containing the AWS access keys as an execution parameter:
 
 ```
-python3 examples/stork-runner-s3.py --config_path==PATH_TO_AWS_CONFIG_FILE --pipeline=examples/pipelines/example.py
+python3 examples/stork-runner-s3.py --credentials=PATH_TO_AWS_CONFIG_FILE
 ```
 
 

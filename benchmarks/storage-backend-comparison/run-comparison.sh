@@ -18,8 +18,8 @@ cd pipelines
 cd ../../../
 
 # Run Stork on the existing pipelines
-#python3 $PWD/src/stork_fs.py --repositories=$ROOT/pipelines --individual_logs=$ROOT/outputs/lfs/individual_logs/ --outputs=$ROOT/outputs/lfs/
+python3 $PWD/src/stork_fs.py --repositories=$ROOT/pipelines --individual_logs=$ROOT/outputs/lfs/individual_logs/ --outputs=$ROOT/outputs/lfs/
 python3 $PWD/src/stork_s3.py --credentials=$S3CONFIG --repositories=$ROOT/pipelines/ --individual_logs=$ROOT/outputs/s3/individual_logs/ --outputs=$ROOT/outputs/s3/
-#python3 $PWD/src/stork_db.py --repositories=$ROOT/pipelines/ --individual_logs=$ROOT/outputs/pg/individual_logs/ --outputs=$ROOT/outputs/pg
+python3 $PWD/src/stork_db.py --repositories=$ROOT/pipelines/ --individual_logs=$ROOT/outputs/pg/individual_logs/ --outputs=$ROOT/outputs/pg
 
 
