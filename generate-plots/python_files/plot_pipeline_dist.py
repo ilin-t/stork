@@ -5,9 +5,6 @@ import numpy as np
 
 from matplotlib.ticker import FuncFormatter
 
-
-os.makedirs("plots/", exist_ok=True)
-
 def shorten_yaxis(value, pos):
     thousands = value / 1e3
     return f'{thousands:.1f}k'

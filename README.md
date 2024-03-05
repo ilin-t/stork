@@ -72,7 +72,11 @@ Provide the config file containing the AWS access keys as an execution parameter
 ```
 python3 examples/stork-runner-s3.py --credentials=PATH_TO_AWS_CONFIG_FILE
 ```
+## Generate Results from the Paper
 
+To generate the paper plots, execute the following script:
+
+cd generate-plots && bash generate-plots.sh
 
 
 
