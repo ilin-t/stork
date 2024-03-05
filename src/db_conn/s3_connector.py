@@ -1,7 +1,6 @@
 import os
 import boto3
 
-# import src.log_modules.log_modules
 from src.log_modules import util
 
 
@@ -21,24 +20,11 @@ class S3Connector:
         self.client = boto3.client(service_name=client, aws_access_key_id=aws_access_key,
                                    aws_secret_access_key=aws_secret_access_key)
 
-    # def setConnection(self):
-    #     self.connection = []
-
-    # def setResource(self, aws_access_key, aws_secret_access_key, resource):
-    #     self.resource = boto3.resource(service_name=resource, aws_access_key_id=aws_access_key,
-    #                                    aws_secret_access_key=aws_secret_access_key)
-
     def setPipeline(self, pipeline):
         self.pipeline = pipeline
 
     def getClient(self):
         return self.client
-
-    # def getConnection(self):
-    #     return self.connection
-
-    # def getResource(self):
-    #     return self.resource
 
     def setAst(self):
         self.ast = util.getAst(self.pipeline)
@@ -75,8 +61,6 @@ class S3Connector:
         self.client.put_object(Bucket=bucket, Key=f"{folder_name}/")
 
     def getBuckets(self):
-        # for bucket in self.resource.buckets.all():
-        # print(bucket.name)
         return self.client.list_buckets()
 
     def getBucketNames(self):

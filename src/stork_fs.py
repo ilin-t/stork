@@ -124,7 +124,7 @@ def run_stork(args):
                               level=logging.INFO)
         stork = Stork(logger=logger)
 
-        stork.setup(pipeline=pipeline.strip(), new_pipeline=f"new_{pipeline}.py")
+        stork.setup(pipeline=pipeline.strip(), new_pipeline=f"new_{pipeline}.py", destination_path=args.outputs)
 
         stats[pipeline] = {"translation_time": stork.translation_times,
                            "datasets": {"schema_gen": stork.schema_generation_times},
@@ -145,7 +145,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        prog='Run Stork with a Postgres Backend',
+        prog='Run Stork with a local file system',
     )
 
     parser.add_argument('-r', '--repositories',

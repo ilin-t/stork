@@ -18,20 +18,15 @@ from src.log_modules.log_results import createLogger, createLoggerPlain
 
 class Stork:
 
-    def __init__(self, config_path, logger, connector):
+    def __init__(self, config_path, logger):
 
-        if "s3" in connector:
-            self.connector = S3Connector()
-        elif "postgres" in connector:
-            self.connector = PsqlConnector(config_path)
-            self.connector.set_logger(logger)
-        elif "sqlite" in connector:
-            self.connector = sqliteConnector(db_file=config_path)
+
+        self.connector = PsqlConnector(config_path)
+        self.connector.set_logger(logger)
         self.assignVisitor = AssignVisitor()
         self.pipeline = ""
         self.config_path = config_path
-        # self.access_key, self.secret_access_key = self.parseConfig(config_path=self.config_path)
-        # self.config = self.connector.config(filename=config_path, section='psycopg2')
+
         self.config = None
         self.assignments = {}
         self.datasets = {}
@@ -75,8 +70,6 @@ class Stork:
         self.translation_times = translation_end / 1000000
         self.connector.logger.info(f"Translation time: {translation_end / 1000000} ms")
 
-        # repo_name = self.assignVisitor.parseRepoName(self.assignVisitor.getRepositoryName())
-        # print(f"Adapted repository and bucket name: {repo_name}")
         schema_name = "variable"
         if len(self.assignVisitor.datasets) > 0:
             self.connector.create_schema(schema_name, "postgres_test_user")
@@ -91,7 +84,6 @@ class Stork:
                 df_size = sys.getsizeof(dataset_df)
                 self.connector.logger.info(f"Dataset size: {df_size}")
                 self.dataframe_sizes[dataset_name]=df_size
-                # print(f"df head: {dataset_df.head()}")
 
                 schema_gen_start = time.time_ns()
                 schema_string = self.connector.generate_schema(dataset_df)
@@ -143,7 +135,6 @@ def extract_files():
 
 def run_stork(args):
 
-    # pipelines = get_repository_list(f"{args.repositories}/{args.mode}_full_paths.txt")
     pipelines = [f.path for f in os.scandir(args.repositories) if f.is_file()]
     print(pipelines)
     output_logger = createLoggerPlain(filename=f"{args.outputs}/paper_example_times.log",

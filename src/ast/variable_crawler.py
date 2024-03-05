@@ -3,7 +3,7 @@ import time
 
 from assign_visitor import AssignVisitor
 from src.log_modules.util import getAst
-from src.stork_main import Stork
+from src.stork_s3 import Stork
 from src.log_modules.parse_repos import unzip
 
 
