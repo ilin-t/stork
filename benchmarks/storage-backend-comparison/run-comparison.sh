@@ -9,9 +9,9 @@ ROOT=$PWD
 
 cd pipelines
 #Generating the dataset file
-#python3 proto-10-mb.py
-#python3 proto-100-mb.py
-#python3 proto-1000-mb.py
+python3 proto-10-mb.py
+python3 proto-100-mb.py
+python3 proto-1000-mb.py
 
 
 # Move to the stork runner

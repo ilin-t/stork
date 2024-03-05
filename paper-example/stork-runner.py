@@ -1,10 +1,14 @@
 import logging
+import os
 
 from src.log_modules.log_results import createLogger
 from src.stork_fs import Stork
 
 
 def main():
+    os.makedirs("destination-path/", exist_ok=True)
+    os.makedirs("logs/", exist_ok=True)
+
     logger = createLogger(filename=f"logs/example.log",
                           project_name=f"pipelines/example.py",
                           level=logging.INFO)

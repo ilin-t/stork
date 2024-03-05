@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -16,6 +18,7 @@ data = np.random.random(size=(num_rows, 100))  # 100 columns for example
 df = pd.DataFrame(data, columns=column_names)
 df['Target'] = np.random.choice([0, 1], size=num_rows)
 
+os.makedirs("../generated-data", exist_ok=True)
 csv_file_path = '../generated-data/random_data_1000MB.csv'
 df.to_csv(csv_file_path, index=False)
 
