@@ -6,9 +6,11 @@ System for automated data and pipeline migration. Stork automates the process of
 2. Data Transfer
 3. Pipeline Rewrite
 
+In this repository, we provide the code for our VLDB submission, together with short example use cases.
+
 ## Stages
 
-In this section, we describe the three stages, and provide a running example in the end.
+We describe the three stages, and provide a running example in the end.
 
 ### Pipeline Analysis
 The pipeline analysis stage is done by traversing the abstract syntax tree of a given pipeline. Stork generates essential metadata regarding the location and format of the data. Next, Stork formats and migrates the data to a new destination in a hosted Database Management System, cloud storage service, or a local file system. 
@@ -70,9 +72,7 @@ Provide the config file containing the AWS access keys as an execution parameter
 python3 examples/stork-runner-s3.py --config_path==PATH_TO_AWS_CONFIG_FILE --pipeline=examples/pipelines/example.py
 ```
 
-## Reproduce Experiments
 
-To reproduce individual experiments from the evaluation section, please refer to the documentation in the **docs** folder.
 
 
 
