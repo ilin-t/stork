@@ -7,31 +7,23 @@ import time
 from configparser import ConfigParser
 from glob import glob
 
-from src.db_conn.sqliteConnector import sqliteConnector
 from src.log_modules import util
-from src.db_conn.s3_connector import S3Connector
 from src.db_conn.psqlConnector import PsqlConnector
 from src.ast.assign_visitor import AssignVisitor, getDatasetName
-from src.log_modules.flag_repositories import get_repository_list
 from src.log_modules.log_results import createLogger, createLoggerPlain
 
 
 class Stork:
 
-    def __init__(self, config_path, logger, connector):
+    def __init__(self, config_path, logger):
 
-        if "s3" in connector:
-            self.connector = S3Connector()
-        elif "postgres" in connector:
-            self.connector = PsqlConnector(config_path)
-            self.connector.set_logger(logger)
-        elif "sqlite" in connector:
-            self.connector = sqliteConnector(db_file=config_path)
+
+        self.connector = PsqlConnector(config_path)
+        self.connector.set_logger(logger)
         self.assignVisitor = AssignVisitor()
         self.pipeline = ""
         self.config_path = config_path
-        # self.access_key, self.secret_access_key = self.parseConfig(config_path=self.config_path)
-        # self.config = self.connector.config(filename=config_path, section='psycopg2')
+
         self.config = None
         self.assignments = {}
         self.datasets = {}
@@ -75,8 +67,6 @@ class Stork:
         self.translation_times = translation_end / 1000000
         self.connector.logger.info(f"Translation time: {translation_end / 1000000} ms")
 
-        # repo_name = self.assignVisitor.parseRepoName(self.assignVisitor.getRepositoryName())
-        # print(f"Adapted repository and bucket name: {repo_name}")
         schema_name = "variable"
         if len(self.assignVisitor.datasets) > 0:
             self.connector.create_schema(schema_name, "postgres_test_user")
@@ -87,11 +77,10 @@ class Stork:
             if abs_path_dataset and util.fileExists(abs_path_dataset):
                 dataset_df = self.connector.read_file(abs_path_dataset)
                 dataset_name = getDatasetName(abs_path_dataset)
-                dataset_name = ''.join([i for i in dataset_name if i.isalpha()])
+                dataset_name = ''.join([i for i in dataset_name if i.isalnum()])
                 df_size = sys.getsizeof(dataset_df)
                 self.connector.logger.info(f"Dataset size: {df_size}")
                 self.dataframe_sizes[dataset_name]=df_size
-                # print(f"df head: {dataset_df.head()}")
 
                 schema_gen_start = time.time_ns()
                 schema_string = self.connector.generate_schema(dataset_df)
@@ -143,7 +132,6 @@ def extract_files():
 
 def run_stork(args):
 
-    # pipelines = get_repository_list(f"{args.repositories}/{args.mode}_full_paths.txt")
     pipelines = [f.path for f in os.scandir(args.repositories) if f.is_file()]
     print(pipelines)
     output_logger = createLoggerPlain(filename=f"{args.outputs}/paper_example_times.log",
@@ -154,7 +142,7 @@ def run_stork(args):
         pipeline_name = getDatasetName(pipeline.strip())
         logger = createLogger(filename=f"{args.individual_logs}/{pipeline_name}.log", project_name=f"{pipeline_name}_project",
                               level=logging.INFO)
-        stork = Stork(logger = logger, config_path=r"./db_conn/config_db.ini")
+        stork = Stork(logger = logger, config_path=args.credentials)
 
         stork.setup(pipeline = pipeline.strip(), new_pipeline=f"new_{pipeline}.py")
 
@@ -185,8 +173,7 @@ if __name__ == '__main__':
                         default='/home/ilint/HPI/Stork/average-runtime/individual_logs/')
     parser.add_argument('-o', '--outputs',
                         default='/home/ilint/HPI/Stork/average-runtime/outputs')
-    # parser.add_argument('-m', '--mode',
-    #                     default='variable')
+    parser.add_argument('-c', '--credentials')
 
     args = parser.parse_args()
     main(args)

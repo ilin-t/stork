@@ -22,20 +22,12 @@ from src.log_modules.log_results import createLogger, closeLog, createLoggerPlai
 def run_stork(python_files, flagged_pipelines, pipeline_logger, dataset_logger, existent_dataset_logger,read_method_logger,
               translated_datasets_logger, error_logger, yearly_stats_thread, pipelines_to_rewrite_logger):
 
-    # stork = Stork(r"../src/db_conn/config_s3.ini")
-    # stork.setClient(stork.access_key, stork.secret_access_key)
-    #
-    # buckets = stork.connector.getBucketNames()
-    # bucket_name = "stork-storage"
-
     yearly_stats_thread["pipelines_total"] = yearly_stats_thread["pipelines_total"] + len(python_files)
     stork = Stork(logger= pipeline_logger, config_path=f"db_sqlite.db", connector="sqlite")
     # print(f"Flagged files: {flagged_pipelines}")
     for py_file in python_files:
         if py_file in flagged_pipelines:
-            # if not filter_pipeline(input_pipeline=py_file):
-            #     continue
-            # else:
+
             pipeline_logger.info(f"Pipeline: {py_file}")
             tree = []
             stork.assignVisitor.setLogger(error_logger)

@@ -1,3 +1,4 @@
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -22,6 +23,7 @@ plt.rcParams.update({'text.usetex' : True,
                      'ytick.labelsize' : 'xx-small',
                      'xtick.labelsize' : 'xx-small'
                     })
+
 plt.rcParams["ytick.labelsize"] = '14'
 plt.rcParams["xtick.labelsize"] = '14'
 
@@ -58,6 +60,7 @@ for x in dm_libaries.keys():
     ax2.bar_label(bc, labels=[f"{dm_libaries[x]/514841*100:.1f}\%"], label_type='center')
 
 # ax2.set_title('DM Distribution')
+
 ax2.legend(ncols=1, handletextpad=0.5, loc='upper right',
            columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
 ax2.axis('off')
@@ -86,4 +89,5 @@ con.set_color([0, 0, 0])
 ax2.add_artist(con)
 con.set_linewidth(2)
 
-plt.savefig("../../../analysis_results/plots/distributions/library_distribution.svg", transparent=True, bbox_inches='tight')
+plt.savefig("../plots/library_distribution.svg", transparent=True, bbox_inches='tight')
+../../analysis_results/plots/distributions/library_distribution.svg", transparent=True, bbox_inches='tight')

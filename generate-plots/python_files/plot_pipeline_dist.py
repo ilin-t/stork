@@ -1,17 +1,12 @@
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 
 from matplotlib.ticker import FuncFormatter
 
-
-# colors = [‘#BAE4BC’, ‘#7BCCC4’, ‘#43A2CA’, ‘#0868AC’]
-
-# plt.rcParams["axes.prop_cycle"] = plt.cycler('color', ['#d7191c', '#fdae61', '#018571', '#abd9e9', '#2c7bb6'])
-
 def shorten_yaxis(value, pos):
     thousands = value / 1e3
     return f'{thousands:.1f}k'
-
 
 plt.rcParams["font.size"] = '14'
 plt.rcParams["figure.figsize"] = (5,2)
@@ -74,5 +69,5 @@ ax.set_xticklabels(years)
 ax.legend(loc='upper left', ncols=1, handletextpad=0.5,
            columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
 
-# plt.show()
-fig.savefig("../../../analysis_results/plots/distributions/pipeline_distribution.svg", transparent=True)
+
+fig.savefig("../plots/pipeline_distribution.svg", transparent=True)

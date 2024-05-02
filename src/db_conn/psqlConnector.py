@@ -1,9 +1,7 @@
 import os
-import re
 from pathlib import Path
 
 import cchardet as chardet
-import numpy as np
 
 import psycopg2
 from configparser import ConfigParser
@@ -73,17 +71,12 @@ class PsqlConnector:
             # db_version = self.cursor.fetchall()
             fetch_all_time = time.time_ns() - fetch_all_start
 
-            # close_start = time.time_ns()
-            # self.cursor.close()
-            # close_time = time.time_ns() - close_start
-
             print(f"Establishing a database connection: {conn_duration / 1000000} ms.")
             print(f"Setting a cursor: {cur_duration / 1000000} ms.")
             print(f"Executing a select version statement: {execute_time / 1000000} ms.")
             print(f"Fetching a single row: {fetch_time / 1000000} ms.")
             print(f"Fetching all rows: {fetch_all_time / 1000000} ms.")
             print(f"Result: {db_version}")
-            # print(f"Closing time: {close_time / 1000000} ms.")
 
         except psycopg2.DatabaseError as error:
             print(error.args[0])
@@ -101,8 +94,6 @@ class PsqlConnector:
         finally:
             if self.connection is not None:
                 print("WARNING: The connection to the database is still open!")
-                # self.connection.close()
-                # print('Database connection closed')
 
     def set_logger(self, logger):
         self.logger = logger
@@ -114,9 +105,6 @@ class PsqlConnector:
             connection_time = time.time_ns() - connection_start
 
             print(f"Connection time: {connection_time / 1000000} ms.")
-
-            # self.connection.close()
-            # print("Database connection closed.")
 
         except TypeError as error:
             print(f"TypeError: {error}")
@@ -185,8 +173,6 @@ class PsqlConnector:
                 # Parameter placeholders
             )
             extras.execute_values(self.cursor, insert_query, data_to_insert)
-            # print(sql_stmt.as_string(context=self.connection))
-            # self.cursor.execute(insert_query, (row,))
             self.connection.commit()
             print(f"{len(data_to_insert)} rows inserted into '{table_name}' in schema '{schema}' successfully!")
 
@@ -233,11 +219,6 @@ class PsqlConnector:
             print(f"The data is of format {df.type}. Cannot create schema.")
 
     def get_one(self, table_name):
-
-        # sql_stmt = sql.SQL('''SELECT * FROM {table_name}''').format(
-        #     table_name=sql.Identifier(table_name)
-        # )
-
         select_query = '''
             SELECT * FROM {} LIMIT 1
         '''.format(table_name)
@@ -245,8 +226,6 @@ class PsqlConnector:
         self.cursor = self.connection.cursor()
         self.cursor.execute(select_query)
         data = self.cursor.fetchall()
-        # print(f"Retrieved from DB:")
-        # print(data)
         for row in data:
             print(f"Retrieved from DB: {row}")
 
@@ -254,11 +233,6 @@ class PsqlConnector:
 
 
     def get_data(self, table_name):
-
-        # sql_stmt = sql.SQL('''SELECT * FROM {table_name}''').format(
-        #     table_name=sql.Identifier(table_name)
-        # )
-
         select_query = '''
             SELECT * FROM {}
         '''.format(table_name)
@@ -266,8 +240,7 @@ class PsqlConnector:
         self.cursor = self.connection.cursor()
         self.cursor.execute(select_query)
         data = self.cursor.fetchall()
-        # print(f"Retrieved from DB:")
-        # print(data)
+
         for row in data:
             print(f"Retrieved from DB: {row}")
 
@@ -287,9 +260,6 @@ class PsqlConnector:
         result = detection["encoding"]
         print(f"Result: {result}")
 
-        # with open(file_path, 'rb') as f:
-        #     result = chardet.detect(f.read())
-        # f.close()
         supported_formats = {
             'csv': pd.read_csv,
             'xlsx': pd.read_excel,
@@ -319,32 +289,3 @@ class PsqlConnector:
         else:
             # File extension not supported
             raise ValueError(f"Unsupported file extension: {file_extension}")
-
-
-# TODO Deploy postgres via ssh connection to a dedicated IP
-# TODO Execute on multiple pipelines
-
-# TODO Instantiate validity checkers.. (e.g., config, data, file checks)
-# TODO Establish databases, tables for new data
-# TODO Control of DBMS resources.. Data/Table size overloads
-# TODO Measure and compare the overhead of stork and PSQL to a client execution
-
-if __name__ == '__main__':
-    pp = PsqlConnector(config_path="config_db.ini")
-    # pp.stop_remove_container()
-
-    # pp.deploy_postgres()
-    pp.setup()
-
-    df = pp.read_file("../../examples/data/products.zip")
-    schema_string = pp.generate_schema(df)
-    # print(schema_string)
-
-    pp.create_schema("testschema", "postgres_test_user")
-
-    pp.create_table(table_name="testschema.testTable2", schema_order=schema_string)
-    #
-    # pp.insert_into_table(table_name="testSchema.testTable", schema=schema_string, data=df)
-    # pp.create_table(table_name="newTable", schema_order=schema_string)
-    # pp.insert_into_table(table_name="newTable", schema=schema_string, data=df)
-    # pp.get_data('testSchema.testTable')

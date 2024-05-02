@@ -1,16 +1,8 @@
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-# plt.rcParams["axes.prop_cycle"] = plt.cycler('color',
-#                                              ['#66c2a5', '#8da0cb', '#fc8d62', '#e78ac3',
-#                                               '#a6d854', '#ffd92f', '#e5c494', '#b3b3b3'])
-# plt.rcParams["axes.prop_cycle"] = plt.cycler('color',
-#                                              ['#3E89D6', '#E1A03C', '#9DA9C0', '#72DF96',
-#                                               '#596366', '#ffd92f', '#e5c494', '#b3b3b3'])
-
-# plt.rcParams["axes.prop_cycle"] = plt.cycler('color',
-#                                              ['#029e73', '#d55e00', '#cc78bc', '#56b4e9', '#ca9161',
-#                                               '#fbafe4', '#949494', '#ece133', '#56b4e9', '#0173b2', '#de8f05',])
 
 plt.rcParams["axes.prop_cycle"] = plt.cycler('color', ['#d7191c', '#fdae61', '#018571', '#abd9e9', '#2c7bb6'])
 
@@ -56,7 +48,7 @@ COLORS = ['#018571', '#af8dc3', '#4575b4', '#d73027', '#fc8d59', '#fee090']
 for attribute, measurement in outputs.items():
     offset = width * multiplier
     print(measurement)
-    rects = ax.bar(x + offset, measurement, width, fill=False, edgecolor=COLORS[multiplier], label=attribute, hatch=hatches[multiplier])
+    rects = ax.bar(x + offset, measurement, width, fill=False, edgecolor=colors[multiplier], label=attribute, hatch=hatches[multiplier])
     pcts = [int(pct) for pct in measurement]
     pcts[0] = "{:.1f}".format(pcts[0]/25*100)
     pcts[1] = "{:.1f}".format(pcts[1]/25*100)
@@ -66,6 +58,7 @@ for attribute, measurement in outputs.items():
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('\# Pipelines')
+
 ax.set_xticks(x + width, read_types)
 ax.legend(loc='upper left', ncols=3, handletextpad=0.5, columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
 ax.set_ylim(0, 18)
@@ -73,4 +66,4 @@ ax.tick_params(axis='both', which='major', labelsize=18)
 
 
 # plt.show()
-fig.savefig("../../../analysis_results/plots/evaluation/llm_results.svg", transparent=True)
+fig.savefig("../plots/llm_results.svg", transparent=True)

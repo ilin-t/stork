@@ -1,6 +1,9 @@
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
 
 plt.rcParams["font.size"] = '14'
 plt.rcParams["figure.figsize"] = (5,2.5)
@@ -21,13 +24,14 @@ plt.rcParams.update({'text.usetex' : True,
                      'ytick.labelsize' : 'xx-small',
                      'xtick.labelsize' : 'xx-small'
                     })
+
 plt.rcParams["ytick.labelsize"] = '14'
 plt.rcParams["xtick.labelsize"] = '14'
 
 HATCHES = ['//', 'oo', '++', 'xx', '|||', '--']
 COLORS = ['#d73027', '#fc8d59', '#fee090', '#018571', '#af8dc3', '#4575b4']
 
-df = pd.read_csv("../raw_data/occurrences_aggregated.csv")
+df = pd.read_csv("../raw-data/occurrences_aggregated.csv")
 data = df["count"].to_numpy()
 # Generate example data with a long-tail distribution
 # data = np.random.pareto(2, 1000) + 1

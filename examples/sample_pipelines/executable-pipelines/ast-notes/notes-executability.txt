@@ -1,9 +1,0 @@
-with-main.py: Contains only Import, ImportFrom, and FunctionDef, and If nodes.
-              We need the FunctionDef nodes to contain at least one main method.
-              Additionally, the If method needs to check for a main method.
-
-without- main.py: Variety of nodes. In case there are assignments, calls, the pipeline is executable.
-
-ne-runner.py: FunctionDefs without an If condition make the pipeline not executable.
-
-If a mixture of the conditions above: Executable pipeline.
