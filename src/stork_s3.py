@@ -7,7 +7,6 @@ from configparser import ConfigParser
 
 from src.log_modules import util
 from src.db_conn.s3_connector import S3Connector
-from src.db_conn.psqlConnector import PsqlConnector
 from src.ast.assign_visitor import AssignVisitor, getDatasetName
 from src.log_modules.log_results import createLogger, createLoggerPlain
 
@@ -19,10 +18,6 @@ class Stork:
         if "s3" in connector:
             self.connector = S3Connector()
             self.connector.set_logger(logger)
-        elif "postgres" in connector:
-            self.connector = PsqlConnector()
-        else:
-            self.connector = None
         self.assignVisitor = AssignVisitor()
         self.pipeline = ""
         self.config_path = config_path
@@ -94,23 +89,27 @@ class Stork:
                 print(f"Dataset: {dataset}")
                 # print(f"Source data file:{abs_path_dataset}")
                 dataset_name = getDatasetName(abs_path_dataset)
-                dataset_name = ''.join([i for i in dataset_name if i.isalpha()])
+                # dataset_name = ''.join([i for i in dataset_name if i.isalnum()])
                 insert_start = time.time_ns()
-                self.connector.uploadFile(path=abs_path_dataset, folder="external",
+                self.connector.uploadFile(path=abs_path_dataset, folder="paper-example",
                                           logger="dataset_logger", bucket=bucket_name)
                 insert_end = time.time_ns() - insert_start
                 self.file_upload[dataset_name] = (insert_end / 1000000)
                 self.connector.logger.info(f"Upload time for {dataset_name}: {insert_end / 1000000}ms")
 
                 # print(f"Url: {self.connector.getObjectUrl(key=dataset_name, folder='test-folder', bucket=bucket_name)}")
-                self.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset_name,
+                self.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset['dataset'],
                                                          "url": self.connector.getObjectUrl(
-                                                             key=dataset_name, folder='external', bucket=bucket_name), "lineno": dataset['lineno']})
+                                                             key=dataset_name, folder='paper-example', bucket=bucket_name), "lineno": dataset['lineno']})
+
+                self.assignVisitor.transformScript(script=pipeline, new_script=new_pipeline)
+
+
 
 
 
     def setClient(self, access_key, secret_access_key, client="s3"):
-        # print("Access key id: %s, secret access key: %s, service_name: %s" % (access_key, secret_access_key, client))
+        print("Access key id: %s, secret access key: %s, service_name: %s" % (access_key, secret_access_key, client))
         self.connector.setClient(aws_access_key=access_key, aws_secret_access_key=secret_access_key, client=client)
 
     def setResource(self, access_key, secret_access_key, resource="s3"):
@@ -149,9 +148,9 @@ def run_stork(args):
         logger = createLogger(filename=f"{args.individual_logs}/{pipeline_name}.log",
                               project_name=f"{pipeline_name}_project",
                               level=logging.INFO)
-        stork = Stork(logger=logger, config_path=r"./db_conn/config_s3.ini")
+        stork = Stork(logger=logger, config_path=args.credentials)
 
-        stork.setup(pipeline=pipeline.strip(), new_pipeline=f"new_{pipeline}.py")
+        stork.setup(pipeline=pipeline.strip(), new_pipeline=f"{pipeline[:-3]}_rewritten.py")
 
         stats[pipeline] = {"translation_time": stork.translation_times,
                            "datasets": {"schema_gen": stork.schema_generation_times},
@@ -171,11 +170,12 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        prog='Run Stork with a Postgres Backend',
+        prog='Run Stork with a S3 Backend',
     )
 
     parser.add_argument('-r', '--repositories',
                         default='/home/ilint/HPI/Stork/average-runtime/paper-example/')
+    parser.add_argument('-c', '--credentials')
     parser.add_argument('-l', '--individual_logs',
                         default='/home/ilint/HPI/Stork/average-runtime/individual_logs/')
     parser.add_argument('-o', '--outputs',

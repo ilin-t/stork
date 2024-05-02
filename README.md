@@ -6,9 +6,11 @@ System for automated data and pipeline migration. Stork automates the process of
 2. Data Transfer
 3. Pipeline Rewrite
 
+In this repository, we provide the code for our VLDB submission, together with short example use cases.
+
 ## Stages
 
-In this section, we describe the three stages, and provide a running example in the end.
+We describe the three stages, and provide a running example in the end.
 
 ### Pipeline Analysis
 The pipeline analysis stage is done by traversing the abstract syntax tree of a given pipeline. Stork generates essential metadata regarding the location and format of the data. Next, Stork formats and migrates the data to a new destination in a hosted Database Management System, cloud storage service, or a local file system. 
@@ -40,9 +42,10 @@ python3 examples/stork-init.py
 
 ## Run Pipeline Analysis with Stork
 
-To run an example pipeline with Stork, execute the Stork runner with the provided **example.py** pipeline:
+To run an example pipeline with Stork, execute the Stork runner with the provided **example.py** pipeline. In order to generate a small dataset of 1MB, we run the **example.py** pipeline first:
 
 ```
+python3 examples/pipelines/example.py
 python3 examples/stork-runner.py --pipeline=examples/pipelines/example.py
 ```
 
@@ -61,19 +64,18 @@ To run the Stork workflow:
 python3 examples/stork-runner-pg --pipeline=examples/pipelines/example.py
 ```
 
-## Use Stork with AWS S3
+## Stork with AWS S3
 In order to use Stork with AWS S3 as data backend, an existing S3 configuration is required. 
 
 Provide the config file containing the AWS access keys as an execution parameter:
 
+```
+python3 examples/stork-runner-s3.py --credentials=PATH_TO_AWS_CONFIG_FILE
+```
+## Generate Results from the Paper
+
+To generate the paper plots, execute the following script:
 
 ```
-python3 examples/stork-runner-s3.py --config_path==PATH_TO_AWS_CONFIG_FILE --pipeline=examples/pipelines/example.py
+cd generate-plots && bash generate-plots.sh
 ```
-
-## Reproduce Experiments
-
-To reproduce individual experiments from the evaluation section, please refer to the documentation in the **docs** folder.
-
-
-

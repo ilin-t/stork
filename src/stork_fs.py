@@ -2,38 +2,22 @@ import argparse
 import logging
 import os
 import shutil
-import subprocess
-import sys
 import time
-import paramiko
 
-from configparser import ConfigParser
 from glob import glob
 
 from src.log_modules import util
-from src.db_conn.s3_connector import S3Connector
-from src.db_conn.psqlConnector import PsqlConnector
 from src.ast.assign_visitor import AssignVisitor, getDatasetName
-from src.log_modules.flag_repositories import get_repository_list
 from src.log_modules.log_results import createLogger, createLoggerPlain
 
 
 class Stork:
 
     def __init__(self, logger):
-        #
-        # if "s3" in connector:
-        #     self.connector = S3Connector()
-        # elif "postgres" in connector:
-        #     # self.connector = PsqlConnector(config_path)
-        #     self.connector.set_logger(logger)
-        # else:
-        self.connector = None
         self.assignVisitor = AssignVisitor()
         self.pipeline = ""
         self.logger = logger
         self.config_path = None
-        # self.access_key, self.secret_access_key = self.parseConfig(config_path=self.config_path)
         self.config = None
         self.assignments = {}
         self.datasets = {}
@@ -58,9 +42,7 @@ class Stork:
         except len(pipeline.split(".")) > 2:
             print("Pipeline name has wrong formatting.")
 
-    def setup(self, pipeline, new_pipeline):
-
-        # self.connector.setup()
+    def setup(self, pipeline, new_pipeline, destination_path):
 
         self.setPipeline(pipeline=pipeline)
         self.assignVisitor.setPipeline(pipeline=self.pipeline)
@@ -76,56 +58,37 @@ class Stork:
         translation_end = time.time_ns() - translation_start
 
         self.translation_times = translation_end / 1000000
-        self.connector.logger.info(f"Translation time: {translation_end / 1000000} ms")
+        self.logger.info(f"Translation time: {translation_end / 1000000} ms")
 
-        # repo_name = self.assignVisitor.parseRepoName(self.assignVisitor.getRepositoryName())
-        # print(f"Adapted repository and bucket name: {repo_name}")
-        schema_name = "variable"
-        # if len(self.assignVisitor.datasets) > 0:
-        #     self.connector.create_schema(schema_name, "postgres_test_user")
         print(self.assignVisitor.datasets)
+        self.logger.info(f"Stork detected the following datasets: {self.assignVisitor.datasets}")
         for dataset in self.assignVisitor.datasets:
             abs_path_dataset = self.assignVisitor.parsePath(dataset)
             print(f"Absolute path: {abs_path_dataset}")
             if abs_path_dataset and util.fileExists(abs_path_dataset):
-                # dataset_df = self.connector.read_file(abs_path_dataset)
                 dataset_name = getDatasetName(abs_path_dataset)
-                dataset_name = ''.join([i for i in dataset_name if i.isalpha()])
-                # df_size = sys.getsizeof(dataset_df)
-                # self.connector.logger.info(f"Dataset size: {df_size}")
-                # self.dataframe_sizes[dataset_name]=df_size
-                # print(f"df head: {dataset_df.head()}")
-
+                dataset_name = ''.join([i for i in dataset_name if i.isalnum()])
                 schema_gen_start = time.time_ns()
-                # schema_string = self.connector.generate_schema(dataset_df)
                 schema_gen_end = time.time_ns() - schema_gen_start
                 self.logger.info(f"Schema generation for {dataset_name}: {schema_gen_end / 1000000} ms")
                 self.schema_generation_times[dataset_name] = (schema_gen_end / 1000000)
                 print(dataset_name)
-                # if self.connector.create_table(table_name=f"{schema_name}.{dataset_name}", schema_order=schema_string):
 
                 insert_start = time.time_ns()
-                shutil.copy(abs_path_dataset, "/mnt/fs00/ilin.tolovski/{dataset}_{pipeline}.csv")
+                shutil.copy(abs_path_dataset, f"{destination_path}/{dataset_name}.csv")
                 insert_end = time.time_ns() - insert_start
                 self.table_insertion_times[dataset_name] = (insert_end / 1000000)
                 self.logger.info(f"Insertion time for {dataset_name}: {insert_end / 1000000}ms")
-                # self.logger.get_one(f"{schema_name}.{dataset_name}")
+                self.assignVisitor.datasets_urls.append({"variable": dataset['variable'], "dataset_name": dataset['dataset'],
+                                                         "url": f"{destination_path}{dataset_name}.csv", "lineno": dataset['lineno']})
+                self.logger.info(self.assignVisitor.datasets_urls)
+                self.assignVisitor.transformScript(script=pipeline, new_script=new_pipeline)
 
-    def parseConfig(self, config_path):
-        config = ConfigParser()
-        config.read(config_path)
-        credentials = config['credentials']
-
-        return credentials["aws_access_key_id"], credentials["aws_secret_access_key"]
-
-
-def extract_files():
-    root_path = "/home/ilint/HPI/Stork/stork-dolly-example/pipelines/"
+def extract_files(root_path):
     modes = ["raw-string", "variable", "external"]
     full_paths = {"raw-string": [], "variable": [], "external": []}
     for mode in modes:
         list_files = [f.name for f in os.scandir(f"{root_path}{mode}_python_files") if f.is_file()]
-        # list_files = [x.replace("Dolly_", "") for x in list_files]
 
         full_projects = glob(os.path.join(f"{root_path}{mode}/", '**', '*.py'), recursive=True)
 
@@ -142,7 +105,6 @@ def extract_files():
 
 
 def run_stork(args):
-    # pipelines = get_repository_list(f"{args.repositories}/{args.mode}_full_paths.txt")
     pipelines = [f.path for f in os.scandir(args.repositories) if f.is_file()]
     print(pipelines)
     output_logger = createLoggerPlain(filename=f"{args.outputs}/paper_example_times.log",
@@ -156,7 +118,7 @@ def run_stork(args):
                               level=logging.INFO)
         stork = Stork(logger=logger)
 
-        stork.setup(pipeline=pipeline.strip(), new_pipeline=f"new_{pipeline}.py")
+        stork.setup(pipeline=pipeline.strip(), new_pipeline=f"new_{pipeline}.py", destination_path=args.outputs)
 
         stats[pipeline] = {"translation_time": stork.translation_times,
                            "datasets": {"schema_gen": stork.schema_generation_times},
@@ -177,7 +139,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        prog='Run Stork with a Postgres Backend',
+        prog='Run Stork with a local file system',
     )
 
     parser.add_argument('-r', '--repositories',
@@ -185,9 +147,7 @@ if __name__ == '__main__':
     parser.add_argument('-l', '--individual_logs',
                         default='/home/ilint/HPI/Stork/average-runtime/individual_logs/')
     parser.add_argument('-o', '--outputs',
-                        default='/home/ilint/HPI/Stork/average-runtime/outputs')
-    # parser.add_argument('-m', '--mode',
-    #                     default='variable')
+                        default='/home/ilint/HPI/Stork/average-runtime/outputs/')
 
     args = parser.parse_args()
     main(args)
