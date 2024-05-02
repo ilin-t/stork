@@ -65,4 +65,4 @@ plt.xscale('log')
 plt.ylabel('Cumulative Percentage', fontsize=12)
 plt.legend(loc='upper left', handletextpad=0.5, columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
 
-plt.savefig(f"../plots/cum_library.svg", transparent=True)
+plt.savefig(f"../plots/cum_library.png", transparent=True)
