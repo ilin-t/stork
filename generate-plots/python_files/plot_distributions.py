@@ -1,5 +1,4 @@
 import os
-
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
@@ -23,8 +22,9 @@ plt.rcParams.update({'text.usetex' : True,
                      'ytick.labelsize' : 'xx-small',
                      'xtick.labelsize' : 'xx-small'
                     })
-plt.rcParams["ytick.labelsize"] = '10'
-plt.rcParams["xtick.labelsize"] = '10'
+
+plt.rcParams["ytick.labelsize"] = '14'
+plt.rcParams["xtick.labelsize"] = '14'
 
 HATCHES = ['//', 'oo', '++', 'xx', '|||', '--']
 COLORS = ['#d73027', '#fc8d59', '#fee090', '#018571', '#af8dc3', '#4575b4']
@@ -97,6 +97,7 @@ def plot_bar_chart(in_dict, ylabel, fig_name):
 
 
     plt.savefig(f"../plots/{fig_name}.svg", transparent=True)
+
 
 def merge_counts():
     occ434 = pd.read_csv("../../../analysis_results/yearly_splits/occurrences-434k.csv")

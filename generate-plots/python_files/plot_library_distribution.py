@@ -1,13 +1,12 @@
 import os
-
 import matplotlib.pyplot as plt
 import numpy as np
 
 from matplotlib.patches import ConnectionPatch
 
-plt.rcParams["font.size"] = '11'
+plt.rcParams["font.size"] = '14'
 plt.rcParams["figure.figsize"] = (5.5,2.5)
-plt.rcParams["legend.fontsize"] = '11'
+plt.rcParams["legend.fontsize"] = '14'
 
 plt.rcParams.update({'text.usetex' : True,
                      'pgf.rcfonts': False,
@@ -24,8 +23,9 @@ plt.rcParams.update({'text.usetex' : True,
                      'ytick.labelsize' : 'xx-small',
                      'xtick.labelsize' : 'xx-small'
                     })
-plt.rcParams["ytick.labelsize"] = '10'
-plt.rcParams["xtick.labelsize"] = '10'
+
+plt.rcParams["ytick.labelsize"] = '14'
+plt.rcParams["xtick.labelsize"] = '14'
 
 HATCHES = ['//', 'oo', '++', 'xx', '|||', '--']
 COLORS = ['#2166ac', '#fc8d59', '#fee090', '#018571', '#af8dc3', '#4575b4']
@@ -60,7 +60,9 @@ for x in dm_libaries.keys():
     ax2.bar_label(bc, labels=[f"{dm_libaries[x]/514841*100:.1f}\%"], label_type='center')
 
 # ax2.set_title('DM Distribution')
-ax2.legend()
+
+ax2.legend(ncols=1, handletextpad=0.5, loc='upper right',
+           columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
 ax2.axis('off')
 ax2.set_xlim(- 1 * width, 2.5 * width)
 
@@ -88,3 +90,4 @@ ax2.add_artist(con)
 con.set_linewidth(2)
 
 plt.savefig("../plots/library_distribution.svg", transparent=True, bbox_inches='tight')
+../../analysis_results/plots/distributions/library_distribution.svg", transparent=True, bbox_inches='tight')

@@ -6,7 +6,6 @@ import numpy as np
 plt.rcParams["axes.prop_cycle"] = plt.cycler('color', ['#d7191c', '#2c7bb6', '#abd9e9', '#fdae61', '#018571'])
 
 
-
 plt.rcParams["font.size"] = '16'
 plt.rcParams["figure.figsize"] = (6,4)
 plt.rcParams["legend.fontsize"] = '16'
@@ -53,6 +52,7 @@ def plot_landscape():
     lib = {'DBMS': 50040, 'WEB': 288476.0, 'ML': 173360.0, 'DM': 269071.0, 'VISUAL': 217578.0, 'CLOUD': 22370.0,
      'SETUP': 232771.0, 'OTHER': 552735.0}
 
+vldb-submission
     plot_coverage(values=list(lib.values()), labels=lib.keys(), output_file="../plots/library_coverage.svg")
 
 def main():

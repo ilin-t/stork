@@ -79,7 +79,3 @@ To generate the paper plots, execute the following script:
 ```
 cd generate-plots && bash generate-plots.sh
 ```
-
-
-
-
