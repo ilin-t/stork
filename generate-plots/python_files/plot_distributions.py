@@ -138,7 +138,7 @@ if __name__ == '__main__':
     # covered_libs['OTHER'] = other
     # print(covered_libs)
     #
-    perc95 = get_df_percentile(30, "../../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+    perc95 = get_df_percentile(30, "../raw_data/occurrences_aggregated.csv")
 
     subset_keys = ['mongo','sqlalchemy', 'mysql', 'postgres',  'redis', 'elasticsearch']
 

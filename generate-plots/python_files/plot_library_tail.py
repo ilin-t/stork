@@ -27,7 +27,7 @@ plt.rcParams["xtick.labelsize"] = '14'
 HATCHES = ['//', 'oo', '++', 'xx', '|||', '--']
 COLORS = ['#d73027', '#fc8d59', '#fee090', '#018571', '#af8dc3', '#4575b4']
 
-df = pd.read_csv("../../../analysis_results/yearly_splits/occurrences_aggregated.csv")
+df = pd.read_csv("../raw_data/occurrences_aggregated.csv")
 data = df["count"].to_numpy()
 # Generate example data with a long-tail distribution
 # data = np.random.pareto(2, 1000) + 1
