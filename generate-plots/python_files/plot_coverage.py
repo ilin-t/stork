@@ -30,7 +30,7 @@ def plot_coverage(values, labels, output_file):
     explode[:] = 0.1
     fig, ax = plt.subplots()
     ax.pie(x=values, startangle=100, explode=explode, shadow=True, autopct='%1.1f%%')
-    ax.legend(labels=labels, loc=[0.85, 0])
+    ax.legend(labels=labels, loc=[0.75, 0], handletextpad=0.5, columnspacing=0.5, handlelength=1, borderpad=0.3, labelspacing=0)
     fig.tight_layout()
     fig.savefig(output_file, transparent=True)
 
@@ -52,7 +52,6 @@ def plot_landscape():
     lib = {'DBMS': 50040, 'WEB': 288476.0, 'ML': 173360.0, 'DM': 269071.0, 'VISUAL': 217578.0, 'CLOUD': 22370.0,
      'SETUP': 232771.0, 'OTHER': 552735.0}
 
-vldb-submission
     plot_coverage(values=list(lib.values()), labels=lib.keys(), output_file="../plots/library_coverage.svg")
 
 def main():

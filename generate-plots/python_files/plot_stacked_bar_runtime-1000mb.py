@@ -3,9 +3,9 @@ import numpy as np
 
 from matplotlib.ticker import FuncFormatter
 
-plt.rcParams["font.size"] = '12'
+plt.rcParams["font.size"] = '18'
 plt.rcParams["figure.figsize"] = (3, 2)
-plt.rcParams["legend.fontsize"] = '12'
+plt.rcParams["legend.fontsize"] = '17'
 plt.rcParams.update({'text.usetex': True,
                      'pgf.rcfonts': False,
                      'text.latex.preamble':
@@ -26,13 +26,13 @@ plt.rcParams.update({
     'svg.fonttype': 'none',
 })
 
-plt.rcParams["ytick.labelsize"] = '12'
-plt.rcParams["xtick.labelsize"] = '12'
+plt.rcParams["ytick.labelsize"] = '18'
+plt.rcParams["xtick.labelsize"] = '18'
 
 HATCHES = ['//', 'oo', '++']
 COLORS = ['#018571', '#af8dc3', '#4575b4', '#d73027', '#fc8d59', '#fee090']
 # Create sample data
-categories = ["Postgres", "AWS S3", "LFS"]
+categories = ["Postgres", "S3", "LFS"]
 translation_times = np.array([2.485255,  4.12, 3.90])
 schema_gen = np.array([5.19, 376.12, 0])
 data_transfer = np.array([412175.39, 758066.73, 3454.95699])
@@ -47,7 +47,9 @@ ax.bar(categories, data_transfer, width = 0.5, bottom=translation_times + schema
 # Adding labels and title
 
 ax.set_yscale('log', base=10)
-ax.legend(loc= (0.61,0.61), ncols=1, handletextpad=0.3,
-          columnspacing=0.3, handlelength=1, borderpad=0.2, labelspacing=0)
+ax.set_ylim(1, 10000001)
+# ax.set_yticks([])
+# ax.legend(loc= (0.61,0.61), ncols=1, handletextpad=0.3,
+#           columnspacing=0.3, handlelength=1, borderpad=0.2, labelspacing=0)
 
 fig.savefig("../plots/runtime-breakdown-1000mb.svg", transparent=True)

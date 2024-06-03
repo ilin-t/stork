@@ -3,7 +3,7 @@ import numpy as np
 
 from matplotlib.ticker import FuncFormatter
 
-plt.rcParams["font.size"] = '12'
+plt.rcParams["font.size"] = '18'
 plt.rcParams["figure.figsize"] = (3, 2)
 plt.rcParams["legend.fontsize"] = '12'
 plt.rcParams.update({'text.usetex': True,
@@ -18,21 +18,20 @@ plt.rcParams.update({'text.usetex': True,
                             \else
                                 \RequirePackage[tt=false, type1=true]{libertine}
                             \fi""",
-                     'ytick.labelsize': 'xx-small'
                      })
 
 plt.rcParams.update({
-    'font.size': 12,
+    'font.size': 18,
     'svg.fonttype': 'none',
 })
 
-plt.rcParams["ytick.labelsize"] = '12'
-plt.rcParams["xtick.labelsize"] = '12'
+plt.rcParams["ytick.labelsize"] = '18'
+plt.rcParams["xtick.labelsize"] = '18'
 
 HATCHES = ['//', 'oo', '++']
 COLORS = ['#018571', '#af8dc3', '#4575b4', '#d73027', '#fc8d59', '#fee090']
 # Create sample data
-categories = ["Postgres", "AWS S3", "LFS"]
+categories = ["Postgres", "S3", "LFS"]
 translation_times = np.array([1.994515,  2.859814, 1.847849])
 schema_gen = np.array([5.194627, 403.693394, 0])
 data_transfer = np.array([4106.353397, 8291.398719, 24.362831])
@@ -47,8 +46,9 @@ ax.bar(categories, data_transfer, width = 0.5, bottom=translation_times + schema
 # Adding labels and title
 
 ax.set_yscale('log', base=10)
-ax.set_ylabel('Time(ms)')
-ax.legend(loc= (0.59,0.60), ncols=1, handletextpad=0.3,
-          columnspacing=0.3, handlelength=1, borderpad=0.2, labelspacing=0)
+ax.set_ylabel('Time (ms)')
+ax.set_ylim(1, 10000001)
+# ax.legend(loc= (0.59,0.60), ncols=1, handletextpad=0.3,
+#           columnspacing=0.3, handlelength=1, borderpad=0.2, labelspacing=0)
 
 fig.savefig("../plots/runtime-breakdown-10mb.svg", transparent=True, bbox_inches='tight')

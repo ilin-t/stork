@@ -12,10 +12,10 @@ OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 ORGANIZATION_ID = os.getenv('ORGANIZATION_ID')
 
 def read_file(file):
-    with open(file, "rb") as f:
+    with open(file, "r") as f:
         content = f.read()
     f.close()
-    print(content)
+    # print(content)
     return content
 
 def write_output(prompt_output, output_file):
@@ -42,20 +42,19 @@ def process_pipeline(prompt_file, pipeline_file):
     return pipeline_name, prompt_content, code_content, read_time
 
 def run_prompt(client, prompt, code, output_file):
-
     request_start = time.time_ns()
     chat_completion = client.chat.completions.create(
         messages=[
             {
                 "role": "user",
-                "content": prompt + code,
+                "content": prompt + code
             }
         ],
         model="gpt-3.5-turbo",
     )
     request_end = (time.time_ns() - request_start) / 1000000
 
-    print(chat_completion)
+    print(f"Full response: {chat_completion}")
     print(f"Message response: {chat_completion.choices[0].message.content}")
 
     write_output(output_file=output_file, prompt_output=chat_completion.choices[0].message.content)
@@ -64,6 +63,7 @@ def run_prompt(client, prompt, code, output_file):
 
 def prompt_wrapper(prompt_file, pipeline_file):
     pipeline_name, prompt_content, code_content, read_time = process_pipeline(prompt_file=prompt_file, pipeline_file=pipeline_file)
+
     client = set_client(api_key=OPENAI_API_KEY, organization_id=ORGANIZATION_ID)
     runtime = run_prompt(client, prompt=prompt_content, code=code_content, output_file=f"{args.output_path}gpt_output_{pipeline_name}.txt")
 

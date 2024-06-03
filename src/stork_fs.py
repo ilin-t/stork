@@ -143,11 +143,11 @@ if __name__ == '__main__':
     )
 
     parser.add_argument('-r', '--repositories',
-                        default='/home/ilint/HPI/Stork/average-runtime/paper-example/')
+                        default='/home/ilint/HPI/repos/stork/benchmarks/pipeline_subset/raw-string_python_files/')
     parser.add_argument('-l', '--individual_logs',
-                        default='/home/ilint/HPI/Stork/average-runtime/individual_logs/')
+                        default='/home/ilint/HPI/repos/stork/benchmarks/stork-llm-individual_logs/raw-string/')
     parser.add_argument('-o', '--outputs',
-                        default='/home/ilint/HPI/Stork/average-runtime/outputs/')
+                        default='/home/ilint/HPI/repos/stork/benchmarks/stork-llm-outputs/')
 
     args = parser.parse_args()
     main(args)
